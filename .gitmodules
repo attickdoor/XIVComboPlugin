@@ -1,3 +1,6 @@
 [submodule "lib/Dalamud"]
 	path = lib/Dalamud
 	url = https://github.com/goaaats/Dalamud
+[submodule "lib/dalamud"]
+	path = lib/dalamud
+	url = https://github.com/goaaats/dalamud

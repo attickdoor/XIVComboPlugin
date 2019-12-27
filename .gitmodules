@@ -1,0 +1,3 @@
+[submodule "lib/dalamud"]
+	path = lib/dalamud
+	url = https://github.com/goaaats/dalamud

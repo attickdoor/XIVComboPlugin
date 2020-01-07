@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\Configuration.cs" />
+    <Compile Include="Configuration\IconReplacerConfiguration.cs" />
     <Compile Include="Configuration\CustomComboPreset.cs" />
     <Compile Include="IconReplacer.cs" />
     <Compile Include="IconReplacerAddressResolver.cs" />

@@ -18,25 +18,22 @@ namespace IconReplacerPlugin
         public void Initialize(DalamudPluginInterface pluginInterface)
         {
             this.pluginInterface = pluginInterface;
-            this.pluginInterface.CommandManager.AddHandler("/xldcombo", new CommandInfo(OnCommandDebugCombo)
+            this.pluginInterface.CommandManager.AddHandler("/xlpcombo", new CommandInfo(OnCommandDebugCombo)
             {
-                HelpMessage = "COMBO debug",
-                ShowInHelp = false
+                HelpMessage = "Edit custom combo settings. Run without any parameters to learn more.",
+                ShowInHelp = true
             });
 
-            string configPath = Path.Combine(pluginInterface.WorkingDirectory, "iconReplacerConfig.json");
-            this.Configuration = IconReplacerConfiguration.Load<IconReplacerConfiguration>(configPath);
+            this.Configuration = pluginInterface.GetPluginConfig() as IconReplacerConfiguration;
 
-            this.iconReplacer = new IconReplacer(pluginInterface.SigScanner, pluginInterface.ClientState, this.Configuration);
+            this.iconReplacer = new IconReplacer(pluginInterface.TargetModuleScanner, pluginInterface.ClientState, this.Configuration);
 
-            if (this.Configuration.ComboPresets != CustomComboPreset.None)
-                this.iconReplacer.Enable();
+            this.iconReplacer.Enable();
         }
 
         public void Dispose()
         {
-            if (this.Configuration.ComboPresets != CustomComboPreset.None)
-                this.iconReplacer.Dispose();
+            this.iconReplacer.Dispose();
 
             this.pluginInterface.CommandManager.RemoveHandler("/xldcombo");
         }
@@ -120,7 +117,7 @@ namespace IconReplacerPlugin
                     break;
             }
 
-            this.Configuration.Save();
+            this.pluginInterface.SavePluginConfig(this.Configuration);
         }
     }
 }

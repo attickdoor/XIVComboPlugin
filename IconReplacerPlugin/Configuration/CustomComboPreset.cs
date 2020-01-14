@@ -2,14 +2,14 @@
 
 namespace IconReplacerPlugin
 {
-    //CURRENT HIGHEST FLAG IS 44
+    //CURRENT HIGHEST FLAG IS 51
     [Flags]
     public enum CustomComboPreset : long
     {
         None = 0,
 
         // DRAGOON
-        [CustomComboInfo("Jump + Mirage Dive", "Replace Jump with Mirage Dive when Dive Ready", 22)]
+        [CustomComboInfo("Jump + Mirage Dive", "Replace (High) Jump with Mirage Dive when Dive Ready", 22)]
         DragoonJumpFeature = 1L << 44,
 
         [CustomComboInfo("BOTD Into Stardiver", "Replace Blood of the Dragon with Stardiver when in Life of the Dragon", 22)]
@@ -35,7 +35,7 @@ namespace IconReplacerPlugin
         [CustomComboInfo("Goring Blade Combo", "Replace Goring Blade with its combo chain", 19)]
         PaladinGoringBladeCombo = 1L << 5,
 
-        [CustomComboInfo("Royal Authority Combo", "Replace Royal Authority with its combo chain", 19)]
+        [CustomComboInfo("Royal Authority Combo", "Replace Royal Authority/Rage of Halone with its combo chain", 19)]
         PaladinRoyalAuthorityCombo = 1L << 6,
 
         [CustomComboInfo("Prominence Combo", "Replace Prominence with its combo chain", 19)]
@@ -67,6 +67,9 @@ namespace IconReplacerPlugin
         [CustomComboInfo("Oka Combo", "Replace Oka with its combo chain", 34)]
         SamuraiOkaCombo = 1L << 15,
 
+        [CustomComboInfo("Seigan to Third Eye", "Replace Seigan with Third Eye when not procced", 34)]
+        SamuraiThirdEyeFeature = 1L << 51,
+
 
         // NINJA
         [CustomComboInfo("Armor Crush Combo", "Replace Armor Crush with its combo chain", 30)]
@@ -92,74 +95,77 @@ namespace IconReplacerPlugin
         GunbreakerDemonSlaughterCombo = 1L << 22,
 
         // MACHINIST
-        [CustomComboInfo("(Heated) Shot Combo", "Replace UNHEATED Split Shot with its combo chain or with Heat Blast when overheated.", 31)]
+        [CustomComboInfo("(Heated) Shot Combo", "Replace either form of Clean Shot with its combo chain", 31)]
         MachinistMainCombo = 1L << 23,
 
-        [CustomComboInfo("Spread Shot Heat", "Replace Spread Shot with Auto Crossbow when overheated.", 31)]
+        [CustomComboInfo("Spread Shot Heat", "Replace Spread Shot with Auto Crossbow when overheated", 31)]
         MachinistSpreadShotFeature = 1L << 24,
 
+        [CustomComboInfo("Heat Blast when overheated", "Replace Overheat with Heat Blast when overheated", 31)]
+        MachinistOverheatFeature = 1L << 47,
+
         // BLACK MAGE
-        [CustomComboInfo("Enochian Stance Switcher", "Change Enochian to Fire 4 or Blizzard 4 depending on stance.", 25)]
+        [CustomComboInfo("Enochian Stance Switcher", "Change Enochian to Fire 4 or Blizzard 4 depending on stance", 25)]
         BlackEnochianFeature = 1L << 25,
 
-        [CustomComboInfo("Umbral Soul/Transpose Switcher", "Change between Umbral Soul and Transpose automatically.", 25)]
+        [CustomComboInfo("Umbral Soul/Transpose Switcher", "Change Transpose into Umbral Soul when Umbral Soul is usable", 25)]
         BlackManaFeature = 1L << 26,
 
         // ASTROLOGIAN
-        [CustomComboInfo("Draw on Play", "Play turns into Draw when no card is drawn, as well as the usual Play behavior.", 33)]
+        [CustomComboInfo("Draw on Play", "Play turns into Draw when no card is drawn, as well as the usual Play behavior", 33)]
         AstrologianCardsOnDrawFeature = 1L << 27,
 
         // SUMMONER
-        [CustomComboInfo("Demi-summon combiners", "Dreadwyrm Trance, Summon Bahamut, and Firebird Trance are now one button. Deathflare, Enkindle Bahamut, and Enkindle Phoenix are now one button.", 27)]
+        [CustomComboInfo("Demi-summon combiners", "Dreadwyrm Trance, Summon Bahamut, and Firebird Trance are now one button. Deathflare, Enkindle Bahamut, and Enkindle Phoenix are now one button", 27)]
         SummonerDemiCombo = 1L << 28,
 
-        [CustomComboInfo("Brand of Purgatory Combo", "Replaces Fountain of Fire with Brand of Purgatory when under the affect of Hellish Conduit.", 27)]
+        [CustomComboInfo("Brand of Purgatory Combo", "Replaces Fountain of Fire with Brand of Purgatory when under the affect of Hellish Conduit", 27)]
         SummonerBoPCombo = 1L << 38,
 
-        [CustomComboInfo("ED Fester", "Change Fester into Energy Drain when out of Aetherflow stacks.", 27)]
+        [CustomComboInfo("ED Fester", "Change Fester into Energy Drain when out of Aetherflow stacks", 27)]
         SummonerEDFesterCombo = 1L << 39,
 
-        [CustomComboInfo("ES Painflare", "Change Painflare into Energy Syphon when out of Aetherflow stacks.", 27)]
+        [CustomComboInfo("ES Painflare", "Change Painflare into Energy Syphon when out of Aetherflow stacks", 27)]
         SummonerESPainflareCombo = 1L << 40,
 
-        [CustomComboInfo("DWT", "DWT.", 27)]
+        [CustomComboInfo("DWT", "DWT", 27)]
         SummonerDwtCombo = 1L << 50,
 
         // SCHOLAR
-        [CustomComboInfo("Seraph Fey Blessing/Consolation", "Change Fey Blessing into Consolation when Seraph is out.", 28)]
+        [CustomComboInfo("Seraph Fey Blessing/Consolation", "Change Fey Blessing into Consolation when Seraph is out", 28)]
         ScholarSeraphConsolationFeature = 1L << 29,
 
-        [CustomComboInfo("ED Aetherflow", "Change Energy Drain into Aetherflow when you have no more Aetherflow stacks.", 28)]
+        [CustomComboInfo("ED Aetherflow", "Change Energy Drain into Aetherflow when you have no more Aetherflow stacks", 28)]
         ScholarEnergyDrainFeature = 1L << 37,
 
         // DANCER
-        [CustomComboInfo("AoE GCD procs", "Replaces all AoE GCDs with their procced version when available.", 38)]
+        [CustomComboInfo("AoE GCD procs", "Replaces all AoE GCDs with their procced version when available", 38)]
         DancerAoeGcdFeature = 1L << 32,
 
-        [CustomComboInfo("Fan Dance Combos", "Change Fan Dance and Fan Dance 2 into Fan Dance 3 while flourishing.", 38)]
+        [CustomComboInfo("Fan Dance Combos", "Change Fan Dance and Fan Dance 2 into Fan Dance 3 while flourishing", 38)]
         DancerFanDanceCombo = 1L << 33,
 
         // WHITE MAGE
-        [CustomComboInfo("Solace into Misery", "Replaces Afflatus Solace with Afflatus Misery when Misery is ready to be used.", 24)]
+        [CustomComboInfo("Solace into Misery", "Replaces Afflatus Solace with Afflatus Misery when Misery is ready to be used", 24)]
         WhiteMageSolaceMiseryFeature = 1L << 35,
 
-        [CustomComboInfo("Rapture into Misery", "Replaces Afflatus Rapture with Afflatus Misery when Misery is ready to be used.", 24)]
+        [CustomComboInfo("Rapture into Misery", "Replaces Afflatus Rapture with Afflatus Misery when Misery is ready to be used", 24)]
         WhiteMageRaptureMiseryFeature = 1L << 36,
 
         // BARD
-        [CustomComboInfo("Wanderer's into Pitch Perfect", "Replaces Wanderer's Minuet with Pitch Perfect while in WM.", 23)]
+        [CustomComboInfo("Wanderer's into Pitch Perfect", "Replaces Wanderer's Minuet with Pitch Perfect while in WM", 23)]
         BardWandererPPFeature = 1L << 41,
 
-        [CustomComboInfo("Heavy Shot into Straight Shot", "Replaces Heavy Shot/Burst Shot with Straight Shot/Refulgent Arrow when procced.", 23)]
+        [CustomComboInfo("Heavy Shot into Straight Shot", "Replaces Heavy Shot/Burst Shot with Straight Shot/Refulgent Arrow when procced", 23)]
         BardStraightShotUpgradeFeature = 1L << 42,
 
         // MONK
 
         // RED MAGE
-        [CustomComboInfo("Red Mage AoE Combo", "Replaces Veraero/thunder 2 with Impact when Dualcast or Swiftcast are active.", 35)]
+        [CustomComboInfo("Red Mage AoE Combo", "Replaces Veraero/thunder 2 with Impact when Dualcast or Swiftcast are active", 35)]
         RedMageAoECombo = 1L << 48,
 
-        [CustomComboInfo("Redoublement combo", "Replaces Redoublement with its combo chain, following enchantment rules.", 35)]
+        [CustomComboInfo("Redoublement combo", "Replaces Redoublement with its combo chain, following enchantment rules", 35)]
         RedMageMeleeCombo = 1L << 49
     }
 

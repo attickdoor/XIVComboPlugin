@@ -232,7 +232,7 @@ namespace IconReplacerPlugin
 
             // Replace Royal Authority with Royal Authority combo
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PaladinRoyalAuthorityCombo))
-                if (actionID == 3539)
+                if (actionID == 3539 || actionID == 21)
                 {
                     if (comboTime > 0)
                     {
@@ -359,6 +359,13 @@ namespace IconReplacerPlugin
                     return 7483;
                 }
 
+            // Turn Seigan into Third Eye when not procced
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiThirdEyeFeature))
+                if (actionID == 7501) {
+                    if (SearchBuffArray(1252)) return 7501;
+                    return 7498;
+                }
+
             // NINJA
 
             // Replace Armor Crush with Armor Crush combo
@@ -447,11 +454,8 @@ namespace IconReplacerPlugin
             // Or with Heat Blast when overheated.
             // For some reason the shots use their unheated IDs as combo moves
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistMainCombo))
-                if (actionID == 2873)
+                if (actionID == 2873 || actionID == 7413)
                 {
-                    var gauge = clientState.JobGauges.Get<MCHGauge>();
-                    // End overheat slightly early to prevent eager button mashing clipping your gcd with a fake 6th HB.
-                    if (gauge.IsOverheated() && level >= 35 && gauge.OverheatTimeRemaining > 30) return 7410;
                     if (comboTime > 0)
                     {
                         if (lastMove == 2866)
@@ -471,6 +475,15 @@ namespace IconReplacerPlugin
                     return 2866;
                 }
 
+                        
+            // End overheat slightly early to prevent eager button mashing clipping your gcd with a fake 6th HB.
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistOverheatFeature))
+                if (actionID == 17209) {
+                    var gauge = clientState.JobGauges.Get<MCHGauge>();
+                    if (gauge.IsOverheated() && level >= 35) return 7410;
+                    return 17209;
+                }
+                
             // Replace Spread Shot with Auto Crossbow when overheated.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistSpreadShotFeature))
                 if (actionID == 2870)
@@ -569,7 +582,7 @@ namespace IconReplacerPlugin
                 }
 
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SummonerDemiCombo))
-            {
+            
                 // Replace Deathflare with demi enkindles
                 if (actionID == 3582)
                 {
@@ -588,11 +601,11 @@ namespace IconReplacerPlugin
                         gauge.TimerRemaining > 0 && gauge.ReturnSummon != SummonPet.NONE) return 16513;
                     return 3581;
                 }
-            }
+            
 
             // Ruin 1 now upgrades to Brand of Purgatory in addition to Ruin 3 and Fountain of Fire
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SummonerBoPCombo))
-                if (actionID == 163)
+                if (actionID == 163 || actionID == 3579)
                 {
                     var gauge = clientState.JobGauges.Get<SMNGauge>();
                     if (gauge.TimerRemaining > 0)
@@ -1003,6 +1016,10 @@ namespace IconReplacerPlugin
             customIds.Add(92);
             customIds.Add(3553);
             customIds.Add(2873);
+            customIds.Add(3579);
+            customIds.Add(17209);
+            customIds.Add(7501);
+            customIds.Add(21);
             vanillaIds.Add(0x3e75);
             vanillaIds.Add(0x3e76);
             vanillaIds.Add(0x3e77);
@@ -1143,7 +1160,6 @@ namespace IconReplacerPlugin
             vanillaIds.Add(0xdde);
             vanillaIds.Add(0xde3);
             vanillaIds.Add(0xdf0);
-            vanillaIds.Add(0xdfb);
             vanillaIds.Add(0xe00);
             vanillaIds.Add(0xe0b);
             vanillaIds.Add(0xe0c);
@@ -1165,7 +1181,6 @@ namespace IconReplacerPlugin
             vanillaIds.Add(0xb38);
             vanillaIds.Add(0xb3e);
             vanillaIds.Add(0x12d);
-            vanillaIds.Add(0x15);
             vanillaIds.Add(0x26);
             vanillaIds.Add(0x31);
             vanillaIds.Add(0x33);

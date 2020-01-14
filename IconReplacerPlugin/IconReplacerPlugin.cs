@@ -24,7 +24,8 @@ namespace IconReplacerPlugin
         public void Initialize(DalamudPluginInterface pluginInterface)
         {
             this.pluginInterface = pluginInterface;
-            this.pluginInterface.CommandManager.AddHandler("/combo", new CommandInfo(OnCommandDebugCombo)
+
+            this.pluginInterface.CommandManager.AddHandler("/pcombo", new CommandInfo(OnCommandDebugCombo)
             {
                 HelpMessage = "Open a window to edit custom combo settings.",
                 ShowInHelp = true
@@ -165,7 +166,7 @@ namespace IconReplacerPlugin
         {
             this.iconReplacer.Dispose();
 
-            this.pluginInterface.CommandManager.RemoveHandler("/combo");
+            this.pluginInterface.CommandManager.RemoveHandler("/pcombo");
 
             this.pluginInterface.Dispose();
         }

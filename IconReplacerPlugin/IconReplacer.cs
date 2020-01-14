@@ -232,7 +232,7 @@ namespace IconReplacerPlugin
 
             // Replace Royal Authority with Royal Authority combo
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PaladinRoyalAuthorityCombo))
-                if (actionID == 3539)
+                if (actionID == 3539 || actionID == 21)
                 {
                     if (comboTime > 0)
                     {
@@ -1019,6 +1019,7 @@ namespace IconReplacerPlugin
             customIds.Add(3579);
             customIds.Add(17209);
             customIds.Add(7501);
+            customIds.Add(21);
             vanillaIds.Add(0x3e75);
             vanillaIds.Add(0x3e76);
             vanillaIds.Add(0x3e77);
@@ -1180,7 +1181,6 @@ namespace IconReplacerPlugin
             vanillaIds.Add(0xb38);
             vanillaIds.Add(0xb3e);
             vanillaIds.Add(0x12d);
-            vanillaIds.Add(0x15);
             vanillaIds.Add(0x26);
             vanillaIds.Add(0x31);
             vanillaIds.Add(0x33);

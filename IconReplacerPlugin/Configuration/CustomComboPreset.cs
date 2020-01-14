@@ -35,7 +35,7 @@ namespace IconReplacerPlugin
         [CustomComboInfo("Goring Blade Combo", "Replace Goring Blade with its combo chain", 19)]
         PaladinGoringBladeCombo = 1L << 5,
 
-        [CustomComboInfo("Royal Authority Combo", "Replace Royal Authority with its combo chain", 19)]
+        [CustomComboInfo("Royal Authority Combo", "Replace Royal Authority/Rage of Halone with its combo chain", 19)]
         PaladinRoyalAuthorityCombo = 1L << 6,
 
         [CustomComboInfo("Prominence Combo", "Replace Prominence with its combo chain", 19)]

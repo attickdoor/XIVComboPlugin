@@ -69,6 +69,14 @@
       <Project>{3245d097-503a-4929-bb41-95f179b02902}</Project>
       <Name>Dalamud</Name>
     </ProjectReference>
+    <ProjectReference Include="..\lib\dalamud\lib\ImGuiScene\deps\ImGui.NET\src\ImGui.NET-472\ImGui.NET-472.csproj">
+      <Project>{0483026E-C6CE-4B1A-AA68-46544C08140B}</Project>
+      <Name>ImGui.NET-472</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\lib\dalamud\lib\ImGuiScene\ImGuiScene\ImGuiScene.csproj">
+      <Project>{c0e7e797-4fbf-4f46-bc57-463f3719ba7a}</Project>
+      <Name>ImGuiScene</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

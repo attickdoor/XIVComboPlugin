@@ -1,8 +1,14 @@
 ﻿using Dalamud.Game.Command;
 using Dalamud.Plugin;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Numerics;
+using System.Runtime.Remoting.Messaging;
+using Dalamud.Game.Chat;
+using ImGuiNET;
+using Serilog;
 
 namespace IconReplacerPlugin
 {
@@ -18,17 +24,142 @@ namespace IconReplacerPlugin
         public void Initialize(DalamudPluginInterface pluginInterface)
         {
             this.pluginInterface = pluginInterface;
+
             this.pluginInterface.CommandManager.AddHandler("/pcombo", new CommandInfo(OnCommandDebugCombo)
             {
-                HelpMessage = "Edit custom combo settings. Run without any parameters to learn more.",
+                HelpMessage = "Open a window to edit custom combo settings.",
                 ShowInHelp = true
             });
 
-            this.Configuration = pluginInterface.GetPluginConfig() as IconReplacerConfiguration;
+            this.Configuration = pluginInterface.GetPluginConfig() as IconReplacerConfiguration ?? new IconReplacerConfiguration();
 
             this.iconReplacer = new IconReplacer(pluginInterface.TargetModuleScanner, pluginInterface.ClientState, this.Configuration);
 
             this.iconReplacer.Enable();
+
+            this.pluginInterface.UiBuilder.OnBuildUi += UiBuilder_OnBuildUi;
+        }
+
+        private bool isImguiComboSetupOpen = false;
+
+        private string ClassJobToName(byte key)
+        {
+            switch (key)
+            {
+                default: return "Unknown";
+                case 1: return "Gladiator";
+                case 2: return "Pugilist";
+                case 3: return "Marauder";
+                case 4: return "Lancer";
+                case 5: return "Archer";
+                case 6: return "Conjurer";
+                case 7: return "Thaumaturge";
+                case 8: return "Carpenter";
+                case 9: return "Blacksmith";
+                case 10: return "Armorer";
+                case 11: return "Goldsmith";
+                case 12: return "Leatherworker";
+                case 13: return "Weaver";
+                case 14: return "Alchemist";
+                case 15: return "Culinarian";
+                case 16: return "Miner";
+                case 17: return "Botanist";
+                case 18: return "Fisher";
+                case 19: return "Paladin";
+                case 20: return "Monk";
+                case 21: return "Warrior";
+                case 22: return "Dragoon";
+                case 23: return "Bard";
+                case 24: return "White Mage";
+                case 25: return "Black Mage";
+                case 26: return "Arcanist";
+                case 27: return "Summoner";
+                case 28: return "Scholar";
+                case 29: return "Rogue";
+                case 30: return "Ninja";
+                case 31: return "Machinist";
+                case 32: return "Dark Knight";
+                case 33: return "Astrologian";
+                case 34: return "Samurai";
+                case 35: return "Red Mage";
+                case 36: return "Blue Mage";
+                case 37: return "Gunbreaker";
+                case 38: return "Dancer";
+            }
+        }
+
+        private void UiBuilder_OnBuildUi()
+        {
+            if (!isImguiComboSetupOpen)
+                return;
+
+            var values = Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>();
+            var orderedByClassJob = values.Where(x => x != CustomComboPreset.None && x.GetAttribute<CustomComboInfoAttribute>() != null).OrderBy(x => x.GetAttribute<CustomComboInfoAttribute>().ClassJob).ToArray();
+
+            var flagsSelected = new bool[orderedByClassJob.Length];
+            for (var i = 0; i < orderedByClassJob.Length; i++)
+            {
+                flagsSelected[i] = Configuration.ComboPresets.HasFlag(orderedByClassJob[i]);
+            }
+            
+            ImGui.SetNextWindowSize(new Vector2(740, 490));
+
+            ImGui.Begin("Custom Combo Setup", ref isImguiComboSetupOpen, ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoScrollbar);
+
+            ImGui.Text("This window allows you to enable and disable custom combos to your liking.");
+            ImGui.Separator();
+
+            ImGui.BeginChild("scrolling", new Vector2(0, 400), true, ImGuiWindowFlags.HorizontalScrollbar);
+
+            ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 5));
+
+            var lastClassJob = 0;
+
+            for (var i = 0; i < orderedByClassJob.Length; i++)
+            {
+                var flag = orderedByClassJob[i];
+                var flagInfo = flag.GetAttribute<CustomComboInfoAttribute>();
+
+                ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 14));
+                if (lastClassJob != flagInfo.ClassJob)
+                {
+                    ImGui.Separator();
+
+                    lastClassJob = flagInfo.ClassJob;
+                    ImGui.TextColored(new Vector4(0.0f, 0.4f, 0.7f, 1.0f), ClassJobToName(flagInfo.ClassJob));
+                }
+                ImGui.PopStyleVar();
+
+                ImGui.Checkbox(flagInfo.FancyName, ref flagsSelected[i]);
+                ImGui.TextColored(new Vector4(0.68f, 0.68f, 0.68f, 1.0f), $"#{i}:" + flagInfo.Description);
+                ImGui.Spacing();
+            }
+
+            for (var i = 0; i < orderedByClassJob.Length; i++)
+            {
+                if (flagsSelected[i])
+                {
+                    Configuration.ComboPresets |= orderedByClassJob[i];
+                }
+                else
+                {
+                    Configuration.ComboPresets &= ~orderedByClassJob[i];
+                }
+            }
+
+            ImGui.PopStyleVar();
+
+            ImGui.EndChild();
+
+            ImGui.Separator();
+
+            if (ImGui.Button("Save and Close"))
+            {
+                this.pluginInterface.SavePluginConfig(Configuration);
+                this.isImguiComboSetupOpen = false;
+            }
+
+            ImGui.End();
         }
 
         public void Dispose()
@@ -36,6 +167,8 @@ namespace IconReplacerPlugin
             this.iconReplacer.Dispose();
 
             this.pluginInterface.CommandManager.RemoveHandler("/pcombo");
+
+            this.pluginInterface.Dispose();
         }
 
         private void OnCommandDebugCombo(string command, string arguments)
@@ -113,7 +246,7 @@ namespace IconReplacerPlugin
                     break;
 
                 default:
-                    this.pluginInterface.Framework.Gui.Chat.Print("Unknown");
+                    this.isImguiComboSetupOpen = true;
                     break;
             }
 

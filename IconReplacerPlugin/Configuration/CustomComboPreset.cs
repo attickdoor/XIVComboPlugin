@@ -68,7 +68,7 @@ namespace IconReplacerPlugin
         SamuraiOkaCombo = 1L << 15,
 
         [CustomComboInfo("Seigan to Third Eye", "Replace Seigan with Third Eye when not procced", 34)]
-        SamuraiOkaCombo = 1L << 51,
+        SamuraiThirdEyeFeature = 1L << 51,
 
 
         // NINJA

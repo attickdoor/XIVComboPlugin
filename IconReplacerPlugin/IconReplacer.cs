@@ -554,6 +554,7 @@ namespace IconReplacerPlugin
             // DWT changes. 
             // Now contains DWT, Deathflare, Summon Bahamut, Enkindle Bahamut, FBT, and Enkindle Phoenix.
             // What a monster of a button.
+            /*
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SummonerDwtCombo))
                 if (actionID == 3581)
                 {
@@ -580,7 +581,7 @@ namespace IconReplacerPlugin
                         return 3581;
                     }
                 }
-
+                */
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SummonerDemiCombo))
             
                 // Replace Deathflare with demi enkindles
@@ -597,8 +598,12 @@ namespace IconReplacerPlugin
                 {
                     var gauge = clientState.JobGauges.Get<SMNGauge>();
                     if (gauge.IsBahamutReady()) return 7427;
-                    if (gauge.IsPhoenixReady() ||
-                        gauge.TimerRemaining > 0 && gauge.ReturnSummon != SummonPet.NONE) return 16513;
+                if (gauge.IsPhoenixReady() ||
+                    gauge.TimerRemaining > 0 && gauge.ReturnSummon != SummonPet.NONE)
+                    {
+                        if (level >= 80) return 16549;
+                        return 16513;
+                    }
                     return 3581;
                 }
             

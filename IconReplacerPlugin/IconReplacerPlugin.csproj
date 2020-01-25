@@ -48,6 +48,22 @@
     <Compile Include="IconReplacer.cs" />
     <Compile Include="IconReplacerAddressResolver.cs" />
     <Compile Include="IconReplacerPlugin.cs" />
+    <Compile Include="JobActions\AST.cs" />
+    <Compile Include="JobActions\BLM.cs" />
+    <Compile Include="JobActions\BRD.cs" />
+    <Compile Include="JobActions\DNC.cs" />
+    <Compile Include="JobActions\DRG.cs" />
+    <Compile Include="JobActions\DRK.cs" />
+    <Compile Include="JobActions\GNB.cs" />
+    <Compile Include="JobActions\MCH.cs" />
+    <Compile Include="JobActions\NIN.cs" />
+    <Compile Include="JobActions\PLD.cs" />
+    <Compile Include="JobActions\RDM.cs" />
+    <Compile Include="JobActions\SAM.cs" />
+    <Compile Include="JobActions\SCH.cs" />
+    <Compile Include="JobActions\SMN.cs" />
+    <Compile Include="JobActions\WAR.cs" />
+    <Compile Include="JobActions\WHM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

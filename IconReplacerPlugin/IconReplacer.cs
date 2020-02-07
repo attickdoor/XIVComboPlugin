@@ -193,7 +193,7 @@ namespace IconReplacerPlugin
                             && level >= 4)
                             return DRG.VorpalThrust;
                         if (lastMove == DRG.VorpalThrust && level >= 26)
-                            return DRG.TrueThrust;
+                            return DRG.FullThrust;
                     }
 
                     if (SearchBuffArray(802) && level >= 56)
@@ -366,7 +366,7 @@ namespace IconReplacerPlugin
                         if (lastMove == SAM.Hakaze && level >= 18)
                             return SAM.Shifu;
                         if (lastMove == SAM.Shifu && level >= 40)
-                            return SAM.Gekko;
+                            return SAM.Kasha;
                     }
 
                     return SAM.Hakaze;
@@ -1097,6 +1097,8 @@ namespace IconReplacerPlugin
             customIds.Add(17209);
             customIds.Add(7501);
             customIds.Add(21);
+            customIds.Add(DNC.Bloodshower);
+            customIds.Add(DNC.RisingWindmill);
             vanillaIds.Add(0x3e75);
             vanillaIds.Add(0x3e76);
             vanillaIds.Add(0x3e77);

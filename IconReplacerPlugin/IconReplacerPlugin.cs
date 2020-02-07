@@ -119,20 +119,27 @@ namespace IconReplacerPlugin
             {
                 var flag = orderedByClassJob[i];
                 var flagInfo = flag.GetAttribute<CustomComboInfoAttribute>();
-
-                ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 14));
                 if (lastClassJob != flagInfo.ClassJob)
                 {
-                    ImGui.Separator();
-
                     lastClassJob = flagInfo.ClassJob;
-                    ImGui.TextColored(new Vector4(0.0f, 0.4f, 0.7f, 1.0f), ClassJobToName(flagInfo.ClassJob));
+                    if (ImGui.CollapsingHeader(ClassJobToName((byte)lastClassJob)))
+                    {
+                        for (int j = i; j < orderedByClassJob.Length; j++)
+                        {
+                            flag = orderedByClassJob[j];
+                            flagInfo = flag.GetAttribute<CustomComboInfoAttribute>();
+                            if (lastClassJob != flagInfo.ClassJob)
+                            {
+                                break;
+                            }
+                            ImGui.Checkbox(flagInfo.FancyName, ref flagsSelected[j]);
+                            ImGui.TextColored(new Vector4(0.68f, 0.68f, 0.68f, 1.0f), $"#{j+1}:" + flagInfo.Description);
+                            ImGui.Spacing();
+                        }
+                        
+                    }
+                    
                 }
-                ImGui.PopStyleVar();
-
-                ImGui.Checkbox(flagInfo.FancyName, ref flagsSelected[i]);
-                ImGui.TextColored(new Vector4(0.68f, 0.68f, 0.68f, 1.0f), $"#{i}:" + flagInfo.Description);
-                ImGui.Spacing();
             }
 
             for (var i = 0; i < orderedByClassJob.Length; i++)
@@ -239,10 +246,10 @@ namespace IconReplacerPlugin
                     {
                         foreach (var value in Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>())
                         {
-                            if (argumentsParts[1].ToLower == "set")
+                            if (argumentsParts[1].ToLower() == "set")
                                 if (this.Configuration.ComboPresets.HasFlag(value))
                                     this.pluginInterface.Framework.Gui.Chat.Print(value.ToString());
-                            else if (argumentsParts[1].ToLower == "all")
+                            else if (argumentsParts[1].ToLower() == "all")
                                 this.pluginInterface.Framework.Gui.Chat.Print(value.ToString());
                         }
                     }

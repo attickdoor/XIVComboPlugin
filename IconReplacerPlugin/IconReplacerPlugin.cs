@@ -239,7 +239,10 @@ namespace IconReplacerPlugin
                     {
                         foreach (var value in Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>())
                         {
-                            if (this.Configuration.ComboPresets.HasFlag(value))
+                            if (argumentsParts[1].ToLower == "set")
+                                if (this.Configuration.ComboPresets.HasFlag(value))
+                                    this.pluginInterface.Framework.Gui.Chat.Print(value.ToString());
+                            else if (argumentsParts[1].ToLower == "all")
                                 this.pluginInterface.Framework.Gui.Chat.Print(value.ToString());
                         }
                     }

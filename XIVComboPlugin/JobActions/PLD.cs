@@ -1,4 +1,4 @@
-﻿namespace IconReplacerPlugin.JobActions
+﻿namespace XIVComboPlugin.JobActions
 {
     public static class PLD
     {

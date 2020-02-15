@@ -7,8 +7,8 @@
     <ProjectGuid>{619DF476-7225-4783-95A5-D29A8816EE66}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IconReplacerPlugin</RootNamespace>
-    <AssemblyName>IconReplacerPlugin</AssemblyName>
+    <RootNamespace>XIVComboPlugin</RootNamespace>
+    <AssemblyName>XIVCombo</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -33,21 +33,17 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dalamud, Version=4.7.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>%AppData%\XIVLauncher\addon\Hooks\Dalamud.dll</HintPath>
+    <Reference Include="Dalamud">
+      <HintPath>$(appdata)\XIVLauncher\addon\Hooks\Dalamud.dll</HintPath>
     </Reference>
-    <Reference Include="ImGui.NET, Version=1.72.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>%AppData%\XIVLauncher\addon\Hooks\ImGui.NET.dll</HintPath>
+    <Reference Include="ImGui.NET">
+      <HintPath>$(appdata)\XIVLauncher\addon\Hooks\ImGui.NET.dll</HintPath>
     </Reference>
-    <Reference Include="ImGuiScene, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>%AppData%\XIVLauncher\addon\Hooks\ImGuiScene.dll</HintPath>
+    <Reference Include="ImGuiScene">
+      <HintPath>$(appdata)\XIVLauncher\addon\Hooks\ImGuiScene.dll</HintPath>
     </Reference>
-    <Reference Include="SDL2-CS, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>%AppData%\XIVLauncher\addon\Hooks\SDL2-CS.dll</HintPath>
+    <Reference Include="SDL2-CS">
+      <HintPath>$(appdata)\XIVLauncher\addon\Hooks\SDL2-CS.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,11 +56,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\IconReplacerConfiguration.cs" />
     <Compile Include="Configuration\CustomComboPreset.cs" />
     <Compile Include="IconReplacer.cs" />
     <Compile Include="IconReplacerAddressResolver.cs" />
-    <Compile Include="IconReplacerPlugin.cs" />
+    <Compile Include="Configuration\XIVComboConfiguration.cs" />
+    <Compile Include="XIVComboPlugin.cs" />
     <Compile Include="JobActions\AST.cs" />
     <Compile Include="JobActions\BLM.cs" />
     <Compile Include="JobActions\BRD.cs" />

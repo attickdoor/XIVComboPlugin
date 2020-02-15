@@ -5,10 +5,10 @@ using Dalamud.Game;
 using Dalamud.Game.ClientState;
 using Dalamud.Game.ClientState.Structs.JobGauge;
 using Dalamud.Hooking;
-using IconReplacerPlugin.JobActions;
+using XIVComboPlugin.JobActions;
 using Serilog;
 
-namespace IconReplacerPlugin
+namespace XIVComboPlugin
 {
     public class IconReplacer
     {
@@ -25,7 +25,7 @@ namespace IconReplacerPlugin
 
         private readonly IntPtr comboTimer;
 
-        private readonly IconReplacerConfiguration Configuration;
+        private readonly XIVComboConfiguration Configuration;
 
         private readonly HashSet<uint> customIds;
         private readonly HashSet<uint> vanillaIds;
@@ -36,7 +36,7 @@ namespace IconReplacerPlugin
 
         private unsafe delegate int* getArray(long* address);
 
-        public IconReplacer(SigScanner scanner, ClientState clientState, IconReplacerConfiguration configuration)
+        public IconReplacer(SigScanner scanner, ClientState clientState, XIVComboConfiguration configuration)
         {
             Configuration = configuration;
             this.clientState = clientState;

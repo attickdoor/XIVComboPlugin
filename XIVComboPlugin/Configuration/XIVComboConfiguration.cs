@@ -4,10 +4,10 @@ using Dalamud.Configuration;
 using Dalamud.Plugin;
 using Newtonsoft.Json;
 
-namespace IconReplacerPlugin
+namespace XIVComboPlugin
 {
     [Serializable]
-    public class IconReplacerConfiguration : IPluginConfiguration
+    public class XIVComboConfiguration : IPluginConfiguration
     {
         public CustomComboPreset ComboPresets { get; set; }
         int IPluginConfiguration.Version { get; set; }

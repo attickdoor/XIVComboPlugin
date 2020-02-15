@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IconReplacerPlugin
+namespace XIVComboPlugin
 {
     //CURRENT HIGHEST FLAG IS 51
     [Flags]
@@ -116,7 +116,7 @@ namespace IconReplacerPlugin
         AstrologianCardsOnDrawFeature = 1L << 27,
 
         // SUMMONER
-        [CustomComboInfo("Demi-summon combiners", "Dreadwyrm Trance, Summon Bahamut, and Firebird Trance are now one button. Deathflare, Enkindle Bahamut, and Enkindle Phoenix are now one button", 27)]
+        [CustomComboInfo("Demi-summon combiners", "Dreadwyrm Trance, Summon Bahamut, and Firebird Trance are now one button.\nDeathflare, Enkindle Bahamut, and Enkindle Phoenix are now one button", 27)]
         SummonerDemiCombo = 1L << 28,
 
         [CustomComboInfo("Brand of Purgatory Combo", "Replaces Fountain of Fire with Brand of Purgatory when under the affect of Hellish Conduit", 27)]
@@ -127,9 +127,6 @@ namespace IconReplacerPlugin
 
         [CustomComboInfo("ES Painflare", "Change Painflare into Energy Syphon when out of Aetherflow stacks", 27)]
         SummonerESPainflareCombo = 1L << 40,
-
-        [CustomComboInfo("DWT", "DWT", 27)]
-        SummonerDwtCombo = 1L << 50,
 
         // SCHOLAR
         [CustomComboInfo("Seraph Fey Blessing/Consolation", "Change Fey Blessing into Consolation when Seraph is out", 28)]

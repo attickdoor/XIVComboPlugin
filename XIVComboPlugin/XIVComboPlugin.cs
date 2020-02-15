@@ -10,13 +10,13 @@ using Dalamud.Game.Chat;
 using ImGuiNET;
 using Serilog;
 
-namespace IconReplacerPlugin
+namespace XIVComboPlugin
 {
-    class IconReplacerPlugin : IDalamudPlugin
+    class XIVComboPlugin : IDalamudPlugin
     {
-        public string Name => "Icon Replacer Plugin";
+        public string Name => "XIV Combo Plugin";
 
-        public IconReplacerConfiguration Configuration;
+        public XIVComboConfiguration Configuration;
 
         private DalamudPluginInterface pluginInterface;
         private IconReplacer iconReplacer;
@@ -31,7 +31,7 @@ namespace IconReplacerPlugin
                 ShowInHelp = true
             });
 
-            this.Configuration = pluginInterface.GetPluginConfig() as IconReplacerConfiguration ?? new IconReplacerConfiguration();
+            this.Configuration = pluginInterface.GetPluginConfig() as XIVComboConfiguration ?? new XIVComboConfiguration();
 
             this.iconReplacer = new IconReplacer(pluginInterface.TargetModuleScanner, pluginInterface.ClientState, this.Configuration);
 
@@ -244,11 +244,13 @@ namespace IconReplacerPlugin
 
                 case "list":
                     {
-                        foreach (var value in Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>())
+                        foreach (var value in Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>().Where(x => x != CustomComboPreset.None))
                         {
                             if (argumentsParts[1].ToLower() == "set")
+                            {
                                 if (this.Configuration.ComboPresets.HasFlag(value))
                                     this.pluginInterface.Framework.Gui.Chat.Print(value.ToString());
+                            }
                             else if (argumentsParts[1].ToLower() == "all")
                                 this.pluginInterface.Framework.Gui.Chat.Print(value.ToString());
                         }

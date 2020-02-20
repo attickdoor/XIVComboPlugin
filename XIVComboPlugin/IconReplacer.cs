@@ -45,11 +45,11 @@ namespace XIVComboPlugin
             Address.Setup(scanner);
 
             byteBase = scanner.Module.BaseAddress;
-            comboTimer = byteBase + 0x1BB3B50;
+            comboTimer = byteBase + 0x1C16B00;
             //this.comboTimer = scanner.ScanText("E8 ?? ?? ?? ?? 80 7E 21 00") + 0x178;
             lastComboMove = comboTimer + 0x4;
 
-            playerLevel = byteBase + 0x1C2BFA8 + 0x78;
+            playerLevel = byteBase + 0x1C8F3E8 + 0x78;
             //this.playerLevel = scanner.ScanText("E8 ?? ?? ?? ?? 88 45 EF") + 0x4D;
 
             customIds = new HashSet<uint>();
@@ -1034,7 +1034,7 @@ namespace XIVComboPlugin
 
         private unsafe IntPtr FindBuffAddress()
         {
-            var randomAddress = byteBase + 0x1C02BE0;
+            var randomAddress = byteBase + 0x1C66390;
             var num = Marshal.ReadIntPtr(randomAddress);
             var step2 = (IntPtr) (Marshal.ReadInt64(num) + 0x248);
             var step3 = Marshal.ReadIntPtr(step2);

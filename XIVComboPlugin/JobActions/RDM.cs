@@ -11,6 +11,7 @@
             Zwerchhau = 7512,
             EZwerchhau = 7528,
             Riposte = 7504,
-            ERiposte = 7527;
+            ERiposte = 7527,
+            Scatter = 7509;
     }
 }

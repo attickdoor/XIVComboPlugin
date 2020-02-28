@@ -726,58 +726,6 @@ namespace XIVComboPlugin
 
             // DANCER
 
-            /*
-    
-            // Standard Step is one button.
-            if (this.Configuration.ComboPresets.HasFlag(CustomComboPreset.DancerStandardStepCombo)) {
-                if (actionID == 15997) {
-                    DNCGauge gauge = this.clientState.JobGauges.Get<DNCGauge>();
-                    if (gauge.IsDancing()) {
-                        if (gauge.NumCompleteSteps == 2) {
-                            return 16192;
-                        }
-                        else {
-                            // C# can't implicitly cast from int to ulong.
-                            return gauge.NextStep();
-                        }
-                    }
-                    return 15997;
-                }
-            }
-    
-            // Technical Step is one button.
-            if (this.Configuration.ComboPresets.HasFlag(CustomComboPreset.DancerTechnicalStepCombo)) {
-                if (actionID == 15998) {
-                    DNCGauge gauge = this.clientState.JobGauges.Get<DNCGauge>();
-                    if (gauge.IsDancing()) {
-                        if (gauge.NumCompleteSteps == 4) {
-                            return 16196;
-                        }
-                        else {
-                            // C# can't implicitly cast from int to ulong.
-                            return gauge.NextStep();
-                        }
-                    }
-                    return 15998;
-                }
-            }
-    
-            // Fountain changes into Fountain combo, prioritizing procs over combo,
-            // and Fountainfall over Reverse Cascade.
-            if (this.Configuration.ComboPresets.HasFlag(CustomComboPreset.DancerFountainCombo)) {
-                if (actionID == 15990) {
-                    if (this.clientState.JobGauges.Get<DNCGauge>().IsDancing()) return 15999;
-                    if (SearchBuffArray(1815)) return 15992;
-                    if (SearchBuffArray(1814)) return 15991;
-                    if (comboTime > 0) {
-                        if (lastMove == 15989 && level >= 2) return 15990;
-                    }
-                    return 15989;
-                }
-            }
-    
-            */
-
             // AoE GCDs are split into two buttons, because priority matters
             // differently in different single-target moments. Thanks yoship.
             // Replaces each GCD with its procced version.
@@ -863,135 +811,30 @@ namespace XIVComboPlugin
                 }
 
             // MONK
-
-            /*
-    
-            // Replace Snap Punch with flank positional combo.
-            // During PB, Snap (with sub-max stacks) > Twin (with no active Twin) > DK
-            if (this.Configuration.ComboPresets.HasFlag(CustomComboPreset.MonkFlankCombo)) {
-                if (actionID == 56) {
-                    if (SearchBuffArray(110)) {
-                        MNKGauge gauge = this.clientState.JobGauges.Get<MNKGauge>();
-                        if ((gauge.NumGLStacks < 3 && level < 76) || SearchBuffArray(103)) {
-                            return 56;
-                        }
-                        else if (gauge.NumGLStacks < 4 && level >= 76 && SearchBuffArray(105)) {
-                            return 56;
-                        }
-                        else if (!SearchBuffArray(101)) return 61;
-                        else return 74;
-                    }
-                    else {
-                        if (SearchBuffArray(107) && level >= 50) return 74;
-                        if (SearchBuffArray(108) && level >= 18) return 61;
-                        if (SearchBuffArray(109) && level >= 6) return 56;
-                        return 74;
-                    }
-                }
-            }
-    
-            // Replace Demolish with rear positional combo.
-            // During PB, Demo (with sub-max stacks) > Bootshine.
-            if (this.Configuration.ComboPresets.HasFlag(CustomComboPreset.MonkRearCombo)) {
-                if (actionID == 66) {
-                    if (SearchBuffArray(110)) {
-                        MNKGauge gauge = this.clientState.JobGauges.Get<MNKGauge>();
-                        if ((gauge.NumGLStacks < 3 && level < 76) || SearchBuffArray(103)) {
-                            return 66;
-                        }
-                        else if (gauge.NumGLStacks < 4 && level >= 76 && SearchBuffArray(105)) {
-                            return 66;
-                        }
-                        else return 53;
-                    }
-                    else {
-                        if (SearchBuffArray(107)) return 53;
-                        if (SearchBuffArray(108) && level >= 4) return 54;
-                        if (SearchBuffArray(109) && level >= 30) return 66;
-                        return 53;
-                    }
-                }
-            }
-    
-            // Replace Rockbreaker with AoE combo.
-            // During PB, RB (with sub-max stacks) > Twin Snakes (if not applied) > RB.
-            if (this.Configuration.ComboPresets.HasFlag(CustomComboPreset.MonkAoECombo)) {
-                if (actionID == 70) {
-                    if (SearchBuffArray(110)) {
-                        MNKGauge gauge = this.clientState.JobGauges.Get<MNKGauge>();
-                        if ((gauge.NumGLStacks < 3 && level < 76) || SearchBuffArray(103)) {
-                            return 70;
-                        }
-                        else if (gauge.NumGLStacks < 4 && level >= 76 && SearchBuffArray(105)) {
-                            return 70;
-                        }
-                        else if (!SearchBuffArray(101)) return 61;
-                        else return 70;
-                    }
-                    else {
-                        if (SearchBuffArray(107)) return 62;
-                        if (SearchBuffArray(108)) {
-                            if (!SearchBuffArray(101)) return 61;
-                            if (level >= 45) return 16473;
-                        }
-                        if (SearchBuffArray(109) && level >= 30) return 70;
-                        return 62;
-                    }
-                }
-            }
-    
-            */
+            // This space intentionally left blank.
 
             // RED MAGE
-
-            /*
-    
-            // Replace Verstone with White Magic spells. Priority order:
-            // Scorch > Verholy > Verstone = Veraero (with Dualcast active) > opener Veraero > Jolt
-            // Impact is not the first available spell to allow for precast openers.
-            if (this.Configuration.ComboPresets.HasFlag(CustomComboPreset.RedMageWhiteMagicFeature)) {
-                if (actionID == 7511) {
-                    if ((lastMove == 7526 || lastMove == 7525) && level >= 80) return 16530;
-                    if (lastMove == 7529 && level >= 70) return 7526;
-                    if ((SearchBuffArray(1249) || SearchBuffArray(167)) && level >= 10) return 7507;
-                    if (SearchBuffArray(1235) && level >= 30) return 7511;
-                    RDMGauge gauge = this.clientState.JobGauges.Get<RDMGauge>();
-                    if ((gauge.BlackGauge == 0 && gauge.WhiteGauge == 0) && level >= 10) return 7507;
-                    if (level >= 62) return 7524;
-                    return 7503;
-                }
-            }
-    
-            // Replace Verfire with Black Magic spells. Priority order:
-            // Scorch > Verflare> Verfire = Verthunder (with Dualcast active) > opener Verthunder > Jolt
-            // Impact is not the first available spell to allow for precast openers.
-            if (this.Configuration.ComboPresets.HasFlag(CustomComboPreset.RedMageBlackMagicFeature)) {
-                if (actionID == 7510) {
-                    if ((lastMove == 7526 || lastMove == 7525) && level >= 80) return 16530;
-                    if (lastMove == 7529 && level >= 68) return 7525;
-                    if ((SearchBuffArray(1249) || SearchBuffArray(167)) && level >= 4) return 7505;
-                    if (SearchBuffArray(1234) && level >= 26) return 7510;
-                    RDMGauge gauge = this.clientState.JobGauges.Get<RDMGauge>();
-                    if ((gauge.BlackGauge == 0 && gauge.WhiteGauge == 0) && level >= 4) return 7505;
-                    if (level >= 62) return 7524;
-                    return 7503;
-                }
-            }
-            */
+           
             // Replace Veraero/thunder 2 with Impact when Dualcast is active
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.RedMageAoECombo))
             {
                 if (actionID == RDM.Veraero2)
                 {
-                    if (level >= 66 && (SearchBuffArray(1249) || SearchBuffArray(167)))
-                        return RDM.Impact;
+                    if (SearchBuffArray(167) || SearchBuffArray(1249))
+                    {
+                        if (level >= 66) return RDM.Impact;
+                        return RDM.Scatter;
+                    }
                     return RDM.Veraero2;
                 }
 
                 if (actionID == RDM.Verthunder2)
                 {
-                    if (level >= 66 && (SearchBuffArray(1249) || SearchBuffArray(167)))
-                        return RDM.Impact;
+                    if (SearchBuffArray(167) || SearchBuffArray(1249))
+                    {
+                        if (level >= 66) return RDM.Impact;
+                        return RDM.Scatter;
+                    }
                     return RDM.Verthunder2;
                 }
             }

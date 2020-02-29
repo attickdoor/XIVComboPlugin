@@ -471,16 +471,28 @@ namespace XIVComboPlugin
                 }
 
             // Replace Wicked Talon with Gnashing Fang combo
-            // TODO: Potentially add Contuation moves as well?
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.GunbreakerGnashingFangCombo))
                 if (actionID == GNB.WickedTalon)
                 {
+                    if (level >= GNB.LevelContinuation)
+                    {
+                        if (SearchBuffArray(GNB.BuffReadyToRip))
+                            return GNB.JugularRip;
+                        if (SearchBuffArray(GNB.BuffReadyToTear))
+                            return GNB.AbdomenTear;
+                        if (SearchBuffArray(GNB.BuffReadyToGouge))
+                            return GNB.EyeGouge;
+                    }
                     var ammoComboState = clientState.JobGauges.Get<GNBGauge>().AmmoComboStepNumber;
-                    if (ammoComboState == 1)
-                        return GNB.SavageClaw;
-                    if (ammoComboState == 2)
-                        return GNB.WickedTalon;
-                    return GNB.GnashingFang;
+                    switch(ammoComboState)
+                    {
+                        case 1:
+                            return GNB.SavageClaw;
+                        case 2:
+                            return GNB.WickedTalon;
+                        default:
+                            return GNB.GnashingFang;
+                    }
                 }
 
             // Replace Demon Slaughter with Demon Slaughter combo

@@ -12,7 +12,7 @@ For some jobs, this frees a massive amount of hotbar space (looking at you, DRG)
 
 ## Installation
 * Download the zip file from the most recent release.
-* Unzip said zip file inside of `%appdata%/XIVLauncher/installedPlugins`, or use the quick launcher's built-in plugin installer.
+* Unzip said zip file inside of `%appdata%/XIVLauncher/installedPlugins`.
   * NOTE: %appdata% refers to the ROAMING folder inside of the AppData folder.
     *If you want to get there instantly, press Windows key + r, and type %appdata% in the box that pops up.
 ## In-game usage

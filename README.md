@@ -8,6 +8,7 @@ XIVCombo is a plugin to allow for "one-button" combo chains, as well as implemen
 * Hypercharge turns into Heat Blast while Overheated.
 * Jump/High Jump turns into Mirage Dive while Dive Ready.
 * And many, many more!
+
 For some jobs, this frees a massive amount of hotbar space (looking at you, DRG). For most, it removes a lot of mindless tedium associated with having to press various buttons that have little logical reason to be separate.
 
 ## Installation
@@ -27,4 +28,4 @@ For some jobs, this frees a massive amount of hotbar space (looking at you, DRG)
 ![](https://github.com/attickdoor/xivcomboplugin/raw/master/res/eno_swap.gif)
 
 ## Known Issues
-* There is an issue with XIVLauncher not saving configurations when the game is closed and relaunched. Until this has been resolved, you can type /pcombo setall to quickly set all combos when the game is restarted
+* None, for now!

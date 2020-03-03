@@ -25,3 +25,6 @@ For some jobs, this frees a massive amount of hotbar space (looking at you, DRG)
 ![](https://github.com/attickdoor/xivcomboplugin/raw/master/res/souleater_combo.gif)
 ![](https://github.com/attickdoor/xivcomboplugin/raw/master/res/hypercharge_heat_blast.gif)
 ![](https://github.com/attickdoor/xivcomboplugin/raw/master/res/eno_swap.gif)
+
+## Known Issues
+* There is an issue with XIVLauncher not saving configurations when the game is closed and relaunched. Until this has been resolved, you can type /pcombo setall to quickly set all combos when the game is restarted

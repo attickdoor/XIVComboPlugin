@@ -889,7 +889,7 @@ namespace XIVComboPlugin
 
         private unsafe IntPtr FindBuffAddress()
         {
-            var randomAddress = byteBase + 0x1C66390;
+            var randomAddress = byteBase + 0x1C66310;
             var num = Marshal.ReadIntPtr(randomAddress);
             var step2 = (IntPtr) (Marshal.ReadInt64(num) + 0x270);
             var step3 = Marshal.ReadIntPtr(step2);

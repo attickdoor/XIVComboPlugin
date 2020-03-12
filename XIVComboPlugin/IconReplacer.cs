@@ -474,14 +474,17 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.GunbreakerGnashingFangCombo))
                 if (actionID == GNB.WickedTalon)
                 {
-                    if (level >= GNB.LevelContinuation)
+                    if (Configuration.ComboPresets.HasFlag(CustomComboPreset.GunbreakerGnashingFangCont))
                     {
-                        if (SearchBuffArray(GNB.BuffReadyToRip))
-                            return GNB.JugularRip;
-                        if (SearchBuffArray(GNB.BuffReadyToTear))
-                            return GNB.AbdomenTear;
-                        if (SearchBuffArray(GNB.BuffReadyToGouge))
-                            return GNB.EyeGouge;
+                        if (level >= GNB.LevelContinuation)
+                        {
+                            if (SearchBuffArray(GNB.BuffReadyToRip))
+                                return GNB.JugularRip;
+                            if (SearchBuffArray(GNB.BuffReadyToTear))
+                                return GNB.AbdomenTear;
+                            if (SearchBuffArray(GNB.BuffReadyToGouge))
+                                return GNB.EyeGouge;
+                        }
                     }
                     var ammoComboState = clientState.JobGauges.Get<GNBGauge>().AmmoComboStepNumber;
                     switch(ammoComboState)

@@ -2,7 +2,7 @@
 
 namespace XIVComboPlugin
 {
-    //CURRENT HIGHEST FLAG IS 51
+    //CURRENT HIGHEST FLAG IS 52
     [Flags]
     public enum CustomComboPreset : long
     {
@@ -90,6 +90,9 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Gnashing Fang Combo", "Replace Wicked Talon with its combo chain", 37)]
         GunbreakerGnashingFangCombo = 1L << 21,
+
+        [CustomComboInfo("Gnashing Fang Continuation", "In addition to the Wicked Talon combo chain, put Continuation moves on Wicked Talon when appropriate", 37)]
+        GunbreakerGnashingFangCont = 1L << 52,
 
         [CustomComboInfo("Demon Slaughter Combo", "Replace Demon Slaughter with its combo chain", 37)]
         GunbreakerDemonSlaughterCombo = 1L << 22,

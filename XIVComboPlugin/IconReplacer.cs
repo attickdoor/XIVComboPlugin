@@ -49,7 +49,7 @@ namespace XIVComboPlugin
             //this.comboTimer = scanner.ScanText("E8 ?? ?? ?? ?? 80 7E 21 00") + 0x178;
             lastComboMove = comboTimer + 0x4;
 
-            playerLevel = byteBase + 0x1C8F3E8 + 0x78;
+            playerLevel = byteBase + 0x1C8F368 + 0x78;
             //this.playerLevel = scanner.ScanText("E8 ?? ?? ?? ?? 88 45 EF") + 0x4D;
 
             customIds = new HashSet<uint>();

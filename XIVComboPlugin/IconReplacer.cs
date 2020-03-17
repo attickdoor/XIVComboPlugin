@@ -19,7 +19,6 @@ namespace XIVComboPlugin
         private IntPtr activeBuffArray = IntPtr.Zero;
 
         private readonly IconReplacerAddressResolver Address;
-        private readonly IntPtr byteBase;
         private readonly Hook<OnCheckIsIconReplaceableDelegate> checkerHook;
         private readonly ClientState clientState;
 
@@ -34,6 +33,8 @@ namespace XIVComboPlugin
         private readonly IntPtr lastComboMove;
         private readonly IntPtr playerLevel;
 
+        private readonly IntPtr BuffVTableAddr;
+
         private unsafe delegate int* getArray(long* address);
 
         public IconReplacer(SigScanner scanner, ClientState clientState, XIVComboConfiguration configuration)
@@ -44,13 +45,12 @@ namespace XIVComboPlugin
             Address = new IconReplacerAddressResolver();
             Address.Setup(scanner);
 
-            byteBase = scanner.Module.BaseAddress;
-            comboTimer = byteBase + 0x1C16B00;
-            //this.comboTimer = scanner.ScanText("E8 ?? ?? ?? ?? 80 7E 21 00") + 0x178;
+            comboTimer = scanner.GetStaticAddressFromSig("E8 ?? ?? ?? ?? 80 7E 21 00", 0x178);
             lastComboMove = comboTimer + 0x4;
 
-            playerLevel = byteBase + 0x1C8F368 + 0x78;
-            //this.playerLevel = scanner.ScanText("E8 ?? ?? ?? ?? 88 45 EF") + 0x4D;
+            playerLevel = scanner.GetStaticAddressFromSig("E8 ?? ?? ?? ?? 88 45 EF", 0x4d) + 0x78;
+
+            BuffVTableAddr = scanner.GetStaticAddressFromSig("48 89 05 ?? ?? ?? ?? 88 05 ?? ?? ?? ?? 88 05 ?? ?? ?? ??", 0);
 
             customIds = new HashSet<uint>();
             vanillaIds = new HashSet<uint>();
@@ -892,8 +892,7 @@ namespace XIVComboPlugin
 
         private unsafe IntPtr FindBuffAddress()
         {
-            var randomAddress = byteBase + 0x1C66310;
-            var num = Marshal.ReadIntPtr(randomAddress);
+            var num = Marshal.ReadIntPtr(BuffVTableAddr);
             var step2 = (IntPtr) (Marshal.ReadInt64(num) + 0x270);
             var step3 = Marshal.ReadIntPtr(step2);
             var callback = Marshal.GetDelegateForFunctionPointer<getArray>(step3);

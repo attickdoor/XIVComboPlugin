@@ -12,10 +12,7 @@ XIVCombo is a plugin to allow for "one-button" combo chains, as well as implemen
 For some jobs, this frees a massive amount of hotbar space (looking at you, DRG). For most, it removes a lot of mindless tedium associated with having to press various buttons that have little logical reason to be separate.
 
 ## Installation
-* Download the zip file from the most recent release.
-* Unzip said zip file inside of `%appdata%/XIVLauncher/installedPlugins`.
-  * NOTE: %appdata% refers to the ROAMING folder inside of the AppData folder.
-    *If you want to get there instantly, press Windows key + r, and type %appdata% in the box that pops up.
+* Type `/xlplugins` in-game to access the plugin installer and updater. Any releases on this github page have been removed to facilitate proper installation going forward.
 ## In-game usage
 * Type `/pcombo` to pull up a GUI for editing active combo replacements.
 * Drag the named ability from your ability list onto your hotbar to use.

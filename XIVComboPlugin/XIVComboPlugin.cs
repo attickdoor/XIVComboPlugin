@@ -38,6 +38,7 @@ namespace XIVComboPlugin
             this.iconReplacer.Enable();
 
             this.pluginInterface.UiBuilder.OnOpenConfigUi += (sender, args) => isImguiComboSetupOpen = true;
+            this.pluginInterface.UiBuilder.OnBuildUi += UiBuilder_OnBuildUi;
         }
 
         private bool isImguiComboSetupOpen = false;

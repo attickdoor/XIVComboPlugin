@@ -7,6 +7,8 @@ using Dalamud.Game.ClientState.Structs.JobGauge;
 using Dalamud.Hooking;
 using XIVComboPlugin.JobActions;
 using Serilog;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace XIVComboPlugin
 {
@@ -37,8 +39,11 @@ namespace XIVComboPlugin
 
         private unsafe delegate int* getArray(long* address);
 
+        private bool shutdown;
+
         public IconReplacer(SigScanner scanner, ClientState clientState, XIVComboConfiguration configuration)
         {
+            shutdown = false;
             Configuration = configuration;
             this.clientState = clientState;
 
@@ -67,6 +72,11 @@ namespace XIVComboPlugin
             iconHook = new Hook<OnGetIconDelegate>(Address.GetIcon, new OnGetIconDelegate(GetIconDetour), this);
             checkerHook = new Hook<OnCheckIsIconReplaceableDelegate>(Address.IsIconReplaceable,
                 new OnCheckIsIconReplaceableDelegate(CheckIsIconReplaceableDetour), this);
+
+            Task.Run(() =>
+            {
+                BuffTask();
+            });
         }
 
         public void Enable()
@@ -77,8 +87,27 @@ namespace XIVComboPlugin
 
         public void Dispose()
         {
+            shutdown = true;
             iconHook.Dispose();
             checkerHook.Dispose();
+        }
+
+        public void BuffTask()
+        {
+            while (!shutdown)
+            {
+                try
+                {
+                    activeBuffArray = FindBuffAddress();
+                }
+                catch (Exception)
+                {
+                    //Before you're loaded in
+                    activeBuffArray = IntPtr.Zero;
+                }
+
+                Thread.Sleep(1000);
+            }
         }
 
         // I hate this function. This is the dumbest function to exist in the game. Just return 1.
@@ -103,17 +132,7 @@ namespace XIVComboPlugin
 
             if (vanillaIds.Contains(actionID)) return iconHook.Original(self, actionID);
             if (!customIds.Contains(actionID)) return actionID;
-            if (activeBuffArray == IntPtr.Zero)
-                try
-                {
-                    activeBuffArray = FindBuffAddress();
-                }
-                catch (Exception)
-                {
-                    //Before you're loaded in
-                    activeBuffArray = IntPtr.Zero;
-                    return iconHook.Original(self, actionID);
-                }
+            if (activeBuffArray == IntPtr.Zero) return iconHook.Original(self, actionID);
 
             // Don't clutter the spaghetti any worse than it already is.
             var lastMove = Marshal.ReadInt32(lastComboMove);

@@ -156,11 +156,12 @@ namespace XIVComboPlugin
                             {
                                 break;
                             }
+                            ImGui.PushItemWidth(200);
                             ImGui.Checkbox(flagInfo.FancyName, ref flagsSelected[j]);
+                            ImGui.PopItemWidth();
+                            ImGui.SameLine(275);
+                            ImGui.Checkbox("Prevent this chain from updating its icon" + $"##{j}", ref hiddenFlags[j]);
                             ImGui.TextColored(new Vector4(0.68f, 0.68f, 0.68f, 1.0f), $"#{j+1}:" + flagInfo.Description);
-                            ImGui.Indent();
-                            ImGui.Checkbox("Prevent this chain from updating its icon", ref hiddenFlags[j]);
-                            ImGui.Unindent();
                             ImGui.Spacing();
                         }
                         
@@ -187,7 +188,12 @@ namespace XIVComboPlugin
             ImGui.EndChild();
 
             ImGui.Separator();
-
+            if (ImGui.Button("Save"))
+            {
+                this.pluginInterface.SavePluginConfig(Configuration);
+                UpdateConfig();
+            }
+            ImGui.SameLine();
             if (ImGui.Button("Save and Close"))
             {
                 this.pluginInterface.SavePluginConfig(Configuration);

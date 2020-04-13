@@ -2,7 +2,7 @@
 {
     public static class BRD
     {
-        public static uint
+        public const uint
             WanderersMinuet = 3559,
             PitchPerfect = 7404,
             HeavyShot = 97,

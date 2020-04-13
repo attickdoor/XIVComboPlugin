@@ -2,7 +2,7 @@
 {
     public static class RDM
     {
-        public static uint
+        public const uint
             Veraero2 = 16525,
             Verthunder2 = 16524,
             Impact = 16526,

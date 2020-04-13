@@ -2,7 +2,7 @@
 {
     public static class SAM
     {
-        public static uint
+        public const uint
             Yukikaze = 7480,
             Hakaze = 7477,
             Gekko = 7481,

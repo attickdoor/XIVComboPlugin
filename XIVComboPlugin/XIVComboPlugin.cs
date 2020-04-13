@@ -9,6 +9,7 @@ using System.Runtime.Remoting.Messaging;
 using Dalamud.Game.Chat;
 using ImGuiNET;
 using Serilog;
+using System.Collections.Generic;
 
 namespace XIVComboPlugin
 {
@@ -20,6 +21,8 @@ namespace XIVComboPlugin
 
         private DalamudPluginInterface pluginInterface;
         private IconReplacer iconReplacer;
+        private readonly int CURRENT_CONFIG_VERSION = 1;
+        private CustomComboPreset[] orderedByClassJob;
 
         public void Initialize(DalamudPluginInterface pluginInterface)
         {
@@ -32,13 +35,23 @@ namespace XIVComboPlugin
             });
 
             this.Configuration = pluginInterface.GetPluginConfig() as XIVComboConfiguration ?? new XIVComboConfiguration();
-
+            if (Configuration.Version < CURRENT_CONFIG_VERSION)
+            {
+                Configuration.HiddenActions = new List<bool>();
+                for (var i = 0; i < Enum.GetValues(typeof(CustomComboPreset)).Length; i++)
+                    Configuration.HiddenActions.Add(false);
+                Configuration.Version = CURRENT_CONFIG_VERSION;
+            }
             this.iconReplacer = new IconReplacer(pluginInterface.TargetModuleScanner, pluginInterface.ClientState, this.Configuration);
 
             this.iconReplacer.Enable();
 
             this.pluginInterface.UiBuilder.OnOpenConfigUi += (sender, args) => isImguiComboSetupOpen = true;
             this.pluginInterface.UiBuilder.OnBuildUi += UiBuilder_OnBuildUi;
+
+            var values = Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>();
+            orderedByClassJob = values.Where(x => x != CustomComboPreset.None && x.GetAttribute<CustomComboInfoAttribute>() != null).OrderBy(x => x.GetAttribute<CustomComboInfoAttribute>().ClassJob).ToArray();
+            UpdateConfig();
         }
 
         private bool isImguiComboSetupOpen = false;
@@ -89,20 +102,30 @@ namespace XIVComboPlugin
             }
         }
 
+        private void UpdateConfig()
+        {
+            for (var i = 0; i < orderedByClassJob.Length; i++)
+            {
+                if (Configuration.HiddenActions[i])
+                    iconReplacer.AddNoUpdate(orderedByClassJob[i].GetAttribute<CustomComboInfoAttribute>().Abilities);
+                else
+                    iconReplacer.RemoveNoUpdate(orderedByClassJob[i].GetAttribute<CustomComboInfoAttribute>().Abilities);
+            }
+        }
+
         private void UiBuilder_OnBuildUi()
         {
             if (!isImguiComboSetupOpen)
                 return;
 
-            var values = Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>();
-            var orderedByClassJob = values.Where(x => x != CustomComboPreset.None && x.GetAttribute<CustomComboInfoAttribute>() != null).OrderBy(x => x.GetAttribute<CustomComboInfoAttribute>().ClassJob).ToArray();
-
             var flagsSelected = new bool[orderedByClassJob.Length];
+            var hiddenFlags = new bool[orderedByClassJob.Length];
             for (var i = 0; i < orderedByClassJob.Length; i++)
             {
                 flagsSelected[i] = Configuration.ComboPresets.HasFlag(orderedByClassJob[i]);
+                hiddenFlags[i] = Configuration.HiddenActions[i];
             }
-            
+
             ImGui.SetNextWindowSize(new Vector2(740, 490));
 
             ImGui.Begin("Custom Combo Setup", ref isImguiComboSetupOpen, ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoScrollbar);
@@ -135,6 +158,9 @@ namespace XIVComboPlugin
                             }
                             ImGui.Checkbox(flagInfo.FancyName, ref flagsSelected[j]);
                             ImGui.TextColored(new Vector4(0.68f, 0.68f, 0.68f, 1.0f), $"#{j+1}:" + flagInfo.Description);
+                            ImGui.Indent();
+                            ImGui.Checkbox("Prevent this chain from updating its icon", ref hiddenFlags[j]);
+                            ImGui.Unindent();
                             ImGui.Spacing();
                         }
                         
@@ -153,6 +179,7 @@ namespace XIVComboPlugin
                 {
                     Configuration.ComboPresets &= ~orderedByClassJob[i];
                 }
+                Configuration.HiddenActions[i] = hiddenFlags[i];
             }
 
             ImGui.PopStyleVar();
@@ -165,6 +192,7 @@ namespace XIVComboPlugin
             {
                 this.pluginInterface.SavePluginConfig(Configuration);
                 this.isImguiComboSetupOpen = false;
+                UpdateConfig();
             }
 
             ImGui.End();

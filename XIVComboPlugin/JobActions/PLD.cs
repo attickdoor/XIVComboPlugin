@@ -2,7 +2,7 @@
 {
     public static class PLD
     {
-        public static uint
+        public const uint
             GoringBlade = 3538,
             FastBlade = 9,
             RiotBlade = 15,

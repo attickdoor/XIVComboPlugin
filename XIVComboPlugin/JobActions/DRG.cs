@@ -2,7 +2,7 @@
 {
     public static class DRG
     {
-        public static uint
+        public const uint
             Jump = 92,
             HighJump = 16478,
             MirageDive = 7399,

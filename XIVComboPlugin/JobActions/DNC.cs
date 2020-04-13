@@ -2,7 +2,7 @@
 {
     public static class DNC
     {
-        public static uint
+        public const uint
             Bladeshower = 15994,
             Bloodshower = 15996,
             Windmill = 15993,

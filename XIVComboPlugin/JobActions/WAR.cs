@@ -2,7 +2,7 @@
 {
     public static class WAR
     {
-        public static uint
+        public const uint
             StormsPath = 42,
             HeavySwing = 31,
             Maim = 37,

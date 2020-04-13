@@ -2,7 +2,7 @@
 {
 	public static class WHM
 	{
-		public static uint
+		public const uint
 			Solace = 16531,
 			Rapture = 16534,
 			Misery = 16535;

@@ -2,7 +2,7 @@
 {
     public static class AST
     {
-        public static uint
+        public const uint
             Play = 17055,
             Draw = 3590,
             Balance = 4401,

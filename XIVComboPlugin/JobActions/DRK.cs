@@ -2,7 +2,7 @@
 {
     public static class DRK
     {
-        public static uint
+        public const uint
             Souleater = 3632,
             HardSlash = 3617,
             SyphonStrike = 3623,

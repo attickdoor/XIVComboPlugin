@@ -2,7 +2,7 @@
 {
     public static class SCH
     {
-        public static uint
+        public const uint
             FeyBless = 16543,
             Consolation = 16546,
             EnergyDrain = 167,

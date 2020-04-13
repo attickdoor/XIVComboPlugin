@@ -2,7 +2,7 @@
 {
     public static class GNB
     {
-        public static uint
+        public const uint
             SolidBarrel = 16145,
             KeenEdge = 16137,
             BrutalShell = 16139,
@@ -15,11 +15,11 @@
             JugularRip = 16156,
             AbdomenTear = 16157,
             EyeGouge = 16158;
-        public static short
+        public const short
             BuffReadyToRip = 1842,
             BuffReadyToTear = 1843,
             BuffReadyToGouge = 1844;
-        public static byte
+        public const byte
             LevelContinuation = 70;
     }
 }

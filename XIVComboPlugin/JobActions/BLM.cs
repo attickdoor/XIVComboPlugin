@@ -2,7 +2,7 @@
 {
     public static class BLM
     {
-        public static uint
+        public const uint
             Enochian = 3575,
             Blizzard4 = 3576,
             Fire4 = 3577,

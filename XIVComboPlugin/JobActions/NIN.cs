@@ -2,7 +2,7 @@
 {
     public static class NIN
     {
-        public static uint
+        public const uint
             ArmorCrush = 3563,
             SpinningEdge = 2240,
             GustSlash = 2242,

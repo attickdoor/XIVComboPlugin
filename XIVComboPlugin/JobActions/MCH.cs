@@ -2,7 +2,7 @@
 {
     public static class MCH
     {
-        public static uint
+        public const uint
             CleanShot = 2873,
             HeatedCleanShot = 7413,
             SplitShot = 2866,

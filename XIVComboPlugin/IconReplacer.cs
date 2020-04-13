@@ -37,6 +37,8 @@ namespace XIVComboPlugin
         private readonly Hook<OnGetIconDelegate> iconHook;
         private readonly IntPtr lastComboMove;
         private readonly IntPtr playerLevel;
+        private readonly IntPtr playerJob;
+        private byte lastJob = 0;
 
         private readonly IntPtr BuffVTableAddr;
 
@@ -57,6 +59,7 @@ namespace XIVComboPlugin
             lastComboMove = comboTimer + 0x4;
 
             playerLevel = scanner.GetStaticAddressFromSig("E8 ?? ?? ?? ?? 88 45 EF", 0x4d) + 0x78;
+            playerJob = playerLevel - 0xE;
 
             BuffVTableAddr = scanner.GetStaticAddressFromSig("48 89 05 ?? ?? ?? ?? 88 05 ?? ?? ?? ?? 88 05 ?? ?? ?? ??", 0);
 
@@ -152,6 +155,11 @@ namespace XIVComboPlugin
         /// </summary>
         private ulong GetIconDetour(byte self, uint actionID)
         {
+            if (lastJob != Marshal.ReadByte(playerJob))
+            {
+                lastJob = Marshal.ReadByte(playerJob);
+                seenNoUpdate.Clear();
+            }
             // TODO: More jobs, level checking for everything.
             if (noUpdateIcons.Contains(actionID) && !seenNoUpdate.Contains(actionID))
             {

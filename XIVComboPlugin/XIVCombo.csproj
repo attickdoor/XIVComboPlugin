@@ -60,6 +60,7 @@
     <Compile Include="IconReplacer.cs" />
     <Compile Include="IconReplacerAddressResolver.cs" />
     <Compile Include="Configuration\XIVComboConfiguration.cs" />
+    <Compile Include="JobActions\MNK.cs" />
     <Compile Include="XIVComboPlugin.cs" />
     <Compile Include="JobActions\AST.cs" />
     <Compile Include="JobActions\BLM.cs" />

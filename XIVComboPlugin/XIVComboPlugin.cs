@@ -21,7 +21,7 @@ namespace XIVComboPlugin
 
         private DalamudPluginInterface pluginInterface;
         private IconReplacer iconReplacer;
-        private readonly int CURRENT_CONFIG_VERSION = 1;
+        private readonly int CURRENT_CONFIG_VERSION = 2;
         private CustomComboPreset[] orderedByClassJob;
 
         public void Initialize(DalamudPluginInterface pluginInterface)
@@ -35,12 +35,17 @@ namespace XIVComboPlugin
             });
 
             this.Configuration = pluginInterface.GetPluginConfig() as XIVComboConfiguration ?? new XIVComboConfiguration();
-            if (Configuration.Version < CURRENT_CONFIG_VERSION)
+            if (Configuration.Version < 1)
             {
                 Configuration.HiddenActions = new List<bool>();
                 for (var i = 0; i < Enum.GetValues(typeof(CustomComboPreset)).Length; i++)
                     Configuration.HiddenActions.Add(false);
-                Configuration.Version = CURRENT_CONFIG_VERSION;
+                Configuration.Version = 1;
+            }
+            if (Configuration.Version < 2)
+            {
+                Configuration.HiddenActions.Add(false);
+                Configuration.Version = 2;
             }
             this.iconReplacer = new IconReplacer(pluginInterface.TargetModuleScanner, pluginInterface.ClientState, this.Configuration);
 

@@ -12,6 +12,13 @@
             EZwerchhau = 7528,
             Riposte = 7504,
             ERiposte = 7527,
-            Scatter = 7509;
+            Scatter = 7509,
+            Verstone = 7511,
+            Verfire = 7510,
+            Jolt = 7503,
+            Jolt2 = 7524,
+            Verholy = 7526,
+            Verflare = 7535,
+            Scorch = 16530;
     }
 }

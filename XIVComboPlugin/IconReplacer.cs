@@ -895,7 +895,17 @@ namespace XIVComboPlugin
                 }
 
             // MONK
-            // This space intentionally left blank.
+            
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MnkAoECombo))
+                if (actionID == MNK.Rockbreaker)
+                {
+                    UpdateBuffAddress();
+                    if (SearchBuffArray(110)) return MNK.Rockbreaker;
+                    if (SearchBuffArray(107)) return MNK.AOTD;
+                    if (SearchBuffArray(108)) return MNK.FourPointFury;
+                    if (SearchBuffArray(109)) return MNK.Rockbreaker;
+                    return MNK.AOTD;
+                }
 
             // RED MAGE
            
@@ -949,6 +959,25 @@ namespace XIVComboPlugin
                         return RDM.ERiposte;
                     return RDM.Riposte;
                 }
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.RedMageVerprocCombo))
+            {
+                if (actionID == RDM.Verstone)
+                {
+                    if (level >= 80 && (lastMove == RDM.Verflare || lastMove == RDM.Verholy)) return RDM.Scorch;
+                    UpdateBuffAddress();
+                    if (SearchBuffArray(1235)) return RDM.Verstone;
+                    if (level < 62) return RDM.Jolt;
+                    return RDM.Jolt2;
+                }
+                if (actionID == RDM.Verfire)
+                {
+                    if (level >= 80 && (lastMove == RDM.Verflare || lastMove == RDM.Verholy)) return RDM.Scorch;
+                    UpdateBuffAddress();
+                    if (SearchBuffArray(1234)) return RDM.Verfire;
+                    if (level < 62) return RDM.Jolt;
+                    return RDM.Jolt2;
+                }
+            }
 
             return iconHook.Original(self, actionID);
         }
@@ -1041,6 +1070,9 @@ namespace XIVComboPlugin
             customIds.Add(21);
             customIds.Add(DNC.Bloodshower);
             customIds.Add(DNC.RisingWindmill);
+            customIds.Add(RDM.Verstone);
+            customIds.Add(RDM.Verfire);
+            customIds.Add(MNK.Rockbreaker);
             vanillaIds.Add(0x3e75);
             vanillaIds.Add(0x3e76);
             vanillaIds.Add(0x3e77);

@@ -3,7 +3,7 @@ using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
 {
-    //CURRENT HIGHEST FLAG IS 52
+    //CURRENT HIGHEST FLAG IS 54
     [Flags]
     public enum CustomComboPreset : long
     {
@@ -161,13 +161,18 @@ namespace XIVComboPlugin
         BardStraightShotUpgradeFeature = 1L << 42,
 
         // MONK
+        [CustomComboInfo("Monk AoE Combo", "Replaces Rockbreaker with the AoE combo chain, or Rockbreaker when Perfect Balance is active", 20, new uint[] { MNK.Rockbreaker })]
+        MnkAoECombo = 1L << 54,
 
         // RED MAGE
         [CustomComboInfo("Red Mage AoE Combo", "Replaces Veraero/thunder 2 with Impact when Dualcast or Swiftcast are active", 35, new uint[] { RDM.Veraero2, RDM.Verthunder2 })]
         RedMageAoECombo = 1L << 48,
 
         [CustomComboInfo("Redoublement combo", "Replaces Redoublement with its combo chain, following enchantment rules", 35, new uint[] { RDM.Redoublement })]
-        RedMageMeleeCombo = 1L << 49
+        RedMageMeleeCombo = 1L << 49,
+
+        [CustomComboInfo("Verproc into Jolt", "Replaces Verstone/Verfire with Jolt/Scorch when no proc is available.", 35, new uint[] { RDM.Verstone, RDM.Verfire })]
+        RedMageVerprocCombo = 1L << 53
     }
 
     public class CustomComboInfoAttribute : Attribute

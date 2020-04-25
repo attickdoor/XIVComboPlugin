@@ -18,7 +18,7 @@
             Jolt = 7503,
             Jolt2 = 7524,
             Verholy = 7526,
-            Verflare = 7535,
+            Verflare = 7525,
             Scorch = 16530;
     }
 }

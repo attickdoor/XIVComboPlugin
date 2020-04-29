@@ -1219,6 +1219,7 @@ namespace XIVComboPlugin
             vanillaIds.Add(0xe0e);
             vanillaIds.Add(0xe0f);
             vanillaIds.Add(0xe11);
+            vanillaIds.Add(0xe18);
             vanillaIds.Add(0xfed);
             vanillaIds.Add(0xff7);
             vanillaIds.Add(0xffb);

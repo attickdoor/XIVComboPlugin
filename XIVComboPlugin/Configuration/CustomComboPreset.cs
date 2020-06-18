@@ -42,6 +42,9 @@ namespace XIVComboPlugin
         [CustomComboInfo("Prominence Combo", "Replace Prominence with its combo chain", 19, new uint[] { PLD.Prominence })]
         PaladinProminenceCombo = 1L << 7,
 
+        [CustomComboInfo("Requiescat Confiteor", "Replace Requiescat with Confiter while under the effect of Requiescat", 19, new uint[] { PLD.Requiescat })]
+        PaladinRequiescatCombo = 1L << 55,
+
         // WARRIOR
         [CustomComboInfo("Storms Path Combo", "Replace Storms Path with its combo chain", 21, new uint[] { WAR.StormsPath })]
         WarriorStormsPathCombo = 1L << 8,
@@ -114,6 +117,9 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Umbral Soul/Transpose Switcher", "Change Transpose into Umbral Soul when Umbral Soul is usable", 25, new uint[] { BLM.Transpose })]
         BlackManaFeature = 1L << 26,
+
+        [CustomComboInfo("(Between the) Ley Lines", "Change Ley Lines into BTL when Ley Lines is active", 25, new uint[] { BLM.LeyLines })]
+        BlackLeyLines = 1L << 56,
 
         // ASTROLOGIAN
         [CustomComboInfo("Draw on Play", "Play turns into Draw when no card is drawn, as well as the usual Play behavior", 33, new uint[] { AST.Play })]

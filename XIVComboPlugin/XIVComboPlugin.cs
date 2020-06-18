@@ -10,6 +10,7 @@ using Dalamud.Game.Chat;
 using ImGuiNET;
 using Serilog;
 using System.Collections.Generic;
+using System.Dynamic;
 
 namespace XIVComboPlugin
 {
@@ -21,7 +22,7 @@ namespace XIVComboPlugin
 
         private DalamudPluginInterface pluginInterface;
         private IconReplacer iconReplacer;
-        private readonly int CURRENT_CONFIG_VERSION = 2;
+        private readonly int CURRENT_CONFIG_VERSION = 3;
         private CustomComboPreset[] orderedByClassJob;
 
         public void Initialize(DalamudPluginInterface pluginInterface)
@@ -35,25 +36,27 @@ namespace XIVComboPlugin
             });
 
             this.Configuration = pluginInterface.GetPluginConfig() as XIVComboConfiguration ?? new XIVComboConfiguration();
-            if (Configuration.Version < 1)
+            if (Configuration.Version < 3)
             {
                 Configuration.HiddenActions = new List<bool>();
                 for (var i = 0; i < Enum.GetValues(typeof(CustomComboPreset)).Length; i++)
                     Configuration.HiddenActions.Add(false);
-                Configuration.Version = 1;
+                Configuration.Version = 3;
             }
-            if (Configuration.Version < 2)
-            {
-                Configuration.HiddenActions.Add(false);
-                Configuration.Version = 2;
-            }
+
             this.iconReplacer = new IconReplacer(pluginInterface.TargetModuleScanner, pluginInterface.ClientState, this.Configuration);
 
             this.iconReplacer.Enable();
 
             this.pluginInterface.UiBuilder.OnOpenConfigUi += (sender, args) => isImguiComboSetupOpen = true;
             this.pluginInterface.UiBuilder.OnBuildUi += UiBuilder_OnBuildUi;
-
+            /*
+            pluginInterface.Subscribe("PingPlugin", e => {
+                dynamic msg = e;
+                iconReplacer.UpdatePing(msg.LastRTT / 2);
+                PluginLog.Log("Ping was updated to {0} ms", msg.LastRTT / 2);
+                });
+                */
             var values = Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>();
             orderedByClassJob = values.Where(x => x != CustomComboPreset.None && x.GetAttribute<CustomComboInfoAttribute>() != null).OrderBy(x => x.GetAttribute<CustomComboInfoAttribute>().ClassJob).ToArray();
             UpdateConfig();

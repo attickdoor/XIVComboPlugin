@@ -9,6 +9,8 @@
             RoyalAuthority = 3539,
             RageOfHalone = 21,
             Prominence = 16457,
-            TotalEclipse = 7381;
+            TotalEclipse = 7381,
+            Requiescat = 7383,
+            Confiteor = 16459;
     }
 }

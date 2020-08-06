@@ -122,12 +122,12 @@ namespace XIVComboPlugin
                     seenNoUpdate.Remove(id);
             }
         }
-        private void BuffTask()
+        private async void BuffTask()
         {
             while (!shutdown)
             {
                 UpdateBuffAddress();
-                Thread.Sleep(1000);
+                await Task.Delay(1000);
             }
         }
 

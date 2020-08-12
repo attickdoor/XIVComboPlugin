@@ -145,6 +145,9 @@ namespace XIVComboPlugin
         [CustomComboInfo("ED Aetherflow", "Change Energy Drain into Aetherflow when you have no more Aetherflow stacks", 28, new uint[] { SCH.EnergyDrain })]
         ScholarEnergyDrainFeature = 1L << 37,
 
+        [CustomComboInfo("Summon Fairy", "Change Summon Eos/Serene into Whispering Dawn/Fey Illumination when either is fairy summoned", 28, new uint[] { SCH.SummonEos, SCH.SummonSelene })]
+        ScholarEnergyDrainFeature = 1L << 37,
+
         // DANCER
         [CustomComboInfo("AoE GCD procs", "DNC AoE procs turn into their normal abilities when not procced", 38, new uint[] { DNC.Bloodshower, DNC.RisingWindmill })]
         DancerAoeGcdFeature = 1L << 32,

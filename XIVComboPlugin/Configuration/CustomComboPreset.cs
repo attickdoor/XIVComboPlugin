@@ -3,7 +3,7 @@ using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
 {
-    //CURRENT HIGHEST FLAG IS 57
+    //CURRENT HIGHEST FLAG IS 58
     [Flags]
     public enum CustomComboPreset : long
     {

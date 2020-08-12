@@ -823,6 +823,15 @@ namespace XIVComboPlugin
                     return SCH.EnergyDrain;
                 }
 
+            // Change Fairy actions if no fairy is summoned.
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarSummonFeature))
+                if (actionID == SCH.SummonEos)
+                {
+                    if (clientState.JobGauges.Get<SCHGauge>().DismissedFairy == 0 || level < 20) 
+                        return SCH.SummonEos;
+                    return SCH.WhisperingDawn;
+                }
+
             // DANCER
 
             // AoE GCDs are split into two buttons, because priority matters

@@ -39,7 +39,7 @@ namespace XIVComboPlugin
         private readonly IntPtr lastComboMove;
         private readonly IntPtr playerLevel;
         private readonly IntPtr playerJob;
-        private byte lastJob = 0;
+        private uint lastJob = 0;
 
         private readonly IntPtr BuffVTableAddr;
         private float ping;
@@ -60,10 +60,10 @@ namespace XIVComboPlugin
 
             comboTimer = scanner.GetStaticAddressFromSig("E8 ?? ?? ?? ?? 80 7E 21 00", 0x178);
             lastComboMove = comboTimer + 0x4;
-
+            /*
             playerLevel = scanner.GetStaticAddressFromSig("E8 ?? ?? ?? ?? 88 45 EF", 0x4d) + 0x78;
             playerJob = playerLevel - 0xE;
-
+            */
             BuffVTableAddr = scanner.GetStaticAddressFromSig("48 89 05 ?? ?? ?? ?? 88 05 ?? ?? ?? ?? 88 05 ?? ?? ?? ??", 0);
 
             customIds = new HashSet<uint>();
@@ -156,9 +156,12 @@ namespace XIVComboPlugin
         /// </summary>
         private ulong GetIconDetour(byte self, uint actionID)
         {
-            if (lastJob != Marshal.ReadByte(playerJob))
+            
+            if (clientState.LocalPlayer == null) return iconHook.Original(self, actionID);
+            var job = clientState.LocalPlayer.ClassJob.Id;
+            if (lastJob != job)
             {
-                lastJob = Marshal.ReadByte(playerJob);
+                lastJob = job;
                 seenNoUpdate.Clear();
             }
             // TODO: More jobs, level checking for everything.
@@ -174,7 +177,8 @@ namespace XIVComboPlugin
             // Don't clutter the spaghetti any worse than it already is.
             var lastMove = Marshal.ReadInt32(lastComboMove);
             var comboTime = Marshal.PtrToStructure<float>(comboTimer);
-            var level = Marshal.ReadByte(playerLevel);
+            //var level = Marshal.ReadByte(playerLevel);
+            var level = clientState.LocalPlayer.Level;
             // DRAGOON
 
             // Change Jump/High Jump into Mirage Dive when Dive Ready
@@ -1049,7 +1053,7 @@ namespace XIVComboPlugin
         private unsafe IntPtr FindBuffAddress()
         {
             var num = Marshal.ReadIntPtr(BuffVTableAddr);
-            var step2 = (IntPtr) (Marshal.ReadInt64(num) + 0x270);
+            var step2 = (IntPtr) (Marshal.ReadInt64(num) + 0x280);
             var step3 = Marshal.ReadIntPtr(step2);
             var callback = Marshal.GetDelegateForFunctionPointer<getArray>(step3);
             return (IntPtr) callback((long*) num) + 8;

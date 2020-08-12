@@ -824,12 +824,20 @@ namespace XIVComboPlugin
                 }
 
             // Change Fairy actions if no fairy is summoned.
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarSummonFeature))
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarSummonEosFeature))
                 if (actionID == SCH.SummonEos)
                 {
-                    if (clientState.JobGauges.Get<SCHGauge>().DismissedFairy == 0 || level < 20) 
+                    if (clientState.JobGauges.Get<SCHGauge>().DismissedFairy == 0 || level < 20)
                         return SCH.SummonEos;
                     return SCH.WhisperingDawn;
+                }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarSummonSeleneFeature))
+                if (actionID == SCH.SummonSelene)
+                {
+                    if (clientState.JobGauges.Get<SCHGauge>().DismissedFairy == 0 || level < 40)
+                        return SCH.SummonSelene;
+                    return SCH.FeyIllumination;
                 }
 
             // DANCER

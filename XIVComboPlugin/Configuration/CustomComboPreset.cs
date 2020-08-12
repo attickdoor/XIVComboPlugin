@@ -149,7 +149,7 @@ namespace XIVComboPlugin
         ScholarSummonEosFeature = 1L << 57,
 
         [CustomComboInfo("Summon Fairy", "Change Summon Serene into Fey Illumination when either fairy is summoned", 28, new uint[] { SCH.SummonSelene })]
-        ScholarSummonSereneFeature = 1L << 58,
+        ScholarSummonSeleneFeature = 1L << 58,
 
         // DANCER
         [CustomComboInfo("AoE GCD procs", "DNC AoE procs turn into their normal abilities when not procced", 38, new uint[] { DNC.Bloodshower, DNC.RisingWindmill })]

@@ -821,7 +821,7 @@ namespace XIVComboPlugin
 
             // Change Energy Drain into Aetherflow when you have no more Aetherflow stacks.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarEnergyDrainFeature))
-                if (actionID == SCH.EnergyDrain)
+                if (actionID == SCH.SummonEos)
                 {
                     if (clientState.JobGauges.Get<SCHGauge>().NumAetherflowStacks == 0) return SCH.Aetherflow;
                     return SCH.EnergyDrain;
@@ -830,18 +830,35 @@ namespace XIVComboPlugin
             // Change Fairy actions if a fairy is already summoned.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarSummonFeature))
             {
+                Dalamud.Game.ClientState.Actors.ActorTable actorTable = this.clientState.Actors;
+                var fairySummoned = false;
+
+                for (var i = 1; i < this.clientState.Actors.Length; i++) // 0th entry is self, can be skipped
+                {
+                    var actor = this.clientState.Actors[i];
+
+                    if (actor == null)
+                        continue;
+
+                    if (String.Equals(actor.Name, "Eos") || String.Equals(actor.Name, "Selene"))
+                    {
+                        fairySummoned = true;
+                        break;
+                    }
+                }
                 if (actionID == SCH.SummonEos)
                 {
-                    if (clientState.JobGauges.Get<SCHGauge>().DismissedFairy == 0 || level < 20)
-                        return SCH.SummonEos;
-                    return SCH.WhisperingDawn;
+                    if (fairySummoned && level >= 20)
+                        return SCH.WhisperingDawn;
+                    return SCH.SummonEos;
                 }
                 if (actionID == SCH.SummonSelene)
                 {
-                    if (clientState.JobGauges.Get<SCHGauge>().DismissedFairy == 0 || level < 40)
-                        return SCH.SummonSelene;
-                    return SCH.FeyIllumination;
+                    if (fairySummoned && level >= 40)
+                        return SCH.FeyIllumination;
+                    return SCH.SummonSelene;
                 }
+
             }
 
             // DANCER

@@ -821,7 +821,7 @@ namespace XIVComboPlugin
 
             // Change Energy Drain into Aetherflow when you have no more Aetherflow stacks.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarEnergyDrainFeature))
-                if (actionID == SCH.SummonEos)
+                if (actionID == SCH.EnergyDrain)
                 {
                     if (clientState.JobGauges.Get<SCHGauge>().NumAetherflowStacks == 0) return SCH.Aetherflow;
                     return SCH.EnergyDrain;
@@ -858,7 +858,6 @@ namespace XIVComboPlugin
                         return SCH.FeyIllumination;
                     return SCH.SummonSelene;
                 }
-
             }
 
             // DANCER

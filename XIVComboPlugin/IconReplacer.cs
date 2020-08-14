@@ -849,13 +849,13 @@ namespace XIVComboPlugin
                         }
                     }
                 }
-                if (actionID == SCH.SummonEos)
+                if (actionID == SCH.WhisperingDawn)
                 {
                     if (fairySummoned && level >= 20)
                         return SCH.WhisperingDawn;
                     return SCH.SummonEos;
                 }
-                if (actionID == SCH.SummonSelene)
+                if (actionID == SCH.FeyIllumination)
                 {
                     if (fairySummoned && level >= 40)
                         return SCH.FeyIllumination;

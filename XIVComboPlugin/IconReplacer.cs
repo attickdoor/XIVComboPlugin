@@ -830,7 +830,7 @@ namespace XIVComboPlugin
             // Change Fairy actions if a fairy is already summoned.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarSummonFeature))
             {
-                Dalamud.Game.ClientState.Actors.ActorTable actorTable = this.clientState.Actors;
+                var playerId = clientState.LocalPlayer.ActorId;
                 var fairySummoned = false;
 
                 for (var i = 1; i < this.clientState.Actors.Length; i++) // 0th entry is self, can be skipped
@@ -840,10 +840,13 @@ namespace XIVComboPlugin
                     if (actor == null)
                         continue;
 
-                    if (String.Equals(actor.Name, "Eos") || String.Equals(actor.Name, "Selene"))
+                    if (actor is Dalamud.Game.ClientState.Actors.Types.NonPlayer.BattleNpc bnpc) 
                     {
-                        fairySummoned = true;
-                        break;
+                        if (bnpc.OwnerId == playerId && (String.Equals(bnpc.Name, "Eos") || String.Equals(bnpc.Name, "Selene") || String.Equals(bnpc.Name, "Seraph")))
+                        {
+                            fairySummoned = true;
+                            break;
+                        }
                     }
                 }
                 if (actionID == SCH.SummonEos)

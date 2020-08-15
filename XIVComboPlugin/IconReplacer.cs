@@ -830,25 +830,39 @@ namespace XIVComboPlugin
             // Change Fairy actions if a fairy is already summoned.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarSummonFeature))
             {
-                var playerId = clientState.LocalPlayer.ActorId;
                 var fairySummoned = false;
 
-                for (var i = 1; i < this.clientState.Actors.Length; i++) // 0th entry is self, can be skipped
+                // No need to check for fairy if not a SCH
+                if (job == 28)
                 {
-                    var actor = this.clientState.Actors[i];
-
-                    if (actor == null)
-                        continue;
-
-                    if (actor is Dalamud.Game.ClientState.Actors.Types.NonPlayer.BattleNpc bnpc) 
+                    // No need to check actors if Seraph guage is up, or Dissipation (791 / 0x0317) is active. Check for the Dissipation buff or the gauge/dismissed status produces the exact same result.
+                    if (clientState.JobGauges.Get<SCHGauge>().SeraphTimer > 0  || clientState.JobGauges.Get<SCHGauge>().DismissedFairy != 0)
+                        fairySummoned = true;
+                    else
                     {
-                        if (bnpc.OwnerId == playerId && (String.Equals(bnpc.Name, "Eos") || String.Equals(bnpc.Name, "Selene") || String.Equals(bnpc.Name, "Seraph")))
+                        var playerId = clientState.LocalPlayer.ActorId;
+
+                        // 0th entry is self, can be skipped
+                        for (var i = 1; i < clientState.Actors.Length; i++)
                         {
-                            fairySummoned = true;
-                            break;
+                            var actor = clientState.Actors[i];
+
+                            if (actor == null)
+                                continue;
+
+                            if (actor is Dalamud.Game.ClientState.Actors.Types.NonPlayer.BattleNpc bnpc)
+                            {
+                                // Keep looking for Seraph, to prevent flashing the summon commands when she is leaving the battlefield
+                                if (bnpc.OwnerId == playerId && (String.Equals(bnpc.Name, "Eos") || String.Equals(bnpc.Name, "Selene") || String.Equals(bnpc.Name, "Seraph")))
+                                {
+                                    fairySummoned = true;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
+                
                 if (actionID == SCH.WhisperingDawn)
                 {
                     if (fairySummoned && level >= 20)

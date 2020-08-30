@@ -1,9 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using Dalamud.Configuration;
-using Dalamud.Plugin;
-using Newtonsoft.Json;
 
 namespace XIVComboPlugin
 {

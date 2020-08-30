@@ -1,16 +1,12 @@
-﻿using Dalamud.Game.Command;
-using Dalamud.Plugin;
 using System;
-using System.Diagnostics;
-using System.IO;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using System.Runtime.Remoting.Messaging;
 using Dalamud.Game.Chat;
+using Dalamud.Game.Command;
+using Dalamud.Plugin;
 using ImGuiNET;
 using Serilog;
-using System.Collections.Generic;
-using System.Dynamic;
 
 namespace XIVComboPlugin
 {

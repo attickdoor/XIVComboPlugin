@@ -1,16 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Dalamud.Game;
+using Dalamud.Game.Chat;
 using Dalamud.Game.ClientState;
 using Dalamud.Game.ClientState.Structs.JobGauge;
 using Dalamud.Hooking;
-using XIVComboPlugin.JobActions;
 using Serilog;
-using System.Threading.Tasks;
-using System.Threading;
-using Dalamud.Plugin;
-using System.Dynamic;
+using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
 {

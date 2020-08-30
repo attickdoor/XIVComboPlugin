@@ -14,5 +14,24 @@
             Oka = 7485,
             Seigan = 7501,
             ThirdEye = 7498;
+
+        public static class Buffs
+        {
+            public const short
+                MeikyoShisui = 1233,
+                EyesOpen = 1252;
+        }
+
+        public static class Levels
+        {
+            public const byte
+                Jinpu = 4,
+                Shifu = 18,
+                Gekko = 30,
+                Mangetsu = 35,
+                Kasha = 40,
+                Oka = 45,
+                Yukikaze = 50;
+        }
     }
 }

@@ -9,6 +9,21 @@
             Transpose = 149,
             UmbralSoul = 16506,
             LeyLines = 3573,
-            BTL = 7419;
+            BetweenTheLines = 7419;
+
+        public static class Buffs
+        {
+            public const short
+                LeyLines = 737;
+        }
+
+        public static class Levels
+        {
+            public const byte
+                Blizzard4 = 58,
+                Fire4 = 60,
+                BetweenTheLines = 62,
+                UmbralSoul = 76;
+        }
     }
 }

@@ -11,5 +11,15 @@
             Spear = 4403,
             Ewer = 4405,
             Spire = 4406;
+
+        public static class Buffs
+        {
+            // public const short placeholder = 0;
+        }
+
+        public static class Levels
+        {
+            // public const byte placeholder = 0;
+        }
     }
 }

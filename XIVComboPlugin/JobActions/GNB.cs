@@ -14,12 +14,25 @@
             Continuation = 16155,
             JugularRip = 16156,
             AbdomenTear = 16157,
-            EyeGouge = 16158;
-        public const short
-            BuffReadyToRip = 1842,
-            BuffReadyToTear = 1843,
-            BuffReadyToGouge = 1844;
-        public const byte
-            LevelContinuation = 70;
+            EyeGouge = 16158,
+            FatedCircle = 16163;
+
+        public static class Buffs
+        {
+            public const short
+                ReadyToRip = 1842,
+                ReadyToTear = 1843,
+                ReadyToGouge = 1844;
+        }
+
+        public static class Levels
+        {
+            public const byte
+                BrutalShell = 4,
+                SolidBarrel = 26,
+                DemonSlaughter = 40,
+                Continuation = 70,
+                FatedCircle = 72;
+        }
     }
 }

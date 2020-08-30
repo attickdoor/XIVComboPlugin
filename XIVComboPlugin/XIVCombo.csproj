@@ -70,6 +70,7 @@
     <Compile Include="JobActions\BLM.cs" />
     <Compile Include="JobActions\BRD.cs" />
     <Compile Include="JobActions\DNC.cs" />
+    <Compile Include="JobActions\DoM.cs" />
     <Compile Include="JobActions\DRG.cs" />
     <Compile Include="JobActions\DRK.cs" />
     <Compile Include="JobActions\GNB.cs" />

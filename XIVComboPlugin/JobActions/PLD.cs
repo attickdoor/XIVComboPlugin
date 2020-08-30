@@ -12,5 +12,22 @@
             TotalEclipse = 7381,
             Requiescat = 7383,
             Confiteor = 16459;
+
+        public static class Buffs
+        {
+            public const short
+                Requiescat = 1368;
+        }
+
+        public static class Levels
+        {
+            public const byte
+                RiotBlade = 4,
+                RageOfHalone = 26,
+                Prominence = 40,
+                GoringBlade = 54,
+                RoyalAuthority = 60,
+                Confiteor = 80;
+        }
     }
 }

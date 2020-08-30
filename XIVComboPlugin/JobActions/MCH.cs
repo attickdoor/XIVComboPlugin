@@ -13,5 +13,22 @@
             HeatBlast = 7410,
             SpreadShot = 2870,
             AutoCrossbow = 16497;
+
+        public static class Buffs
+        {
+            // public const short placeholder = 0;
+        }
+
+        public static class Levels
+        {
+            public const byte
+                SlugShot = 2,
+                CleanShot = 26,
+                HeatBlast = 35,
+                AutoCrossbow = 52,
+                HeatedSplitShot = 54,
+                HeatedSlugshot = 60,
+                HeatedCleanShot = 64;
+        }
     }
 }

@@ -1174,66 +1174,18 @@ namespace XIVComboPlugin
 
         private void PopulateDict()
         {
-            customIds.Add(DRG.CoerthanTorment);
-            customIds.Add(DRG.ChaosThrust);
-            customIds.Add(DRG.FullThrust);
-            customIds.Add(DRK.Souleater);
-            customIds.Add(DRK.StalwartSoul);
-            customIds.Add(PLD.GoringBlade);
-            customIds.Add(PLD.RoyalAuthority);
-            customIds.Add(PLD.Prominence);
-            customIds.Add(WAR.StormsPath);
-            customIds.Add(WAR.StormsEye);
-            customIds.Add(WAR.MythrilTempest);
-            customIds.Add(SAM.Yukikaze);
-            customIds.Add(SAM.Gekko);
-            customIds.Add(SAM.Kasha);
-            customIds.Add(SAM.Mangetsu);
-            customIds.Add(SAM.Oka);
-            customIds.Add(NIN.ArmorCrush);
-            customIds.Add(NIN.AeolianEdge);
-            customIds.Add(NIN.HakkeMujinsatsu);
-            customIds.Add(GNB.SolidBarrel);
-            customIds.Add(GNB.WickedTalon);
-            customIds.Add(GNB.DemonSlaughter);
-            customIds.Add(MCH.HeatedCleanShot);
-            customIds.Add(MCH.SpreadShot);
-            customIds.Add(BLM.Enochian);
-            customIds.Add(BLM.Transpose);
-            customIds.Add(AST.Play);
-            customIds.Add(SMN.Deathflare);
-            customIds.Add(SMN.DreadwyrmTrance);
-            customIds.Add(SMN.Ruin1);
-            customIds.Add(SMN.Fester);
-            customIds.Add(SMN.Painflare);
-            customIds.Add(SCH.FeyBless);
-            customIds.Add(SCH.EnergyDrain);
-            customIds.Add(DNC.Bladeshower);
-            customIds.Add(DNC.Windmill);
-            customIds.Add(DNC.FanDance1);
-            customIds.Add(DNC.FanDance2);
-            customIds.Add(WHM.Solace);
-            customIds.Add(WHM.Rapture);
-            customIds.Add(BRD.WanderersMinuet);
-            customIds.Add(BRD.HeavyShot);
-            customIds.Add(RDM.Veraero2);
-            customIds.Add(RDM.Verthunder2);
-            customIds.Add(RDM.Redoublement);
-            customIds.Add(NIN.DreamWithinADream);
-            customIds.Add(DRG.Jump);
-            customIds.Add(DRG.BloodOfTheDragon);
-            customIds.Add(MCH.CleanShot);
-            customIds.Add(SMN.Ruin3);
-            customIds.Add(MCH.Hypercharge);
-            customIds.Add(SAM.Seigan);
-            customIds.Add(PLD.RageOfHalone);
-            customIds.Add(DNC.Bloodshower);
-            customIds.Add(DNC.RisingWindmill);
-            customIds.Add(RDM.Verstone);
-            customIds.Add(RDM.Verfire);
-            customIds.Add(MNK.Rockbreaker);
-            customIds.Add(BLM.LeyLines);
-            customIds.Add(PLD.Requiescat);
+            var values = Enum
+                .GetValues(typeof(CustomComboPreset))
+                .Cast<CustomComboPreset>()
+                .Where(x => x != CustomComboPreset.None && x.GetAttribute<CustomComboInfoAttribute>() != null)
+                .ToArray();
+            foreach (var value in values)
+            {
+                var abilities = value.GetAttribute<CustomComboInfoAttribute>().Abilities;
+                foreach (var ability in abilities)
+                    customIds.Add(ability);
+            }
+
             vanillaIds.Add(0x3e75);
             vanillaIds.Add(0x3e76);
             vanillaIds.Add(0x3e77);
@@ -1420,6 +1372,10 @@ namespace XIVComboPlugin
             vanillaIds.Add(0x10e);
             vanillaIds.Add(0x110);
             vanillaIds.Add(0x111);
+
+            foreach (var actionID in customIds)
+                if (vanillaIds.Contains(actionID))
+                    vanillaIds.Remove(actionID);
         }
     }
 }

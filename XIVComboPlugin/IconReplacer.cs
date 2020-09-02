@@ -102,7 +102,7 @@ namespace XIVComboPlugin
             checkerHook.Dispose();
         }
 
-        public void AddNoUpdate(uint [] ids)
+        public void AddNoUpdate(uint[] ids)
         {
             foreach (uint id in ids)
             {
@@ -111,7 +111,7 @@ namespace XIVComboPlugin
             }
         }
 
-        public void RemoveNoUpdate(uint [] ids)
+        public void RemoveNoUpdate(uint[] ids)
         {
             foreach (uint id in ids)
             {
@@ -138,7 +138,8 @@ namespace XIVComboPlugin
             {
                 return 1;
             }
-            if (!seenNoUpdate.Contains(actionID)) { 
+            if (!seenNoUpdate.Contains(actionID))
+            {
                 return 1;
             }
             return 0;
@@ -155,7 +156,6 @@ namespace XIVComboPlugin
         /// </summary>
         private ulong GetIconDetour(byte self, uint actionID)
         {
-            
             if (clientState.LocalPlayer == null) return iconHook.Original(self, actionID);
             var job = clientState.LocalPlayer.ClassJob.Id;
             if (lastJob != job)
@@ -618,7 +618,7 @@ namespace XIVComboPlugin
                         }
                     }
                     var ammoComboState = clientState.JobGauges.Get<GNBGauge>().AmmoComboStepNumber;
-                    switch(ammoComboState)
+                    switch (ammoComboState)
                     {
                         case 1:
                             return GNB.SavageClaw;
@@ -1133,12 +1133,14 @@ namespace XIVComboPlugin
 
             return iconHook.Original(self, actionID);
         }
+
         /*
         public void UpdatePing(ulong value)
         {
             ping = (float)(value)/1000;
         }
         */
+
         private bool SearchBuffArray(short needle)
         {
             if (activeBuffArray == IntPtr.Zero) return false;
@@ -1164,10 +1166,10 @@ namespace XIVComboPlugin
         private unsafe IntPtr FindBuffAddress()
         {
             var num = Marshal.ReadIntPtr(BuffVTableAddr);
-            var step2 = (IntPtr) (Marshal.ReadInt64(num) + 0x280);
+            var step2 = (IntPtr)(Marshal.ReadInt64(num) + 0x280);
             var step3 = Marshal.ReadIntPtr(step2);
             var callback = Marshal.GetDelegateForFunctionPointer<getArray>(step3);
-            return (IntPtr) callback((long*) num) + 8;
+            return (IntPtr)callback((long*)num) + 8;
         }
 
         private void PopulateDict()

@@ -1,22 +1,24 @@
-﻿using System;
+using System;
 using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
 {
-    //CURRENT HIGHEST FLAG IS 54
+    //CURRENT HIGHEST FLAG IS 56
     [Flags]
     public enum CustomComboPreset : long
     {
         None = 0,
 
-        // DRAGOON
-        [CustomComboInfo("Jump + Mirage Dive", "Replace (High) Jump with Mirage Dive when Dive Ready", 22, new uint[]{ DRG.Jump, DRG.HighJump })]
+        // ====================================================================================
+        #region DRAGOON
+
+        [CustomComboInfo("Jump + Mirage Dive", "Replace (High) Jump with Mirage Dive when Dive Ready", 22, new uint[] { DRG.Jump, DRG.HighJump })]
         DragoonJumpFeature = 1L << 44,
 
-        [CustomComboInfo("BOTD Into Stardiver", "Replace Blood of the Dragon with Stardiver when in Life of the Dragon", 22, new uint[] { DRG.BOTD })]
+        [CustomComboInfo("BOTD Into Stardiver", "Replace Blood of the Dragon with Stardiver when in Life of the Dragon", 22, new uint[] { DRG.BloodOfTheDragon })]
         DragoonBOTDFeature = 1L << 46,
 
-        [CustomComboInfo("Coerthan Torment Combo", "Replace Coerthan Torment with its combo chain", 22, new uint[] { DRG.CTorment })]
+        [CustomComboInfo("Coerthan Torment Combo", "Replace Coerthan Torment with its combo chain", 22, new uint[] { DRG.CoerthanTorment })]
         DragoonCoerthanTormentCombo = 1L << 0,
 
         [CustomComboInfo("Chaos Thrust Combo", "Replace Chaos Thrust with its combo chain", 22, new uint[] { DRG.ChaosThrust })]
@@ -25,14 +27,20 @@ namespace XIVComboPlugin
         [CustomComboInfo("Full Thrust Combo", "Replace Full Thrust with its combo chain", 22, new uint[] { DRG.FullThrust })]
         DragoonFullThrustCombo = 1L << 2,
 
-        // DARK KNIGHT
+        #endregion
+        // ====================================================================================
+        #region DARK KNIGHT
+
         [CustomComboInfo("Souleater Combo", "Replace Souleater with its combo chain", 32, new uint[] { DRK.Souleater })]
         DarkSouleaterCombo = 1L << 3,
 
         [CustomComboInfo("Stalwart Soul Combo", "Replace Stalwart Soul with its combo chain", 32, new uint[] { DRK.StalwartSoul })]
         DarkStalwartSoulCombo = 1L << 4,
 
-        // PALADIN
+        #endregion
+        // ====================================================================================
+        #region PALADIN
+
         [CustomComboInfo("Goring Blade Combo", "Replace Goring Blade with its combo chain", 19, new uint[] { PLD.GoringBlade })]
         PaladinGoringBladeCombo = 1L << 5,
 
@@ -45,7 +53,10 @@ namespace XIVComboPlugin
         [CustomComboInfo("Requiescat Confiteor", "Replace Requiescat with Confiter while under the effect of Requiescat", 19, new uint[] { PLD.Requiescat })]
         PaladinRequiescatCombo = 1L << 55,
 
-        // WARRIOR
+        #endregion
+        // ====================================================================================
+        #region WARRIOR
+
         [CustomComboInfo("Storms Path Combo", "Replace Storms Path with its combo chain", 21, new uint[] { WAR.StormsPath })]
         WarriorStormsPathCombo = 1L << 8,
 
@@ -55,7 +66,10 @@ namespace XIVComboPlugin
         [CustomComboInfo("Mythril Tempest Combo", "Replace Mythril Tempest with its combo chain", 21, new uint[] { WAR.MythrilTempest })]
         WarriorMythrilTempestCombo = 1L << 10,
 
-        // SAMURAI
+        #endregion
+        // ====================================================================================
+        #region SAMURAI
+
         [CustomComboInfo("Yukikaze Combo", "Replace Yukikaze with its combo chain", 34, new uint[] { SAM.Yukikaze })]
         SamuraiYukikazeCombo = 1L << 11,
 
@@ -74,21 +88,25 @@ namespace XIVComboPlugin
         [CustomComboInfo("Seigan to Third Eye", "Replace Seigan with Third Eye when not procced", 34, new uint[] { SAM.Seigan })]
         SamuraiThirdEyeFeature = 1L << 51,
 
+        #endregion
+        // ====================================================================================
+        #region NINJA
 
-        // NINJA
         [CustomComboInfo("Armor Crush Combo", "Replace Armor Crush with its combo chain", 30, new uint[] { NIN.ArmorCrush })]
         NinjaArmorCrushCombo = 1L << 17,
 
         [CustomComboInfo("Aeolian Edge Combo", "Replace Aeolian Edge with its combo chain", 30, new uint[] { NIN.AeolianEdge })]
         NinjaAeolianEdgeCombo = 1L << 18,
 
-        [CustomComboInfo("Hakke Mujinsatsu Combo", "Replace Hakke Mujinsatsu with its combo chain", 30, new uint[] { NIN.HakkeM })]
+        [CustomComboInfo("Hakke Mujinsatsu Combo", "Replace Hakke Mujinsatsu with its combo chain", 30, new uint[] { NIN.HakkeMujinsatsu })]
         NinjaHakkeMujinsatsuCombo = 1L << 19,
 
-        [CustomComboInfo("Dream to Assassinate", "Replace Dream Within a Dream with Assassinate when Assassinate Ready", 30, new uint[] { NIN.DWAD })]
+        [CustomComboInfo("Dream to Assassinate", "Replace Dream Within a Dream with Assassinate when Assassinate Ready", 30, new uint[] { NIN.DreamWithinADream })]
         NinjaAssassinateFeature = 1L << 45,
+        #endregion
+        // ====================================================================================
+        #region GUNBREAKER
 
-        // GUNBREAKER
         [CustomComboInfo("Solid Barrel Combo", "Replace Solid Barrel with its combo chain", 37, new uint[] { GNB.SolidBarrel })]
         GunbreakerSolidBarrelCombo = 1L << 20,
 
@@ -101,7 +119,10 @@ namespace XIVComboPlugin
         [CustomComboInfo("Demon Slaughter Combo", "Replace Demon Slaughter with its combo chain", 37, new uint[] { GNB.DemonSlaughter })]
         GunbreakerDemonSlaughterCombo = 1L << 22,
 
-        // MACHINIST
+        #endregion
+        // ====================================================================================
+        #region MACHINIST
+
         [CustomComboInfo("(Heated) Shot Combo", "Replace either form of Clean Shot with its combo chain", 31, new uint[] { MCH.HeatedCleanShot, MCH.CleanShot })]
         MachinistMainCombo = 1L << 23,
 
@@ -111,7 +132,10 @@ namespace XIVComboPlugin
         [CustomComboInfo("Heat Blast when overheated", "Replace Hypercharge with Heat Blast when overheated", 31, new uint[] { MCH.Hypercharge })]
         MachinistOverheatFeature = 1L << 47,
 
-        // BLACK MAGE
+        #endregion
+        // ====================================================================================
+        #region BLACK MAGE
+
         [CustomComboInfo("Enochian Stance Switcher", "Change Enochian to Fire 4 or Blizzard 4 depending on stance", 25, new uint[] { BLM.Enochian })]
         BlackEnochianFeature = 1L << 25,
 
@@ -121,12 +145,18 @@ namespace XIVComboPlugin
         [CustomComboInfo("(Between the) Ley Lines", "Change Ley Lines into BTL when Ley Lines is active", 25, new uint[] { BLM.LeyLines })]
         BlackLeyLines = 1L << 56,
 
-        // ASTROLOGIAN
+        #endregion
+        // ====================================================================================
+        #region ASTROLOGIAN
+
         [CustomComboInfo("Draw on Play", "Play turns into Draw when no card is drawn, as well as the usual Play behavior", 33, new uint[] { AST.Play })]
         AstrologianCardsOnDrawFeature = 1L << 27,
 
-        // SUMMONER
-        [CustomComboInfo("Demi-summon combiners", "Dreadwyrm Trance, Summon Bahamut, and Firebird Trance are now one button.\nDeathflare, Enkindle Bahamut, and Enkindle Phoenix are now one button", 27, new uint[] { SMN.DWT, SMN.Deathflare })]
+        #endregion
+        // ====================================================================================
+        #region SUMMONER
+
+        [CustomComboInfo("Demi-summon combiners", "Dreadwyrm Trance, Summon Bahamut, and Firebird Trance are now one button.\nDeathflare, Enkindle Bahamut, and Enkindle Phoenix are now one button", 27, new uint[] { SMN.DreadwyrmTrance, SMN.Deathflare })]
         SummonerDemiCombo = 1L << 28,
 
         [CustomComboInfo("Brand of Purgatory Combo", "Replaces Fountain of Fire with Brand of Purgatory when under the affect of Hellish Conduit", 27, new uint[] { SMN.Ruin1, SMN.Ruin3 })]
@@ -137,40 +167,57 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("ES Painflare", "Change Painflare into Energy Syphon when out of Aetherflow stacks", 27, new uint[] { SMN.Painflare })]
         SummonerESPainflareCombo = 1L << 40,
+        #endregion
+        // ====================================================================================
+        #region SCHOLAR
 
-        // SCHOLAR
         [CustomComboInfo("Seraph Fey Blessing/Consolation", "Change Fey Blessing into Consolation when Seraph is out", 28, new uint[] { SCH.FeyBless })]
         ScholarSeraphConsolationFeature = 1L << 29,
 
         [CustomComboInfo("ED Aetherflow", "Change Energy Drain into Aetherflow when you have no more Aetherflow stacks", 28, new uint[] { SCH.EnergyDrain })]
         ScholarEnergyDrainFeature = 1L << 37,
 
-        // DANCER
+        #endregion
+        // ====================================================================================
+        #region DANCER
+
         [CustomComboInfo("AoE GCD procs", "DNC AoE procs turn into their normal abilities when not procced", 38, new uint[] { DNC.Bloodshower, DNC.RisingWindmill })]
         DancerAoeGcdFeature = 1L << 32,
 
         [CustomComboInfo("Fan Dance Combos", "Change Fan Dance and Fan Dance 2 into Fan Dance 3 while flourishing", 38, new uint[] { DNC.FanDance1, DNC.FanDance2 })]
         DancerFanDanceCombo = 1L << 33,
 
-        // WHITE MAGE
+        #endregion
+        // ====================================================================================
+        #region WHITE MAGE
+
         [CustomComboInfo("Solace into Misery", "Replaces Afflatus Solace with Afflatus Misery when Misery is ready to be used", 24, new uint[] { WHM.Solace })]
         WhiteMageSolaceMiseryFeature = 1L << 35,
 
         [CustomComboInfo("Rapture into Misery", "Replaces Afflatus Rapture with Afflatus Misery when Misery is ready to be used", 24, new uint[] { WHM.Misery })]
         WhiteMageRaptureMiseryFeature = 1L << 36,
 
-        // BARD
+        #endregion
+        // ====================================================================================
+        #region BARD
+
         [CustomComboInfo("Wanderer's into Pitch Perfect", "Replaces Wanderer's Minuet with Pitch Perfect while in WM", 23, new uint[] { BRD.WanderersMinuet })]
         BardWandererPPFeature = 1L << 41,
 
         [CustomComboInfo("Heavy Shot into Straight Shot", "Replaces Heavy Shot/Burst Shot with Straight Shot/Refulgent Arrow when procced", 23, new uint[] { BRD.HeavyShot, BRD.BurstShot })]
         BardStraightShotUpgradeFeature = 1L << 42,
 
-        // MONK
+        #endregion
+        // ====================================================================================
+        #region MONK
+
         [CustomComboInfo("Monk AoE Combo", "Replaces Rockbreaker with the AoE combo chain, or Rockbreaker when Perfect Balance is active", 20, new uint[] { MNK.Rockbreaker })]
         MnkAoECombo = 1L << 54,
 
-        // RED MAGE
+        #endregion
+        // ====================================================================================
+        #region RED MAGE
+
         [CustomComboInfo("Red Mage AoE Combo", "Replaces Veraero/thunder 2 with Impact when Dualcast or Swiftcast are active", 35, new uint[] { RDM.Veraero2, RDM.Verthunder2 })]
         RedMageAoECombo = 1L << 48,
 
@@ -179,6 +226,9 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Verproc into Jolt", "Replaces Verstone/Verfire with Jolt/Scorch when no proc is available.", 35, new uint[] { RDM.Verstone, RDM.Verfire })]
         RedMageVerprocCombo = 1L << 53
+
+        #endregion
+        // ====================================================================================
     }
 
     public class CustomComboInfoAttribute : Attribute

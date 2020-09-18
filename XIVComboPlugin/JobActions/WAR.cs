@@ -1,4 +1,4 @@
-﻿namespace XIVComboPlugin.JobActions
+namespace XIVComboPlugin.JobActions
 {
     public static class WAR
     {
@@ -21,7 +21,7 @@
                 Maim = 4,
                 StormsPath = 26,
                 MythrilTempest = 40,
-                StormsEye = 56;
+                StormsEye = 50;
         }
     }
 }

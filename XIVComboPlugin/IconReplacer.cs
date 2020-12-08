@@ -924,10 +924,10 @@ namespace XIVComboPlugin
                 if (actionID == MNK.Rockbreaker)
                 {
                     UpdateBuffAddress();
-                    if (SearchBuffArray(110)) return MNK.Rockbreaker;
+                    if (SearchBuffArray(110) || SearchBuffArray(2513)) return MNK.Rockbreaker;
                     if (SearchBuffArray(107)) return MNK.AOTD;
-                    if (SearchBuffArray(108)) return MNK.FourPointFury;
-                    if (SearchBuffArray(109)) return MNK.Rockbreaker;
+                    if (SearchBuffArray(108) && level >= 45) return MNK.FourPointFury;
+                    if (SearchBuffArray(109) && level >= 30) return MNK.Rockbreaker;
                     return MNK.AOTD;
                 }
 

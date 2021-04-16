@@ -30,8 +30,8 @@ namespace XIVComboPlugin
 
         private readonly XIVComboConfiguration Configuration;
 
-        private readonly HashSet<uint> customIds;
-        private readonly HashSet<uint> vanillaIds;
+        //private readonly HashSet<uint> customIds;
+        //private readonly HashSet<uint> vanillaIds;
         private HashSet<uint> noUpdateIcons;
         private HashSet<uint> seenNoUpdate;
 
@@ -66,12 +66,12 @@ namespace XIVComboPlugin
             */
             BuffVTableAddr = scanner.GetStaticAddressFromSig("48 89 05 ?? ?? ?? ?? 88 05 ?? ?? ?? ?? 88 05 ?? ?? ?? ??", 0);
 
-            customIds = new HashSet<uint>();
-            vanillaIds = new HashSet<uint>();
+            //customIds = new HashSet<uint>();
+            //vanillaIds = new HashSet<uint>();
             noUpdateIcons = new HashSet<uint>();
             seenNoUpdate = new HashSet<uint>();
 
-            PopulateDict();
+            //PopulateDict();
 
             Log.Verbose("===== H O T B A R S =====");
             Log.Verbose("IsIconReplaceable address {IsIconReplaceable}", Address.IsIconReplaceable);
@@ -170,8 +170,8 @@ namespace XIVComboPlugin
                 seenNoUpdate.Add(actionID);
                 return actionID;
             }
-            if (vanillaIds.Contains(actionID)) return iconHook.Original(self, actionID);
-            if (!customIds.Contains(actionID)) return actionID;
+            //if (vanillaIds.Contains(actionID)) return iconHook.Original(self, actionID);
+            //if (!customIds.Contains(actionID)) return actionID;
             if (activeBuffArray == IntPtr.Zero) return iconHook.Original(self, actionID);
 
             // Don't clutter the spaghetti any worse than it already is.
@@ -1036,12 +1036,12 @@ namespace XIVComboPlugin
         private unsafe IntPtr FindBuffAddress()
         {
             var num = Marshal.ReadIntPtr(BuffVTableAddr);
-            var step2 = (IntPtr) (Marshal.ReadInt64(num) + 0x280);
+            var step2 = (IntPtr) (Marshal.ReadInt64(num) + 0x278);
             var step3 = Marshal.ReadIntPtr(step2);
             var callback = Marshal.GetDelegateForFunctionPointer<getArray>(step3);
             return (IntPtr) callback((long*) num) + 8;
         }
-
+        /*
         private void PopulateDict()
         {
             customIds.Add(16477);
@@ -1290,6 +1290,8 @@ namespace XIVComboPlugin
             vanillaIds.Add(0x10e);
             vanillaIds.Add(0x110);
             vanillaIds.Add(0x111);
+            vanillaIds.
         }
+        */
     }
 }

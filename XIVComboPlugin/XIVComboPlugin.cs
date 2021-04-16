@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.Remoting.Messaging;
-using Dalamud.Game.Chat;
+using Dalamud.Game.Text;
 using ImGuiNET;
 using Serilog;
 using System.Collections.Generic;

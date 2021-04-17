@@ -1035,6 +1035,7 @@ namespace XIVComboPlugin
 
         private unsafe IntPtr FindBuffAddress()
         {
+            if (BuffVTableAddr == IntPtr.Zero) return IntPtr.Zero;
             var num = Marshal.ReadIntPtr(BuffVTableAddr);
             var step2 = (IntPtr) (Marshal.ReadInt64(num) + 0x278);
             var step3 = Marshal.ReadIntPtr(step2);

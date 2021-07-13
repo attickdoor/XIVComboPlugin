@@ -80,9 +80,9 @@ namespace XIVComboPlugin
             Log.Verbose("LastComboMove address {LastComboMove}", lastComboMove);
             Log.Verbose("PlayerLevel address {PlayerLevel}", playerLevel);
 
-            iconHook = new Hook<OnGetIconDelegate>(Address.GetIcon, new OnGetIconDelegate(GetIconDetour), this);
+            iconHook = new Hook<OnGetIconDelegate>(Address.GetIcon, new OnGetIconDelegate(GetIconDetour));
             checkerHook = new Hook<OnCheckIsIconReplaceableDelegate>(Address.IsIconReplaceable,
-                new OnCheckIsIconReplaceableDelegate(CheckIsIconReplaceableDetour), this);
+                          new OnCheckIsIconReplaceableDelegate(CheckIsIconReplaceableDetour));
 
             Task.Run(() =>
             {

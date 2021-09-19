@@ -1,16 +1,16 @@
 ﻿using Dalamud.Game.Command;
 using Dalamud.Plugin;
 using System;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Numerics;
-using System.Runtime.Remoting.Messaging;
-using Dalamud.Game.Text;
 using ImGuiNET;
-using Serilog;
 using System.Collections.Generic;
-using System.Dynamic;
+using Dalamud.Game;
+using Dalamud.Game.ClientState;
+using Dalamud.Game.ClientState.JobGauge;
+using Dalamud.Game.Gui;
+using Dalamud.IoC;
+using Dalamud.Utility;
 
 namespace XIVComboPlugin
 {
@@ -20,22 +20,27 @@ namespace XIVComboPlugin
 
         public XIVComboConfiguration Configuration;
 
-        private DalamudPluginInterface pluginInterface;
         private IconReplacer iconReplacer;
         private readonly int CURRENT_CONFIG_VERSION = 3;
         private CustomComboPreset[] orderedByClassJob;
 
-        public void Initialize(DalamudPluginInterface pluginInterface)
-        {
-            this.pluginInterface = pluginInterface;
+        [PluginService] public static CommandManager CommandManager { get; private set; } = null!;
+        [PluginService] public static DalamudPluginInterface PluginInterface { get; private set; } = null!;
+        [PluginService] public static SigScanner TargetModuleScanner { get; private set; } = null!;
+        [PluginService] public static ClientState ClientState { get; private set; } = null!;
+        [PluginService] public static ChatGui ChatGui { get; private set; } = null!;
+        [PluginService] public static JobGauges JobGauges { get; private set; } = null!;
 
-            this.pluginInterface.CommandManager.AddHandler("/pcombo", new CommandInfo(OnCommandDebugCombo)
+        public XIVComboPlugin()
+        {
+
+            CommandManager.AddHandler("/pcombo", new CommandInfo(OnCommandDebugCombo)
             {
                 HelpMessage = "Open a window to edit custom combo settings.",
                 ShowInHelp = true
             });
 
-            this.Configuration = pluginInterface.GetPluginConfig() as XIVComboConfiguration ?? new XIVComboConfiguration();
+            this.Configuration = PluginInterface.GetPluginConfig() as XIVComboConfiguration ?? new XIVComboConfiguration();
             if (Configuration.Version < 3)
             {
                 Configuration.HiddenActions = new List<bool>();
@@ -44,12 +49,12 @@ namespace XIVComboPlugin
                 Configuration.Version = 3;
             }
 
-            this.iconReplacer = new IconReplacer(pluginInterface.TargetModuleScanner, pluginInterface.ClientState, this.Configuration);
+            this.iconReplacer = new IconReplacer(TargetModuleScanner, ClientState, this.Configuration);
 
             this.iconReplacer.Enable();
 
-            this.pluginInterface.UiBuilder.OnOpenConfigUi += (sender, args) => isImguiComboSetupOpen = true;
-            this.pluginInterface.UiBuilder.OnBuildUi += UiBuilder_OnBuildUi;
+            PluginInterface.UiBuilder.OpenConfigUi += () => isImguiComboSetupOpen = true;
+            PluginInterface.UiBuilder.Draw += UiBuilder_OnBuildUi;
             /*
             pluginInterface.Subscribe("PingPlugin", e => {
                 dynamic msg = e;
@@ -198,13 +203,13 @@ namespace XIVComboPlugin
             ImGui.Separator();
             if (ImGui.Button("Save"))
             {
-                this.pluginInterface.SavePluginConfig(Configuration);
+                PluginInterface.SavePluginConfig(Configuration);
                 UpdateConfig();
             }
             ImGui.SameLine();
             if (ImGui.Button("Save and Close"))
             {
-                this.pluginInterface.SavePluginConfig(Configuration);
+                PluginInterface.SavePluginConfig(Configuration);
                 this.isImguiComboSetupOpen = false;
                 UpdateConfig();
             }
@@ -216,9 +221,9 @@ namespace XIVComboPlugin
         {
             this.iconReplacer.Dispose();
 
-            this.pluginInterface.CommandManager.RemoveHandler("/pcombo");
+            CommandManager.RemoveHandler("/pcombo");
 
-            this.pluginInterface.Dispose();
+            PluginInterface.Dispose();
         }
 
         private void OnCommandDebugCombo(string command, string arguments)
@@ -237,7 +242,7 @@ namespace XIVComboPlugin
                             this.Configuration.ComboPresets |= value;
                         }
 
-                        this.pluginInterface.Framework.Gui.Chat.Print("all SET");
+                        ChatGui.Print("all SET");
                     }
                     break;
                 case "unsetall":
@@ -247,7 +252,7 @@ namespace XIVComboPlugin
                             this.Configuration.ComboPresets &= value;
                         }
 
-                        this.pluginInterface.Framework.Gui.Chat.Print("all UNSET");
+                        ChatGui.Print("all UNSET");
                     }
                     break;
                 case "set":
@@ -292,10 +297,10 @@ namespace XIVComboPlugin
                             if (argumentsParts[1].ToLower() == "set")
                             {
                                 if (this.Configuration.ComboPresets.HasFlag(value))
-                                    this.pluginInterface.Framework.Gui.Chat.Print(value.ToString());
+                                    ChatGui.Print(value.ToString());
                             }
                             else if (argumentsParts[1].ToLower() == "all")
-                                this.pluginInterface.Framework.Gui.Chat.Print(value.ToString());
+                                ChatGui.Print(value.ToString());
                         }
                     }
                     break;
@@ -305,7 +310,7 @@ namespace XIVComboPlugin
                     break;
             }
 
-            this.pluginInterface.SavePluginConfig(this.Configuration);
+            PluginInterface.SavePluginConfig(this.Configuration);
         }
     }
 }

@@ -100,25 +100,7 @@ namespace XIVComboPlugin
             checkerHook.Dispose();
         }
 
-        public void AddNoUpdate(uint [] ids)
-        {
-            foreach (uint id in ids)
-            {
-                if (!noUpdateIcons.Contains(id))
-                    noUpdateIcons.Add(id);
-            }
-        }
-
-        public void RemoveNoUpdate(uint [] ids)
-        {
-            foreach (uint id in ids)
-            {
-                if (noUpdateIcons.Contains(id))
-                    noUpdateIcons.Remove(id);
-                if (seenNoUpdate.Contains(id))
-                    seenNoUpdate.Remove(id);
-            }
-        }
+        
         private async void BuffTask()
         {
             while (!shutdown)
@@ -132,14 +114,7 @@ namespace XIVComboPlugin
         // Determines which abilities are allowed to have their icons updated.
         private ulong CheckIsIconReplaceableDetour(uint actionID)
         {
-            if (!noUpdateIcons.Contains(actionID))
-            {
-                return 1;
-            }
-            if (!seenNoUpdate.Contains(actionID)) { 
-                return 1;
-            }
-            return 0;
+            return 1;
         }
 
         /// <summary>
@@ -155,18 +130,7 @@ namespace XIVComboPlugin
         {
             
             if (clientState.LocalPlayer == null) return iconHook.Original(self, actionID);
-            var job = clientState.LocalPlayer.ClassJob.Id;
-            if (lastJob != job)
-            {
-                lastJob = job;
-                seenNoUpdate.Clear();
-            }
-            // TODO: More jobs, level checking for everything.
-            if (noUpdateIcons.Contains(actionID) && !seenNoUpdate.Contains(actionID))
-            {
-                seenNoUpdate.Add(actionID);
-                return actionID;
-            }
+
             //if (vanillaIds.Contains(actionID)) return iconHook.Original(self, actionID);
             //if (!customIds.Contains(actionID)) return actionID;
             if (activeBuffArray == IntPtr.Zero) return iconHook.Original(self, actionID);
@@ -392,6 +356,14 @@ namespace XIVComboPlugin
                 }
 
             // SAMURAI
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiTsubameCombo))
+                if (actionID == SAM.Iaijutsu)
+                {
+                    var x = iconHook.Original(self, SAM.Tsubame);
+                    if (x != SAM.Tsubame) return x;
+                    return iconHook.Original(self, actionID);
+                }
 
             // Replace Yukikaze with Yukikaze combo
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiYukikazeCombo))

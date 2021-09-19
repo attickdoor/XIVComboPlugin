@@ -41,12 +41,9 @@ namespace XIVComboPlugin
             });
 
             this.Configuration = PluginInterface.GetPluginConfig() as XIVComboConfiguration ?? new XIVComboConfiguration();
-            if (Configuration.Version < 3)
+            if (Configuration.Version < 4)
             {
-                Configuration.HiddenActions = new List<bool>();
-                for (var i = 0; i < Enum.GetValues(typeof(CustomComboPreset)).Length; i++)
-                    Configuration.HiddenActions.Add(false);
-                Configuration.Version = 3;
+                Configuration.Version = 4;
             }
 
             this.iconReplacer = new IconReplacer(TargetModuleScanner, ClientState, this.Configuration);
@@ -117,13 +114,7 @@ namespace XIVComboPlugin
 
         private void UpdateConfig()
         {
-            for (var i = 0; i < orderedByClassJob.Length; i++)
-            {
-                if (Configuration.HiddenActions[i])
-                    iconReplacer.AddNoUpdate(orderedByClassJob[i].GetAttribute<CustomComboInfoAttribute>().Abilities);
-                else
-                    iconReplacer.RemoveNoUpdate(orderedByClassJob[i].GetAttribute<CustomComboInfoAttribute>().Abilities);
-            }
+
         }
 
         private void UiBuilder_OnBuildUi()
@@ -172,8 +163,6 @@ namespace XIVComboPlugin
                             ImGui.PushItemWidth(200);
                             ImGui.Checkbox(flagInfo.FancyName, ref flagsSelected[j]);
                             ImGui.PopItemWidth();
-                            ImGui.SameLine(275);
-                            ImGui.Checkbox("Prevent this chain from updating its icon" + $"##{j}", ref hiddenFlags[j]);
                             ImGui.TextColored(new Vector4(0.68f, 0.68f, 0.68f, 1.0f), $"#{j+1}:" + flagInfo.Description);
                             ImGui.Spacing();
                         }
@@ -193,7 +182,6 @@ namespace XIVComboPlugin
                 {
                     Configuration.ComboPresets &= ~orderedByClassJob[i];
                 }
-                Configuration.HiddenActions[i] = hiddenFlags[i];
             }
 
             ImGui.PopStyleVar();

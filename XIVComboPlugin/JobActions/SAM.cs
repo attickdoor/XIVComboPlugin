@@ -13,6 +13,8 @@
             Fuga = 7483,
             Oka = 7485,
             Seigan = 7501,
-            ThirdEye = 7498;
+            ThirdEye = 7498,
+            Iaijutsu = 7867,
+            Tsubame = 16483;
     }
 }

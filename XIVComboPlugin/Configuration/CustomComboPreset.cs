@@ -110,6 +110,9 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Heat Blast when overheated", "Replace Hypercharge with Heat Blast when overheated", 31, new uint[] { MCH.Hypercharge })]
         MachinistOverheatFeature = 1L << 47,
+        
+        [CustomComboInfo("Heat Blast over Combo when overheated", "Replace Shot Combo with Heat Blast when overheated", 31, new uint[] { MCH.HeatedCleanShot, MCH.CleanShot })]
+        MachinistHeatBlastFeature = 1L << 57,
 
         // BLACK MAGE
         [CustomComboInfo("Enochian Stance Switcher", "Change Enochian to Fire 4 or Blizzard 4 depending on stance", 25, new uint[] { BLM.Enochian })]

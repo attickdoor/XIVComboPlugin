@@ -588,8 +588,18 @@ namespace XIVComboPlugin
 
             // MACHINIST
 
+            // Replace Clean Shot and Heated Clean Shot with Heat Blast 
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistHeatBlastFeature))
+            {
+                if (actionID == MCH.CleanShot || actionID == MCH.HeatedCleanShot)
+                {
+                    var gauge = clientState.JobGauges.Get<MCHGauge>();
+                    if (gauge.IsOverheated() && level >= 35)
+                        return MCH.HeatBlast;
+                }
+            }
+            
             // Replace Clean Shot with Heated Clean Shot combo
-            // Or with Heat Blast when overheated.
             // For some reason the shots use their unheated IDs as combo moves
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistMainCombo))
                 if (actionID == MCH.CleanShot || actionID == MCH.HeatedCleanShot)

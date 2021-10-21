@@ -11,6 +11,9 @@
             Prominence = 16457,
             TotalEclipse = 7381,
             Requiescat = 7383,
-            Confiteor = 16459;
+            Confiteor = 16459,
+            Atonement = 16460;
+
+        public const short SwordOath = 1902;
     }
 }

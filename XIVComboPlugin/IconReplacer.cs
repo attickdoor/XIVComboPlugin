@@ -1034,10 +1034,10 @@ namespace XIVComboPlugin
         private unsafe IntPtr FindBuffAddress()
         {
             var num = Marshal.ReadIntPtr(BuffVTableAddr);
-            var step2 = (IntPtr) (Marshal.ReadInt64(num) + 0x278);
+            var step2 = (IntPtr)(Marshal.ReadInt64(num) + 0x278);
             var step3 = Marshal.ReadIntPtr(step2);
             var callback = Marshal.GetDelegateForFunctionPointer<getArray>(step3);
-            return (IntPtr) callback((long*) num) + 8;
+            return (IntPtr)callback((long*)num) + 8;
         }
         /*
         private void PopulateDict()

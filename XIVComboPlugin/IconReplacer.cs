@@ -100,7 +100,7 @@ namespace XIVComboPlugin
             checkerHook.Dispose();
         }
 
-        
+
         private async void BuffTask()
         {
             while (!shutdown)
@@ -160,7 +160,7 @@ namespace XIVComboPlugin
                 {
                     if (comboTime > 0)
                     {
-                        if (lastMove == DRG.DoomSpike && level >= 62)
+                        if ((lastMove == DRG.DoomSpike || lastMove == DRG.DraconianFury) && level >= 62)
                             return DRG.SonicThrust;
                         if (lastMove == DRG.SonicThrust && level >= 72)
                             return DRG.CTorment;
@@ -169,18 +169,21 @@ namespace XIVComboPlugin
                     return DRG.DoomSpike;
                 }
 
-
             // Replace Chaos Thrust with the Chaos Thrust combo chain
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonChaosThrustCombo))
                 if (actionID == DRG.ChaosThrust)
                 {
                     if (comboTime > 0)
                     {
-                        if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust)
-                            && level >= 18) 
-                                return DRG.Disembowel;
-                        if (lastMove == DRG.Disembowel && level >= 50) 
-                            return DRG.ChaosThrust;
+                        if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 18)
+                            return DRG.Disembowel;
+                        if (lastMove == DRG.Disembowel)
+                        {
+                            if (level >= 86)
+                                return DRG.ChaoticSpring;
+                            if (level >= 50)
+                                return DRG.ChaosThrust;
+                        }
                     }
                     UpdateBuffAddress();
                     if (SearchBuffArray(802) && level >= 56)
@@ -200,11 +203,15 @@ namespace XIVComboPlugin
                 {
                     if (comboTime > 0)
                     {
-                        if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust)
-                            && level >= 4)
+                        if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 4)
                             return DRG.VorpalThrust;
-                        if (lastMove == DRG.VorpalThrust && level >= 26)
-                            return DRG.FullThrust;
+                        if (lastMove == DRG.VorpalThrust)
+                        {
+                            if (level >= 86)
+                                return DRG.HeavensThrust;
+                            if (level >= 26)
+                                return DRG.FullThrust;
+                        }
                     }
                     UpdateBuffAddress();
                     if (SearchBuffArray(802) && level >= 56)
@@ -292,7 +299,7 @@ namespace XIVComboPlugin
 
                     return PLD.TotalEclipse;
                 }
-            
+
             // Replace Requiescat with Confiteor when under the effect of Requiescat
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PaladinRequiescatCombo))
                 if (actionID == PLD.Requiescat)

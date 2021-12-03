@@ -68,9 +68,6 @@ namespace XIVComboPlugin
         [CustomComboInfo("Oka Combo", "Replace Oka with its combo chain", 34)]
         SamuraiOkaCombo = 1L << 15,
 
-        [CustomComboInfo("Seigan to Third Eye", "Replace Seigan with Third Eye when not procced", 34)]
-        SamuraiThirdEyeFeature = 1L << 51,
-
         [CustomComboInfo("Iaijutsu into Tsubame", "Replace Iaijutsu with Tsubame after using an Iaijutsu", 34)]
         SamuraiTsubameCombo = 1L << 56,
 

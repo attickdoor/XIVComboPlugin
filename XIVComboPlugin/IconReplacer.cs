@@ -446,14 +446,6 @@ namespace XIVComboPlugin
                     return SAM.Fuga;
                 }
 
-            // Turn Seigan into Third Eye when not procced
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiThirdEyeFeature))
-                if (actionID == SAM.Seigan) {
-                    UpdateBuffAddress();
-                    if (SearchBuffArray(1252)) return SAM.Seigan;
-                    return SAM.ThirdEye;
-                }
-
             // NINJA
 
             // Replace Armor Crush with Armor Crush combo

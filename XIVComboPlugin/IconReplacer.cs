@@ -659,14 +659,19 @@ namespace XIVComboPlugin
                             return AST.Ewer;
                         case CardType.SPIRE:
                             return AST.Spire;
-                        /*
-                        case CardType.LORD:
-                            return 7444;
-                        case CardType.LADY:
-                            return 7445;
-                        */
                         default:
                             return AST.Draw;
+                    }
+                }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.AstrologianMinorArcanaPlayFeature))
+                if (actionID == AST.MinorArcana)
+                {
+                    if (level >= 70)
+                    {
+                        UpdateBuffAddress();
+                        if (SearchBuffArray(AST.BuffLadyOfCrownsDrawn) || SearchBuffArray(AST.BuffLadyOfCrownsDrawn))
+                            return AST.CrownPlay;
                     }
                 }
 

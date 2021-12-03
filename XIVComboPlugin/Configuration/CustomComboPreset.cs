@@ -122,6 +122,9 @@ namespace XIVComboPlugin
         [CustomComboInfo("Draw on Play", "Play turns into Draw when no card is drawn, as well as the usual Play behavior", 33)]
         AstrologianCardsOnDrawFeature = 1L << 27,
 
+        [CustomComboInfo("Minor Arcana Play", "Minor Arcana turns into Crown Play when a card drawn.", 32)]
+        AstrologianMinorArcanaPlayFeature = 1L << 30,
+
         // SUMMONER
         [CustomComboInfo("Demi-summon combiners", "Dreadwyrm Trance, Summon Bahamut, and Firebird Trance are now one button.\nDeathflare, Enkindle Bahamut, and Enkindle Phoenix are now one button", 27)]
         SummonerDemiCombo = 1L << 28,

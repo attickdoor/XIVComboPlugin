@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
@@ -178,7 +178,13 @@ namespace XIVComboPlugin
         RedMageMeleeCombo = 1L << 49,
 
         [CustomComboInfo("Verproc into Jolt", "Replaces Verstone/Verfire with Jolt/Scorch when no proc is available.", 35)]
-        RedMageVerprocCombo = 1L << 53
+        RedMageVerprocCombo = 1L << 53,
+
+        [CustomComboInfo("Slice Combo", "Replace Slice with its combo chain.", 39)]
+        ReaperSliceCombo = 1L << 16,
+
+        [CustomComboInfo("Scythe Combo", "Replace Spinning Scythe with its combo chain.", 39)]
+        ReaperScytheCombo = 1L << 17,
     }
 
     public class CustomComboInfoAttribute : Attribute

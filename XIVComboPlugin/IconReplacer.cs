@@ -961,6 +961,39 @@ namespace XIVComboPlugin
                 }
             }
 
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ReaperSliceCombo))
+            {
+                if (actionID == RPR.Slice)
+                {
+                    if (comboTime > 0)
+                    {
+                        if (lastMove == RPR.Slice && level >= RPR.Levels.WaxingSlice)
+                            return RPR.WaxingSlice;
+
+                        if (lastMove == RPR.WaxingSlice && level >= RPR.Levels.InfernalSlice)
+                            return RPR.InfernalSlice;
+                    }
+
+                    return RPR.Slice;
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ReaperScytheCombo))
+            {
+                if (actionID == RPR.SpinningScythe)
+                {
+                    if (comboTime > 0)
+                    {
+                        if (lastMove == RPR.SpinningScythe && level >= RPR.Levels.NightmareScythe)
+                            return RPR.NightmareScythe;
+                    }
+
+                    return RPR.SpinningScythe;
+                }
+
+                return actionID;
+            }
+
             return iconHook.Original(self, actionID);
         }
         /*

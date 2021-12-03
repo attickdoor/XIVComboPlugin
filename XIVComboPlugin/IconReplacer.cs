@@ -931,7 +931,6 @@ namespace XIVComboPlugin
                 }
             }
 
-
             // Replace Redoublement with Redoublement combo, Enchanted if possible.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.RedMageMeleeCombo))
                 if (actionID == RDM.Redoublement)
@@ -974,6 +973,8 @@ namespace XIVComboPlugin
                     return RDM.Jolt2;
                 }
             }
+
+            // REAPER 
 
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ReaperSliceCombo))
             {

@@ -805,7 +805,7 @@ namespace XIVComboPlugin
                 if (actionID == DNC.Bloodshower)
                 {
                     UpdateBuffAddress();
-                    if (SearchBuffArray(1817))
+                    if (SearchBuffArray(DNC.BuffFlourishingFlow))
                         return DNC.Bloodshower;
                     return DNC.Bladeshower;
                 }
@@ -813,7 +813,7 @@ namespace XIVComboPlugin
                 if (actionID == DNC.RisingWindmill)
                 {
                     UpdateBuffAddress();
-                    if (SearchBuffArray(1816))
+                    if (SearchBuffArray(DNC.BuffFlourishingSymmetry))
                         return DNC.RisingWindmill;
                     return DNC.Windmill;
                 }
@@ -825,7 +825,9 @@ namespace XIVComboPlugin
                 if (actionID == DNC.FanDance1)
                 {
                     UpdateBuffAddress();
-                    if (SearchBuffArray(1820))
+                    if (SearchBuffArray(DNC.BuffFourfoldFanDance))
+                        return DNC.FanDance4;
+                    if (SearchBuffArray(DNC.BuffThreefoldFanDance))
                         return DNC.FanDance3;
                     return DNC.FanDance1;
                 }
@@ -834,7 +836,9 @@ namespace XIVComboPlugin
                 if (actionID == DNC.FanDance2)
                 {
                     UpdateBuffAddress();
-                    if (SearchBuffArray(1820))
+                    if (SearchBuffArray(DNC.BuffFourfoldFanDance))
+                        return DNC.FanDance4;
+                    if (SearchBuffArray(DNC.BuffThreefoldFanDance))
                         return DNC.FanDance3;
                     return DNC.FanDance2;
                 }

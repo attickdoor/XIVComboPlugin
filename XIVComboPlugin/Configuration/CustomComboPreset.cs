@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
@@ -81,9 +81,6 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Hakke Mujinsatsu Combo", "Replace Hakke Mujinsatsu with its combo chain", 30)]
         NinjaHakkeMujinsatsuCombo = 1L << 19,
-
-        [CustomComboInfo("Dream to Assassinate", "Replace Dream Within a Dream with Assassinate when Assassinate Ready", 30)]
-        NinjaAssassinateFeature = 1L << 45,
 
         // GUNBREAKER
         [CustomComboInfo("Solid Barrel Combo", "Replace Solid Barrel with its combo chain", 37)]

@@ -488,15 +488,6 @@ namespace XIVComboPlugin
                     return NIN.DeathBlossom;
                 }
 
-            //Replace Dream Within a Dream with Assassinate when Assassinate Ready
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.NinjaAssassinateFeature))
-                if (actionID == NIN.DWAD)
-                {
-                    UpdateBuffAddress();
-                    if (SearchBuffArray(1955)) return NIN.Assassinate;
-                    return NIN.DWAD;
-                }
-
             // GUNBREAKER
 
             // Replace Solid Barrel with Solid Barrel combo

@@ -306,6 +306,16 @@ namespace XIVComboPlugin
                 {
                     if (SearchBuffArray(1368) && level >= 80)
                         return PLD.Confiteor;
+                    
+                    if (lastMove == PLD.Confiteor)
+                        return PLD.BladeOfFaith;
+
+                    if (lastMove == PLD.BladeOfFaith)
+                        return PLD.BladeOfTruth;
+
+                    if (lastMove == PLD.BladeOfTruth)
+                        return PLD.BladeOfValor;
+
                     return PLD.Requiescat;
                 }
 

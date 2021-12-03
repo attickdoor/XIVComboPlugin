@@ -109,7 +109,7 @@ namespace XIVComboPlugin
         MachinistOverheatFeature = 1L << 47,
 
         // BLACK MAGE
-        [CustomComboInfo("Enochian Stance Switcher", "Change Enochian to Fire 4 or Blizzard 4 depending on stance", 25)]
+        [CustomComboInfo("Enochian Stance Switcher", "Change Fire 4 and Blizzard 4 to the appropriate element depending on stance", 25)]
         BlackEnochianFeature = 1L << 25,
 
         [CustomComboInfo("Umbral Soul/Transpose Switcher", "Change Transpose into Umbral Soul when Umbral Soul is usable", 25)]

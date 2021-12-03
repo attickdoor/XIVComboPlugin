@@ -608,20 +608,15 @@ namespace XIVComboPlugin
 
             // BLACK MAGE
 
-            // Enochian changes to B4 or F4 depending on stance.
+            // B4 and F4 change to each other depending on stance.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BlackEnochianFeature))
-                if (actionID == BLM.Enochian)
+                if (actionID == BLM.Fire4 || actionID == BLM.Blizzard4)
                 {
                     var gauge = XIVComboPlugin.JobGauges.Get<BLMGauge>();
-                    if (gauge.IsEnochianActive)
-                    {
-                        if (gauge.InUmbralIce && level >= 58)
-                            return BLM.Blizzard4;
-                        if (level >= 60)
-                            return BLM.Fire4;
-                    }
-
-                    return BLM.Enochian;
+                    if (gauge.InUmbralIce && level >= 58)
+                        return BLM.Blizzard4;
+                    if (level >= 60)
+                        return BLM.Fire4;
                 }
 
             // Umbral Soul and Transpose

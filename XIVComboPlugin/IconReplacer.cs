@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Dalamud.Game;
@@ -590,13 +590,14 @@ namespace XIVComboPlugin
 
             // Replace Hypercharge with Heat Blast when overheated
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistOverheatFeature))
-                if (actionID == MCH.Hypercharge) {
+                if (actionID == MCH.Hypercharge)
+                {
                     var gauge = XIVComboPlugin.JobGauges.Get<MCHGauge>();
                     if (gauge.IsOverheated && level >= 35)
                         return MCH.HeatBlast;
                     return MCH.Hypercharge;
                 }
-                
+
             // Replace Spread Shot with Auto Crossbow when overheated.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistSpreadShotFeature))
                 if (actionID == MCH.SpreadShot)
@@ -888,7 +889,7 @@ namespace XIVComboPlugin
                 }
 
             // MONK
-            
+
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MnkAoECombo))
                 if (actionID == MNK.Rockbreaker)
                 {
@@ -901,7 +902,7 @@ namespace XIVComboPlugin
                 }
 
             // RED MAGE
-           
+
             // Replace Veraero/thunder 2 with Impact when Dualcast is active
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.RedMageAoECombo))
             {

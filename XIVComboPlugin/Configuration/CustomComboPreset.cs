@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
@@ -91,6 +91,9 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Wicked Talon Continuation", "In addition to the Wicked Talon combo chain, put Continuation moves on Wicked Talon when appropriate", 37)]
         GunbreakerGnashingFangCont = 1L << 52,
+
+        [CustomComboInfo("Burst Strike Continuation", "Put Continuation moves on Burst Strike when appropriate", 37)]
+        GunbreakerBurstStrikeCont = 1L << 45,
 
         [CustomComboInfo("Demon Slaughter Combo", "Replace Demon Slaughter with its combo chain", 37)]
         GunbreakerDemonSlaughterCombo = 1L << 22,

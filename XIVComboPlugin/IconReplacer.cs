@@ -196,7 +196,6 @@ namespace XIVComboPlugin
                     return DRG.TrueThrust;
                 }
 
-
             // Replace Full Thrust with the Full Thrust combo chain
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonFullThrustCombo))
                 if (actionID == 84)
@@ -306,7 +305,7 @@ namespace XIVComboPlugin
                 {
                     if (SearchBuffArray(1368) && level >= 80)
                         return PLD.Confiteor;
-                    
+
                     if (lastMove == PLD.Confiteor)
                         return PLD.BladeOfFaith;
 
@@ -523,7 +522,7 @@ namespace XIVComboPlugin
                         }
                     }
                     var ammoComboState = XIVComboPlugin.JobGauges.Get<GNBGauge>().AmmoComboStep;
-                    switch(ammoComboState)
+                    switch (ammoComboState)
                     {
                         case 1:
                             return GNB.SavageClaw;
@@ -531,6 +530,18 @@ namespace XIVComboPlugin
                             return GNB.WickedTalon;
                         default:
                             return GNB.GnashingFang;
+                    }
+                }
+
+            // Replace Burst Strike with Continuation
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.GunbreakerBurstStrikeCont))
+                if (actionID == GNB.BurstStrike)
+                {
+                    if (level >= GNB.LevelEnhancedContinuation)
+                    {
+                        UpdateBuffAddress();
+                        if (SearchBuffArray(GNB.BuffReadyToBlast))
+                            return GNB.Hypervelocity;
                     }
                 }
 
@@ -576,7 +587,7 @@ namespace XIVComboPlugin
                     return MCH.SplitShot;
                 }
 
-                        
+
             // Replace Hypercharge with Heat Blast when overheated
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistOverheatFeature))
                 if (actionID == MCH.Hypercharge) {

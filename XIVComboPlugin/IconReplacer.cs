@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Dalamud.Game;
@@ -128,7 +128,7 @@ namespace XIVComboPlugin
         /// </summary>
         private ulong GetIconDetour(byte self, uint actionID)
         {
-            
+
             if (clientState.LocalPlayer == null) return iconHook.Original(self, actionID);
 
             //if (vanillaIds.Contains(actionID)) return iconHook.Original(self, actionID);
@@ -152,17 +152,6 @@ namespace XIVComboPlugin
                     if (level >= 74)
                         return DRG.HighJump;
                     return DRG.Jump;
-                }
-
-            // Change Blood of the Dragon into Stardiver when in Life of the Dragon
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonBOTDFeature))
-                if (actionID == DRG.BOTD)
-                {
-                    if (level >= 80)
-                        if (XIVComboPlugin.JobGauges.Get<DRGGauge>().BOTDState == BOTDState.LOTD)
-                            return DRG.Stardiver;
-                    return DRG.BOTD;
-                    
                 }
 
             // Replace Coerthan Torment with Coerthan Torment combo chain

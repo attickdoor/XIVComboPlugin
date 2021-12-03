@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
@@ -12,9 +12,6 @@ namespace XIVComboPlugin
         // DRAGOON
         [CustomComboInfo("Jump + Mirage Dive", "Replace (High) Jump with Mirage Dive when Dive Ready", 22)]
         DragoonJumpFeature = 1L << 44,
-
-        [CustomComboInfo("BOTD Into Stardiver", "Replace Blood of the Dragon with Stardiver when in Life of the Dragon", 22)]
-        DragoonBOTDFeature = 1L << 46,
 
         [CustomComboInfo("Coerthan Torment Combo", "Replace Coerthan Torment with its combo chain", 22)]
         DragoonCoerthanTormentCombo = 1L << 0,

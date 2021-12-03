@@ -678,9 +678,6 @@ namespace XIVComboPlugin
 
             // SUMMONER
 
-            // DWT changes. 
-            // Now contains DWT, Deathflare, Summon Bahamut, Enkindle Bahamut, FBT, and Enkindle Phoenix.
-            // What a monster of a button.
             /*
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SummonerDwtCombo))
                 if (actionID == 3581)
@@ -708,7 +705,7 @@ namespace XIVComboPlugin
                         return 3581;
                     }
                 }
-                */
+                
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SummonerDemiCombo))
             {
 
@@ -778,6 +775,7 @@ namespace XIVComboPlugin
                         return SMN.Painflare;
                     return SMN.EnergySyphon;
                 }
+            */
 
             // SCHOLAR
 

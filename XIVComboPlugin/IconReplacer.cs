@@ -100,7 +100,7 @@ namespace XIVComboPlugin
             checkerHook.Dispose();
         }
 
-        
+
         private async void BuffTask()
         {
             while (!shutdown)
@@ -128,7 +128,7 @@ namespace XIVComboPlugin
         /// </summary>
         private ulong GetIconDetour(byte self, uint actionID)
         {
-            
+
             if (clientState.LocalPlayer == null) return iconHook.Original(self, actionID);
 
             //if (vanillaIds.Contains(actionID)) return iconHook.Original(self, actionID);
@@ -154,24 +154,13 @@ namespace XIVComboPlugin
                     return DRG.Jump;
                 }
 
-            // Change Blood of the Dragon into Stardiver when in Life of the Dragon
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonBOTDFeature))
-                if (actionID == DRG.BOTD)
-                {
-                    if (level >= 80)
-                        if (XIVComboPlugin.JobGauges.Get<DRGGauge>().BOTDState == BOTDState.LOTD)
-                            return DRG.Stardiver;
-                    return DRG.BOTD;
-                    
-                }
-
             // Replace Coerthan Torment with Coerthan Torment combo chain
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonCoerthanTormentCombo))
                 if (actionID == DRG.CTorment)
                 {
                     if (comboTime > 0)
                     {
-                        if (lastMove == DRG.DoomSpike && level >= 62)
+                        if ((lastMove == DRG.DoomSpike || lastMove == DRG.DraconianFury) && level >= 62)
                             return DRG.SonicThrust;
                         if (lastMove == DRG.SonicThrust && level >= 72)
                             return DRG.CTorment;
@@ -180,18 +169,21 @@ namespace XIVComboPlugin
                     return DRG.DoomSpike;
                 }
 
-
             // Replace Chaos Thrust with the Chaos Thrust combo chain
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonChaosThrustCombo))
                 if (actionID == DRG.ChaosThrust)
                 {
                     if (comboTime > 0)
                     {
-                        if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust)
-                            && level >= 18) 
-                                return DRG.Disembowel;
-                        if (lastMove == DRG.Disembowel && level >= 50) 
-                            return DRG.ChaosThrust;
+                        if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 18)
+                            return DRG.Disembowel;
+                        if (lastMove == DRG.Disembowel)
+                        {
+                            if (level >= 86)
+                                return DRG.ChaoticSpring;
+                            if (level >= 50)
+                                return DRG.ChaosThrust;
+                        }
                     }
                     UpdateBuffAddress();
                     if (SearchBuffArray(802) && level >= 56)
@@ -204,18 +196,21 @@ namespace XIVComboPlugin
                     return DRG.TrueThrust;
                 }
 
-
             // Replace Full Thrust with the Full Thrust combo chain
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonFullThrustCombo))
                 if (actionID == 84)
                 {
                     if (comboTime > 0)
                     {
-                        if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust)
-                            && level >= 4)
+                        if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 4)
                             return DRG.VorpalThrust;
-                        if (lastMove == DRG.VorpalThrust && level >= 26)
-                            return DRG.FullThrust;
+                        if (lastMove == DRG.VorpalThrust)
+                        {
+                            if (level >= 86)
+                                return DRG.HeavensThrust;
+                            if (level >= 26)
+                                return DRG.FullThrust;
+                        }
                     }
                     UpdateBuffAddress();
                     if (SearchBuffArray(802) && level >= 56)
@@ -303,13 +298,23 @@ namespace XIVComboPlugin
 
                     return PLD.TotalEclipse;
                 }
-            
+
             // Replace Requiescat with Confiteor when under the effect of Requiescat
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PaladinRequiescatCombo))
                 if (actionID == PLD.Requiescat)
                 {
                     if (SearchBuffArray(1368) && level >= 80)
                         return PLD.Confiteor;
+
+                    if (lastMove == PLD.Confiteor)
+                        return PLD.BladeOfFaith;
+
+                    if (lastMove == PLD.BladeOfFaith)
+                        return PLD.BladeOfTruth;
+
+                    if (lastMove == PLD.BladeOfTruth)
+                        return PLD.BladeOfValor;
+
                     return PLD.Requiescat;
                 }
 
@@ -440,14 +445,6 @@ namespace XIVComboPlugin
                     return SAM.Fuga;
                 }
 
-            // Turn Seigan into Third Eye when not procced
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiThirdEyeFeature))
-                if (actionID == SAM.Seigan) {
-                    UpdateBuffAddress();
-                    if (SearchBuffArray(1252)) return SAM.Seigan;
-                    return SAM.ThirdEye;
-                }
-
             // NINJA
 
             // Replace Armor Crush with Armor Crush combo
@@ -490,15 +487,6 @@ namespace XIVComboPlugin
                     return NIN.DeathBlossom;
                 }
 
-            //Replace Dream Within a Dream with Assassinate when Assassinate Ready
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.NinjaAssassinateFeature))
-                if (actionID == NIN.DWAD)
-                {
-                    UpdateBuffAddress();
-                    if (SearchBuffArray(1955)) return NIN.Assassinate;
-                    return NIN.DWAD;
-                }
-
             // GUNBREAKER
 
             // Replace Solid Barrel with Solid Barrel combo
@@ -534,7 +522,7 @@ namespace XIVComboPlugin
                         }
                     }
                     var ammoComboState = XIVComboPlugin.JobGauges.Get<GNBGauge>().AmmoComboStep;
-                    switch(ammoComboState)
+                    switch (ammoComboState)
                     {
                         case 1:
                             return GNB.SavageClaw;
@@ -542,6 +530,18 @@ namespace XIVComboPlugin
                             return GNB.WickedTalon;
                         default:
                             return GNB.GnashingFang;
+                    }
+                }
+
+            // Replace Burst Strike with Continuation
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.GunbreakerBurstStrikeCont))
+                if (actionID == GNB.BurstStrike)
+                {
+                    if (level >= GNB.LevelEnhancedContinuation)
+                    {
+                        UpdateBuffAddress();
+                        if (SearchBuffArray(GNB.BuffReadyToBlast))
+                            return GNB.Hypervelocity;
                     }
                 }
 
@@ -587,16 +587,17 @@ namespace XIVComboPlugin
                     return MCH.SplitShot;
                 }
 
-                        
+
             // Replace Hypercharge with Heat Blast when overheated
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistOverheatFeature))
-                if (actionID == MCH.Hypercharge) {
+                if (actionID == MCH.Hypercharge)
+                {
                     var gauge = XIVComboPlugin.JobGauges.Get<MCHGauge>();
                     if (gauge.IsOverheated && level >= 35)
                         return MCH.HeatBlast;
                     return MCH.Hypercharge;
                 }
-                
+
             // Replace Spread Shot with Auto Crossbow when overheated.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistSpreadShotFeature))
                 if (actionID == MCH.SpreadShot)
@@ -608,20 +609,15 @@ namespace XIVComboPlugin
 
             // BLACK MAGE
 
-            // Enochian changes to B4 or F4 depending on stance.
+            // B4 and F4 change to each other depending on stance.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BlackEnochianFeature))
-                if (actionID == BLM.Enochian)
+                if (actionID == BLM.Fire4 || actionID == BLM.Blizzard4)
                 {
                     var gauge = XIVComboPlugin.JobGauges.Get<BLMGauge>();
-                    if (gauge.IsEnochianActive)
-                    {
-                        if (gauge.InUmbralIce && level >= 58)
-                            return BLM.Blizzard4;
-                        if (level >= 60)
-                            return BLM.Fire4;
-                    }
-
-                    return BLM.Enochian;
+                    if (gauge.InUmbralIce && level >= 58)
+                        return BLM.Blizzard4;
+                    if (level >= 60)
+                        return BLM.Fire4;
                 }
 
             // Umbral Soul and Transpose
@@ -664,22 +660,24 @@ namespace XIVComboPlugin
                             return AST.Ewer;
                         case CardType.SPIRE:
                             return AST.Spire;
-                        /*
-                        case CardType.LORD:
-                            return 7444;
-                        case CardType.LADY:
-                            return 7445;
-                        */
                         default:
                             return AST.Draw;
                     }
                 }
 
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.AstrologianMinorArcanaPlayFeature))
+                if (actionID == AST.MinorArcana)
+                {
+                    if (level >= 70)
+                    {
+                        UpdateBuffAddress();
+                        if (SearchBuffArray(AST.BuffLadyOfCrownsDrawn) || SearchBuffArray(AST.BuffLadyOfCrownsDrawn))
+                            return AST.CrownPlay;
+                    }
+                }
+
             // SUMMONER
 
-            // DWT changes. 
-            // Now contains DWT, Deathflare, Summon Bahamut, Enkindle Bahamut, FBT, and Enkindle Phoenix.
-            // What a monster of a button.
             /*
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SummonerDwtCombo))
                 if (actionID == 3581)
@@ -707,7 +705,7 @@ namespace XIVComboPlugin
                         return 3581;
                     }
                 }
-                */
+                
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SummonerDemiCombo))
             {
 
@@ -777,6 +775,7 @@ namespace XIVComboPlugin
                         return SMN.Painflare;
                     return SMN.EnergySyphon;
                 }
+            */
 
             // SCHOLAR
 
@@ -806,7 +805,7 @@ namespace XIVComboPlugin
                 if (actionID == DNC.Bloodshower)
                 {
                     UpdateBuffAddress();
-                    if (SearchBuffArray(1817))
+                    if (SearchBuffArray(DNC.BuffFlourishingFlow))
                         return DNC.Bloodshower;
                     return DNC.Bladeshower;
                 }
@@ -814,7 +813,7 @@ namespace XIVComboPlugin
                 if (actionID == DNC.RisingWindmill)
                 {
                     UpdateBuffAddress();
-                    if (SearchBuffArray(1816))
+                    if (SearchBuffArray(DNC.BuffFlourishingSymmetry))
                         return DNC.RisingWindmill;
                     return DNC.Windmill;
                 }
@@ -826,7 +825,9 @@ namespace XIVComboPlugin
                 if (actionID == DNC.FanDance1)
                 {
                     UpdateBuffAddress();
-                    if (SearchBuffArray(1820))
+                    if (SearchBuffArray(DNC.BuffFourfoldFanDance))
+                        return DNC.FanDance4;
+                    if (SearchBuffArray(DNC.BuffThreefoldFanDance))
                         return DNC.FanDance3;
                     return DNC.FanDance1;
                 }
@@ -835,7 +836,9 @@ namespace XIVComboPlugin
                 if (actionID == DNC.FanDance2)
                 {
                     UpdateBuffAddress();
-                    if (SearchBuffArray(1820))
+                    if (SearchBuffArray(DNC.BuffFourfoldFanDance))
+                        return DNC.FanDance4;
+                    if (SearchBuffArray(DNC.BuffThreefoldFanDance))
                         return DNC.FanDance3;
                     return DNC.FanDance2;
                 }
@@ -888,7 +891,7 @@ namespace XIVComboPlugin
                 }
 
             // MONK
-            
+
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MnkAoECombo))
                 if (actionID == MNK.Rockbreaker)
                 {
@@ -901,7 +904,7 @@ namespace XIVComboPlugin
                 }
 
             // RED MAGE
-           
+
             // Replace Veraero/thunder 2 with Impact when Dualcast is active
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.RedMageAoECombo))
             {
@@ -927,7 +930,6 @@ namespace XIVComboPlugin
                     return RDM.Verthunder2;
                 }
             }
-
 
             // Replace Redoublement with Redoublement combo, Enchanted if possible.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.RedMageMeleeCombo))
@@ -972,6 +974,41 @@ namespace XIVComboPlugin
                 }
             }
 
+            // REAPER 
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ReaperSliceCombo))
+            {
+                if (actionID == RPR.Slice)
+                {
+                    if (comboTime > 0)
+                    {
+                        if (lastMove == RPR.Slice && level >= RPR.Levels.WaxingSlice)
+                            return RPR.WaxingSlice;
+
+                        if (lastMove == RPR.WaxingSlice && level >= RPR.Levels.InfernalSlice)
+                            return RPR.InfernalSlice;
+                    }
+
+                    return RPR.Slice;
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ReaperScytheCombo))
+            {
+                if (actionID == RPR.SpinningScythe)
+                {
+                    if (comboTime > 0)
+                    {
+                        if (lastMove == RPR.SpinningScythe && level >= RPR.Levels.NightmareScythe)
+                            return RPR.NightmareScythe;
+                    }
+
+                    return RPR.SpinningScythe;
+                }
+
+                return actionID;
+            }
+
             return iconHook.Original(self, actionID);
         }
         /*
@@ -1005,10 +1042,10 @@ namespace XIVComboPlugin
         private unsafe IntPtr FindBuffAddress()
         {
             var num = Marshal.ReadIntPtr(BuffVTableAddr);
-            var step2 = (IntPtr) (Marshal.ReadInt64(num) + 0x278);
+            var step2 = (IntPtr)(Marshal.ReadInt64(num) + 0x278);
             var step3 = Marshal.ReadIntPtr(step2);
             var callback = Marshal.GetDelegateForFunctionPointer<getArray>(step3);
-            return (IntPtr) callback((long*) num) + 8;
+            return (IntPtr)callback((long*)num) + 8;
         }
         /*
         private void PopulateDict()

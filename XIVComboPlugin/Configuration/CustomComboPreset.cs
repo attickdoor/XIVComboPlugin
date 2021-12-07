@@ -13,9 +13,6 @@ namespace XIVComboPlugin
         [CustomComboInfo("Jump + Mirage Dive", "Replace (High) Jump with Mirage Dive when Dive Ready", 22)]
         DragoonJumpFeature = 1L << 44,
 
-        [CustomComboInfo("BOTD Into Stardiver", "Replace Blood of the Dragon with Stardiver when in Life of the Dragon", 22)]
-        DragoonBOTDFeature = 1L << 46,
-
         [CustomComboInfo("Coerthan Torment Combo", "Replace Coerthan Torment with its combo chain", 22)]
         DragoonCoerthanTormentCombo = 1L << 0,
 
@@ -71,9 +68,6 @@ namespace XIVComboPlugin
         [CustomComboInfo("Oka Combo", "Replace Oka with its combo chain", 34)]
         SamuraiOkaCombo = 1L << 15,
 
-        [CustomComboInfo("Seigan to Third Eye", "Replace Seigan with Third Eye when not procced", 34)]
-        SamuraiThirdEyeFeature = 1L << 51,
-
         [CustomComboInfo("Iaijutsu into Tsubame", "Replace Iaijutsu with Tsubame after using an Iaijutsu", 34)]
         SamuraiTsubameCombo = 1L << 56,
 
@@ -88,9 +82,6 @@ namespace XIVComboPlugin
         [CustomComboInfo("Hakke Mujinsatsu Combo", "Replace Hakke Mujinsatsu with its combo chain", 30)]
         NinjaHakkeMujinsatsuCombo = 1L << 19,
 
-        [CustomComboInfo("Dream to Assassinate", "Replace Dream Within a Dream with Assassinate when Assassinate Ready", 30)]
-        NinjaAssassinateFeature = 1L << 45,
-
         // GUNBREAKER
         [CustomComboInfo("Solid Barrel Combo", "Replace Solid Barrel with its combo chain", 37)]
         GunbreakerSolidBarrelCombo = 1L << 20,
@@ -100,6 +91,9 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Wicked Talon Continuation", "In addition to the Wicked Talon combo chain, put Continuation moves on Wicked Talon when appropriate", 37)]
         GunbreakerGnashingFangCont = 1L << 52,
+
+        [CustomComboInfo("Burst Strike Continuation", "Put Continuation moves on Burst Strike when appropriate", 37)]
+        GunbreakerBurstStrikeCont = 1L << 45,
 
         [CustomComboInfo("Demon Slaughter Combo", "Replace Demon Slaughter with its combo chain", 37)]
         GunbreakerDemonSlaughterCombo = 1L << 22,
@@ -115,7 +109,7 @@ namespace XIVComboPlugin
         MachinistOverheatFeature = 1L << 47,
 
         // BLACK MAGE
-        [CustomComboInfo("Enochian Stance Switcher", "Change Enochian to Fire 4 or Blizzard 4 depending on stance", 25)]
+        [CustomComboInfo("Enochian Stance Switcher", "Change Fire 4 and Blizzard 4 to the appropriate element depending on stance", 25)]
         BlackEnochianFeature = 1L << 25,
 
         [CustomComboInfo("Umbral Soul/Transpose Switcher", "Change Transpose into Umbral Soul when Umbral Soul is usable", 25)]
@@ -127,6 +121,9 @@ namespace XIVComboPlugin
         // ASTROLOGIAN
         [CustomComboInfo("Draw on Play", "Play turns into Draw when no card is drawn, as well as the usual Play behavior", 33)]
         AstrologianCardsOnDrawFeature = 1L << 27,
+
+        [CustomComboInfo("Minor Arcana Play", "Minor Arcana turns into Crown Play when a card drawn.", 32)]
+        AstrologianMinorArcanaPlayFeature = 1L << 30,
 
         // SUMMONER
         [CustomComboInfo("Demi-summon combiners", "Dreadwyrm Trance, Summon Bahamut, and Firebird Trance are now one button.\nDeathflare, Enkindle Bahamut, and Enkindle Phoenix are now one button", 27)]
@@ -181,7 +178,13 @@ namespace XIVComboPlugin
         RedMageMeleeCombo = 1L << 49,
 
         [CustomComboInfo("Verproc into Jolt", "Replaces Verstone/Verfire with Jolt/Scorch when no proc is available.", 35)]
-        RedMageVerprocCombo = 1L << 53
+        RedMageVerprocCombo = 1L << 53,
+
+        [CustomComboInfo("Slice Combo", "Replace Slice with its combo chain.", 39)]
+        ReaperSliceCombo = 1L << 16,
+
+        [CustomComboInfo("Scythe Combo", "Replace Spinning Scythe with its combo chain.", 39)]
+        ReaperScytheCombo = 1L << 17,
     }
 
     public class CustomComboInfoAttribute : Attribute

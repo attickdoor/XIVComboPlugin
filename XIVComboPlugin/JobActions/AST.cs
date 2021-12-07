@@ -10,6 +10,11 @@
             Arrow = 4402,
             Spear = 4403,
             Ewer = 4405,
-            Spire = 4406;
+            Spire = 4406,
+            MinorArcana = 7443,
+            CrownPlay = 25869;
+        public const short
+            BuffLordOfCrownsDrawn = 2054,
+            BuffLadyOfCrownsDrawn = 2055;
     }
 }

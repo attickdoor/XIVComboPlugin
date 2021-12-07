@@ -14,12 +14,16 @@
             Continuation = 16155,
             JugularRip = 16156,
             AbdomenTear = 16157,
-            EyeGouge = 16158;
+            EyeGouge = 16158,
+            BurstStrike = 16162,
+            Hypervelocity = 25759;
         public const short
             BuffReadyToRip = 1842,
             BuffReadyToTear = 1843,
-            BuffReadyToGouge = 1844;
+            BuffReadyToGouge = 1844,
+            BuffReadyToBlast = 2686;
         public const byte
-            LevelContinuation = 70;
+            LevelContinuation = 70,
+            LevelEnhancedContinuation = 86;
     }
 }

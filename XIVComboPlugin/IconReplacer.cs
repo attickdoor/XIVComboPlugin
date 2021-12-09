@@ -905,29 +905,18 @@ namespace XIVComboPlugin
 
             // RED MAGE
 
-            // Replace Veraero/thunder 2 with Impact when Dualcast is active
+            // Replace Veraero/Thunder 2 with Impact when Swiftcast, Acceleration or Dualcast are active.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.RedMageAoECombo))
             {
-                if (actionID == RDM.Veraero2)
+                if (actionID == RDM.Verthunder2 || actionID == RDM.Veraero2)
                 {
                     UpdateBuffAddress();
-                    if (SearchBuffArray(167) || SearchBuffArray(1249))
+                    if (SearchBuffArray(RDM.BuffSwiftCast) || SearchBuffArray(RDM.BuffAcceleration) || SearchBuffArray(RDM.BuffDualCast))
                     {
                         if (level >= 66) return RDM.Impact;
                         return RDM.Scatter;
                     }
-                    return RDM.Veraero2;
-                }
-
-                if (actionID == RDM.Verthunder2)
-                {
-                    UpdateBuffAddress();
-                    if (SearchBuffArray(167) || SearchBuffArray(1249))
-                    {
-                        if (level >= 66) return RDM.Impact;
-                        return RDM.Scatter;
-                    }
-                    return RDM.Verthunder2;
+                    return actionID;
                 }
             }
 

@@ -20,5 +20,9 @@
             Verholy = 7526,
             Verflare = 7525,
             Scorch = 16530;
+        public const short
+            BuffSwiftCast = 167, // Common for casters, but RDM is the only one using it currently.
+            BuffAcceleration = 1238,
+            BuffDualCast = 1249;
     }
 }

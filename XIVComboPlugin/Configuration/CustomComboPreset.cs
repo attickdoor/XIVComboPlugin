@@ -3,7 +3,7 @@ using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
 {
-    //CURRENT HIGHEST FLAG IS 56
+    //CURRENT HIGHEST FLAG IS 57
     [Flags]
     public enum CustomComboPreset : long
     {
@@ -107,6 +107,9 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Heat Blast when overheated", "Replace Hypercharge with Heat Blast when overheated", 31)]
         MachinistOverheatFeature = 1L << 47,
+
+        [CustomComboInfo("Overdrive when robot active", "Replace either Rook Autoturrent or Automaton Queen with it's Overdrive when robot is active", 31)]
+        MachinistOverdriveFeature = 1L << 57,
 
         // BLACK MAGE
         [CustomComboInfo("Enochian Stance Switcher", "Change Fire 4 and Blizzard 4 to the appropriate element depending on stance", 25)]

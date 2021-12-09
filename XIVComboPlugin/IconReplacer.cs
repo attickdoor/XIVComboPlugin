@@ -598,6 +598,25 @@ namespace XIVComboPlugin
                     return MCH.Hypercharge;
                 }
 
+            // Replace Rook Autoturret and Automaton Queen with Rook Overdrive and Queen Overdrive when robot is active
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistOverheatFeature))
+            {
+                if (actionID == MCH.RookAutoturret)
+                {
+                    var gauge = XIVComboPlugin.JobGauges.Get<MCHGauge>();
+                    if (gauge.IsRobotActive)
+                        return MCH.RookOverdrive;
+                    return MCH.RookAutoturret;
+                }
+                else if (actionID == MCH.AutomatonQueen)
+                {
+                    var gauge = XIVComboPlugin.JobGauges.Get<MCHGauge>();
+                    if (gauge.IsRobotActive)
+                        return MCH.QueenOverdrive;
+                    return MCH.AutomatonQueen;
+                }
+            }
+
             // Replace Spread Shot with Auto Crossbow when overheated.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistSpreadShotFeature))
                 if (actionID == MCH.SpreadShot)

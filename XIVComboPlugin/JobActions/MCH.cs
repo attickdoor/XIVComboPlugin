@@ -12,6 +12,10 @@
             Hypercharge = 17209,
             HeatBlast = 7410,
             SpreadShot = 2870,
-            AutoCrossbow = 16497;
+            AutoCrossbow = 16497,
+            RookAutoturret = 2864,
+            RookOverdrive = 7415,
+            AutomatonQueen = 16501,
+            QueenOverdrive = 16502;
     }
 }

@@ -22,6 +22,8 @@
             Scorch = 16530;
         public const short
             BuffSwiftCast = 167, // Common for casters, but RDM is the only one using it currently.
+            BuffVerfireReady = 1234,
+            BuffVerstoneReady = 1235,
             BuffAcceleration = 1238,
             BuffDualCast = 1249;
     }

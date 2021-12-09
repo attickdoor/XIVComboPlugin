@@ -764,18 +764,20 @@ namespace XIVComboPlugin
                         return SMN.EnergyDrain;
                     return SMN.Fester;
                 }
+            */
 
-            //Change Painflare into Energy Syphon
+            // Change Painflare into Energy Siphon
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SummonerESPainflareCombo))
+            {
                 if (actionID == SMN.Painflare)
                 {
                     if (!XIVComboPlugin.JobGauges.Get<SMNGauge>().HasAetherflowStacks)
-                        return SMN.EnergySyphon;
-                    if (level >= 52)
+                        return SMN.EnergySiphon;
+                    if (level >= 40)
                         return SMN.Painflare;
-                    return SMN.EnergySyphon;
+                    return SMN.EnergySiphon;
                 }
-            */
+            }
 
             // SCHOLAR
 

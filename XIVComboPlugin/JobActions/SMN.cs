@@ -17,6 +17,6 @@
             Fester = 181,
             EnergyDrain = 16508,
             Painflare = 3578,
-            EnergySyphon = 16510;
+            EnergySiphon = 16510;
     }
 }

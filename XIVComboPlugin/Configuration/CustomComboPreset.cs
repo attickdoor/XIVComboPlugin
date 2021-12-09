@@ -3,7 +3,7 @@ using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
 {
-    //CURRENT HIGHEST FLAG IS 54
+    //CURRENT HIGHEST FLAG IS 57
     [Flags]
     public enum CustomComboPreset : long
     {
@@ -144,6 +144,9 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("ED Aetherflow", "Change Energy Drain into Aetherflow when you have no more Aetherflow stacks", 28, new uint[] { SCH.EnergyDrain })]
         ScholarEnergyDrainFeature = 1L << 37,
+
+        [CustomComboInfo("Summon Fairy", "Change Summon Eos/Serene into Whispering Dawn/Fey Illumination when either fairy is summoned", 28, new uint[] { SCH.WhisperingDawn, SCH.FeyIllumination })]
+        ScholarSummonFeature = 1L << 57,
 
         // DANCER
         [CustomComboInfo("AoE GCD procs", "DNC AoE procs turn into their normal abilities when not procced", 38, new uint[] { DNC.Bloodshower, DNC.RisingWindmill })]

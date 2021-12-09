@@ -827,6 +827,56 @@ namespace XIVComboPlugin
                     return SCH.EnergyDrain;
                 }
 
+            // Change Fairy actions if a fairy is already summoned.
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarSummonFeature))
+            {
+                var fairySummoned = false;
+
+                // No need to check for fairy if not a SCH
+                if (job == 28)
+                {
+                    // No need to check actors if Seraph guage is up, or Dissipation (791 / 0x0317) is active. Check for the Dissipation buff or the gauge/dismissed status produces the exact same result.
+                    if (clientState.JobGauges.Get<SCHGauge>().SeraphTimer > 0  || clientState.JobGauges.Get<SCHGauge>().DismissedFairy != 0)
+                        fairySummoned = true;
+                    else
+                    {
+                        var playerId = clientState.LocalPlayer.ActorId;
+
+                        // 0th entry is self, can be skipped
+                        for (var i = 1; i < clientState.Actors.Length; i++)
+                        {
+                            var actor = clientState.Actors[i];
+
+                            if (actor == null)
+                                continue;
+
+                            if (actor is Dalamud.Game.ClientState.Actors.Types.NonPlayer.BattleNpc bnpc)
+                            {
+                                // Keep looking for Seraph, to prevent flashing the summon commands when she is leaving the battlefield
+                                if (bnpc.OwnerId == playerId && (String.Equals(bnpc.Name, "Eos") || String.Equals(bnpc.Name, "Selene") || String.Equals(bnpc.Name, "Seraph")))
+                                {
+                                    fairySummoned = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                if (actionID == SCH.WhisperingDawn)
+                {
+                    if (fairySummoned && level >= 20)
+                        return SCH.WhisperingDawn;
+                    return SCH.SummonEos;
+                }
+                if (actionID == SCH.FeyIllumination)
+                {
+                    if (fairySummoned && level >= 40)
+                        return SCH.FeyIllumination;
+                    return SCH.SummonSelene;
+                }
+            }
+
             // DANCER
 
             // AoE GCDs are split into two buttons, because priority matters
@@ -1097,6 +1147,8 @@ namespace XIVComboPlugin
             customIds.Add(17209);
             customIds.Add(7501);
             customIds.Add(21);
+            customIds.Add(16537); // Whispering Dawn
+            customIds.Add(16538); // Fey Illumination
             customIds.Add(DNC.Bloodshower);
             customIds.Add(DNC.RisingWindmill);
             customIds.Add(RDM.Verstone);

@@ -880,7 +880,7 @@ namespace XIVComboPlugin
                 if (actionID == BRD.HeavyShot || actionID == BRD.BurstShot)
                 {
                     UpdateBuffAddress();
-                    if (SearchBuffArray(122))
+                    if (SearchBuffArray(BRD.BuffStraightShotReady))
                     {
                         if (level >= 70) return BRD.RefulgentArrow;
                         return BRD.StraightShot;
@@ -889,6 +889,19 @@ namespace XIVComboPlugin
                     if (level >= 76) return BRD.BurstShot;
                     return BRD.HeavyShot;
                 }
+
+            // Replace Quick Knock/Ladonsbite with Shadowbite when procced.
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BardQuickNockUpgradeFeature))
+            {
+                if (actionID == BRD.QuickKnock || actionID == BRD.Ladonsbite)
+                {
+                    UpdateBuffAddress();
+                    if (SearchBuffArray(BRD.BuffShadowbiteReady))
+                        return BRD.Shadowbite;
+
+                    return actionID;
+                }
+            }
 
             // MONK
 

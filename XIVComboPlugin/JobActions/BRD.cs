@@ -8,6 +8,12 @@
             HeavyShot = 97,
             BurstShot = 16495,
             StraightShot = 98,
-            RefulgentArrow = 7409;
+            RefulgentArrow = 7409,
+            QuickKnock = 106,
+            Ladonsbite = 25783,
+            Shadowbite = 16494;
+        public const short
+            BuffStraightShotReady = 122,
+            BuffShadowbiteReady = 3002;
     }
 }

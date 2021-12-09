@@ -3,7 +3,7 @@ using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
 {
-    //CURRENT HIGHEST FLAG IS 56
+    //CURRENT HIGHEST FLAG IS 57
     [Flags]
     public enum CustomComboPreset : long
     {
@@ -165,6 +165,9 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Heavy Shot into Straight Shot", "Replaces Heavy Shot/Burst Shot with Straight Shot/Refulgent Arrow when procced", 23)]
         BardStraightShotUpgradeFeature = 1L << 42,
+
+        [CustomComboInfo("Quick Knock into Shadowbite", "Replaces Quick Knock/Ladonsbite with Shadowbite when procced", 23)]
+        BardQuickNockUpgradeFeature = 1L << 57,
 
         // MONK
         [CustomComboInfo("Monk AoE Combo", "Replaces Rockbreaker with the AoE combo chain, or Rockbreaker when Perfect Balance is active", 20)]

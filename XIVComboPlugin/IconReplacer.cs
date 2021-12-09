@@ -967,19 +967,19 @@ namespace XIVComboPlugin
                     var gauge = clientState.JobGauges.Get<RDMGauge>();
                     if ((lastMove == RDM.Riposte || lastMove == RDM.ERiposte) && level >= 35)
                     {
-                        if (gauge.BlackGauge >= 25 && gauge.WhiteGauge >= 25)
+                        if (gauge.BlackGauge >= 15 && gauge.WhiteGauge >= 15)
                             return RDM.EZwerchhau;
                         return RDM.Zwerchhau;
                     }
 
                     if (lastMove == RDM.Zwerchhau && level >= 50)
                     {
-                        if (gauge.BlackGauge >= 25 && gauge.WhiteGauge >= 25)
+                        if (gauge.BlackGauge >= 15 && gauge.WhiteGauge >= 15)
                             return RDM.ERedoublement;
                         return RDM.Redoublement;
                     }
 
-                    if (gauge.BlackGauge >= 30 && gauge.WhiteGauge >= 30)
+                    if (gauge.BlackGauge >= 20 && gauge.WhiteGauge >= 20)
                         return RDM.ERiposte;
                     return RDM.Riposte;
                 }

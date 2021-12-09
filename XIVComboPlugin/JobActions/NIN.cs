@@ -10,6 +10,10 @@
             HakkeM = 16488,
             DeathBlossom = 2254,
             DWAD = 3566,
-            Assassinate = 2246;
+            Assassinate = 2246,
+            Bunshin = 16493,
+            PhantomKamaitachi = 25876;
+        public const short
+            BuffPhantomKamaitachiReady = 2723;
     }
 }

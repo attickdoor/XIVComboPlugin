@@ -487,6 +487,16 @@ namespace XIVComboPlugin
                     return NIN.DeathBlossom;
                 }
 
+            // Replace Bunshin with Phantom Kamaitachi
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PhantomKamaitachiFeature))
+                if (actionID == NIN.Bunshin)
+                    if (level >= 82)
+                    {
+                        UpdateBuffAddress();
+                        if (SearchBuffArray(NIN.BuffPhantomKamaitachiReady))
+                            return NIN.PhantomKamaitachi;
+                    }
+
             // GUNBREAKER
 
             // Replace Solid Barrel with Solid Barrel combo

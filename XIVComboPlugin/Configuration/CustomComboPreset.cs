@@ -3,7 +3,7 @@ using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
 {
-    //CURRENT HIGHEST FLAG IS 56
+    //CURRENT HIGHEST FLAG IS 57
     [Flags]
     public enum CustomComboPreset : long
     {
@@ -81,6 +81,9 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Hakke Mujinsatsu Combo", "Replace Hakke Mujinsatsu with its combo chain", 30)]
         NinjaHakkeMujinsatsuCombo = 1L << 19,
+
+        [CustomComboInfo("Phantom Kamaitachi", "Replace Bunshin with Phantom Kamaitachi", 30)]
+        PhantomKamaitachiFeature = 1L << 57,
 
         // GUNBREAKER
         [CustomComboInfo("Solid Barrel Combo", "Replace Solid Barrel with its combo chain", 37)]

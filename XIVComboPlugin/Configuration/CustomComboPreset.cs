@@ -3,7 +3,7 @@ using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
 {
-    //CURRENT HIGHEST FLAG IS 57
+    //CURRENT HIGHEST FLAG IS 58
     [Flags]
     public enum CustomComboPreset : long
     {
@@ -189,6 +189,9 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Arcane Circle into Plentiful Harvest", "Replace Arcane Circle with Plentiful Harvest when Circle of Sacrifice or Immortal Sacrifice are active.", 39)]
         ReaperPlentifulHarvestFeature = 1L << 57,
+
+        [CustomComboInfo("Enshroud into Communio", "Replace Enshroud with Communio when Enshrouded is active.", 39)]
+        ReaperCommunioFeature = 1L << 58,
     }
 
     public class CustomComboInfoAttribute : Attribute

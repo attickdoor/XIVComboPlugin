@@ -1021,6 +1021,21 @@ namespace XIVComboPlugin
                 }
             }
 
+            // Replace Enshroud with Communio when Enshrouded is active.
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ReaperCommunioFeature))
+            {
+                if (actionID == RPR.Enshroud)
+                {
+                    if (level == RPR.Levels.Communio)
+                    {
+                        UpdateBuffAddress();
+                        if (SearchBuffArray(RPR.Buffs.Enshrouded))
+                            return RPR.Communio;
+                    }
+                    return actionID;
+                }
+            }
+
             return iconHook.Original(self, actionID);
         }
         /*

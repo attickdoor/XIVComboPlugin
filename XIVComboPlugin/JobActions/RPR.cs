@@ -12,19 +12,24 @@
             // AoE
             SpinningScythe = 24376,
             NightmareScythe = 24377,
+            PlentifulHarvest = 24385,
             // Shroud
             Enshroud = 24394,
-            Communio = 24398;
+            Communio = 24398,
+            // Buffs
+            ArcaneCircle = 24405;
 
         public static class Buffs
         {
-            public const ushort
-                Enshrouded = 2593;
+            public const short
+                Enshrouded = 2593,
+                ImmortalSacrifice = 2592,
+                CircleOfSacrifice = 2600;
         }
 
         public static class Debuffs
         {
-            public const ushort
+            public const short
                 Placeholder = 0;
         }
 
@@ -37,6 +42,7 @@
                 InfernalSlice = 30,
                 NightmareScythe = 45,
                 Enshroud = 80,
+                PlentifulHarvest = 88,
                 Communio = 90;
         }
     }

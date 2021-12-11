@@ -1005,8 +1005,20 @@ namespace XIVComboPlugin
 
                     return RPR.SpinningScythe;
                 }
+            }
 
-                return actionID;
+            // Replace Arcane Circle with Plentiful Harvest when Circle of Sacrifice or Immortal Sacrifice are active.
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ReaperPlentifulHarvestFeature))
+            {
+                if (actionID == RPR.ArcaneCircle)
+                {
+                    if(level == RPR.Levels.PlentifulHarvest) { 
+                        UpdateBuffAddress();
+                        if (SearchBuffArray(RPR.Buffs.CircleOfSacrifice) || SearchBuffArray(RPR.Buffs.ImmortalSacrifice))
+                            return RPR.PlentifulHarvest;
+                    }
+                    return actionID;
+                }
             }
 
             return iconHook.Original(self, actionID);

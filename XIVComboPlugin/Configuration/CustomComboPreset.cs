@@ -3,7 +3,7 @@ using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
 {
-    //CURRENT HIGHEST FLAG IS 56
+    //CURRENT HIGHEST FLAG IS 57
     [Flags]
     public enum CustomComboPreset : long
     {
@@ -180,11 +180,15 @@ namespace XIVComboPlugin
         [CustomComboInfo("Verproc into Jolt", "Replaces Verstone/Verfire with Jolt/Scorch when no proc is available.", 35)]
         RedMageVerprocCombo = 1L << 53,
 
+        // REAPER
         [CustomComboInfo("Slice Combo", "Replace Slice with its combo chain.", 39)]
         ReaperSliceCombo = 1L << 16,
 
         [CustomComboInfo("Scythe Combo", "Replace Spinning Scythe with its combo chain.", 39)]
         ReaperScytheCombo = 1L << 17,
+
+        [CustomComboInfo("Arcane Circle into Plentiful Harvest", "Replace Arcane Circle with Plentiful Harvest when Circle of Sacrifice or Immortal Sacrifice are active.", 39)]
+        ReaperPlentifulHarvestFeature = 1L << 57,
     }
 
     public class CustomComboInfoAttribute : Attribute

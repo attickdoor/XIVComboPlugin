@@ -3,7 +3,7 @@ using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
 {
-    //CURRENT HIGHEST FLAG IS 56
+    //CURRENT HIGHEST FLAG IS 57
     [Flags]
     public enum CustomComboPreset : long
     {
@@ -109,8 +109,11 @@ namespace XIVComboPlugin
         MachinistOverheatFeature = 1L << 47,
 
         // BLACK MAGE
-        [CustomComboInfo("Enochian Stance Switcher", "Change Fire 4 and Blizzard 4 to the appropriate element depending on stance", 25)]
-        BlackEnochianFeature = 1L << 25,
+        [CustomComboInfo("Blizzard/Fire 4 Switcher", "Switch Blizzard 4 and Fire 4 depending on stance", 25)]
+        BlackEnochianBF4Feature = 1L << 25,
+
+        [CustomComboInfo("Freeze/Flare Switcher", "Switch Freeze and Flare depending on stance", 25)]
+        BlackEnochianFFFeature = 1L << 57,
 
         [CustomComboInfo("Umbral Soul/Transpose Switcher", "Change Transpose into Umbral Soul when Umbral Soul is usable", 25)]
         BlackManaFeature = 1L << 26,

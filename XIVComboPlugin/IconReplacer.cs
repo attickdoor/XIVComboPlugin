@@ -609,8 +609,8 @@ namespace XIVComboPlugin
 
             // BLACK MAGE
 
-            // B4 and F4 change to each other depending on stance.
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BlackEnochianFeature))
+            // Switch Blizzard 4 and Fire 4 depending on stance.
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BlackEnochianBF4Feature))
                 if (actionID == BLM.Fire4 || actionID == BLM.Blizzard4)
                 {
                     var gauge = XIVComboPlugin.JobGauges.Get<BLMGauge>();
@@ -618,7 +618,22 @@ namespace XIVComboPlugin
                         return BLM.Blizzard4;
                     if (level >= 60)
                         return BLM.Fire4;
+                    return actionID;
                 }
+
+            // Switch Blizzard 4 and Fire 4 depending on stance.
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BlackEnochianFFFeature))
+            {
+                if (actionID == BLM.Freeze || actionID == BLM.Flare)
+                {
+                    var gauge = XIVComboPlugin.JobGauges.Get<BLMGauge>();
+                    if (gauge.InUmbralIce && level >= 40)
+                        return BLM.Freeze;
+                    if (level >= 50)
+                        return BLM.Flare;
+                    return actionID;
+                }
+            }
 
             // Umbral Soul and Transpose
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BlackManaFeature))

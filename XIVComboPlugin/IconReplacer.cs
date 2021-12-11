@@ -1012,7 +1012,7 @@ namespace XIVComboPlugin
             {
                 if (actionID == RPR.ArcaneCircle)
                 {
-                    if(level == RPR.Levels.PlentifulHarvest) { 
+                    if(level >= RPR.Levels.PlentifulHarvest) { 
                         UpdateBuffAddress();
                         if (SearchBuffArray(RPR.Buffs.CircleOfSacrifice) || SearchBuffArray(RPR.Buffs.ImmortalSacrifice))
                             return RPR.PlentifulHarvest;
@@ -1026,7 +1026,7 @@ namespace XIVComboPlugin
             {
                 if (actionID == RPR.Enshroud)
                 {
-                    if (level == RPR.Levels.Communio)
+                    if (level >= RPR.Levels.Communio)
                     {
                         UpdateBuffAddress();
                         if (SearchBuffArray(RPR.Buffs.Enshrouded))

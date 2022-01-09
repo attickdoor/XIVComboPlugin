@@ -12,7 +12,12 @@
             Mangetsu = 7484,
             Fuga = 7483,
             Oka = 7485,
-            Seigan = 7501,
-            ThirdEye = 7498;
+            ThirdEye = 7498,
+            Iaijutsu = 7867,
+            Tsubame = 16483,
+            OgiNamikiri = 25781,
+            Ikishoten = 16482,
+            KaeshiNamikiri = 25782,
+            Fuko = 25780;
     }
 }

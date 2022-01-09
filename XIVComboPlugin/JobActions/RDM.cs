@@ -19,6 +19,7 @@
             Jolt2 = 7524,
             Verholy = 7526,
             Verflare = 7525,
-            Scorch = 16530;
+            Scorch = 16530,
+            Resolution = 25858;
     }
 }

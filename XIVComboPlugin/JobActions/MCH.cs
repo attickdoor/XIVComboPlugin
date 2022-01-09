@@ -12,6 +12,7 @@
             Hypercharge = 17209,
             HeatBlast = 7410,
             SpreadShot = 2870,
-            AutoCrossbow = 16497;
+            AutoCrossbow = 16497,
+            Scattergun = 25786;
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System;
-using XIVComboPlugin.JobActions;
 
 namespace XIVComboPlugin
 {
-    //CURRENT HIGHEST FLAG IS 56
+    //TODO: count which enum values are still in use, and fill in empty spaces with new ones
     [Flags]
     public enum CustomComboPreset : long
     {
@@ -52,6 +51,9 @@ namespace XIVComboPlugin
         [CustomComboInfo("Mythril Tempest Combo", "Replace Mythril Tempest with its combo chain", 21)]
         WarriorMythrilTempestCombo = 1L << 10,
 
+        [CustomComboInfo("IR to Primal Rend", "Replace Inner Release with Primal Rend when Primal Rend Ready", 21)]
+        WarriorIRCombo = 1L << 63,
+
         // SAMURAI
         [CustomComboInfo("Yukikaze Combo", "Replace Yukikaze with its combo chain", 34)]
         SamuraiYukikazeCombo = 1L << 11,
@@ -71,8 +73,14 @@ namespace XIVComboPlugin
         [CustomComboInfo("Iaijutsu into Tsubame", "Replace Iaijutsu with Tsubame after using an Iaijutsu", 34)]
         SamuraiTsubameCombo = 1L << 56,
 
+        [CustomComboInfo("Ogi Namikiri Combo", "Replace Ikishoten with Ogi Namiki and Kaeshi Namikiri when appropriate", 34)]
+        SamuraiOgiCombo = 1L << 62,
+
 
         // NINJA
+        [CustomComboInfo("Bunshin Combo", "Replace Bunshin with Phantom Kamaitachi when Phantom Kamaitachi Ready", 30)]
+        NinjaBunshinCombo = 1L << 58,
+
         [CustomComboInfo("Armor Crush Combo", "Replace Armor Crush with its combo chain", 30)]
         NinjaArmorCrushCombo = 1L << 17,
 
@@ -109,35 +117,30 @@ namespace XIVComboPlugin
         MachinistOverheatFeature = 1L << 47,
 
         // BLACK MAGE
-        [CustomComboInfo("Enochian Stance Switcher", "Change Fire 4 and Blizzard 4 to the appropriate element depending on stance", 25)]
+        [CustomComboInfo("Enochian Stance Switcher", "Change Fire 4 and Blizzard 4 to the appropriate element depending on stance, as well as Flare and Freeze", 25)]
         BlackEnochianFeature = 1L << 25,
-
+        /*
         [CustomComboInfo("Umbral Soul/Transpose Switcher", "Change Transpose into Umbral Soul when Umbral Soul is usable", 25)]
         BlackManaFeature = 1L << 26,
-
+        */
         [CustomComboInfo("(Between the) Ley Lines", "Change Ley Lines into BTL when Ley Lines is active", 25)]
-        BlackLeyLines = 1L << 56,
+        BlackLeyLines = 1L << 28,
 
         // ASTROLOGIAN
         [CustomComboInfo("Draw on Play", "Play turns into Draw when no card is drawn, as well as the usual Play behavior", 33)]
         AstrologianCardsOnDrawFeature = 1L << 27,
 
-        [CustomComboInfo("Minor Arcana Play", "Minor Arcana turns into Crown Play when a card drawn.", 32)]
+        [CustomComboInfo("Minor Arcana Play", "Crown Play turns into Minor Arcana when no Minor Arcana is drawn.", 33)]
         AstrologianMinorArcanaPlayFeature = 1L << 30,
 
         // SUMMONER
-        [CustomComboInfo("Demi-summon combiners", "Dreadwyrm Trance, Summon Bahamut, and Firebird Trance are now one button.\nDeathflare, Enkindle Bahamut, and Enkindle Phoenix are now one button", 27)]
-        SummonerDemiCombo = 1L << 28,
-
-        [CustomComboInfo("Brand of Purgatory Combo", "Replaces Fountain of Fire with Brand of Purgatory when under the affect of Hellish Conduit", 27)]
-        SummonerBoPCombo = 1L << 38,
 
         [CustomComboInfo("ED Fester", "Change Fester into Energy Drain when out of Aetherflow stacks", 27)]
         SummonerEDFesterCombo = 1L << 39,
 
         [CustomComboInfo("ES Painflare", "Change Painflare into Energy Syphon when out of Aetherflow stacks", 27)]
         SummonerESPainflareCombo = 1L << 40,
-
+        
         // SCHOLAR
         [CustomComboInfo("Seraph Fey Blessing/Consolation", "Change Fey Blessing into Consolation when Seraph is out", 28)]
         ScholarSeraphConsolationFeature = 1L << 29,
@@ -151,6 +154,12 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Fan Dance Combos", "Change Fan Dance and Fan Dance 2 into Fan Dance 3 while flourishing", 38)]
         DancerFanDanceCombo = 1L << 33,
+
+        [CustomComboInfo("Fan Dance IV", "Change Flourish into Fan Dance IV while flourishing", 38)]
+        DancerFanDance4Combo = 1L << 60,
+
+        [CustomComboInfo("Devilment into Starfall", "Change Devilment into Starfall Dance while under the effect of Flourishing Starfall", 38)]
+        DancerDevilmentCombo = 1L << 61,
 
         // WHITE MAGE
         [CustomComboInfo("Solace into Misery", "Replaces Afflatus Solace with Afflatus Misery when Misery is ready to be used", 24)]
@@ -166,9 +175,11 @@ namespace XIVComboPlugin
         [CustomComboInfo("Heavy Shot into Straight Shot", "Replaces Heavy Shot/Burst Shot with Straight Shot/Refulgent Arrow when procced", 23)]
         BardStraightShotUpgradeFeature = 1L << 42,
 
+        [CustomComboInfo("Quick Nock into Shadowbite", "Replaces Quick Nock/Ladonsbite with Shadowbite when procced", 23)]
+        BardAoEUpgradeFeature = 1L << 59,
+
         // MONK
-        [CustomComboInfo("Monk AoE Combo", "Replaces Rockbreaker with the AoE combo chain, or Rockbreaker when Perfect Balance is active", 20)]
-        MnkAoECombo = 1L << 54,
+        // you get nothing, you lose, have a nice day etc
 
         // RED MAGE
         [CustomComboInfo("Red Mage AoE Combo", "Replaces Veraero/thunder 2 with Impact when Dualcast or Swiftcast are active", 35)]
@@ -180,11 +191,12 @@ namespace XIVComboPlugin
         [CustomComboInfo("Verproc into Jolt", "Replaces Verstone/Verfire with Jolt/Scorch when no proc is available.", 35)]
         RedMageVerprocCombo = 1L << 53,
 
+        // REAPER
         [CustomComboInfo("Slice Combo", "Replace Slice with its combo chain.", 39)]
         ReaperSliceCombo = 1L << 16,
 
         [CustomComboInfo("Scythe Combo", "Replace Spinning Scythe with its combo chain.", 39)]
-        ReaperScytheCombo = 1L << 17,
+        ReaperScytheCombo = 1L << 57,
     }
 
     public class CustomComboInfoAttribute : Attribute

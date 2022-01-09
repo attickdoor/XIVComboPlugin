@@ -4,13 +4,13 @@ using System;
 using System.Linq;
 using System.Numerics;
 using ImGuiNET;
-using System.Collections.Generic;
 using Dalamud.Game;
 using Dalamud.Game.ClientState;
 using Dalamud.Game.ClientState.JobGauge;
 using Dalamud.Game.Gui;
 using Dalamud.IoC;
 using Dalamud.Utility;
+using Dalamud.Data;
 
 namespace XIVComboPlugin
 {
@@ -21,7 +21,6 @@ namespace XIVComboPlugin
         public XIVComboConfiguration Configuration;
 
         private IconReplacer iconReplacer;
-        private readonly int CURRENT_CONFIG_VERSION = 3;
         private CustomComboPreset[] orderedByClassJob;
 
         [PluginService] public static CommandManager CommandManager { get; private set; } = null!;
@@ -31,7 +30,7 @@ namespace XIVComboPlugin
         [PluginService] public static ChatGui ChatGui { get; private set; } = null!;
         [PluginService] public static JobGauges JobGauges { get; private set; } = null!;
 
-        public XIVComboPlugin()
+        public XIVComboPlugin(DataManager manager)
         {
 
             CommandManager.AddHandler("/pcombo", new CommandInfo(OnCommandDebugCombo)
@@ -46,19 +45,13 @@ namespace XIVComboPlugin
                 Configuration.Version = 4;
             }
 
-            this.iconReplacer = new IconReplacer(TargetModuleScanner, ClientState, this.Configuration);
+            this.iconReplacer = new IconReplacer(TargetModuleScanner, ClientState, manager, this.Configuration);
 
             this.iconReplacer.Enable();
 
             PluginInterface.UiBuilder.OpenConfigUi += () => isImguiComboSetupOpen = true;
             PluginInterface.UiBuilder.Draw += UiBuilder_OnBuildUi;
-            /*
-            pluginInterface.Subscribe("PingPlugin", e => {
-                dynamic msg = e;
-                iconReplacer.UpdatePing(msg.LastRTT / 2);
-                PluginLog.Log("Ping was updated to {0} ms", msg.LastRTT / 2);
-                });
-                */
+
             var values = Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>();
             orderedByClassJob = values.Where(x => x != CustomComboPreset.None && x.GetAttribute<CustomComboInfoAttribute>() != null).OrderBy(x => x.GetAttribute<CustomComboInfoAttribute>().ClassJob).ToArray();
             UpdateConfig();
@@ -109,6 +102,8 @@ namespace XIVComboPlugin
                 case 36: return "Blue Mage";
                 case 37: return "Gunbreaker";
                 case 38: return "Dancer";
+                case 39: return "Reaper";
+                case 40: return "Sage";
             }
         }
 
@@ -119,15 +114,13 @@ namespace XIVComboPlugin
 
         private void UiBuilder_OnBuildUi()
         {
+
             if (!isImguiComboSetupOpen)
                 return;
-
             var flagsSelected = new bool[orderedByClassJob.Length];
-            var hiddenFlags = new bool[orderedByClassJob.Length];
             for (var i = 0; i < orderedByClassJob.Length; i++)
             {
                 flagsSelected[i] = Configuration.ComboPresets.HasFlag(orderedByClassJob[i]);
-                hiddenFlags[i] = Configuration.HiddenActions[i];
             }
 
             ImGui.SetNextWindowSize(new Vector2(740, 490));

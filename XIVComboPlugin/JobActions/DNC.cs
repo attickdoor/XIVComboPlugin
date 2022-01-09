@@ -10,7 +10,10 @@
             FanDance1 = 16007,
             FanDance2 = 16008,
             FanDance3 = 16009,
-            FanDance4 = 25791;
+            FanDance4 = 25791,
+            Flourish = 16013,
+            Devilment = 16011,
+            StarfallDance = 25792;
         public const short
             BuffFlourishingSymmetry = 2693,
             BuffFlourishingFlow = 2694,

@@ -8,6 +8,8 @@
             Transpose = 149,
             UmbralSoul = 16506,
             LeyLines = 3573,
-            BTL = 7419;
+            BTL = 7419,
+            Flare = 162,
+            Freeze = 159;
     }
 }

@@ -14,6 +14,10 @@
             Oka = 7485,
             ThirdEye = 7498,
             Iaijutsu = 7867,
-            Tsubame = 16483;
+            Tsubame = 16483,
+            OgiNamikiri = 25781,
+            Ikishoten = 16482,
+            KaeshiNamikiri = 25782,
+            Fuko = 25780;
     }
 }

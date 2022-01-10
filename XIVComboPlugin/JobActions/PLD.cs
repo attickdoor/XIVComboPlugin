@@ -14,6 +14,7 @@
             Confiteor = 16459,
             BladeOfFaith = 25748,
             BladeOfTruth = 25749,
-            BladeOfValor = 25750;
+            BladeOfValor = 25750,
+            Atonement = 16460;
     }
 }

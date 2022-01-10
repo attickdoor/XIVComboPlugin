@@ -218,6 +218,9 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PaladinRoyalAuthorityCombo))
                 if (actionID == PLD.RoyalAuthority || actionID == PLD.RageOfHalone)
                 {
+                    if (SearchBuffArray(1902) && level >= 76)
+                        return PLD.Atonement;
+
                     if (comboTime > 0)
                     {
                         if (lastMove == PLD.FastBlade && level >= 4)

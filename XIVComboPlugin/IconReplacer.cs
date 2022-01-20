@@ -431,6 +431,9 @@ namespace XIVComboPlugin
                             return NIN.GustSlash;
                         if (lastMove == NIN.GustSlash && level >= 54)
                             return NIN.ArmorCrush;
+                        // For levels 26 ~ 53, continue combo via Aeolian since Armor Crush isn't available yet
+                        if (lastMove == NIN.GustSlash && level >= 26)
+                            return NIN.AeolianEdge;
                     }
 
                     return NIN.SpinningEdge;

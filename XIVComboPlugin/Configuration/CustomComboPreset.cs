@@ -90,6 +90,9 @@ namespace XIVComboPlugin
         [CustomComboInfo("Hakke Mujinsatsu Combo", "Replace Hakke Mujinsatsu with its combo chain", 30)]
         NinjaHakkeMujinsatsuCombo = 1L << 19,
 
+        [CustomComboInfo("Auto Huraijin", "Add Huraijin in Armor Crush/Aeolian Edge combos when Huton is inactive. (Requires respective combos enabled to take effect.)", 30)]
+        NinjaAutoHuraijin = 1L << 31,
+
         // GUNBREAKER
         [CustomComboInfo("Solid Barrel Combo", "Replace Solid Barrel with its combo chain", 37)]
         GunbreakerSolidBarrelCombo = 1L << 20,

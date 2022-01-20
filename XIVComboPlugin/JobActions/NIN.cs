@@ -12,6 +12,7 @@
             DWAD = 3566,
             Assassinate = 2246,
             Bunshin = 16493,
-            PhantomK = 25774;
+            PhantomK = 25774,
+            Huraijin = 25876;
     }
 }

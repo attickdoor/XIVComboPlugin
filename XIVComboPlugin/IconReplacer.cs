@@ -425,6 +425,15 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.NinjaArmorCrushCombo))
                 if (actionID == NIN.ArmorCrush)
                 {
+                    if (Configuration.ComboPresets.HasFlag(CustomComboPreset.NinjaAutoHuraijin))
+                    {
+                        var gauge = XIVComboPlugin.JobGauges.Get<NINGauge>();
+                        if (gauge.HutonTimer <= 0 && level >= 60)
+                        {
+                            return NIN.Huraijin;
+                        }
+                    }
+
                     if (comboTime > 0)
                     {
                         if (lastMove == NIN.SpinningEdge && level >= 4)
@@ -440,6 +449,15 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.NinjaAeolianEdgeCombo))
                 if (actionID == NIN.AeolianEdge)
                 {
+                    if (Configuration.ComboPresets.HasFlag(CustomComboPreset.NinjaAutoHuraijin))
+                    {
+                        var gauge = XIVComboPlugin.JobGauges.Get<NINGauge>();
+                        if (gauge.HutonTimer <= 0 && level >= 60)
+                        {
+                            return NIN.Huraijin;
+                        }
+                    }
+
                     if (comboTime > 0)
                     {
                         if (lastMove == NIN.SpinningEdge && level >= 4)

@@ -713,6 +713,27 @@ namespace XIVComboPlugin
                 }
             }
 
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DancerSgtGcdFeature))
+            {
+                if (actionID == DNC.FountainFall)
+                {
+                    if (HasBuff(DNC.DancingBuffs))
+                        return DNC.Pirouette;
+                    if (SearchBuffArray(DNC.BuffFlourishingFlow))
+                        return DNC.FountainFall;
+                    return DNC.Fountain;
+                }
+
+                if (actionID == DNC.ReverseCascade)
+                {
+                    if (HasBuff(DNC.DancingBuffs))
+                        return DNC.Jete;
+                    if (SearchBuffArray(DNC.BuffFlourishingSymmetry))
+                        return DNC.ReverseCascade;
+                    return DNC.Cascade;
+                }
+            }
+
             // Fan Dance changes into Fan Dance 3 while flourishing.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DancerFanDanceCombo))
             {
@@ -925,6 +946,15 @@ namespace XIVComboPlugin
                 if (buffs[i].StatusId == needle)
                     return true;
             return false;
-        }        
+        }
+        
+        private bool HasBuff(short[] buffs)
+        {
+            foreach (var buff in buffs) 
+                if (SearchBuffArray(buff))
+                    return true;
+
+            return false;
+        }
     }
 }

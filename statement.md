@@ -18,6 +18,7 @@ My end goal in all of this is to encourage the XIV team to open their design opt
 - Chaos Thrust and Full Thrust combos both free up 3 buttons.
 - BOTD and Stardiver frees up 1 button.
 - Jump and Mirage Dive frees up 1 button.
+
 In total, by consolidating weaponskills and mutually exclusive buttons, DRG gains EIGHT new free spaces for new abilities. What sort of new job mechanics, buffs, or other abilities could the development team add in those eight slots? DRG gains the most free spaces of any jobs, but the possibilities are exciting and interesting. For a job that has a very linear use of abilities, there is little difference in satisfaction between pressing 1-2-3-4 and 1-1-1-1.
 
 Similarly, I think tanks could benefit massively from having more free slots. While each tank has their own distinctive "flavor" cooldown (TBN, Nascent, Heart of Stone, Sheltron), the overall tanking plan is extremely similar for all tanks. With more spots for abilities freed up, tanks could gain more disctinctive abilities. Mitigation and survival could become an even more dynamic experience. But the more redundant buttons there are, the fewer abilities the developers can play around with.

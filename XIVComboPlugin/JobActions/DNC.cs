@@ -18,6 +18,9 @@
             BuffFlourishingSymmetry = 2693,
             BuffFlourishingFlow = 2694,
             BuffThreefoldFanDance = 1820,
-            BuffFourfoldFanDance = 2699;
+            BuffFourfoldFanDance = 2699,
+            BuffStarfallDanceReady = 2700,
+            BuffSilkenSymmetry = -1,
+            BuffSilkenFlow = -1;
     }
 }

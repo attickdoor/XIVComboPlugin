@@ -204,7 +204,7 @@ namespace XIVComboPlugin
 
             CommandManager.RemoveHandler("/pcombo");
 
-            PluginInterface.Dispose();
+            //PluginInterface.Dispose();
         }
 
         private void OnCommandDebugCombo(string command, string arguments)

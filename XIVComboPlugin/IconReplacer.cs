@@ -93,15 +93,6 @@ namespace XIVComboPlugin
 
             // DRAGOON
 
-            // Change Jump/High Jump into Mirage Dive when Dive Ready
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonJumpFeature))
-                if (actionID == DRG.Jump || actionID == DRG.HighJump)
-                {
-                    if (SearchBuffArray(1243))
-                        return DRG.MirageDive;
-                    return iconHook.Original(self, DRG.Jump);
-                }
-
             // Replace Coerthan Torment with Coerthan Torment combo chain
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonCoerthanTormentCombo))
                 if (actionID == DRG.CTorment)
@@ -133,11 +124,11 @@ namespace XIVComboPlugin
                                 return DRG.ChaosThrust;
                         }
                     }
-                    if (SearchBuffArray(802) && level >= 56)
+                    if (SearchBuffArray(DRG.BuffFangAndClawReady) && level >= 56)
                         return DRG.FangAndClaw;
-                    if (SearchBuffArray(803) && level >= 58)
+                    if (SearchBuffArray(DRG.BuffWheelingThrustReady) && level >= 58)
                         return DRG.WheelingThrust;
-                    if (SearchBuffArray(1863) && level >= 76)
+                    if (SearchBuffArray(DRG.BuffDraconianFire) && level >= 76)
                         return DRG.RaidenThrust;
 
                     return DRG.TrueThrust;
@@ -159,11 +150,11 @@ namespace XIVComboPlugin
                                 return DRG.FullThrust;
                         }
                     }
-                    if (SearchBuffArray(802) && level >= 56)
+                    if (SearchBuffArray(DRG.BuffFangAndClawReady) && level >= 56)
                         return DRG.FangAndClaw;
-                    if (SearchBuffArray(803) && level >= 58)
+                    if (SearchBuffArray(DRG.BuffWheelingThrustReady) && level >= 58)
                         return DRG.WheelingThrust;
-                    if (SearchBuffArray(1863) && level >= 76)
+                    if (SearchBuffArray(DRG.BuffDraconianFire) && level >= 76)
                         return DRG.RaidenThrust;
 
                     return DRG.TrueThrust;
@@ -249,10 +240,10 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PaladinRequiescatCombo))
                 if (actionID == PLD.Requiescat)
                 {
-                    if (SearchBuffArray(1368) && level >= 80)
+                    if (SearchBuffArray(PLD.BuffRequiescat) && level >= 80)
                         return PLD.Confiteor;
 
-                    if (lastMove == PLD.Confiteor)
+                    if (SearchBuffArray(PLD.BuffBladeOfFaithReady))
                         return PLD.BladeOfFaith;
 
                     if (lastMove == PLD.BladeOfFaith)
@@ -309,7 +300,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.WarriorIRCombo))
                 if (actionID == WAR.InnerRelease || actionID == WAR.Berserk)
                 {
-                    if (SearchBuffArray(2624))
+                    if (SearchBuffArray(WAR.BuffPrimalRendReady))
                         return WAR.PrimalRend;
                     return iconHook.Original(self, actionID);
                 }
@@ -328,7 +319,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiYukikazeCombo))
                 if (actionID == SAM.Yukikaze)
                 {
-                    if (SearchBuffArray(1233))
+                    if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Yukikaze;
                     if (comboTime > 0)
                         if (lastMove == SAM.Hakaze && level >= 50)
@@ -340,7 +331,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiGekkoCombo))
                 if (actionID == SAM.Gekko)
                 {
-                    if (SearchBuffArray(1233))
+                    if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Gekko;
                     if (comboTime > 0)
                     {
@@ -357,7 +348,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiKashaCombo))
                 if (actionID == SAM.Kasha)
                 {
-                    if (SearchBuffArray(1233))
+                    if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Kasha;
                     if (comboTime > 0)
                     {
@@ -374,10 +365,10 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiMangetsuCombo))
                 if (actionID == SAM.Mangetsu)
                 {
-                    if (SearchBuffArray(1233))
+                    if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Mangetsu;
                     if (comboTime > 0)
-                        if ((lastMove == SAM.Fuga || lastMove == 25780) && level >= 35)
+                        if ((lastMove == SAM.Fuga || lastMove == SAM.Fuko) && level >= 35)
                             return SAM.Mangetsu;
                     if (level >= 86)
                         return SAM.Fuko;
@@ -388,10 +379,10 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiOkaCombo))
                 if (actionID == SAM.Oka)
                 {
-                    if (SearchBuffArray(1233))
+                    if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Oka;
                     if (comboTime > 0)
-                        if ((lastMove == SAM.Fuga || lastMove == 25780) && level >= 45)
+                        if ((lastMove == SAM.Fuga || lastMove == SAM.Fuko) && level >= 45)
                             return SAM.Oka;
                     if (level >= 86)
                         return SAM.Fuko;
@@ -401,7 +392,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiOgiCombo))
                 if (actionID == SAM.Ikishoten)
                 {
-                    if (SearchBuffArray(2959))
+                    if (SearchBuffArray(SAM.BuffOgiNamikiriReady))
                         return SAM.OgiNamikiri;
                     if (XIVComboPlugin.JobGauges.Get<SAMGauge>().Kaeshi == Kaeshi.NAMIKIRI)
                         return SAM.KaeshiNamikiri;
@@ -415,7 +406,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.NinjaBunshinCombo))
                 if (actionID == NIN.Bunshin)
                 {
-                    if (SearchBuffArray(2723))
+                    if (SearchBuffArray(NIN.BuffPhantomKReady))
                         return NIN.PhantomK;
 
                     return NIN.Bunshin;
@@ -611,7 +602,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BlackLeyLines))
                 if (actionID == BLM.LeyLines)
                 {
-                    if (SearchBuffArray(737) && level >= 62)
+                    if (SearchBuffArray(BLM.BuffLeyLines) && level >= 62)
                         return BLM.BTL;
                     return BLM.LeyLines;
                 }
@@ -700,14 +691,14 @@ namespace XIVComboPlugin
             {
                 if (actionID == DNC.Bloodshower)
                 {
-                    if (SearchBuffArray(DNC.BuffFlourishingFlow))
+                    if (SearchBuffArray(DNC.BuffFlourishingFlow) || SearchBuffArray(DNC.BuffSilkenFlow))
                         return DNC.Bloodshower;
                     return DNC.Bladeshower;
                 }
 
                 if (actionID == DNC.RisingWindmill)
                 {
-                    if (SearchBuffArray(DNC.BuffFlourishingSymmetry))
+                    if (SearchBuffArray(DNC.BuffFlourishingSymmetry) || SearchBuffArray(DNC.BuffSilkenSymmetry))
                         return DNC.RisingWindmill;
                     return DNC.Windmill;
                 }
@@ -746,7 +737,7 @@ namespace XIVComboPlugin
             {
                 if (actionID == DNC.Devilment)
                 {
-                    if (SearchBuffArray(2700))
+                    if (SearchBuffArray(DNC.BuffStarfallDanceReady))
                         return DNC.StarfallDance;
                     return DNC.Devilment;
                 }
@@ -774,20 +765,11 @@ namespace XIVComboPlugin
 
             // BARD
 
-            // Replace Wanderer's Minuet with PP when in WM.
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BardWandererPPFeature))
-                if (actionID == BRD.WanderersMinuet)
-                {
-                    if (XIVComboPlugin.JobGauges.Get<BRDGauge>().Song == Song.WANDERER)
-                        return BRD.PitchPerfect;
-                    return BRD.WanderersMinuet;
-                }
-
             // Replace HS/BS with SS/RA when procced.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BardStraightShotUpgradeFeature))
                 if (actionID == BRD.HeavyShot || actionID == BRD.BurstShot)
                 {
-                    if (SearchBuffArray(122))
+                    if (SearchBuffArray(BRD.BuffStraightShotReady))
                     {
                         if (level >= 70) return BRD.RefulgentArrow;
                         return BRD.StraightShot;
@@ -800,7 +782,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BardAoEUpgradeFeature))
                 if (actionID == BRD.QuickNock || actionID == BRD.Ladonsbite)
                 {
-                    if (SearchBuffArray(3002))
+                    if (SearchBuffArray(BRD.BuffShadowbiteReady))
                     {
                         return BRD.Shadowbite;
                     }
@@ -818,7 +800,8 @@ namespace XIVComboPlugin
             {
                 if (actionID == RDM.Veraero2)
                 {
-                    if (SearchBuffArray(167) || SearchBuffArray(1249) || SearchBuffArray(1238))
+                    if (SearchBuffArray(RDM.BuffSwiftcast) || SearchBuffArray(RDM.BuffDualcast) || 
+                        SearchBuffArray(RDM.BuffAcceleration) || SearchBuffArray(RDM.BuffChainspell))
                     {
                         if (level >= 66) return RDM.Impact;
                         return RDM.Scatter;
@@ -828,7 +811,8 @@ namespace XIVComboPlugin
 
                 if (actionID == RDM.Verthunder2)
                 {
-                    if (SearchBuffArray(167) || SearchBuffArray(1249) || SearchBuffArray(1238))
+                    if (SearchBuffArray(RDM.BuffSwiftcast) || SearchBuffArray(RDM.BuffDualcast) ||
+                        SearchBuffArray(RDM.BuffAcceleration) || SearchBuffArray(RDM.BuffChainspell))
                     {
                         if (level >= 66) return RDM.Impact;
                         return RDM.Scatter;
@@ -868,7 +852,7 @@ namespace XIVComboPlugin
                     if (level >= 80 && (lastMove == RDM.Verflare || lastMove == RDM.Verholy)) return RDM.Scorch;
                     if (level >= 90 && lastMove == RDM.Scorch) return RDM.Resolution;
 
-                    if (SearchBuffArray(1235)) return RDM.Verstone;
+                    if (SearchBuffArray(RDM.BuffVerstoneReady)) return RDM.Verstone;
                     if (level < 62) return RDM.Jolt;
                     return RDM.Jolt2;
                 }
@@ -877,7 +861,7 @@ namespace XIVComboPlugin
                     if (level >= 80 && (lastMove == RDM.Verflare || lastMove == RDM.Verholy)) return RDM.Scorch;
                     if (level >= 90 && lastMove == RDM.Scorch) return RDM.Resolution;
 
-                    if (SearchBuffArray(1234)) return RDM.Verfire;
+                    if (SearchBuffArray(RDM.BuffVerfireReady)) return RDM.Verfire;
                     if (level < 62) return RDM.Jolt;
                     return RDM.Jolt2;
                 }
@@ -920,6 +904,7 @@ namespace XIVComboPlugin
 
         private bool SearchBuffArray(short needle)
         {
+            if (needle == -1) return false;
             var buffs = clientState.LocalPlayer.StatusList;
             for (var i = 0; i < buffs.Length; i++)
                 if (buffs[i].StatusId == needle)

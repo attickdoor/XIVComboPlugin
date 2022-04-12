@@ -22,5 +22,10 @@
             WheelingThrust = 3556,
             FullThrust = 84,
             VorpalThrust = 78;
+
+        public const short
+            BuffFangAndClawReady = 802,
+            BuffWheelingThrustReady = 803,
+            BuffDraconianFire = 1863;
     }
 }

@@ -12,5 +12,9 @@
             QuickNock = 106,
             Ladonsbite = 25783,
             Shadowbite = 16494;
+
+        public const short
+            BuffStraightShotReady = 122,
+            BuffShadowbiteReady = 3002;
     }
 }

@@ -9,9 +9,6 @@ namespace XIVComboPlugin
         None = 0,
 
         // DRAGOON
-        [CustomComboInfo("Jump + Mirage Dive", "Replace (High) Jump with Mirage Dive when Dive Ready", 22)]
-        DragoonJumpFeature = 1L << 44,
-
         [CustomComboInfo("Coerthan Torment Combo", "Replace Coerthan Torment with its combo chain", 22)]
         DragoonCoerthanTormentCombo = 1L << 0,
 
@@ -169,9 +166,6 @@ namespace XIVComboPlugin
         WhiteMageRaptureMiseryFeature = 1L << 36,
 
         // BARD
-        [CustomComboInfo("Wanderer's into Pitch Perfect", "Replaces Wanderer's Minuet with Pitch Perfect while in WM", 23)]
-        BardWandererPPFeature = 1L << 41,
-
         [CustomComboInfo("Heavy Shot into Straight Shot", "Replaces Heavy Shot/Burst Shot with Straight Shot/Refulgent Arrow when procced", 23)]
         BardStraightShotUpgradeFeature = 1L << 42,
 

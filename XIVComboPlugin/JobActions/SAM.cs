@@ -19,5 +19,9 @@
             Ikishoten = 16482,
             KaeshiNamikiri = 25782,
             Fuko = 25780;
+
+        public const short
+            BuffOgiNamikiriReady = 2959,
+            BuffMeikyoShisui = 1233;
     }
 }

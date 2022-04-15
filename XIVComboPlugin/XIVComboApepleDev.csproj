@@ -21,7 +21,7 @@
   <PropertyGroup>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <AssemblyName>XIVCombo</AssemblyName>
+    <AssemblyName>XIVComboApepleDev</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dalamud">

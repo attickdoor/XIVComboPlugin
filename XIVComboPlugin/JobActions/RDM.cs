@@ -21,5 +21,13 @@
             Verflare = 7525,
             Scorch = 16530,
             Resolution = 25858;
+
+        public const short
+            BuffSwiftcast = 167,
+            BuffDualcast = 1249,
+            BuffAcceleration = 1238,
+            BuffChainspell = 2560,
+            BuffVerstoneReady = 1235,
+            BuffVerfireReady = 1234;
     }
 }

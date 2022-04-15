@@ -15,7 +15,7 @@ namespace XIVComboPlugin
 
             this.IsIconReplaceable = sig.ScanText("81 F9 ?? ?? ?? ?? 7F 35");
 
-            this.ComboTimer = sig.GetStaticAddressFromSig("E8 ?? ?? ?? ?? 80 7E 21 00", 0x178);
+            this.ComboTimer = sig.GetStaticAddressFromSig("E8 ?? ?? ?? ?? 80 7E 21 00", 0x178) - 4;
         }
     }
 }

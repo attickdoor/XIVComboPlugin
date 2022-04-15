@@ -16,7 +16,7 @@
   </PropertyGroup>
   <PropertyGroup Label="Feature">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Version>1.7.11</Version>
+    <Version>1.7.12</Version>
   </PropertyGroup>
   <PropertyGroup>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -48,6 +48,12 @@
     <Reference Include="Lumina.Excel">
       <Private>false</Private>
       <HintPath>$(APPDATA)\XIVLauncher\addon\Hooks\dev\Lumina.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="SDL2-CS">
+      <HintPath>..\..\..\..\AppData\Roaming\XIVLauncher\addon\Hooks\dev\SDL2-CS.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog">
+      <HintPath>..\..\..\..\AppData\Roaming\XIVLauncher\addon\Hooks\dev\Serilog.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

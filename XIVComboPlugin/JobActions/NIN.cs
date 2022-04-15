@@ -13,5 +13,8 @@
             Assassinate = 2246,
             Bunshin = 16493,
             PhantomK = 25774;
+
+        public const short
+            BuffPhantomKReady = 2723;
     }
 }

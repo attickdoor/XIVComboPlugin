@@ -12,5 +12,8 @@
             InnerRelease = 7389,
             PrimalRend = 25753,
             Berserk = 38;
+
+        public const short
+            BuffPrimalRendReady = 2624;
     }
 }

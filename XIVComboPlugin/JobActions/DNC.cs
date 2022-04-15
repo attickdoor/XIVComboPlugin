@@ -21,10 +21,13 @@
             Pirouette = 16002,
             Jete = 16001;
         public const short
-            BuffFlourishingSymmetry = 2693,
-            BuffFlourishingFlow = 2694,
+            BuffFlourishingSymmetry = 3017,
+            BuffFlourishingFlow = 3018,
             BuffThreefoldFanDance = 1820,
             BuffFourfoldFanDance = 2699,
+            BuffStarfallDanceReady = 2700,
+            BuffSilkenSymmetry = 2693,
+            BuffSilkenFlow = 2694;
             BuffStandardStep = 1818,
             BuffTechnicalStep = 1819,
             BuffImprovisation = 1827;

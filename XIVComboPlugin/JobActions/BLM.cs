@@ -11,5 +11,8 @@
             BTL = 7419,
             Flare = 162,
             Freeze = 159;
+
+        public const short
+            BuffLeyLines = 737;
     }
 }

@@ -182,7 +182,7 @@ namespace XIVComboPlugin
                 if (actionID == DRK.StalwartSoul)
                 {
                     if (comboTime > 0)
-                        if (lastMove == DRK.Unleash && level >= 72)
+                        if (lastMove == DRK.Unleash && level >= 40)
                             return DRK.StalwartSoul;
 
                     return DRK.Unleash;

@@ -27,7 +27,7 @@
             BuffFourfoldFanDance = 2699,
             BuffStarfallDanceReady = 2700,
             BuffSilkenSymmetry = 2693,
-            BuffSilkenFlow = 2694;
+            BuffSilkenFlow = 2694,
             BuffStandardStep = 1818,
             BuffTechnicalStep = 1819,
             BuffImprovisation = 1827;

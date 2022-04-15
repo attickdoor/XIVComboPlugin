@@ -710,7 +710,7 @@ namespace XIVComboPlugin
                 {
                     if (HasBuff(DNC.DancingBuffs))
                         return DNC.Pirouette;
-                    if (SearchBuffArray(DNC.BuffFlourishingFlow))
+                    if (SearchBuffArray(DNC.BuffFlourishingFlow) || SearchBuffArray(DNC.BuffSilkenFlow))
                         return DNC.FountainFall;
                     return DNC.Fountain;
                 }
@@ -719,7 +719,7 @@ namespace XIVComboPlugin
                 {
                     if (HasBuff(DNC.DancingBuffs))
                         return DNC.Jete;
-                    if (SearchBuffArray(DNC.BuffFlourishingSymmetry))
+                    if (SearchBuffArray(DNC.BuffFlourishingSymmetry) || SearchBuffArray(DNC.BuffSilkenSymmetry))
                         return DNC.ReverseCascade;
                     return DNC.Cascade;
                 }

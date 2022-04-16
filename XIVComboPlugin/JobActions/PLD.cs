@@ -18,6 +18,6 @@
 
         public const short
             BuffRequiescat = 1368,
-            BuffBladeOfFaithReady = -1;
+            BuffBladeOfFaithReady = 3019;
     }
 }

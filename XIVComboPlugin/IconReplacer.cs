@@ -182,7 +182,7 @@ namespace XIVComboPlugin
                 if (actionID == DRK.StalwartSoul)
                 {
                     if (comboTime > 0)
-                        if (lastMove == DRK.Unleash && level >= 72)
+                        if (lastMove == DRK.Unleash && level >= 40)
                             return DRK.StalwartSoul;
 
                     return DRK.Unleash;
@@ -401,16 +401,6 @@ namespace XIVComboPlugin
                 }
 
             // NINJA
-
-            // Replace Bunshin with Phantom Kamiatachi
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.NinjaBunshinCombo))
-                if (actionID == NIN.Bunshin)
-                {
-                    if (SearchBuffArray(NIN.BuffPhantomKReady))
-                        return NIN.PhantomK;
-
-                    return NIN.Bunshin;
-                }
 
             // Replace Armor Crush with Armor Crush combo
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.NinjaArmorCrushCombo))

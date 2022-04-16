@@ -75,9 +75,6 @@ namespace XIVComboPlugin
 
 
         // NINJA
-        [CustomComboInfo("Bunshin Combo", "Replace Bunshin with Phantom Kamaitachi when Phantom Kamaitachi Ready", 30)]
-        NinjaBunshinCombo = 1L << 58,
-
         [CustomComboInfo("Armor Crush Combo", "Replace Armor Crush with its combo chain", 30)]
         NinjaArmorCrushCombo = 1L << 17,
 

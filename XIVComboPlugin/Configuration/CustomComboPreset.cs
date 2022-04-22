@@ -32,6 +32,9 @@ namespace XIVComboPlugin
         [CustomComboInfo("Royal Authority Combo", "Replace Royal Authority/Rage of Halone with its combo chain", 19)]
         PaladinRoyalAuthorityCombo = 1L << 6,
 
+        [CustomComboInfo("Royal Authority to Atonement", "Replace Royal Authority with Atonement if any Sword Oath stacks are present", 19)]
+        PaladinAtonementCombo = 1L << 64,
+
         [CustomComboInfo("Prominence Combo", "Replace Prominence with its combo chain", 19)]
         PaladinProminenceCombo = 1L << 7,
 

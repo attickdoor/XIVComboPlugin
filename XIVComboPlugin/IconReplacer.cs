@@ -812,7 +812,55 @@ namespace XIVComboPlugin
                 }
 
             // MONK
-            // haha you get nothing now
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MonkLeadenFistComboFeature))
+            {
+                if (
+                    Array.Exists(
+                        new uint[] { MNK.Bootshine, MNK.DragonKick },
+                        action => action == actionID
+                    )
+                ) {
+                    if (
+                        SearchBuffArray(MNK.PerfectBalance)
+                        || (SearchBuffArray(MNK.OpoOpoForm) && !SearchBuffArray(MNK.LeadenFist))
+                        && level >= 50
+                    ) {
+                        return MNK.DragonKick;
+                    }
+
+                    return MNK.Bootshine;
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MonkAoeComboFeature))
+            {
+                if (
+                    Array.Exists(
+                        new uint[] {MNK.ArmOfTheDestroyer, MNK.FourpointFury, MNK.Rockbreaker},
+                        action => action == actionID
+                    )
+                ){
+                    if (SearchBuffArray(MNK.RaptorForm))
+                    {
+                        if (level >= 45)
+                        {
+                            return MNK.FourpointFury;
+                        }
+
+                        return MNK.TwinSnakes;
+                    }
+
+                    if (
+                        (SearchBuffArray(MNK.PerfectBalance) || SearchBuffArray((MNK.CoeurlForm)))
+                        && level >= 30
+                    )
+                    {
+                        return MNK.Rockbreaker;
+                    }
+
+                    return MNK.ArmOfTheDestroyer;
+                }
+            }
 
             // RED MAGE
 

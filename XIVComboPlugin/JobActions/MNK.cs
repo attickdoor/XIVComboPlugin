@@ -9,8 +9,17 @@ namespace XIVComboPlugin.JobActions
     public static class MNK
     {
         public const uint
-            AOTD = 62,
-            FourPointFury = 16473,
-            Rockbreaker = 70;
+            Bootshine = 53,
+            DragonKick = 74,
+            ArmOfTheDestroyer = 62,
+            FourpointFury = 16473,
+            Rockbreaker = 70,
+            TwinSnakes = 61;
+        public const short
+            OpoOpoForm = 107,
+            RaptorForm = 108,
+            CoeurlForm = 109,
+            LeadenFist = 1861,
+            PerfectBalance = 110;
     }
 }

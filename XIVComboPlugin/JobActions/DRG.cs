@@ -23,7 +23,7 @@
             FullThrust = 84,
             VorpalThrust = 78;
 
-        public const short
+        public const ushort
             BuffFangAndClawReady = 802,
             BuffWheelingThrustReady = 803,
             BuffDraconianFire = 1863;

@@ -13,7 +13,7 @@
             Spire = 4406,
             MinorArcana = 7443,
             CrownPlay = 25869;
-        public const short
+        public const ushort
             BuffLordOfCrownsDrawn = 2054,
             BuffLadyOfCrownsDrawn = 2055;
     }

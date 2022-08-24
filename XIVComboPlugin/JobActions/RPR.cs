@@ -14,12 +14,18 @@
             NightmareScythe = 24377,
             // Shroud
             Enshroud = 24394,
-            Communio = 24398;
+            Communio = 24398,
+            
+            Egress = 24402,
+            Ingress = 24401,
+            Regress = 24403;
 
         public static class Buffs
         {
             public const ushort
-                Enshrouded = 2593;
+                Enshrouded = 2593,
+                Threshold = 2595;
+                //Threshold2 = 0;
         }
 
         public static class Debuffs

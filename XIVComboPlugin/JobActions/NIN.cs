@@ -14,7 +14,7 @@
             Bunshin = 16493,
             PhantomK = 25774;
 
-        public const short
+        public const ushort
             BuffPhantomKReady = 2723;
     }
 }

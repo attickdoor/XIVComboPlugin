@@ -13,7 +13,7 @@
             PrimalRend = 25753,
             Berserk = 38;
 
-        public const short
+        public const ushort
             BuffPrimalRendReady = 2624;
     }
 }

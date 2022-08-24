@@ -20,7 +20,7 @@
             KaeshiNamikiri = 25782,
             Fuko = 25780;
 
-        public const short
+        public const ushort
             BuffOgiNamikiriReady = 2959,
             BuffMeikyoShisui = 1233;
     }

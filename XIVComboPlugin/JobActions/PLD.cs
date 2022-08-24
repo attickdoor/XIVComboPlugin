@@ -16,7 +16,7 @@
             BladeOfTruth = 25749,
             BladeOfValor = 25750;
 
-        public const short
+        public const ushort
             BuffRequiescat = 1368,
             BuffBladeOfFaithReady = 3019;
     }

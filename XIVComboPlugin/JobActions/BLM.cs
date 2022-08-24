@@ -12,7 +12,7 @@
             Flare = 162,
             Freeze = 159;
 
-        public const short
+        public const ushort
             BuffLeyLines = 737;
     }
 }

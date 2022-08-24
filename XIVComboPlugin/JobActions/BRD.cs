@@ -13,7 +13,7 @@
             Ladonsbite = 25783,
             Shadowbite = 16494;
 
-        public const short
+        public const ushort
             BuffStraightShotReady = 122,
             BuffShadowbiteReady = 3002;
     }

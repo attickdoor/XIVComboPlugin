@@ -2,13 +2,16 @@
 
 namespace XIVComboPlugin
 {
-    //TODO: count which enum values are still in use, and fill in empty spaces with new ones
+    //TODO: reorganize the numbers lol lmao
     [Flags]
     public enum CustomComboPreset : long
     {
         None = 0,
 
         // DRAGOON
+        [CustomComboInfo("Jump + Mirage Dive", "Replace (High) Jump with Mirage Dive when Dive Ready", 22)]
+        DragoonJumpFeature = 1L << 44,
+
         [CustomComboInfo("Coerthan Torment Combo", "Replace Coerthan Torment with its combo chain", 22)]
         DragoonCoerthanTormentCombo = 1L << 0,
 
@@ -35,7 +38,7 @@ namespace XIVComboPlugin
         [CustomComboInfo("Prominence Combo", "Replace Prominence with its combo chain", 19)]
         PaladinProminenceCombo = 1L << 7,
 
-        [CustomComboInfo("Requiescat Confiteor", "Replace Requiescat with Confiter while under the effect of Requiescat", 19)]
+        [CustomComboInfo("Requiescat Confiteor", "Replace Requiescat with Confiteor while under the effect of Requiescat", 19)]
         PaladinRequiescatCombo = 1L << 55,
 
         // WARRIOR
@@ -113,19 +116,13 @@ namespace XIVComboPlugin
         // BLACK MAGE
         [CustomComboInfo("Enochian Stance Switcher", "Change Fire 4 and Blizzard 4 to the appropriate element depending on stance, as well as Flare and Freeze", 25)]
         BlackEnochianFeature = 1L << 25,
-        /*
-        [CustomComboInfo("Umbral Soul/Transpose Switcher", "Change Transpose into Umbral Soul when Umbral Soul is usable", 25)]
-        BlackManaFeature = 1L << 26,
-        */
+
         [CustomComboInfo("(Between the) Ley Lines", "Change Ley Lines into BTL when Ley Lines is active", 25)]
         BlackLeyLines = 1L << 28,
 
         // ASTROLOGIAN
         [CustomComboInfo("Draw on Play", "Play turns into Draw when no card is drawn, as well as the usual Play behavior", 33)]
         AstrologianCardsOnDrawFeature = 1L << 27,
-
-        [CustomComboInfo("Minor Arcana Play", "Crown Play turns into Minor Arcana when no Minor Arcana is drawn.", 33)]
-        AstrologianMinorArcanaPlayFeature = 1L << 30,
 
         // SUMMONER
 
@@ -188,6 +185,12 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Scythe Combo", "Replace Spinning Scythe with its combo chain.", 39)]
         ReaperScytheCombo = 1L << 57,
+
+        [CustomComboInfo("Double Regress", "Regress always replaces both Hell's Egress and Hell's Ingress.", 39)]
+        ReaperRegressFeature = 1L << 58,
+
+        [CustomComboInfo("Enshroud Combo", "Replace Enshroud with Communio while you are Enshrouded.", 39)]
+        ReaperEnshroudCombo = 1L << 26,
     }
 
     public class CustomComboInfoAttribute : Attribute

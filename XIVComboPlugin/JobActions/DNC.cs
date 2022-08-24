@@ -14,7 +14,7 @@
             Flourish = 16013,
             Devilment = 16011,
             StarfallDance = 25792;
-        public const short
+        public const ushort
             BuffFlourishingSymmetry = 3017,
             BuffFlourishingFlow = 3018,
             BuffThreefoldFanDance = 1820,

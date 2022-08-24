@@ -22,7 +22,7 @@
             Scorch = 16530,
             Resolution = 25858;
 
-        public const short
+        public const ushort
             BuffSwiftcast = 167,
             BuffDualcast = 1249,
             BuffAcceleration = 1238,

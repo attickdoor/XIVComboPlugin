@@ -27,7 +27,6 @@ namespace XIVComboPlugin
 
         private readonly Hook<OnGetIconDelegate> iconHook;
         private readonly IntPtr lastComboMove;
-        private readonly IntPtr playerLevel;
 
         private unsafe delegate int* getArray(long* address);
 
@@ -48,10 +47,9 @@ namespace XIVComboPlugin
             PluginLog.Verbose("GetIcon address {GetIcon}", Address.GetIcon);
             PluginLog.Verbose("ComboTimer address {ComboTimer}", comboTimer);
             PluginLog.Verbose("LastComboMove address {LastComboMove}", lastComboMove);
-            PluginLog.Verbose("PlayerLevel address {PlayerLevel}", playerLevel);
 
-            iconHook = new Hook<OnGetIconDelegate>(Address.GetIcon, GetIconDetour);
-            checkerHook = new Hook<OnCheckIsIconReplaceableDelegate>(Address.IsIconReplaceable, CheckIsIconReplaceableDetour);
+            iconHook = Hook<OnGetIconDelegate>.FromAddress(Address.GetIcon, GetIconDetour);
+            checkerHook = Hook<OnCheckIsIconReplaceableDelegate>.FromAddress(Address.IsIconReplaceable, CheckIsIconReplaceableDetour);
         }
 
         public void Enable()
@@ -92,6 +90,15 @@ namespace XIVComboPlugin
             var level = clientState.LocalPlayer.Level;
 
             // DRAGOON
+
+            // Change Jump/High Jump into Mirage Dive when Dive Ready
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonJumpFeature))
+                if (actionID == DRG.Jump || actionID == DRG.HighJump)
+                {
+                    if (SearchBuffArray(1243))
+                        return DRG.MirageDive;
+                    return iconHook.Original(self, DRG.Jump);
+                }
 
             // Replace Coerthan Torment with Coerthan Torment combo chain
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonCoerthanTormentCombo))
@@ -182,7 +189,7 @@ namespace XIVComboPlugin
                 if (actionID == DRK.StalwartSoul)
                 {
                     if (comboTime > 0)
-                        if (lastMove == DRK.Unleash && level >= 72)
+                        if (lastMove == DRK.Unleash && level >= 40)
                             return DRK.StalwartSoul;
 
                     return DRK.Unleash;
@@ -402,16 +409,6 @@ namespace XIVComboPlugin
 
             // NINJA
 
-            // Replace Bunshin with Phantom Kamiatachi
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.NinjaBunshinCombo))
-                if (actionID == NIN.Bunshin)
-                {
-                    if (SearchBuffArray(NIN.BuffPhantomKReady))
-                        return NIN.PhantomK;
-
-                    return NIN.Bunshin;
-                }
-
             // Replace Armor Crush with Armor Crush combo
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.NinjaArmorCrushCombo))
                 if (actionID == NIN.ArmorCrush)
@@ -585,19 +582,6 @@ namespace XIVComboPlugin
                 }
             }
 
-            // Umbral Soul and Transpose
-            // Temporarily taken out. The rotation currently is better with a UI3 > transpose > AF1 F3P
-            // instead of using F3P as a part of your main AF rotation.
-            /*
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BlackManaFeature))
-                if (actionID == BLM.Transpose)
-                {
-                    var gauge = XIVComboPlugin.JobGauges.Get<BLMGauge>();
-                    if (gauge.InUmbralIce && gauge.IsEnochianActive && level >= 76)
-                        return BLM.UmbralSoul;
-                    return BLM.Transpose;
-                }
-            */
             // Ley Lines and BTL
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BlackLeyLines))
                 if (actionID == BLM.LeyLines)
@@ -631,18 +615,6 @@ namespace XIVComboPlugin
                         default:
                             return AST.Draw;
                     }
-                }
-
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.AstrologianMinorArcanaPlayFeature))
-                if (actionID == AST.CrownPlay)
-                {
-                    if (level >= 70)
-                    {
-                        if (SearchBuffArray(AST.BuffLordOfCrownsDrawn) || SearchBuffArray(AST.BuffLadyOfCrownsDrawn))
-                            return iconHook.Original(self, AST.CrownPlay);
-                        return AST.MinorArcana;
-                    }
-                    return iconHook.Original(self, AST.CrownPlay);
                 }
 
             // SUMMONER
@@ -968,12 +940,30 @@ namespace XIVComboPlugin
                 }
             }
 
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ReaperRegressFeature))
+            {
+                if (actionID == RPR.Egress || actionID == RPR.Ingress)
+                {
+                    if (SearchBuffArray(RPR.Buffs.Threshold)) return RPR.Regress;
+                    return actionID;
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ReaperEnshroudCombo))
+            {
+                if (actionID == RPR.Enshroud)
+                {
+                    if (SearchBuffArray(RPR.Buffs.Enshrouded)) return RPR.Communio;
+                    return actionID;
+                }
+            }
+
             return iconHook.Original(self, actionID);
         }
 
-        private bool SearchBuffArray(short needle)
+        private bool SearchBuffArray(ushort needle)
         {
-            if (needle == -1) return false;
+            if (needle == 0) return false;
             var buffs = clientState.LocalPlayer.StatusList;
             for (var i = 0; i < buffs.Length; i++)
                 if (buffs[i].StatusId == needle)

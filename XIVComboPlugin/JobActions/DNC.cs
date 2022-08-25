@@ -20,7 +20,7 @@
             FountainFall = 15992,
             Pirouette = 16002,
             Jete = 16001;
-        public const short
+        public const ushort
             BuffFlourishingSymmetry = 3017,
             BuffFlourishingFlow = 3018,
             BuffThreefoldFanDance = 1820,

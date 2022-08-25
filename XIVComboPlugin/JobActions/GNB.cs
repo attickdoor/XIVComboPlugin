@@ -17,7 +17,7 @@
             EyeGouge = 16158,
             BurstStrike = 16162,
             Hypervelocity = 25759;
-        public const short
+        public const ushort
             BuffReadyToRip = 1842,
             BuffReadyToTear = 1843,
             BuffReadyToGouge = 1844,

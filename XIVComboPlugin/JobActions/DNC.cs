@@ -31,7 +31,7 @@
             BuffStandardStep = 1818,
             BuffTechnicalStep = 1819,
             BuffImprovisation = 1827;
-        public static readonly short[]
+        public static readonly ushort[]
             DancingBuffs = { BuffImprovisation, BuffStandardStep, BuffTechnicalStep };
     }
 }

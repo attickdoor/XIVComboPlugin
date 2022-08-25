@@ -971,7 +971,7 @@ namespace XIVComboPlugin
             return false;
         }
         
-        private bool HasBuff(short[] buffs)
+        private bool HasBuff(ushort[] buffs)
         {
             foreach (var buff in buffs) 
                 if (SearchBuffArray(buff))

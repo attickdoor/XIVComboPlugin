@@ -15,7 +15,7 @@ namespace XIVComboPlugin.JobActions
             FourpointFury = 16473,
             Rockbreaker = 70,
             TwinSnakes = 61;
-        public const short
+        public const ushort
             OpoOpoForm = 107,
             RaptorForm = 108,
             CoeurlForm = 109,

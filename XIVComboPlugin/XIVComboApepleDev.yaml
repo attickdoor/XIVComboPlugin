@@ -1,0 +1,8 @@
+name: "XIV Combo Apeple Dev"
+author: "Apeple (forked from attick)"
+description: "Extends, add some combo to attick combo plugin"
+repo_url: "https://github.com/virgilLacondemine/XIVComboPlugin"
+punchline: "PvP, but in PvE!"
+tags: [ "Combo" ]
+accepts_feedback: "true"
+dalamud_api_level: "7"

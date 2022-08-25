@@ -784,6 +784,7 @@ namespace XIVComboPlugin
                 }
 
             // MONK
+            /*
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MonkLeadenFistComboFeature))
             {
                 if (
@@ -833,6 +834,7 @@ namespace XIVComboPlugin
                     return MNK.ArmOfTheDestroyer;
                 }
             }
+            */
 
             // RED MAGE
 

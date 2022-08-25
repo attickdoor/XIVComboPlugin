@@ -153,7 +153,7 @@ namespace XIVComboPlugin
         DancerDevilmentCombo = 1L << 61,
 
         [CustomComboInfo("SgT GCD procs", "DNC Sgt procs turn into their normal abilities when not procced", 38)]
-        DancerSgtGcdFeature = 1L << 26,
+        DancerSgtGcdFeature = 1L << 31,
 
         // WHITE MAGE
         [CustomComboInfo("Solace into Misery", "Replaces Afflatus Solace with Afflatus Misery when Misery is ready to be used", 24)]
@@ -170,11 +170,13 @@ namespace XIVComboPlugin
         BardAoEUpgradeFeature = 1L << 59,
 
         // MONK
+        /*
         [CustomComboInfo("Bootshine into DragonKick", "Replaces Bootshine with DragonKick when procced", 20)]
         MonkLeadenFistComboFeature = 1L << 31,
 
         [CustomComboInfo("Aoe Combo", "Replace Arm of the Destoryer with its combo chain", 20)]
         MonkAoeComboFeature = 1L << 34,
+        */
 
         // RED MAGE
         [CustomComboInfo("Red Mage AoE Combo", "Replaces Veraero/thunder 2 with Impact when Dualcast or Swiftcast are active", 35)]

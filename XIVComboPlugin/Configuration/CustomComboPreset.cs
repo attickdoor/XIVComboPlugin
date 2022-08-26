@@ -107,7 +107,7 @@ namespace XIVComboPlugin
         [CustomComboInfo("(Heated) Shot Combo", "Replace either form of Clean Shot with its combo chain", 31)]
         MachinistMainCombo = 1L << 23,
 
-        [CustomComboInfo("Spread Shot Heat", "Replace Spread Shot with Auto Crossbow when overheated", 31)]
+        [CustomComboInfo("Spread Shot Heat", "Replace Spread Shot or Scattergun with Auto Crossbow when overheated", 31)]
         MachinistSpreadShotFeature = 1L << 24,
 
         [CustomComboInfo("Heat Blast when overheated", "Replace Hypercharge with Heat Blast when overheated", 31)]

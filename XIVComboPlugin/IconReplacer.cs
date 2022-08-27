@@ -550,7 +550,7 @@ namespace XIVComboPlugin
 
             // Replace Spread Shot with Auto Crossbow when overheated.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistSpreadShotFeature))
-                if (actionID == MCH.SpreadShot)
+                if (actionID == MCH.SpreadShot || actionID == MCH.Scattergun)
                 {
                     if (XIVComboPlugin.JobGauges.Get<MCHGauge>().IsOverheated && level >= 52)
                         return MCH.AutoCrossbow;

@@ -159,6 +159,12 @@ namespace XIVComboPlugin
         [CustomComboInfo("Rapture into Misery", "Replaces Afflatus Rapture with Afflatus Misery when Misery is ready to be used", 24)]
         WhiteMageRaptureMiseryFeature = 1L << 36,
 
+        [CustomComboInfo("Cure II into Cure", "Replaces Cure II with Cure when below Lv. 30", 24)]
+        WhiteMageCureFeature = 1L << 30,
+
+        [CustomComboInfo("Medica II into Medica", "Replaces Medica II with Medica when below Lv. 50", 24)]
+        WhiteMageMedicaFeature = 1L << 31,
+
         // BARD
         [CustomComboInfo("Heavy Shot into Straight Shot", "Replaces Heavy Shot/Burst Shot with Straight Shot/Refulgent Arrow when procced", 23)]
         BardStraightShotUpgradeFeature = 1L << 42,

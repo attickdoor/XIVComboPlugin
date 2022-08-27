@@ -726,13 +726,31 @@ namespace XIVComboPlugin
                     return WHM.Solace;
                 }
 
-            // Replace Solace with Misery when full blood lily
+            // Replace Rapture with Misery when full blood lily
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.WhiteMageRaptureMiseryFeature))
                 if (actionID == WHM.Rapture)
                 {
                     if (XIVComboPlugin.JobGauges.Get<WHMGauge>().BloodLily == 3)
                         return WHM.Misery;
                     return WHM.Rapture;
+                }
+
+            // Replace Cure II with Cure when below Lv. 30
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.WhiteMageCureFeature))
+                if (actionID == WHM.CureII)
+                {
+                    if (level < WHM.Levels.CureII)
+                        return WHM.Cure;
+                    return WHM.CureII;
+                }
+
+            // Replace Medica II with Medica when below Lv. 50
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.WhiteMageMedicaFeature))
+                if (actionID == WHM.MedicaII)
+                {
+                    if (level < WHM.Levels.MedicaII)
+                        return WHM.Medica;
+                    return WHM.MedicaII;
                 }
 
             // BARD

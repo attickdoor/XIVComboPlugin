@@ -11,6 +11,7 @@ using Dalamud.Game.Gui;
 using Dalamud.IoC;
 using Dalamud.Utility;
 using Dalamud.Data;
+using Dalamud.Interface;
 
 namespace XIVComboPlugin
 {
@@ -123,14 +124,14 @@ namespace XIVComboPlugin
                 flagsSelected[i] = Configuration.ComboPresets.HasFlag(orderedByClassJob[i]);
             }
 
-            ImGui.SetNextWindowSize(new Vector2(740, 490));
+            ImGui.SetNextWindowSize(new Vector2(750, (30 + ImGui.GetStyle().ItemSpacing.Y) * 17));
 
-            ImGui.Begin("Custom Combo Setup", ref isImguiComboSetupOpen, ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoScrollbar);
+            ImGui.Begin("Custom Combo Setup", ref isImguiComboSetupOpen, ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoScrollbar);
 
             ImGui.Text("This window allows you to enable and disable custom combos to your liking.");
             ImGui.Separator();
 
-            ImGui.BeginChild("scrolling", new Vector2(0, 400), true, ImGuiWindowFlags.HorizontalScrollbar);
+            ImGui.BeginChild("scrolling", new Vector2(0, -(25 + ImGui.GetStyle().ItemSpacing.Y)) * ImGuiHelpers.GlobalScale, true, ImGuiWindowFlags.HorizontalScrollbar);
 
             ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, new Vector2(0, 5));
 

@@ -169,7 +169,7 @@ namespace XIVComboPlugin
 
             if (ImGui.CollapsingHeader("Monk"))
             {
-                ImGui.Text("You get nothing! You lose! Good day sir!");
+                ImGui.Text("Not happening.");
                 if (ImGui.Button("External link for more detailed explanation (for real this time)"))
                 {
                     Process.Start(new ProcessStartInfo

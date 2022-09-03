@@ -32,7 +32,7 @@ There's no clear-cut process on how to handle PB, nor is there a straightforward
 buffs, rotation, whatever, if there's a middling amount of downtime. What happens when you use Form Shift?
 Should Twin Snakes show up? Maybe only if your buff timer is less than 8 seconds? That sounds awfully intelligent to me.
 What about Demolish re-application? What if you know the boss is going away for downtime soon?
-You can hopefuly see how this goes on and on and on.
+You can hopefully see how this goes on and on and on.
 
 Worth noting for those of you who still haven't gone and read
 [my manifesto](https://github.com/attickdoor/XIVComboPlugin/blob/master/statement.md):

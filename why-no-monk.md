@@ -38,7 +38,7 @@ Worth noting for those of you who still haven't gone and read
 [my manifesto](https://github.com/attickdoor/XIVComboPlugin/blob/master/statement.md):
 This is why DNC and RDM aren't as developed as they could possibly be.
 There are too many considerations that muddy the waters, and the intelligence required to surpass that is over the line.
-A very easy example is RDM's long-casts. You always want to pre-cast a loncast at the start of any real fight.
+A very easy example is RDM's long-casts. You always want to pre-cast a longcast at the start of any real fight.
 So no solution can make Verthunder and Veraero inacessible without Dualcast. Chew on that one for a little bit.
 
 ## Deal with it

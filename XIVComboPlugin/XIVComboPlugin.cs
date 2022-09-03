@@ -12,6 +12,7 @@ using Dalamud.IoC;
 using Dalamud.Utility;
 using Dalamud.Data;
 using Dalamud.Interface;
+using System.Diagnostics;
 
 namespace XIVComboPlugin
 {
@@ -163,6 +164,19 @@ namespace XIVComboPlugin
                         
                     }
                     
+                }
+            }
+
+            if (ImGui.CollapsingHeader("Monk"))
+            {
+                ImGui.Text("You get nothing! You lose! Good day sir!");
+                if (ImGui.Button("External link for more detailed explanation"))
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "https://youtu.be/M5QGkOGZubQ",
+                        UseShellExecute = true
+                    });
                 }
             }
 

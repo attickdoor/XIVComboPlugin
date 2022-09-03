@@ -20,8 +20,8 @@
             Ingress = 24401,
             Regress = 24403,
 
-            ArcaneCircle = 0,
-            PlentifulHarvest = 0;
+            ArcaneCircle = 24405,
+            PlentifulHarvest = 24385;
 
         public static class Buffs
         {

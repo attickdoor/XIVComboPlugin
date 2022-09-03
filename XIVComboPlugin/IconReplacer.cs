@@ -896,8 +896,8 @@ namespace XIVComboPlugin
                     if (SearchBuffArray(RPR.Buffs.ImSac1) ||
                         SearchBuffArray(RPR.Buffs.ImSac2))
                         return RPR.PlentifulHarvest;
+                    return actionID;
                 }
-                return actionID;
             }
 
             return iconHook.Original(self, actionID);

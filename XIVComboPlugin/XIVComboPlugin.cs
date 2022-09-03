@@ -169,12 +169,12 @@ namespace XIVComboPlugin
 
             if (ImGui.CollapsingHeader("Monk"))
             {
-                ImGui.Text("You get nothing! You lose! Good day sir!");
+                ImGui.Text("Monk combos are unsupported due to the flexibility of the rotation.");
                 if (ImGui.Button("External link for more detailed explanation"))
                 {
                     Process.Start(new ProcessStartInfo
                     {
-                        FileName = "https://youtu.be/M5QGkOGZubQ",
+                        FileName = "https://github.com/attickdoor/XIVComboPlugin/blob/master/statement.md",
                         UseShellExecute = true
                     });
                 }

@@ -889,6 +889,17 @@ namespace XIVComboPlugin
                 }
             }
 
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ReaperArcaneFeature))
+            {
+                if (actionID == RPR.ArcaneCircle)
+                {
+                    if (SearchBuffArray(RPR.Buffs.ImSac1) ||
+                        SearchBuffArray(RPR.Buffs.ImSac2))
+                        return RPR.PlentifulHarvest;
+                }
+                return actionID;
+            }
+
             return iconHook.Original(self, actionID);
         }
 

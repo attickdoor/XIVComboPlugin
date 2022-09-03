@@ -170,11 +170,11 @@ namespace XIVComboPlugin
             if (ImGui.CollapsingHeader("Monk"))
             {
                 ImGui.Text("You get nothing! You lose! Good day sir!");
-                if (ImGui.Button("External link for more detailed explanation"))
+                if (ImGui.Button("External link for more detailed explanation (for real this time)"))
                 {
                     Process.Start(new ProcessStartInfo
                     {
-                        FileName = "https://youtu.be/M5QGkOGZubQ",
+                        FileName = "https://github.com/attickdoor/XIVComboPlugin/blob/master/why-no-monk.md",
                         UseShellExecute = true
                     });
                 }

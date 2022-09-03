@@ -15,17 +15,21 @@
             // Shroud
             Enshroud = 24394,
             Communio = 24398,
-            
+
             Egress = 24402,
             Ingress = 24401,
-            Regress = 24403;
+            Regress = 24403,
+
+            ArcaneCircle = 0,
+            PlentifulHarvest = 0;
 
         public static class Buffs
         {
             public const ushort
                 Enshrouded = 2593,
-                Threshold = 2595;
-                //Threshold2 = 0;
+                Threshold = 2595,
+                ImSac1 = 2592,
+                ImSac2 = 3204;
         }
 
         public static class Debuffs

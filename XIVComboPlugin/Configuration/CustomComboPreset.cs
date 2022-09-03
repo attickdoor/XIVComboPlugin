@@ -191,6 +191,9 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Enshroud Combo", "Replace Enshroud with Communio while you are Enshrouded.", 39)]
         ReaperEnshroudCombo = 1L << 26,
+
+        [CustomComboInfo("Slice Combo", "Replace Slice with its combo chain.", 39)]
+        ReaperArcaneFeature = 1L << 30,
     }
 
     public class CustomComboInfoAttribute : Attribute

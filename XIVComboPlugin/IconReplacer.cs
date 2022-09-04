@@ -212,6 +212,12 @@ namespace XIVComboPlugin
                     return PLD.FastBlade;
                 }
 
+            // Replace Royal Authority with Atonement if any Sword Oath stacks are present
+            //     This check comes before Royal Authority combo, as we want to prioritize Atonement for this combo if there's any sword oath stacks present
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PaladinAtonementCombo))
+                if ((actionID == PLD.RoyalAuthority || actionID == PLD.RageOfHalone) && SearchBuffArray(PLD.BuffSwordOath))
+                    return PLD.Atonement;
+
             // Replace Royal Authority with Royal Authority combo
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PaladinRoyalAuthorityCombo))
                 if (actionID == PLD.RoyalAuthority || actionID == PLD.RageOfHalone)

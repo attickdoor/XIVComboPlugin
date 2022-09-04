@@ -8,6 +8,7 @@
             RiotBlade = 15,
             RoyalAuthority = 3539,
             RageOfHalone = 21,
+            Atonement = 16460,
             Prominence = 16457,
             TotalEclipse = 7381,
             Requiescat = 7383,
@@ -18,6 +19,8 @@
 
         public const ushort
             BuffRequiescat = 1368,
-            BuffBladeOfFaithReady = 3019;
+            BuffBladeOfFaithReady = 3019,
+            //Can be either 1902 or 1991 - it looks like 1991 is the PVP variant, and was added in 6.1
+            BuffSwordOath = 1902;
     }
 }

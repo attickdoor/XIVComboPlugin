@@ -1,5 +1,4 @@
 ﻿using Dalamud.Game.ClientState.JobGauge.Types;
-using System.Diagnostics.Metrics;
 using XIVCombo.JobActions;
 
 namespace XIVComboPlugin.JobActions

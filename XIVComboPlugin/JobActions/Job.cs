@@ -1,7 +1,6 @@
 ﻿using Dalamud.Game.ClientState;
 using Dalamud.Hooking;
 using Dalamud.Logging;
-using Lumina.Excel.GeneratedSheets;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using Dalamud.Data;
 using Dalamud.Game;
 using Dalamud.Game.ClientState;
 using Dalamud.Hooking;
-using XIVComboPlugin.JobActions;
-using Dalamud.Game.ClientState.JobGauge.Enums;
-using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Logging;
-using Dalamud.Data;
-using XIVCombo.JobActions;
+using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Linq;
+using System.Runtime.InteropServices;
+using XIVCombo.JobActions;
 
 namespace XIVComboPlugin
 {
@@ -58,26 +53,6 @@ namespace XIVComboPlugin
 			checkerHook = Hook<OnCheckIsIconReplaceableDelegate>.FromAddress(Address.IsIconReplaceable, CheckIsIconReplaceableDetour);
 
 			jobsMap = Job.Initialize(clientState, Configuration, iconHook);
-			
-			/*
-			jobsMap["DRG"] = new DRG();
-			jobsMap["DRK"] = new DRK();
-			jobsMap["PLD"] = new PLD();
-			jobsMap["WAR"] = new WAR();
-			jobsMap["SAM"] = new SAM();
-			jobsMap["NIN"] = new NIN();
-			jobsMap["GNB"] = new GNB();
-			jobsMap["MCH"] = new MCH();
-			jobsMap["BLM"] = new BLM();
-			jobsMap["AST"] = new AST();
-			jobsMap["SMN"] = new SMN();
-			jobsMap["SCH"] = new SCH();
-			jobsMap["DNC"] = new DNC();
-			jobsMap["WHM"] = new WHM();
-			jobsMap["BRD"] = new BRD();
-			jobsMap["RDM"] = new RDM();
-			jobsMap["RPR"] = new RPR();
-			*/
 		}
 
 		public void Enable()

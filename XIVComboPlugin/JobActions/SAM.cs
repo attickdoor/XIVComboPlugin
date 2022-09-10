@@ -1,8 +1,5 @@
 ﻿using Dalamud.Game.ClientState.JobGauge.Enums;
 using Dalamud.Game.ClientState.JobGauge.Types;
-using Lumina.Excel.GeneratedSheets;
-using System;
-using System.Reflection.Emit;
 using XIVCombo.JobActions;
 
 namespace XIVComboPlugin.JobActions

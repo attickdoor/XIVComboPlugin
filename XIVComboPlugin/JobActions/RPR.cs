@@ -1,5 +1,4 @@
-﻿using Lumina.Excel.GeneratedSheets;
-using XIVCombo.JobActions;
+﻿using XIVCombo.JobActions;
 
 namespace XIVComboPlugin.JobActions
 {

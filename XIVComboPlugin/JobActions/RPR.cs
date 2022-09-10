@@ -1,53 +1,60 @@
-﻿namespace XIVComboPlugin.JobActions
+﻿using Lumina.Excel.GeneratedSheets;
+using XIVCombo.JobActions;
+
+namespace XIVComboPlugin.JobActions
 {
-    public static class RPR
-    {
-        public const byte JobID = 39;
+	[Job("RPR")]
+	public class RPR : Job
+	{
+		private static JobAction
+			// Single Target
+			Slice               = new JobAction(24373),
+			WaxingSlice         = new JobAction(24374,	5),
+			InfernalSlice       = new JobAction(24375,	30),
+			// AoE
+			SpinningScythe      = new JobAction(24376,	25),
+			NightmareScythe     = new JobAction(24377,	45),
+			// Shroud
+			Enshroud            = new JobAction(24394,	80),
+			Communio            = new JobAction(24398,	90),
 
-        public const uint
-            // Single Target
-            Slice = 24373,
-            WaxingSlice = 24374,
-            InfernalSlice = 24375,
-            // AoE
-            SpinningScythe = 24376,
-            NightmareScythe = 24377,
-            // Shroud
-            Enshroud = 24394,
-            Communio = 24398,
+			Egress              = new JobAction(24402),
+			Ingress             = new JobAction(24401),
+			Regress             = new JobAction(24403),
 
-            Egress = 24402,
-            Ingress = 24401,
-            Regress = 24403,
+			ArcaneCircle        = new JobAction(24405),
+			PlentifulHarvest    = new JobAction(24385);
 
-            ArcaneCircle = 24405,
-            PlentifulHarvest = 24385;
+		private const ushort
+			BuffEnshrouded = 2593,
+			BuffThreshold = 2595,
+			BuffImSac1 = 2592,
+			BuffImSac2 = 3204;
+	
+		public RPR() : base()
+		{
+			WaxingSlice.SetCondition(() => LastMoveWasInCombo(Slice));
+			InfernalSlice.SetCondition(() => LastMoveWasInCombo(WaxingSlice));
+			NightmareScythe.SetCondition(() => LastMoveWasInCombo(SpinningScythe));
+			Regress.SetCondition(() => HasBuff(BuffThreshold));
+			Communio.SetCondition(() => HasBuff(BuffEnshrouded));
+			PlentifulHarvest.SetCondition(() => HasBuff(BuffImSac1, BuffImSac2));
 
-        public static class Buffs
-        {
-            public const ushort
-                Enshrouded = 2593,
-                Threshold = 2595,
-                ImSac1 = 2592,
-                ImSac2 = 3204;
-        }
+			ForFlag(CustomComboPreset.ReaperSliceCombo)
+				.ForComboActions(Slice, WaxingSlice, InfernalSlice);
 
-        public static class Debuffs
-        {
-            public const ushort
-                Placeholder = 0;
-        }
+			ForFlag(CustomComboPreset.ReaperScytheCombo)
+				.UpgradeAction(SpinningScythe, NightmareScythe);
 
-        public static class Levels
-        {
-            public const byte
-                Slice = 1,
-                WaxingSlice = 5,
-                SpinningScythe = 25,
-                InfernalSlice = 30,
-                NightmareScythe = 45,
-                Enshroud = 80,
-                Communio = 90;
-        }
-    }
+			ForFlag(CustomComboPreset.ReaperRegressFeature)
+				.UpgradeAction(Egress, Regress)
+				.UpgradeAction(Ingress, Regress);
+
+			ForFlag(CustomComboPreset.ReaperEnshroudCombo)
+				.UpgradeAction(Enshroud, Communio);
+
+			ForFlag(CustomComboPreset.ReaperArcaneFeature)
+				.UpgradeAction(ArcaneCircle, PlentifulHarvest);
+		}
+	}
 }

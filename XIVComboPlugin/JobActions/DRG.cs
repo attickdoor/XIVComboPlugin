@@ -2,7 +2,7 @@
 
 namespace XIVComboPlugin.JobActions
 {
-	[Job("DRG")]
+	[Job("DRG", "LNC")]
 	public class DRG : Job
 	{
 		private static JobAction

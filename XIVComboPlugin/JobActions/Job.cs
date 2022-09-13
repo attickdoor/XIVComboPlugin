@@ -12,12 +12,12 @@ namespace XIVCombo.JobActions
 {
 	public class JobAttribute : Attribute
 	{
-		internal JobAttribute(string abbreviation)
+		internal JobAttribute(params string[] abbreviations)
 		{
-			Abbreviation = abbreviation;
+			Abbreviations = abbreviations;
 		}
 
-		public string Abbreviation { get; }
+		public string[] Abbreviations { get; }
 
 	}
 	public abstract class Job
@@ -41,9 +41,11 @@ namespace XIVCombo.JobActions
 			Dictionary<string, Job> jobs = new Dictionary<string, Job>();
 			foreach (Type jobType in jobTypes)
 			{
-				string abbreviation = jobType.GetCustomAttribute<JobAttribute>().Abbreviation;
-				PluginLog.Log($"{abbreviation} Loaded");
-				jobs[abbreviation] = (Job)Activator.CreateInstance(jobType);
+				PluginLog.Log($"{jobType.Name} Loaded");
+				string[] abbreviations = jobType.GetCustomAttribute<JobAttribute>().Abbreviations;
+				Job job = (Job)Activator.CreateInstance(jobType);
+				foreach(string abbreviation in abbreviations)
+					jobs[abbreviation] = job;
 			}
 			return jobs;
 		}

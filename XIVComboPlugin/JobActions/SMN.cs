@@ -3,7 +3,7 @@ using XIVCombo.JobActions;
 
 namespace XIVComboPlugin.JobActions
 {
-	[Job("SMN")]
+	[Job("SMN", "ACN")]
 	public class SMN : Job
 	{
 		private static JobAction

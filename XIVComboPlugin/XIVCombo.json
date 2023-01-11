@@ -5,6 +5,5 @@
   "RepoUrl": "https://github.com/attickdoor/XivComboPlugin",
   "Punchline": "PvP, but in PvE!",
   "Tags": [ "Combo" ],
-  "AcceptsFeedback": true,
-  "DalamudApiLevel": 7
+  "AcceptsFeedback": true
 }

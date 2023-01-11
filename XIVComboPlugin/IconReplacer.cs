@@ -197,21 +197,6 @@ namespace XIVComboPlugin
 
             // PALADIN
 
-            // Replace Goring Blade with Goring Blade combo
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PaladinGoringBladeCombo))
-                if (actionID == PLD.GoringBlade)
-                {
-                    if (comboTime > 0)
-                    {
-                        if (lastMove == PLD.FastBlade && level >= 4)
-                            return PLD.RiotBlade;
-                        if (lastMove == PLD.RiotBlade && level >= 54)
-                            return PLD.GoringBlade;
-                    }
-
-                    return PLD.FastBlade;
-                }
-
             // Replace Royal Authority with Royal Authority combo
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PaladinRoyalAuthorityCombo))
                 if (actionID == PLD.RoyalAuthority || actionID == PLD.RageOfHalone)
@@ -248,17 +233,7 @@ namespace XIVComboPlugin
                 if (actionID == PLD.Requiescat)
                 {
                     if (SearchBuffArray(PLD.BuffRequiescat) && level >= 80)
-                        return PLD.Confiteor;
-
-                    if (SearchBuffArray(PLD.BuffBladeOfFaithReady))
-                        return PLD.BladeOfFaith;
-
-                    if (lastMove == PLD.BladeOfFaith)
-                        return PLD.BladeOfTruth;
-
-                    if (lastMove == PLD.BladeOfTruth)
-                        return PLD.BladeOfValor;
-
+                        return iconHook.Original(self, PLD.Confiteor);
                     return PLD.Requiescat;
                 }
 

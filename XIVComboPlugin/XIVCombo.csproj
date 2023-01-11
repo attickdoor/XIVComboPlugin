@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup Label="Target">
     <PlatformTarget>x64</PlatformTarget>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <LangVersion>preview</LangVersion>
     <Platforms>x64</Platforms>
     <Configurations>Debug;Release</Configurations>
@@ -16,7 +16,7 @@
   </PropertyGroup>
   <PropertyGroup Label="Feature">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Version>1.7.20</Version>
+    <Version>1.7.21</Version>
   </PropertyGroup>
   <PropertyGroup>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -31,17 +31,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DalamudPackager" Version="2.1.8" />
+    <PackageReference Include="DalamudPackager" Version="2.1.10" />
+    <Reference Include="Dalamud">
+      <HintPath>$(DalamudLibPath)Dalamud.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="FFXIVClientStructs">
       <HintPath>$(DalamudLibPath)FFXIVClientStructs.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>$(DalamudLibPath)Newtonsoft.Json.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Dalamud">
-      <HintPath>$(DalamudLibPath)Dalamud.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="ImGui.NET">

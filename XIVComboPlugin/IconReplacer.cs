@@ -8,6 +8,7 @@ using Dalamud.Game.ClientState.JobGauge.Enums;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Logging;
 using Dalamud.Data;
+using FFXIVClientStructs.FFXIV.Client.Game;
 
 namespace XIVComboPlugin
 {
@@ -39,8 +40,12 @@ namespace XIVComboPlugin
             Address = new IconReplacerAddressResolver();
             Address.Setup(scanner);
 
-            comboTimer = Address.ComboTimer;
-            lastComboMove = comboTimer + 0x4;
+            unsafe
+            {
+                var actionmanager = (byte*) ActionManager.Instance();
+                comboTimer = (IntPtr)(actionmanager + 0x60);
+                lastComboMove = comboTimer + 0x4;
+            }
 
             PluginLog.Verbose("===== X I V C O M B O =====");
             PluginLog.Verbose("IsIconReplaceable address {IsIconReplaceable}", Address.IsIconReplaceable);

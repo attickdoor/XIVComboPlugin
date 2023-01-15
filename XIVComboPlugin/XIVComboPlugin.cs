@@ -1,6 +1,7 @@
 ﻿using Dalamud.Game.Command;
 using Dalamud.Plugin;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using ImGuiNET;
@@ -42,10 +43,8 @@ namespace XIVComboPlugin
             });
 
             this.Configuration = PluginInterface.GetPluginConfig() as XIVComboConfiguration ?? new XIVComboConfiguration();
-            if (Configuration.Version < 4)
-            {
-                Configuration.Version = 4;
-            }
+            this.Configuration.Initialize();
+            PluginInterface.SavePluginConfig(this.Configuration);
 
             this.iconReplacer = new IconReplacer(TargetModuleScanner, ClientState, manager, this.Configuration);
 
@@ -54,8 +53,8 @@ namespace XIVComboPlugin
             PluginInterface.UiBuilder.OpenConfigUi += () => isImguiComboSetupOpen = true;
             PluginInterface.UiBuilder.Draw += UiBuilder_OnBuildUi;
 
-            var values = Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>();
-            orderedByClassJob = values.Where(x => x != CustomComboPreset.None && x.GetAttribute<CustomComboInfoAttribute>() != null).OrderBy(x => x.GetAttribute<CustomComboInfoAttribute>().ClassJob).ToArray();
+            orderedByClassJob = this.Configuration.GetComboEnabledStates().Keys
+                .OrderBy(x => x.GetAttribute<CustomComboInfoAttribute>().ClassJob).ToArray();
             UpdateConfig();
         }
 
@@ -116,13 +115,12 @@ namespace XIVComboPlugin
 
         private void UiBuilder_OnBuildUi()
         {
-
             if (!isImguiComboSetupOpen)
                 return;
             var flagsSelected = new bool[orderedByClassJob.Length];
             for (var i = 0; i < orderedByClassJob.Length; i++)
             {
-                flagsSelected[i] = Configuration.ComboPresets.HasFlag(orderedByClassJob[i]);
+                flagsSelected[i] = Configuration.IsComboEnabled(orderedByClassJob[i]);
             }
 
             ImGui.SetNextWindowSize(new Vector2(750, (30 + ImGui.GetStyle().ItemSpacing.Y) * 17));
@@ -181,16 +179,7 @@ namespace XIVComboPlugin
             }
 
             for (var i = 0; i < orderedByClassJob.Length; i++)
-            {
-                if (flagsSelected[i])
-                {
-                    Configuration.ComboPresets |= orderedByClassJob[i];
-                }
-                else
-                {
-                    Configuration.ComboPresets &= ~orderedByClassJob[i];
-                }
-            }
+                Configuration.SetComboEnabled(orderedByClassJob[i], flagsSelected[i]);
 
             ImGui.PopStyleVar();
 
@@ -230,73 +219,67 @@ namespace XIVComboPlugin
             {
                 case "setall":
                     {
-                        foreach (var value in Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>())
+                        foreach (var combo in orderedByClassJob)
                         {
-                            if (value == CustomComboPreset.None)
-                                continue;
-
-                            this.Configuration.ComboPresets |= value;
+                            this.Configuration.SetComboEnabled(combo, true);
                         }
-
                         ChatGui.Print("all SET");
                     }
                     break;
                 case "unsetall":
                     {
-                        foreach (var value in Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>())
+                        foreach (var combo in orderedByClassJob)
                         {
-                            this.Configuration.ComboPresets &= value;
+                            this.Configuration.SetComboEnabled(combo, false);
                         }
-
                         ChatGui.Print("all UNSET");
                     }
                     break;
                 case "set":
                     {
-                        foreach (var value in Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>())
+                        var combo = FindCombo(argumentsParts[1]);
+                        if (combo.HasValue)
                         {
-                            if (value.ToString().ToLower() != argumentsParts[1].ToLower())
-                                continue;
-
-                            this.Configuration.ComboPresets |= value;
+                            this.Configuration.SetComboEnabled(combo.Value, true);
+                            ChatGui.Print(combo.ToString() + " SET");
                         }
+                        else
+                            ChatGui.Print("Invalid: " + argumentsParts[1]);
                     }
                     break;
                 case "toggle":
                     {
-                        foreach (var value in Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>())
+                        var combo = FindCombo(argumentsParts[1]);
+                        if (combo.HasValue)
                         {
-                            if (value.ToString().ToLower() != argumentsParts[1].ToLower())
-                                continue;
-
-                            this.Configuration.ComboPresets ^= value;
+                            var val = !this.Configuration.IsComboEnabled(combo.Value);
+                            this.Configuration.SetComboEnabled(combo.Value, val);
+                            ChatGui.Print(combo.ToString() + " " + (val ? "SET" : "UNSET"));
                         }
+                        else
+                            ChatGui.Print("Invalid: " + argumentsParts[1]);
                     }
                     break;
-
                 case "unset":
                     {
-                        foreach (var value in Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>())
+                        var combo = FindCombo(argumentsParts[1]);
+                        if (combo.HasValue)
                         {
-                            if (value.ToString().ToLower() != argumentsParts[1].ToLower())
-                                continue;
-
-                            this.Configuration.ComboPresets &= ~value;
+                            this.Configuration.SetComboEnabled(combo.Value, true);
+                            ChatGui.Print(combo.ToString() + " UNSET");
                         }
+                        else
+                            ChatGui.Print("Invalid: " + argumentsParts[1]);
                     }
                     break;
-
                 case "list":
                     {
-                        foreach (var value in Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>().Where(x => x != CustomComboPreset.None))
+                        foreach (var combo in orderedByClassJob)
                         {
                             if (argumentsParts[1].ToLower() == "set")
-                            {
-                                if (this.Configuration.ComboPresets.HasFlag(value))
-                                    ChatGui.Print(value.ToString());
-                            }
-                            else if (argumentsParts[1].ToLower() == "all")
-                                ChatGui.Print(value.ToString());
+                                if (!this.Configuration.IsComboEnabled(combo))
+                                    continue;
+                            ChatGui.Print(combo.ToString());
                         }
                     }
                     break;
@@ -307,6 +290,16 @@ namespace XIVComboPlugin
             }
 
             PluginInterface.SavePluginConfig(this.Configuration);
+        }
+
+        private CustomComboPreset? FindCombo(string userInput)
+        {
+            foreach (var combo in orderedByClassJob)
+            {
+                if (combo.ToString().ToLower() == userInput.ToLower())
+                    return combo;
+            }
+            return null;
         }
     }
 }

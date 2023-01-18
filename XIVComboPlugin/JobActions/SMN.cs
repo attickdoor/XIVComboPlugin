@@ -39,6 +39,9 @@
             TriDisaster = 25826,
             RubyDisaster = 25827,
             TopazDisaster = 25828,
-            EmeraldDisaster = 25829;
+            EmeraldDisaster = 25829,
+            RubyCatastrophe = 25832,
+            TopazCatastrophe = 25833,
+            EmeraldCatastrophe = 25834;
     }
 }

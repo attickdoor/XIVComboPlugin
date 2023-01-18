@@ -678,6 +678,14 @@ namespace XIVComboPlugin
                 {
                     switch (level)
                     {
+                        case >= 82:
+                            if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsTitanAttuned)
+                                return SMN.TopazCatastrophe;
+                            if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsGarudaAttuned)
+                                return SMN.EmeraldCatastrophe;
+                            if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsIfritAttuned)
+                                return SMN.RubyCatastrophe;
+                            break;
                         case >= 74:
                             if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsTitanAttuned)
                                 return SMN.TopazDisaster;

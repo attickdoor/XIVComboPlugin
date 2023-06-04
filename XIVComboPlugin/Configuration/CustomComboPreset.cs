@@ -67,12 +67,17 @@ namespace XIVComboPlugin
         [CustomComboInfo("Oka Combo", "Replace Oka with its combo chain", 34)]
         SamuraiOkaCombo = 1L << 15,
 
+        [CustomComboInfo("Partial Gekko Combo", "Replace Gekko with a partial Gekko combo chain (Jinpu -> Gekko)", 34)]
+        SamuraiPartialGekkoCombo = 1L << 50,
+
+        [CustomComboInfo("Partial Kasha Combo", "Replace Kasha with a partial Kasha combo chain (Shifu -> Kasha)", 34)]
+        SamuraiPartialKashaCombo = 1L << 51,
+
         [CustomComboInfo("Iaijutsu into Tsubame", "Replace Iaijutsu with Tsubame after using an Iaijutsu", 34)]
         SamuraiTsubameCombo = 1L << 56,
 
         [CustomComboInfo("Ogi Namikiri Combo", "Replace Ikishoten with Ogi Namiki and Kaeshi Namikiri when appropriate", 34)]
         SamuraiOgiCombo = 1L << 62,
-
 
         // NINJA
         [CustomComboInfo("Armor Crush Combo", "Replace Armor Crush with its combo chain", 30)]

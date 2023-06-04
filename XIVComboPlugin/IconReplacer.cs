@@ -403,6 +403,36 @@ namespace XIVComboPlugin
                     return SAM.Ikishoten;
                 }
 
+            // Replace Gekko with a partial Gekko combo chain (Jinpu -> Gekko)
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiPartialGekkoCombo))
+                if (actionID == SAM.Gekko)
+                {
+                    if (SearchBuffArray(SAM.BuffMeikyoShisui))
+                        return SAM.Gekko;
+                    if (comboTime > 0)
+                    {
+                        if (lastMove == SAM.Jinpu && level >= 30)
+                            return SAM.Gekko;
+                    }
+
+                    return SAM.Jinpu;
+                }
+
+            // Replace Kasha with a partial Kasha combo chain (Shifu -> Kasha)
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiPartialKashaCombo))
+                if (actionID == SAM.Kasha)
+                {
+                    if (SearchBuffArray(SAM.BuffMeikyoShisui))
+                        return SAM.Kasha;
+                    if (comboTime > 0)
+                    {
+                        if (lastMove == SAM.Shifu && level >= 40)
+                            return SAM.Kasha;
+                    }
+
+                    return SAM.Shifu;
+                }
+
             // NINJA
 
             // Replace Armor Crush with Armor Crush combo

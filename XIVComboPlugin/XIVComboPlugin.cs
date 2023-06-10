@@ -55,7 +55,11 @@ namespace XIVComboPlugin
             PluginInterface.UiBuilder.Draw += UiBuilder_OnBuildUi;
 
             var values = Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>();
-            orderedByClassJob = values.Where(x => x != CustomComboPreset.None && x.GetAttribute<CustomComboInfoAttribute>() != null).OrderBy(x => x.GetAttribute<CustomComboInfoAttribute>().ClassJob).ToArray();
+            orderedByClassJob = values.Where(x => x != CustomComboPreset.None && x.GetAttribute<CustomComboInfoAttribute>() != null)
+                                      .GroupBy(groupKey => groupKey.GetAttribute<CustomComboInfoAttribute>().ClassJob)
+                                      .OrderBy(x => ClassJobToName(x.Key))
+                                      .SelectMany(x => x)
+                                      .ToArray();
             UpdateConfig();
         }
 

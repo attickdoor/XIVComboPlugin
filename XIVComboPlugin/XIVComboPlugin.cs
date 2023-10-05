@@ -13,6 +13,8 @@ using Dalamud.Utility;
 using Dalamud.Data;
 using Dalamud.Interface;
 using System.Diagnostics;
+using Dalamud.Plugin.Services;
+using Dalamud.Interface.Utility;
 
 namespace XIVComboPlugin
 {
@@ -22,17 +24,21 @@ namespace XIVComboPlugin
 
         public XIVComboConfiguration Configuration;
 
+        private SigScanner TargetModuleScanner = new SigScanner();
         private IconReplacer iconReplacer;
+
         private CustomComboPreset[] orderedByClassJob;
 
-        [PluginService] public static CommandManager CommandManager { get; private set; } = null!;
+        [PluginService] public static ICommandManager CommandManager { get; private set; } = null!;
         [PluginService] public static DalamudPluginInterface PluginInterface { get; private set; } = null!;
-        [PluginService] public static SigScanner TargetModuleScanner { get; private set; } = null!;
-        [PluginService] public static ClientState ClientState { get; private set; } = null!;
-        [PluginService] public static ChatGui ChatGui { get; private set; } = null!;
-        [PluginService] public static JobGauges JobGauges { get; private set; } = null!;
+        
+        [PluginService] public static IClientState ClientState { get; private set; } = null!;
+        [PluginService] public static IChatGui ChatGui { get; private set; } = null!;
+        [PluginService] public static IJobGauges JobGauges { get; private set; } = null!;
+        [PluginService] public static IPluginLog PluginLog { get; private set; } = null!;
+        [PluginService] public static IGameInteropProvider GameInteropProvider { get; private set; } = null!;
 
-        public XIVComboPlugin(DataManager manager)
+        public XIVComboPlugin(IDataManager manager)
         {
 
             CommandManager.AddHandler("/pcombo", new CommandInfo(OnCommandDebugCombo)
@@ -47,7 +53,7 @@ namespace XIVComboPlugin
                 Configuration.Version = 4;
             }
 
-            this.iconReplacer = new IconReplacer(TargetModuleScanner, ClientState, manager, this.Configuration);
+            this.iconReplacer = new IconReplacer(TargetModuleScanner, ClientState, manager, PluginLog, GameInteropProvider, this.Configuration);
 
             this.iconReplacer.Enable();
 

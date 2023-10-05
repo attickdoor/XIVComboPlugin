@@ -36,7 +36,7 @@ namespace XIVComboPlugin
         
 
         public IconReplacer(
-            SigScanner scanner,
+            ISigScanner scanner,
             IClientState clientState,
             IDataManager manager,
             IPluginLog PluginLog,

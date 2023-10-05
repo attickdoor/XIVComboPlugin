@@ -24,7 +24,6 @@ namespace XIVComboPlugin
 
         public XIVComboConfiguration Configuration;
 
-        private SigScanner TargetModuleScanner = new SigScanner();
         private IconReplacer iconReplacer;
 
         private CustomComboPreset[] orderedByClassJob;
@@ -37,6 +36,8 @@ namespace XIVComboPlugin
         [PluginService] public static IJobGauges JobGauges { get; private set; } = null!;
         [PluginService] public static IPluginLog PluginLog { get; private set; } = null!;
         [PluginService] public static IGameInteropProvider GameInteropProvider { get; private set; } = null!;
+        [PluginService] public static ISigScanner TargetModuleScanner { get; private set; } = null!;
+
 
         public XIVComboPlugin(IDataManager manager)
         {

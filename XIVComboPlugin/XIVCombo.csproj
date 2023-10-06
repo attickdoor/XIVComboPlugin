@@ -16,7 +16,7 @@
   </PropertyGroup>
   <PropertyGroup Label="Feature">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Version>1.7.24</Version>
+    <Version>1.7.25</Version>
   </PropertyGroup>
   <PropertyGroup>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -31,7 +31,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DalamudPackager" Version="2.1.10" />
+    <PackageReference Include="DalamudPackager" Version="2.1.12" />
     <Reference Include="Dalamud">
       <HintPath>$(DalamudLibPath)Dalamud.dll</HintPath>
       <Private>false</Private>

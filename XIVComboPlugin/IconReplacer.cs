@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using Dalamud.Game;
-using Dalamud.Game.ClientState;
 using Dalamud.Hooking;
 using XIVComboPlugin.JobActions;
 using Dalamud.Game.ClientState.JobGauge.Enums;
 using Dalamud.Game.ClientState.JobGauge.Types;
-using Dalamud.Logging;
-using Dalamud.Data;
 using FFXIVClientStructs.FFXIV.Client.Game;
+using Dalamud.Plugin.Services;
 
 namespace XIVComboPlugin
 {
@@ -20,7 +18,7 @@ namespace XIVComboPlugin
 
         private readonly IconReplacerAddressResolver Address;
         private readonly Hook<OnCheckIsIconReplaceableDelegate> checkerHook;
-        private readonly ClientState clientState;
+        private readonly IClientState clientState;
 
         private IntPtr comboTimer = IntPtr.Zero;
         private IntPtr lastComboMove = IntPtr.Zero;
@@ -29,21 +27,26 @@ namespace XIVComboPlugin
 
         private readonly Hook<OnGetIconDelegate> iconHook;
 
+        private IGameInteropProvider HookProvider;
+        private IJobGauges JobGauges;
+        private IPluginLog PluginLog;
+
         private unsafe delegate int* getArray(long* address);
 
-        public IconReplacer(SigScanner scanner, ClientState clientState, DataManager manager, XIVComboConfiguration configuration)
+        public IconReplacer(ISigScanner scanner, IClientState clientState, IDataManager manager, XIVComboConfiguration configuration, IGameInteropProvider hookProvider, IJobGauges jobGauges, IPluginLog pluginLog)
         {
-
+            HookProvider = hookProvider;
             Configuration = configuration;
             this.clientState = clientState;
+            JobGauges = jobGauges;
+            PluginLog = pluginLog;
 
-            Address = new IconReplacerAddressResolver();
-            Address.Setup(scanner);
+            Address = new IconReplacerAddressResolver(scanner);
 
             if (!clientState.IsLoggedIn)
                 clientState.Login += SetupComboData;
             else
-                SetupComboData(null, null);
+                SetupComboData();
 
             PluginLog.Verbose("===== X I V C O M B O =====");
             PluginLog.Verbose("IsIconReplaceable address {IsIconReplaceable}", Address.IsIconReplaceable);
@@ -51,11 +54,12 @@ namespace XIVComboPlugin
             PluginLog.Verbose("ComboTimer address {ComboTimer}", comboTimer);
             PluginLog.Verbose("LastComboMove address {LastComboMove}", lastComboMove);
 
-            iconHook = Hook<OnGetIconDelegate>.FromAddress(Address.GetIcon, GetIconDetour);
-            checkerHook = Hook<OnCheckIsIconReplaceableDelegate>.FromAddress(Address.IsIconReplaceable, CheckIsIconReplaceableDetour);
+            iconHook = HookProvider.HookFromAddress<OnGetIconDelegate>(Address.GetIcon, GetIconDetour);
+            checkerHook = HookProvider.HookFromAddress<OnCheckIsIconReplaceableDelegate>(Address.IsIconReplaceable, CheckIsIconReplaceableDetour);
+            HookProvider = hookProvider;
         }
 
-        public unsafe void SetupComboData(object sender, EventArgs args)
+        public unsafe void SetupComboData()
         {
             var actionmanager = (byte*)ActionManager.Instance();
             comboTimer = (IntPtr)(actionmanager + 0x60);
@@ -97,12 +101,12 @@ namespace XIVComboPlugin
             // Last resort. For some reason GetIcon fires after leaving the lobby but before ClientState.Login
             if (lastComboMove == IntPtr.Zero)
             {
-                SetupComboData(null, null);
+                SetupComboData();
                 return iconHook.Original(self, actionID);
             }
             if (comboTimer == IntPtr.Zero)
             {
-                SetupComboData(null, null);
+                SetupComboData();
                 return iconHook.Original(self, actionID);
             }
 
@@ -397,7 +401,7 @@ namespace XIVComboPlugin
                 {
                     if (SearchBuffArray(SAM.BuffOgiNamikiriReady))
                         return SAM.OgiNamikiri;
-                    if (XIVComboPlugin.JobGauges.Get<SAMGauge>().Kaeshi == Kaeshi.NAMIKIRI)
+                    if (JobGauges.Get<SAMGauge>().Kaeshi == Kaeshi.NAMIKIRI)
                         return SAM.KaeshiNamikiri;
                         
                     return SAM.Ikishoten;
@@ -538,7 +542,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistOverheatFeature))
                 if (actionID == MCH.Hypercharge)
                 {
-                    var gauge = XIVComboPlugin.JobGauges.Get<MCHGauge>();
+                    var gauge = JobGauges.Get<MCHGauge>();
                     if (gauge.IsOverheated && level >= 35)
                         return MCH.HeatBlast;
                     return MCH.Hypercharge;
@@ -548,7 +552,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistSpreadShotFeature))
                 if (actionID == MCH.SpreadShot || actionID == MCH.Scattergun)
                 {
-                    if (XIVComboPlugin.JobGauges.Get<MCHGauge>().IsOverheated && level >= 52)
+                    if (JobGauges.Get<MCHGauge>().IsOverheated && level >= 52)
                         return MCH.AutoCrossbow;
                     if (level >= 82)
                         return MCH.Scattergun;
@@ -562,7 +566,7 @@ namespace XIVComboPlugin
             {
                 if (actionID == BLM.Fire4 || actionID == BLM.Blizzard4)
                 {
-                    var gauge = XIVComboPlugin.JobGauges.Get<BLMGauge>();
+                    var gauge = JobGauges.Get<BLMGauge>();
                     if (gauge.InUmbralIce && level >= 58)
                         return BLM.Blizzard4;
                     if (level >= 60)
@@ -571,7 +575,7 @@ namespace XIVComboPlugin
 
                 if (actionID == BLM.Flare || actionID == BLM.Freeze)
                 {
-                    var gauge = XIVComboPlugin.JobGauges.Get<BLMGauge>();
+                    var gauge = JobGauges.Get<BLMGauge>();
                     if (gauge.InAstralFire && level >= 50)
                         return BLM.Flare;
                     return BLM.Freeze;
@@ -593,7 +597,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.AstrologianCardsOnDrawFeature))
                 if (actionID == AST.Play)
                 {
-                    var gauge = XIVComboPlugin.JobGauges.Get<ASTGauge>();
+                    var gauge = JobGauges.Get<ASTGauge>();
                     switch (gauge.DrawnCard)
                     {
                         case CardType.BALANCE:
@@ -618,7 +622,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SummonerEDFesterCombo))
                 if (actionID == SMN.Fester)
                 {
-                    if (!XIVComboPlugin.JobGauges.Get<SMNGauge>().HasAetherflowStacks)
+                    if (!JobGauges.Get<SMNGauge>().HasAetherflowStacks)
                         return SMN.EnergyDrain;
                     return SMN.Fester;
                 }
@@ -627,7 +631,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SummonerESPainflareCombo))
                 if (actionID == SMN.Painflare)
                 {
-                    if (!XIVComboPlugin.JobGauges.Get<SMNGauge>().HasAetherflowStacks)
+                    if (!JobGauges.Get<SMNGauge>().HasAetherflowStacks)
                         return SMN.EnergySyphon;
                     return SMN.Painflare;
                 }
@@ -638,7 +642,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarSeraphConsolationFeature))
                 if (actionID == SCH.FeyBless)
                 {
-                    if (XIVComboPlugin.JobGauges.Get<SCHGauge>().SeraphTimer > 0) return SCH.Consolation;
+                    if (JobGauges.Get<SCHGauge>().SeraphTimer > 0) return SCH.Consolation;
                     return SCH.FeyBless;
                 }
 
@@ -646,7 +650,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarEnergyDrainFeature))
                 if (actionID == SCH.EnergyDrain)
                 {
-                    if (XIVComboPlugin.JobGauges.Get<SCHGauge>().Aetherflow == 0) return SCH.Aetherflow;
+                    if (JobGauges.Get<SCHGauge>().Aetherflow == 0) return SCH.Aetherflow;
                     return SCH.EnergyDrain;
                 }
 
@@ -717,7 +721,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.WhiteMageSolaceMiseryFeature))
                 if (actionID == WHM.Solace)
                 {
-                    if (XIVComboPlugin.JobGauges.Get<WHMGauge>().BloodLily == 3)
+                    if (JobGauges.Get<WHMGauge>().BloodLily == 3)
                         return WHM.Misery;
                     return WHM.Solace;
                 }
@@ -726,7 +730,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.WhiteMageRaptureMiseryFeature))
                 if (actionID == WHM.Rapture)
                 {
-                    if (XIVComboPlugin.JobGauges.Get<WHMGauge>().BloodLily == 3)
+                    if (JobGauges.Get<WHMGauge>().BloodLily == 3)
                         return WHM.Misery;
                     return WHM.Rapture;
                 }
@@ -793,7 +797,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.RedMageMeleeCombo))
                 if (actionID == RDM.Redoublement)
                 {
-                    var gauge = XIVComboPlugin.JobGauges.Get<RDMGauge>();
+                    var gauge = JobGauges.Get<RDMGauge>();
                     if ((lastMove == RDM.Riposte || lastMove == RDM.ERiposte) && level >= 35)
                     {
                         if (gauge.BlackMana >= 15 && gauge.WhiteMana >= 15)

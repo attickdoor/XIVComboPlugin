@@ -5,14 +5,10 @@ using System.Linq;
 using System.Numerics;
 using ImGuiNET;
 using Dalamud.Game;
-using Dalamud.Game.ClientState;
-using Dalamud.Game.ClientState.JobGauge;
-using Dalamud.Game.Gui;
-using Dalamud.IoC;
 using Dalamud.Utility;
-using Dalamud.Data;
-using Dalamud.Interface;
 using System.Diagnostics;
+using Dalamud.Plugin.Services;
+using Dalamud.Interface.Utility;
 
 namespace XIVComboPlugin
 {
@@ -25,15 +21,25 @@ namespace XIVComboPlugin
         private IconReplacer iconReplacer;
         private CustomComboPreset[] orderedByClassJob;
 
-        [PluginService] public static CommandManager CommandManager { get; private set; } = null!;
-        [PluginService] public static DalamudPluginInterface PluginInterface { get; private set; } = null!;
-        [PluginService] public static SigScanner TargetModuleScanner { get; private set; } = null!;
-        [PluginService] public static ClientState ClientState { get; private set; } = null!;
-        [PluginService] public static ChatGui ChatGui { get; private set; } = null!;
-        [PluginService] public static JobGauges JobGauges { get; private set; } = null!;
+        private ICommandManager CommandManager { get; init; }
+        private DalamudPluginInterface PluginInterface { get; init; }
+        private ISigScanner TargetModuleScanner { get; init; }
+        private IClientState ClientState { get; init; }
+        private IChatGui ChatGui { get; init; }
+        private IJobGauges JobGauges { get; init; }
+        private IGameInteropProvider HookProvider { get; init; }
+        private IPluginLog PluginLog { get; init; }
 
-        public XIVComboPlugin(DataManager manager)
+        public XIVComboPlugin(IClientState clientState, ICommandManager commandManager, IDataManager manager, DalamudPluginInterface pluginInterface, ISigScanner sigScanner, IJobGauges jobGauges, IChatGui chatGui, IGameInteropProvider gameInteropProvider, IPluginLog pluginLog)
         {
+            ClientState = clientState;
+            CommandManager = commandManager;
+            PluginInterface =  pluginInterface;
+            TargetModuleScanner = sigScanner;
+            JobGauges = jobGauges;
+            HookProvider = gameInteropProvider;
+            ChatGui = chatGui;
+            PluginLog = pluginLog;
 
             CommandManager.AddHandler("/pcombo", new CommandInfo(OnCommandDebugCombo)
             {
@@ -47,7 +53,7 @@ namespace XIVComboPlugin
                 Configuration.Version = 4;
             }
 
-            this.iconReplacer = new IconReplacer(TargetModuleScanner, ClientState, manager, this.Configuration);
+            this.iconReplacer = new IconReplacer(TargetModuleScanner, ClientState, manager, this.Configuration, HookProvider, JobGauges, PluginLog);
 
             this.iconReplacer.Enable();
 
@@ -158,7 +164,7 @@ namespace XIVComboPlugin
                             ImGui.PushItemWidth(200);
                             ImGui.Checkbox(flagInfo.FancyName, ref flagsSelected[j]);
                             ImGui.PopItemWidth();
-                            ImGui.TextColored(new Vector4(0.68f, 0.68f, 0.68f, 1.0f), $"#{j+1}:" + flagInfo.Description);
+                            ImGui.TextColored(new Vector4(0.68f, 0.68f, 0.68f, 1.0f), $"#{j+1}: " + flagInfo.Description);
                             ImGui.Spacing();
                         }
                         

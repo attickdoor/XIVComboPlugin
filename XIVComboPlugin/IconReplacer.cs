@@ -559,6 +559,25 @@ namespace XIVComboPlugin
                     return MCH.SpreadShot;
                 }
 
+            // Replace Rook/Queen with Overdrive when deployed
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistOverdriveFeature))
+            {
+                if (actionID == MCH.Rook || actionID == MCH.Queen)
+                {
+                    if (XIVComboPlugin.JobGauges.Get<MCHGauge>().IsRobotActive)
+                    {
+                        if (level >= 80)
+                            return MCH.QueenOverdrive;
+                        else
+                            return MCH.RookOverdrive;
+                    }
+                    if (level >= 80)
+                        return MCH.Queen;
+                    else
+                        return MCH.Rook;
+                }
+            }
+
             // BLACK MAGE
 
             // B4 and F4 change to each other depending on stance, as do Flare and Freeze.

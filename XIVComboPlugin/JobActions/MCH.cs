@@ -13,6 +13,10 @@
             HeatBlast = 7410,
             SpreadShot = 2870,
             AutoCrossbow = 16497,
-            Scattergun = 25786;
+            Scattergun = 25786,
+            Rook = 2864,
+            RookOverdrive = 7415,
+            Queen = 16501,
+            QueenOverdrive = 16502;
     }
 }

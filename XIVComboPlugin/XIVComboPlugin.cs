@@ -9,6 +9,7 @@ using Dalamud.Utility;
 using System.Diagnostics;
 using Dalamud.Plugin.Services;
 using Dalamud.Interface.Utility;
+using Dalamud.Game.ClientState.Conditions;
 
 namespace XIVComboPlugin
 {
@@ -29,8 +30,9 @@ namespace XIVComboPlugin
         private IJobGauges JobGauges { get; init; }
         private IGameInteropProvider HookProvider { get; init; }
         private IPluginLog PluginLog { get; init; }
+        private ICondition Condition { get; init; } = null!;
 
-        public XIVComboPlugin(IClientState clientState, ICommandManager commandManager, IDataManager manager, DalamudPluginInterface pluginInterface, ISigScanner sigScanner, IJobGauges jobGauges, IChatGui chatGui, IGameInteropProvider gameInteropProvider, IPluginLog pluginLog)
+        public XIVComboPlugin(IClientState clientState, ICommandManager commandManager, IDataManager manager, DalamudPluginInterface pluginInterface, ISigScanner sigScanner, IJobGauges jobGauges, IChatGui chatGui, IGameInteropProvider gameInteropProvider, IPluginLog pluginLog, ICondition condition)
         {
             ClientState = clientState;
             CommandManager = commandManager;
@@ -40,6 +42,7 @@ namespace XIVComboPlugin
             HookProvider = gameInteropProvider;
             ChatGui = chatGui;
             PluginLog = pluginLog;
+            Condition = condition;
 
             CommandManager.AddHandler("/pcombo", new CommandInfo(OnCommandDebugCombo)
             {
@@ -53,7 +56,7 @@ namespace XIVComboPlugin
                 Configuration.Version = 4;
             }
 
-            this.iconReplacer = new IconReplacer(TargetModuleScanner, ClientState, manager, this.Configuration, HookProvider, JobGauges, PluginLog);
+            this.iconReplacer = new IconReplacer(TargetModuleScanner, ClientState, manager, this.Configuration, HookProvider, JobGauges, PluginLog, Condition);
 
             this.iconReplacer.Enable();
 

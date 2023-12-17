@@ -5,6 +5,7 @@ using Dalamud.Hooking;
 using XIVComboPlugin.JobActions;
 using Dalamud.Game.ClientState.JobGauge.Enums;
 using Dalamud.Game.ClientState.JobGauge.Types;
+using Dalamud.Game.ClientState.Conditions;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using Dalamud.Plugin.Services;
 
@@ -30,16 +31,18 @@ namespace XIVComboPlugin
         private IGameInteropProvider HookProvider;
         private IJobGauges JobGauges;
         private IPluginLog PluginLog;
+        private ICondition Condition;
 
         private unsafe delegate int* getArray(long* address);
 
-        public IconReplacer(ISigScanner scanner, IClientState clientState, IDataManager manager, XIVComboConfiguration configuration, IGameInteropProvider hookProvider, IJobGauges jobGauges, IPluginLog pluginLog)
+        public IconReplacer(ISigScanner scanner, IClientState clientState, IDataManager manager, XIVComboConfiguration configuration, IGameInteropProvider hookProvider, IJobGauges jobGauges, IPluginLog pluginLog, ICondition condition)
         {
             HookProvider = hookProvider;
             Configuration = configuration;
             this.clientState = clientState;
             JobGauges = jobGauges;
             PluginLog = pluginLog;
+            Condition = condition;
 
             Address = new IconReplacerAddressResolver(scanner);
 
@@ -897,6 +900,16 @@ namespace XIVComboPlugin
                         SearchBuffArray(RPR.Buffs.ImSac2))
                         return RPR.PlentifulHarvest;
                     return actionID;
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.FisherHooking)) {
+                if (actionID == FSH.Cast)
+                {
+                    if (Condition[ConditionFlag.Fishing]) {
+                        return FSH.Hook;
+                    }
+                    return FSH.Cast;
                 }
             }
 

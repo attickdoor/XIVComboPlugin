@@ -188,6 +188,10 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Arcane Circle Combo", "Replace Arcane Circle with Plentiful Harvest while you have Immortal Sacrifice.", 39)]
         ReaperArcaneFeature = 1L << 30,
+
+        // FISHER
+        [CustomComboInfo("Cast into Hook", "Replace Cast with Hook while you are currently fishing.", 18)]
+        FisherHooking = 1L << 5,
     }
 
     public class CustomComboInfoAttribute : Attribute

@@ -50,11 +50,10 @@ namespace XIVComboPlugin
 
             PluginLog.Verbose("===== X I V C O M B O =====");
             PluginLog.Verbose("IsIconReplaceable address {IsIconReplaceable}", Address.IsIconReplaceable);
-            PluginLog.Verbose("GetIcon address {GetIcon}", Address.GetIcon);
             PluginLog.Verbose("ComboTimer address {ComboTimer}", comboTimer);
             PluginLog.Verbose("LastComboMove address {LastComboMove}", lastComboMove);
 
-            iconHook = HookProvider.HookFromAddress<OnGetIconDelegate>(Address.GetIcon, GetIconDetour);
+            iconHook = HookProvider.HookFromAddress<OnGetIconDelegate>((nint)ActionManager.Addresses.GetAdjustedActionId.Value, GetIconDetour);
             checkerHook = HookProvider.HookFromAddress<OnCheckIsIconReplaceableDelegate>(Address.IsIconReplaceable, CheckIsIconReplaceableDetour);
             HookProvider = hookProvider;
         }
@@ -76,11 +75,11 @@ namespace XIVComboPlugin
         {
             iconHook.Dispose();
             checkerHook.Dispose();
-
         }
 
         // I hate this function. This is the dumbest function to exist in the game. Just return 1.
         // Determines which abilities are allowed to have their icons updated.
+
         private ulong CheckIsIconReplaceableDetour(uint actionID)
         {
             return 1;

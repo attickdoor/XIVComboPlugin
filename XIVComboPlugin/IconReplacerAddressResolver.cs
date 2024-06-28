@@ -1,4 +1,5 @@
-﻿using Dalamud.Game;
+﻿
+using Dalamud.Game;
 using System;
 
 namespace XIVComboPlugin
@@ -10,9 +11,7 @@ namespace XIVComboPlugin
 
         public IconReplacerAddressResolver(ISigScanner sig)
         {
-            this.GetIcon = sig.ScanText("E8 ?? ?? ?? ?? 8B F8 3B DF");
-
-            this.IsIconReplaceable = sig.ScanText("E8 ?? ?? ?? ?? 84 C0 74 4C 8B D3");
+            this.IsIconReplaceable = sig.ScanText("40 53 48 83 EC 20 8B D9 48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 85 C0 74 1F");
         }
     }
 }

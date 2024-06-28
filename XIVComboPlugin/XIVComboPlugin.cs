@@ -22,7 +22,7 @@ namespace XIVComboPlugin
         private CustomComboPreset[] orderedByClassJob;
 
         private ICommandManager CommandManager { get; init; }
-        private DalamudPluginInterface PluginInterface { get; init; }
+        private IDalamudPluginInterface PluginInterface { get; init; }
         private ISigScanner TargetModuleScanner { get; init; }
         private IClientState ClientState { get; init; }
         private IChatGui ChatGui { get; init; }
@@ -30,7 +30,7 @@ namespace XIVComboPlugin
         private IGameInteropProvider HookProvider { get; init; }
         private IPluginLog PluginLog { get; init; }
 
-        public XIVComboPlugin(IClientState clientState, ICommandManager commandManager, IDataManager manager, DalamudPluginInterface pluginInterface, ISigScanner sigScanner, IJobGauges jobGauges, IChatGui chatGui, IGameInteropProvider gameInteropProvider, IPluginLog pluginLog)
+        public XIVComboPlugin(IClientState clientState, ICommandManager commandManager, IDataManager manager, IDalamudPluginInterface pluginInterface, ISigScanner sigScanner, IJobGauges jobGauges, IChatGui chatGui, IGameInteropProvider gameInteropProvider, IPluginLog pluginLog)
         {
             ClientState = clientState;
             CommandManager = commandManager;

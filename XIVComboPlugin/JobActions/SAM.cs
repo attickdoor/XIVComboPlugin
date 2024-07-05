@@ -18,10 +18,13 @@
             OgiNamikiri = 25781,
             Ikishoten = 16482,
             KaeshiNamikiri = 25782,
-            Fuko = 25780;
+            Fuko = 25780,
+            Gyuofu = 36963,
+            Zanshin = 36964;
 
         public const ushort
             BuffOgiNamikiriReady = 2959,
-            BuffMeikyoShisui = 1233;
+            BuffMeikyoShisui = 1233,
+            BuffZanshinReady = 3855;
     }
 }

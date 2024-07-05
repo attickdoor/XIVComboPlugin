@@ -125,7 +125,10 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("ES Painflare", "Change Painflare into Energy Syphon when out of Aetherflow stacks", 27)]
         SummonerESPainflareCombo = 1L << 40,
-        
+
+        [CustomComboInfo("Ruin/Outburst", "Change Ruin/Outburst into Topaz/Emerald/Ruby Ruin/Outburst while attuned", 27)]
+        SummonerRuinOutburstCombo = 1L << 41,
+
         // SCHOLAR
         [CustomComboInfo("Seraph Fey Blessing/Consolation", "Change Fey Blessing into Consolation when Seraph is out", 28)]
         ScholarSeraphConsolationFeature = 1L << 29,

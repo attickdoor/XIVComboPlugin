@@ -635,6 +635,80 @@ namespace XIVComboPlugin
                     return SMN.Painflare;
                 }
 
+            // Change Ruin/Outburst into Topaz/Emerald/Ruby Ruin/Outburst
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SummonerRuinOutburstCombo))
+            {
+                if (actionID == SMN.Ruin1)
+                {
+                    if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsTitanAttuned)
+                        switch (level)
+                        {
+                            case >= 72:
+                                return SMN.TopazRite;
+                            case >= 54:
+                                return SMN.TopazRuin3;
+                            case >= 30:
+                                return SMN.TopazRuin2;
+                            default:
+                                return SMN.TopazRuin;
+                        }
+                    if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsGarudaAttuned)
+                        switch (level)
+                        {
+                            case >= 72:
+                                return SMN.EmeraldRite;
+                            case >= 54:
+                                return SMN.EmeraldRuin3;
+                            case >= 30:
+                                return SMN.EmeraldRuin2;
+                            default:
+                                return SMN.EmeraldRuin;
+                        }
+                    if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsIfritAttuned)
+                        switch (level)
+                        {
+                            case >= 72:
+                                return SMN.RubyRite;
+                            case >= 54:
+                                return SMN.RubyRuin3;
+                            case >= 30:
+                                return SMN.RubyRuin2;
+                            default:
+                                return SMN.RubyRuin;
+                        }
+                }
+                if (actionID == SMN.Outburst)
+                {
+                    switch (level)
+                    {
+                        case >= 82:
+                            if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsTitanAttuned)
+                                return SMN.TopazCatastrophe;
+                            if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsGarudaAttuned)
+                                return SMN.EmeraldCatastrophe;
+                            if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsIfritAttuned)
+                                return SMN.RubyCatastrophe;
+                            break;
+                        case >= 74:
+                            if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsTitanAttuned)
+                                return SMN.TopazDisaster;
+                            if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsGarudaAttuned)
+                                return SMN.EmeraldDisaster;
+                            if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsIfritAttuned)
+                                return SMN.RubyDisaster;
+                            break;
+                        default:
+                            if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsTitanAttuned)
+                                return SMN.TopazOutburst;
+                            if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsGarudaAttuned)
+                                return SMN.EmeraldOutburst;
+                            if (XIVComboPlugin.JobGauges.Get<SMNGauge>().IsIfritAttuned)
+                                return SMN.RubyOutburst;
+                            break;
+                    }
+                }
+            }
+
             // SCHOLAR
 
             // Change Fey Blessing into Consolation when Seraph is out.

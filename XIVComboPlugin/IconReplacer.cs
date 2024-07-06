@@ -504,6 +504,18 @@ namespace XIVComboPlugin
                     return GNB.DemonSlice;
                 }
 
+            // Replace Fated Brand with Continuation
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.GunbreakerFatedCircleCont))
+                if (actionID == GNB.FatedCircle)
+                {
+                    if (level >= GNB.LevelEnhancedContinuation2)
+                    {
+                        if (SearchBuffArray(GNB.BuffReadyToRaze))
+                            return GNB.FatedBrand;
+                    }
+                    return GNB.FatedCircle;
+                }
+
             // MACHINIST
 
             // Replace Clean Shot with Heated Clean Shot combo
@@ -543,7 +555,10 @@ namespace XIVComboPlugin
                 {
                     var gauge = JobGauges.Get<MCHGauge>();
                     if (gauge.IsOverheated && level >= 35)
-                        return MCH.HeatBlast;
+                        if (level >= 68)
+                            return MCH.BlazingShot;
+                        else
+                            return MCH.HeatBlast;
                     return MCH.Hypercharge;
                 }
 
@@ -592,7 +607,7 @@ namespace XIVComboPlugin
 
             // ASTROLOGIAN
 
-            // Make cards on the same button as play
+            /* Old Astro
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.AstrologianCardsOnDrawFeature))
                 if (actionID == AST.Play)
                 {
@@ -615,6 +630,7 @@ namespace XIVComboPlugin
                             return AST.Draw;
                     }
                 }
+            */
 
             // SUMMONER
             // Change Fester into Energy Drain
@@ -799,19 +815,19 @@ namespace XIVComboPlugin
                     var gauge = JobGauges.Get<RDMGauge>();
                     if ((lastMove == RDM.Riposte || lastMove == RDM.ERiposte) && level >= 35)
                     {
-                        if (gauge.BlackMana >= 15 && gauge.WhiteMana >= 15)
+                        if (gauge.BlackMana >= 15 && gauge.WhiteMana >= 15 || SearchBuffArray(RDM.BuffMagickedSwordplay))
                             return RDM.EZwerchhau;
                         return RDM.Zwerchhau;
                     }
 
                     if (lastMove == RDM.Zwerchhau && level >= 50)
                     {
-                        if (gauge.BlackMana >= 15 && gauge.WhiteMana >= 15)
+                        if (gauge.BlackMana >= 15 && gauge.WhiteMana >= 15 || SearchBuffArray(RDM.BuffMagickedSwordplay))
                             return RDM.ERedoublement;
                         return RDM.Redoublement;
                     }
 
-                    if (gauge.BlackMana >= 20 && gauge.WhiteMana >= 20)
+                    if (gauge.BlackMana >= 20 && gauge.WhiteMana >= 20 || SearchBuffArray(RDM.BuffMagickedSwordplay))
                         return RDM.ERiposte;
                     return RDM.Riposte;
                 }
@@ -825,7 +841,8 @@ namespace XIVComboPlugin
 
                     if (SearchBuffArray(RDM.BuffVerstoneReady)) return RDM.Verstone;
                     if (level < 62) return RDM.Jolt;
-                    return RDM.Jolt2;
+                    if (level < 84) return RDM.Jolt2;
+                    return RDM.Jolt3;
                 }
                 if (actionID == RDM.Verfire)
                 {
@@ -834,7 +851,8 @@ namespace XIVComboPlugin
 
                     if (SearchBuffArray(RDM.BuffVerfireReady)) return RDM.Verfire;
                     if (level < 62) return RDM.Jolt;
-                    return RDM.Jolt2;
+                    if (level < 84) return RDM.Jolt2;
+                    return RDM.Jolt3;
                 }
             }
 

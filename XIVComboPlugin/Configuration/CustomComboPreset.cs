@@ -97,6 +97,9 @@ namespace XIVComboPlugin
         [CustomComboInfo("Demon Slaughter Combo", "Replace Demon Slaughter with its combo chain", 37)]
         GunbreakerDemonSlaughterCombo = 1L << 22,
 
+        [CustomComboInfo("Fated Circle Continuation", "Put Continuation moves on Fated Circle when appropriate", 37)]
+        GunbreakerFatedCircleCont = 1L << 54,
+
         // MACHINIST
         [CustomComboInfo("(Heated) Shot Combo", "Replace either form of Clean Shot with its combo chain", 31)]
         MachinistMainCombo = 1L << 23,
@@ -115,8 +118,10 @@ namespace XIVComboPlugin
         BlackLeyLines = 1L << 28,
 
         // ASTROLOGIAN
+        /* Old Astro
         [CustomComboInfo("Draw on Play", "Play turns into Draw when no card is drawn, as well as the usual Play behavior", 33)]
         AstrologianCardsOnDrawFeature = 1L << 27,
+        */
 
         // SUMMONER
 

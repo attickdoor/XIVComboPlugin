@@ -17,6 +17,7 @@
             Verfire = 7510,
             Jolt = 7503,
             Jolt2 = 7524,
+            Jolt3 = 37004,
             Verholy = 7526,
             Verflare = 7525,
             Scorch = 16530,
@@ -28,6 +29,7 @@
             BuffAcceleration = 1238,
             BuffChainspell = 2560,
             BuffVerstoneReady = 1235,
-            BuffVerfireReady = 1234;
+            BuffVerfireReady = 1234,
+            BuffMagickedSwordplay = 3875;
     }
 }

@@ -160,7 +160,7 @@ namespace XIVComboPlugin
                             if (level >= 50)
                                 return DRG.ChaosThrust;
                         }
-                        if ((lastMove == DRG.ChaosThrust || DRG.ChaoticSpring) && level >= 58)
+                        if ((lastMove == DRG.ChaosThrust || lastMove == DRG.ChaoticSpring) && level >= 58)
                             return DRG.WheelingThrust;
                         if ((lastMove == DRG.WheelingThrust) && level >= 64) //Drakesbane action
                             return DRG.FangAndClaw;
@@ -191,14 +191,14 @@ namespace XIVComboPlugin
                             if (level >= 4)
                                 return DRG.VorpalThrust;
                         }
-                        if (lastMove == DRG.VorpalThrust || DRG.LanceBarrage)
+                        if (lastMove == DRG.VorpalThrust || lastMove == DRG.LanceBarrage)
                         {
                             if (level >= 86)
                                 return DRG.HeavensThrust;
                             if (level >= 26)
                                 return DRG.FullThrust;
                         }
-                        if ((lastMove == DRG.FullThrust || DRG.HeavensThrust) && level >= 56)
+                        if ((lastMove == DRG.FullThrust || lastMove == DRG.HeavensThrust) && level >= 56)
                             return DRG.FangAndClaw;
                         if ((lastMove == DRG.FangAndClaw) && level >= 64) //Drakesbane action
                             return DRG.WheelingThrust;

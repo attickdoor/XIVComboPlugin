@@ -15,6 +15,7 @@
             BrandOfPurgatory = 16515,
             FountainOfFire = 16514,
             Fester = 181,
+            Necrotize = 36990,
             EnergyDrain = 16508,
             Painflare = 3578,
             EnergySyphon = 16510;

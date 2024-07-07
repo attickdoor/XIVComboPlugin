@@ -115,15 +115,16 @@ namespace XIVComboPlugin
 
             // DRAGOON
 
+            //SE built this in, so obsolete now
             // Change Jump/High Jump into Mirage Dive when Dive Ready
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonJumpFeature))
+            /*if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonJumpFeature))
                 if (actionID == DRG.Jump || actionID == DRG.HighJump)
                 {
                     if (SearchBuffArray(1243))
                         return DRG.MirageDive;
                     return iconHook.Original(self, DRG.Jump);
                 }
-
+            */
             // Replace Coerthan Torment with Coerthan Torment combo chain
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonCoerthanTormentCombo))
                 if (actionID == DRG.CTorment)
@@ -146,22 +147,34 @@ namespace XIVComboPlugin
                     if (comboTime > 0)
                     {
                         if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 18)
-                            return DRG.Disembowel;
-                        if (lastMove == DRG.Disembowel)
+                        {
+                            if (level >= 96)
+                                return DRG.SpiralBlow;
+                            if (level >= 18)
+                                return DRG.Disembowel;
+                        }
+                        if (lastMove == DRG.Disembowel || lastMove == DRG.SpiralBlow)
                         {
                             if (level >= 86)
                                 return DRG.ChaoticSpring;
                             if (level >= 50)
                                 return DRG.ChaosThrust;
                         }
+                        if ((lastMove == DRG.ChaosThrust || DRG.ChaoticSpring) && level >= 58)
+                            return DRG.WheelingThrust;
+                        if ((lastMove == DRG.WheelingThrust) && level >= 64) //Drakesbane action
+                            return DRG.FangAndClaw;
+                        
                     }
-                    if (SearchBuffArray(DRG.BuffFangAndClawReady) && level >= 56)
+                    //These buffs no longer exist and are now incorporated into the overall combo
+                    /*if (SearchBuffArray(DRG.BuffFangAndClawReady) && level >= 56)
                         return DRG.FangAndClaw;
                     if (SearchBuffArray(DRG.BuffWheelingThrustReady) && level >= 58)
                         return DRG.WheelingThrust;
+                    */
                     if (SearchBuffArray(DRG.BuffDraconianFire) && level >= 76)
                         return DRG.RaidenThrust;
-
+                    
                     return DRG.TrueThrust;
                 }
 
@@ -171,20 +184,31 @@ namespace XIVComboPlugin
                 {
                     if (comboTime > 0)
                     {
-                        if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 4)
-                            return DRG.VorpalThrust;
-                        if (lastMove == DRG.VorpalThrust)
+                        if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 4) 
+                        {
+                            if (level >= 96)
+                                return DRG.LanceBarrage;
+                            if (level >= 4)
+                                return DRG.VorpalThrust;
+                        }
+                        if (lastMove == DRG.VorpalThrust || DRG.LanceBarrage)
                         {
                             if (level >= 86)
                                 return DRG.HeavensThrust;
                             if (level >= 26)
                                 return DRG.FullThrust;
                         }
+                        if ((lastMove == DRG.FullThrust || DRG.HeavensThrust) && level >= 56)
+                            return DRG.FangAndClaw;
+                        if ((lastMove == DRG.FangAndClaw) && level >= 64) //Drakesbane action
+                            return DRG.WheelingThrust;
                     }
-                    if (SearchBuffArray(DRG.BuffFangAndClawReady) && level >= 56)
+                    //These buffs no longer exist and are now incorporated into the overall combo
+                    /*if (SearchBuffArray(DRG.BuffFangAndClawReady) && level >= 56)
                         return DRG.FangAndClaw;
                     if (SearchBuffArray(DRG.BuffWheelingThrustReady) && level >= 58)
                         return DRG.WheelingThrust;
+                    */
                     if (SearchBuffArray(DRG.BuffDraconianFire) && level >= 76)
                         return DRG.RaidenThrust;
 
@@ -582,14 +606,14 @@ namespace XIVComboPlugin
             }
 
             // Ley Lines and BTL
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BlackLeyLines))
+            /*if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BlackLeyLines))
                 if (actionID == BLM.LeyLines)
                 {
                     if (SearchBuffArray(BLM.BuffLeyLines) && level >= 62)
                         return BLM.BTL;
                     return BLM.LeyLines;
                 }
-
+            */
             // ASTROLOGIAN
 
             // Make cards on the same button as play
@@ -638,13 +662,13 @@ namespace XIVComboPlugin
             // SCHOLAR
 
             // Change Fey Blessing into Consolation when Seraph is out.
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarSeraphConsolationFeature))
+            /*if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarSeraphConsolationFeature))
                 if (actionID == SCH.FeyBless)
                 {
                     if (JobGauges.Get<SCHGauge>().SeraphTimer > 0) return SCH.Consolation;
                     return SCH.FeyBless;
                 }
-
+            */
             // Change Energy Drain into Aetherflow when you have no more Aetherflow stacks.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarEnergyDrainFeature))
                 if (actionID == SCH.EnergyDrain)

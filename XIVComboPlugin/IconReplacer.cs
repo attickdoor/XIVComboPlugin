@@ -162,9 +162,8 @@ namespace XIVComboPlugin
                         }
                         if ((lastMove == DRG.ChaosThrust || lastMove == DRG.ChaoticSpring) && level >= 58)
                             return DRG.WheelingThrust;
-                        if ((lastMove == DRG.WheelingThrust) && level >= 64) //Drakesbane action
-                            return DRG.FangAndClaw;
-                        
+                        if ((lastMove == DRG.WheelingThrust) && level >= 64)
+                            return DRG.Drakesbane;
                     }
                     //These buffs no longer exist and are now incorporated into the overall combo
                     /*if (SearchBuffArray(DRG.BuffFangAndClawReady) && level >= 56)
@@ -172,6 +171,7 @@ namespace XIVComboPlugin
                     if (SearchBuffArray(DRG.BuffWheelingThrustReady) && level >= 58)
                         return DRG.WheelingThrust;
                     */
+                    
                     if (SearchBuffArray(DRG.BuffDraconianFire) && level >= 76)
                         return DRG.RaidenThrust;
                     
@@ -200,8 +200,8 @@ namespace XIVComboPlugin
                         }
                         if ((lastMove == DRG.FullThrust || lastMove == DRG.HeavensThrust) && level >= 56)
                             return DRG.FangAndClaw;
-                        if ((lastMove == DRG.FangAndClaw) && level >= 64) //Drakesbane action
-                            return DRG.WheelingThrust;
+                        if ((lastMove == DRG.FangAndClaw) && level >= 64)
+                            return DRG.Drakesbane;
                     }
                     //These buffs no longer exist and are now incorporated into the overall combo
                     /*if (SearchBuffArray(DRG.BuffFangAndClawReady) && level >= 56)
@@ -209,6 +209,7 @@ namespace XIVComboPlugin
                     if (SearchBuffArray(DRG.BuffWheelingThrustReady) && level >= 58)
                         return DRG.WheelingThrust;
                     */
+                    
                     if (SearchBuffArray(DRG.BuffDraconianFire) && level >= 76)
                         return DRG.RaidenThrust;
 

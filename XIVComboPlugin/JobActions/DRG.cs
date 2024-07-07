@@ -23,7 +23,8 @@
             FullThrust = 84,
             VorpalThrust = 78,
             LanceBarrage = 36901,
-            SpiralBlow = 36903;
+            SpiralBlow = 36903,
+            Drakesbane = 36952;
 
 
         public const ushort

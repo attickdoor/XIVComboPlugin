@@ -326,10 +326,22 @@ namespace XIVComboPlugin
                 if (actionID == SAM.Yukikaze)
                 {
                     if (SearchBuffArray(SAM.BuffMeikyoShisui))
+                    {
                         return SAM.Yukikaze;
+                    }
                     if (comboTime > 0)
-                        if (lastMove == SAM.Hakaze && level >= 50)
+                    {
+                        if ((lastMove == SAM.Hakaze || lastMove == SAM.Gyofu) && level >= 50)
+                        {
                             return SAM.Yukikaze;
+                        }
+                    }
+
+                    if (level >= 92)
+                    {
+                        return SAM.Gyofu;
+                    }
+
                     return SAM.Hakaze;
                 }
 
@@ -338,13 +350,26 @@ namespace XIVComboPlugin
                 if (actionID == SAM.Gekko)
                 {
                     if (SearchBuffArray(SAM.BuffMeikyoShisui))
+                    {
                         return SAM.Gekko;
+                    }
+
                     if (comboTime > 0)
                     {
-                        if (lastMove == SAM.Hakaze && level >= 4)
+                        if ((lastMove == SAM.Hakaze || lastMove == SAM.Gyofu) && level >= 4)
+                        {
                             return SAM.Jinpu;
+                        }
+
                         if (lastMove == SAM.Jinpu && level >= 30)
+                        {
                             return SAM.Gekko;
+                        }
+                    }
+
+                    if (level >= 92)
+                    {
+                        return SAM.Gyofu;
                     }
 
                     return SAM.Hakaze;
@@ -358,10 +383,20 @@ namespace XIVComboPlugin
                         return SAM.Kasha;
                     if (comboTime > 0)
                     {
-                        if (lastMove == SAM.Hakaze && level >= 18)
+                        if ((lastMove == SAM.Hakaze || lastMove == SAM.Gyofu) && level >= 18)
+                        {
                             return SAM.Shifu;
+                        }
+
                         if (lastMove == SAM.Shifu && level >= 40)
+                        {
                             return SAM.Kasha;
+                        }
+                    }
+
+                    if (level >= 92)
+                    {
+                        return SAM.Gyofu;
                     }
 
                     return SAM.Hakaze;
@@ -396,15 +431,27 @@ namespace XIVComboPlugin
                 }
 
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiOgiCombo))
+            {
                 if (actionID == SAM.Ikishoten)
                 {
                     if (SearchBuffArray(SAM.BuffOgiNamikiriReady))
+                    {
                         return SAM.OgiNamikiri;
+                    }
+
                     if (JobGauges.Get<SAMGauge>().Kaeshi == Kaeshi.NAMIKIRI)
+                    {
                         return SAM.KaeshiNamikiri;
-                        
+                    }
+
+                    if (level >= 96 && SearchBuffArray(SAM.BuffZanshinReady))
+                    {
+                        return SAM.Zanshin;
+                    }
+
                     return SAM.Ikishoten;
                 }
+            }
 
             // NINJA
 
@@ -597,23 +644,23 @@ namespace XIVComboPlugin
                 if (actionID == AST.Play)
                 {
                     var gauge = JobGauges.Get<ASTGauge>();
-                    switch (gauge.DrawnCard)
-                    {
-                        case CardType.BALANCE:
-                            return AST.Balance;
-                        case CardType.BOLE:
-                            return AST.Bole;
-                        case CardType.ARROW:
-                            return AST.Arrow;
-                        case CardType.SPEAR:
-                            return AST.Spear;
-                        case CardType.EWER:
-                            return AST.Ewer;
-                        case CardType.SPIRE:
-                            return AST.Spire;
-                        default:
-                            return AST.Draw;
-                    }
+                    //switch (gauge.DrawnCards)
+                    //{
+                    //    case CardType.BALANCE:
+                    //        return AST.Balance;
+                    //    case CardType.BOLE:
+                    //        return AST.Bole;
+                    //    case CardType.ARROW:
+                    //        return AST.Arrow;
+                    //    case CardType.SPEAR:
+                    //        return AST.Spear;
+                    //    case CardType.EWER:
+                    //        return AST.Ewer;
+                    //    case CardType.SPIRE:
+                    //        return AST.Spire;
+                    //    default:
+                    //        return AST.Draw;
+                    //}
                 }
 
             // SUMMONER
@@ -883,7 +930,15 @@ namespace XIVComboPlugin
             {
                 if (actionID == RPR.Enshroud)
                 {
-                    if (SearchBuffArray(RPR.Buffs.Enshrouded)) return RPR.Communio;
+                    if (SearchBuffArray(RPR.Buffs.Enshrouded))
+                    {
+                        return RPR.Communio;
+                    }
+                    else if (SearchBuffArray(RPR.Buffs.PerfectioParata))
+                    {
+                        return RPR.Perfectio;
+                    }
+
                     return actionID;
                 }
             }
@@ -907,8 +962,15 @@ namespace XIVComboPlugin
             if (needle == 0) return false;
             var buffs = clientState.LocalPlayer.StatusList;
             for (var i = 0; i < buffs.Length; i++)
+            {
+                //PluginLog.Debug($"Buff Name: {buffs[i].GameData.Name.ToString()} | ID: {buffs[i].StatusId}");
+
                 if (buffs[i].StatusId == needle)
+                {
                     return true;
+                }
+            }
+
             return false;
         }        
     }

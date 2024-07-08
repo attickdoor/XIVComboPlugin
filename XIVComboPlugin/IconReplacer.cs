@@ -258,6 +258,13 @@ namespace XIVComboPlugin
                 {
                     if (SearchBuffArray(PLD.BuffRequiescat) && level >= 80)
                         return iconHook.Original(self, PLD.Confiteor);
+
+                    if (SearchBuffArray(PLD.BuffBladeOfHonor)) 
+                        return PLD.BladeOfHonor;
+
+                    if (level >= 96)
+                        return PLD.Imperator;
+
                     return PLD.Requiescat;
                 }
 
@@ -330,6 +337,9 @@ namespace XIVComboPlugin
                     if (comboTime > 0)
                         if (lastMove == SAM.Hakaze && level >= 50)
                             return SAM.Yukikaze;
+
+                    if (level >= 92)
+                        return SAM.Gyuofu;
                     return SAM.Hakaze;
                 }
 
@@ -347,6 +357,8 @@ namespace XIVComboPlugin
                             return SAM.Gekko;
                     }
 
+                    if (level >= 92)
+                        return SAM.Gyuofu;
                     return SAM.Hakaze;
                 }
 
@@ -364,6 +376,8 @@ namespace XIVComboPlugin
                             return SAM.Kasha;
                     }
 
+                    if (level >= 92) 
+                        return SAM.Gyuofu;
                     return SAM.Hakaze;
                 }
 
@@ -402,7 +416,9 @@ namespace XIVComboPlugin
                         return SAM.OgiNamikiri;
                     if (JobGauges.Get<SAMGauge>().Kaeshi == Kaeshi.NAMIKIRI)
                         return SAM.KaeshiNamikiri;
-                        
+
+                    if (SearchBuffArray(SAM.BuffZanshinReady)) return SAM.Zanshin;
+
                     return SAM.Ikishoten;
                 }
 

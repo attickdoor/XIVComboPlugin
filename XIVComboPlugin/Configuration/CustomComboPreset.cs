@@ -107,7 +107,7 @@ namespace XIVComboPlugin
         [CustomComboInfo("Spread Shot Heat", "Replace Spread Shot or Scattergun with Auto Crossbow when overheated", 31)]
         MachinistSpreadShotFeature = 1L << 24,
 
-        [CustomComboInfo("Heat Blast when overheated", "Replace Hypercharge with Heat Blast when overheated", 31)]
+        [CustomComboInfo("Heat Blast when overheated", "Replace Hypercharge with Heat Blast/Blazing Shot when overheated", 31)]
         MachinistOverheatFeature = 1L << 47,
 
         // BLACK MAGE

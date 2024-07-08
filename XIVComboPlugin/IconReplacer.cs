@@ -555,10 +555,11 @@ namespace XIVComboPlugin
                 {
                     var gauge = JobGauges.Get<MCHGauge>();
                     if (gauge.IsOverheated && level >= 35)
+                    {
                         if (level >= 68)
                             return MCH.BlazingShot;
-                        else
-                            return MCH.HeatBlast;
+                        return MCH.HeatBlast;
+                    }
                     return MCH.Hypercharge;
                 }
 

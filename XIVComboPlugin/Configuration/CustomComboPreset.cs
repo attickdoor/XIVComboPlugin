@@ -48,7 +48,7 @@ namespace XIVComboPlugin
         [CustomComboInfo("Mythril Tempest Combo", "Replace Mythril Tempest with its combo chain", 21)]
         WarriorMythrilTempestCombo = 1L << 10,
 
-        [CustomComboInfo("IR to Primal Rend", "Replace Inner Release with Primal Rend when Primal Rend Ready", 21)]
+        [CustomComboInfo("IR Combo", "Replace Inner Release with Primal Rend or Primal Ruination if they are ready and Wrathful status is not active", 21)]
         WarriorIRCombo = 1L << 63,
 
         // SAMURAI

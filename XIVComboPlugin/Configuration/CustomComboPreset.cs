@@ -188,6 +188,19 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Arcane Circle Combo", "Replace Arcane Circle with Plentiful Harvest while you have Immortal Sacrifice.", 39)]
         ReaperArcaneFeature = 1L << 30,
+
+        //PICTOMANCER
+        [CustomComboInfo("Red to Blue combo","Replace Fire combo with Blizzard combo when Subtractive Pallet is active.",42)]
+        PictoSubtractivePallet = 1L << 31,
+
+        [CustomComboInfo("Motifs and Muses", "Replace Motifs with their relevant Muses.", 42)]
+        PictoMotifMuseFeature = 1L << 34,
+
+        [CustomComboInfo("Starry Sky to Star Prism", "Replace Starry Sky with Star Prism.", 42)]
+        PictoStarrySkyCombo = 1L << 38,
+
+        [CustomComboInfo("Holy white to Comet Black", "Replace Holy in White with Comet in black when Monochrome Tones is active.", 42)]
+        PictoHolyWhiteCombo = 1L << 43,
     }
 
     public class CustomComboInfoAttribute : Attribute

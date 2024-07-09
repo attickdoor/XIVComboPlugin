@@ -20,6 +20,7 @@
             Disembowel = 87,
             FangAndClaw = 3554,
             WheelingThrust = 3556,
+            Drakesbane = 36952,
             FullThrust = 84,
             VorpalThrust = 78;
 

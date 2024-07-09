@@ -154,11 +154,12 @@ namespace XIVComboPlugin
                             if (level >= 50)
                                 return DRG.ChaosThrust;
                         }
+                        if ((lastMove == DRG.ChaoticSpring || lastMove == DRG.ChaosThrust) && level >= 58)
+                            return DRG.WheelingThrust;
+                        if (lastMove == DRG.WheelingThrust && level >= 64)
+                            return DRG.Drakesbane;
                     }
-                    if (SearchBuffArray(DRG.BuffFangAndClawReady) && level >= 56)
-                        return DRG.FangAndClaw;
-                    if (SearchBuffArray(DRG.BuffWheelingThrustReady) && level >= 58)
-                        return DRG.WheelingThrust;
+
                     if (SearchBuffArray(DRG.BuffDraconianFire) && level >= 76)
                         return DRG.RaidenThrust;
 
@@ -180,11 +181,12 @@ namespace XIVComboPlugin
                             if (level >= 26)
                                 return DRG.FullThrust;
                         }
+                        if ((lastMove == DRG.FullThrust || lastMove == DRG.HeavensThrust) && level >= 56)
+                            return DRG.FangAndClaw;
+                        if (lastMove == DRG.FangAndClaw && level >= 64)
+                            return DRG.Drakesbane;
                     }
-                    if (SearchBuffArray(DRG.BuffFangAndClawReady) && level >= 56)
-                        return DRG.FangAndClaw;
-                    if (SearchBuffArray(DRG.BuffWheelingThrustReady) && level >= 58)
-                        return DRG.WheelingThrust;
+                    
                     if (SearchBuffArray(DRG.BuffDraconianFire) && level >= 76)
                         return DRG.RaidenThrust;
 

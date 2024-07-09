@@ -115,15 +115,6 @@ namespace XIVComboPlugin
 
             // DRAGOON
 
-            // Change Jump/High Jump into Mirage Dive when Dive Ready
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonJumpFeature))
-                if (actionID == DRG.Jump || actionID == DRG.HighJump)
-                {
-                    if (SearchBuffArray(1243))
-                        return DRG.MirageDive;
-                    return iconHook.Original(self, DRG.Jump);
-                }
-
             // Replace Coerthan Torment with Coerthan Torment combo chain
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonCoerthanTormentCombo))
                 if (actionID == DRG.CTorment)

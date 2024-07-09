@@ -603,12 +603,14 @@ namespace XIVComboPlugin
             // Nothing at the moment
 
             // SUMMONER
-            // Change Fester into Energy Drain
+            // Change Fester/Necrotize into Energy Drain
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SummonerEDFesterCombo))
-                if (actionID == SMN.Fester)
+                if (actionID == SMN.Fester || actionID == SMN.Necrotize)
                 {
                     if (!JobGauges.Get<SMNGauge>().HasAetherflowStacks)
                         return SMN.EnergyDrain;
+                    
+                    if (level >= 92) return SMN.Necrotize;
                     return SMN.Fester;
                 }
 

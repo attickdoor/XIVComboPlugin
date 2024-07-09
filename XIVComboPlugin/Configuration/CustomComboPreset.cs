@@ -116,7 +116,7 @@ namespace XIVComboPlugin
 
         // SUMMONER
 
-        [CustomComboInfo("ED Fester", "Change Fester into Energy Drain when out of Aetherflow stacks", 27)]
+        [CustomComboInfo("ED Fester/Necrotize", "Change Fester/Necrotize into Energy Drain when out of Aetherflow stacks", 27)]
         SummonerEDFesterCombo = 1L << 39,
 
         [CustomComboInfo("ES Painflare", "Change Painflare into Energy Syphon when out of Aetherflow stacks", 27)]

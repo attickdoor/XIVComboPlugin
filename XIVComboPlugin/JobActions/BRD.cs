@@ -15,6 +15,7 @@
             Shadowbite = 16494;
 
         public const ushort
+            BuffBarrage = 128,
             BuffHawksEye = 3861;
     }
 }

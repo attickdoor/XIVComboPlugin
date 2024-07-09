@@ -740,7 +740,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BardStraightShotUpgradeFeature))
                 if (actionID == BRD.HeavyShot || actionID == BRD.BurstShot)
                 {
-                    if (SearchBuffArray(BRD.BuffHawksEye))
+                    if (SearchBuffArray(BRD.BuffHawksEye) || SearchBuffArray(BRD.BuffBarrage))
                     {
                         if (level >= 70) return BRD.RefulgentArrow;
                         return BRD.StraightShot;
@@ -753,7 +753,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BardAoEUpgradeFeature))
                 if (actionID == BRD.QuickNock || actionID == BRD.Ladonsbite)
                 {
-                    if (SearchBuffArray(BRD.BuffHawksEye))
+                    if (SearchBuffArray(BRD.BuffHawksEye) || SearchBuffArray(BRD.BuffBarrage))
                     {
                         if (level >= 72) return BRD.Shadowbite;
                         return BRD.WideVolley;

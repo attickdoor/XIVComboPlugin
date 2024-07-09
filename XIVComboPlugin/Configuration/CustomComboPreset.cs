@@ -112,8 +112,7 @@ namespace XIVComboPlugin
         BlackLeyLines = 1L << 28,
 
         // ASTROLOGIAN
-        [CustomComboInfo("Draw on Play", "Play turns into Draw when no card is drawn, as well as the usual Play behavior", 33)]
-        AstrologianCardsOnDrawFeature = 1L << 27,
+        // Nothing here for now
 
         // SUMMONER
 

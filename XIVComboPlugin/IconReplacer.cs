@@ -586,30 +586,7 @@ namespace XIVComboPlugin
                 }
 
             // ASTROLOGIAN
-
-            // Make cards on the same button as play
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.AstrologianCardsOnDrawFeature))
-                if (actionID == AST.Play)
-                {
-                    var gauge = JobGauges.Get<ASTGauge>();
-                    switch (gauge.DrawnCard)
-                    {
-                        case CardType.BALANCE:
-                            return AST.Balance;
-                        case CardType.BOLE:
-                            return AST.Bole;
-                        case CardType.ARROW:
-                            return AST.Arrow;
-                        case CardType.SPEAR:
-                            return AST.Spear;
-                        case CardType.EWER:
-                            return AST.Ewer;
-                        case CardType.SPIRE:
-                            return AST.Spire;
-                        default:
-                            return AST.Draw;
-                    }
-                }
+            // Nothing at the moment
 
             // SUMMONER
             // Change Fester into Energy Drain

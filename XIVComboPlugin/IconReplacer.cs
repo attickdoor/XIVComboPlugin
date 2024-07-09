@@ -331,8 +331,10 @@ namespace XIVComboPlugin
                     if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Yukikaze;
                     if (comboTime > 0)
-                        if (lastMove == SAM.Hakaze && level >= 50)
+                        if ((lastMove == SAM.Hakaze || lastMove == SAM.Gyofu) && level >= 50)
                             return SAM.Yukikaze;
+                    
+                    if (level >= 92) return SAM.Gyofu;
                     return SAM.Hakaze;
                 }
 
@@ -344,12 +346,13 @@ namespace XIVComboPlugin
                         return SAM.Gekko;
                     if (comboTime > 0)
                     {
-                        if (lastMove == SAM.Hakaze && level >= 4)
+                        if ((lastMove == SAM.Hakaze || lastMove == SAM.Gyofu) && level >= 4)
                             return SAM.Jinpu;
                         if (lastMove == SAM.Jinpu && level >= 30)
                             return SAM.Gekko;
                     }
 
+                    if (level >= 92) return SAM.Gyofu;
                     return SAM.Hakaze;
                 }
 
@@ -361,12 +364,13 @@ namespace XIVComboPlugin
                         return SAM.Kasha;
                     if (comboTime > 0)
                     {
-                        if (lastMove == SAM.Hakaze && level >= 18)
+                        if ((lastMove == SAM.Hakaze || lastMove == SAM.Gyofu) && level >= 18)
                             return SAM.Shifu;
                         if (lastMove == SAM.Shifu && level >= 40)
                             return SAM.Kasha;
                     }
 
+                    if (level >= 92) return SAM.Gyofu;
                     return SAM.Hakaze;
                 }
 

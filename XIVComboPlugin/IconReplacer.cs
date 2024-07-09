@@ -813,8 +813,10 @@ namespace XIVComboPlugin
                     if (level >= 90 && lastMove == RDM.Scorch) return RDM.Resolution;
 
                     if (SearchBuffArray(RDM.BuffVerstoneReady)) return RDM.Verstone;
-                    if (level < 62) return RDM.Jolt;
-                    return RDM.Jolt2;
+                    
+                    if (level >= 84) return RDM.Jolt3;
+                    if (level >= 62) return RDM.Jolt2;
+                    return RDM.Jolt;
                 }
                 if (actionID == RDM.Verfire)
                 {
@@ -822,8 +824,10 @@ namespace XIVComboPlugin
                     if (level >= 90 && lastMove == RDM.Scorch) return RDM.Resolution;
 
                     if (SearchBuffArray(RDM.BuffVerfireReady)) return RDM.Verfire;
-                    if (level < 62) return RDM.Jolt;
-                    return RDM.Jolt2;
+                    
+                    if (level >= 84) return RDM.Jolt3;
+                    if (level >= 62) return RDM.Jolt2;
+                    return RDM.Jolt;
                 }
             }
 

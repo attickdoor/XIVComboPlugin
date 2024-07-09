@@ -17,6 +17,7 @@
             Verfire = 7510,
             Jolt = 7503,
             Jolt2 = 7524,
+            Jolt3 = 37004,
             Verholy = 7526,
             Verflare = 7525,
             Scorch = 16530,

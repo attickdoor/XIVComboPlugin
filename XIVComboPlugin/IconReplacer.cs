@@ -255,12 +255,14 @@ namespace XIVComboPlugin
                     return PLD.TotalEclipse;
                 }
 
-            // Replace Requiescat with Confiteor when under the effect of Requiescat
+            // Replace Requiescat/Imperator with Confiteor when under the effect of Requiescat
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PaladinRequiescatCombo))
-                if (actionID == PLD.Requiescat)
+                if (actionID == PLD.Requiescat || actionID == PLD.Imperator)
                 {
                     if (SearchBuffArray(PLD.BuffRequiescat) && level >= 80)
                         return iconHook.Original(self, PLD.Confiteor);
+
+                    if (level >= 96) return PLD.Imperator;
                     return PLD.Requiescat;
                 }
 

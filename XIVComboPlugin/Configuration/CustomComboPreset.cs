@@ -32,7 +32,7 @@ namespace XIVComboPlugin
         [CustomComboInfo("Prominence Combo", "Replace Prominence with its combo chain", 19)]
         PaladinProminenceCombo = 1L << 7,
 
-        [CustomComboInfo("Requiescat Confiteor", "Replace Requiescat with Confiteor while under the effect of Requiescat", 19)]
+        [CustomComboInfo("Requiescat/Imperator Confiteor", "Replace Requiescat/Imperator with Confiteor while under the effect of Requiescat", 19)]
         PaladinRequiescatCombo = 1L << 55,
 
         // WARRIOR

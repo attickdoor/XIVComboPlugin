@@ -136,18 +136,23 @@ namespace XIVComboPlugin
                 {
                     if (comboTime > 0)
                     {
-                        if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 18)
-                            return DRG.Disembowel;
-                        if (lastMove == DRG.Disembowel)
+                        if (lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust)
+                        {
+                            if (level >= 96)
+                                return DRG.SpiralBlow;
+                            if (level >= 18)
+                                return DRG.Disembowel;
+                        }
+                        else if (lastMove == DRG.Disembowel || lastMove == DRG.SpiralBlow)
                         {
                             if (level >= 86)
                                 return DRG.ChaoticSpring;
                             if (level >= 50)
                                 return DRG.ChaosThrust;
                         }
-                        if ((lastMove == DRG.ChaoticSpring || lastMove == DRG.ChaosThrust) && level >= 58)
+                        else if ((lastMove == DRG.ChaoticSpring || lastMove == DRG.ChaosThrust) && level >= 58)
                             return DRG.WheelingThrust;
-                        if (lastMove == DRG.WheelingThrust && level >= 64)
+                        else if (lastMove == DRG.WheelingThrust && level >= 64)
                             return DRG.Drakesbane;
                     }
 
@@ -163,18 +168,23 @@ namespace XIVComboPlugin
                 {
                     if (comboTime > 0)
                     {
-                        if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 4)
-                            return DRG.VorpalThrust;
-                        if (lastMove == DRG.VorpalThrust)
+                        if (lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust)
+                        {
+                            if (level >= 96)
+                                return DRG.LanceBarrage;
+                            if (level >= 4)
+                                return DRG.VorpalThrust;
+                        }
+                        else if (lastMove == DRG.VorpalThrust || lastMove == DRG.LanceBarrage)
                         {
                             if (level >= 86)
                                 return DRG.HeavensThrust;
                             if (level >= 26)
                                 return DRG.FullThrust;
                         }
-                        if ((lastMove == DRG.FullThrust || lastMove == DRG.HeavensThrust) && level >= 56)
+                        else if ((lastMove == DRG.FullThrust || lastMove == DRG.HeavensThrust) && level >= 56)
                             return DRG.FangAndClaw;
-                        if (lastMove == DRG.FangAndClaw && level >= 64)
+                        else if (lastMove == DRG.FangAndClaw && level >= 64)
                             return DRG.Drakesbane;
                     }
                     

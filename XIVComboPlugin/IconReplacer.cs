@@ -639,6 +639,10 @@ namespace XIVComboPlugin
                         default:
                             return AST.Draw;
                     }
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.AstrologianHealLevelSyncFeature))
+                if (actionID == AST.Benefic2 && level <= 25)
+                {
+                    return AST.Benefic1;
                 }
 
             // SUMMONER
@@ -676,6 +680,12 @@ namespace XIVComboPlugin
                 {
                     if (JobGauges.Get<SCHGauge>().Aetherflow == 0) return SCH.Aetherflow;
                     return SCH.EnergyDrain;
+                }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarHealLevelSyncFeature))
+                if (actionID == SCH.Adlo && level <= 29)
+                {
+                    return SCH.Physick;
                 }
 
             // DANCER
@@ -757,6 +767,12 @@ namespace XIVComboPlugin
                     if (JobGauges.Get<WHMGauge>().BloodLily == 3)
                         return WHM.Misery;
                     return WHM.Rapture;
+                }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.WhiteMageHealLevelSyncFeature))
+                if (actionID == WHM.Cure2 && level <= 29)
+                {
+                    return WHM.Cure1;
                 }
 
             // BARD

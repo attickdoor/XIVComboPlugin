@@ -335,8 +335,11 @@ namespace XIVComboPlugin
                     if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Yukikaze;
                     if (comboTime > 0)
-                        if (lastMove == SAM.Hakaze && level >= 50)
+                    {
+                        if ((lastMove == SAM.Hakaze && level >= 50) || lastMove ==SAM.Gyuofu)
                             return SAM.Yukikaze;
+                    }
+
 
                     if (level >= 92)
                         return SAM.Gyuofu;
@@ -351,7 +354,7 @@ namespace XIVComboPlugin
                         return SAM.Gekko;
                     if (comboTime > 0)
                     {
-                        if (lastMove == SAM.Hakaze && level >= 4)
+                        if ((lastMove == SAM.Hakaze && level >= 4) || lastMove == SAM.Gyuofu)
                             return SAM.Jinpu;
                         if (lastMove == SAM.Jinpu && level >= 30)
                             return SAM.Gekko;
@@ -370,7 +373,7 @@ namespace XIVComboPlugin
                         return SAM.Kasha;
                     if (comboTime > 0)
                     {
-                        if (lastMove == SAM.Hakaze && level >= 18)
+                        if ((lastMove == SAM.Hakaze && level >= 18) || lastMove == SAM.Gyuofu)
                             return SAM.Shifu;
                         if (lastMove == SAM.Shifu && level >= 40)
                             return SAM.Kasha;
@@ -613,7 +616,7 @@ namespace XIVComboPlugin
                 if (actionID == AST.Play)
                 {
                     var gauge = JobGauges.Get<ASTGauge>();
-                    switch (gauge.DrawnCard)
+                    switch (gauge.DrawnCards[0])
                     {
                         case CardType.BALANCE:
                             return AST.Balance;

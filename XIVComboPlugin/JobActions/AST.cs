@@ -12,7 +12,11 @@
             Ewer = 4405,
             Spire = 4406,
             MinorArcana = 7443,
-            CrownPlay = 25869;
+            CrownPlay = 25869,
+
+            Benefic1 = 3594,
+            Benefic2 = 3610;
+
         public const ushort
             BuffLordOfCrownsDrawn = 2054,
             BuffLadyOfCrownsDrawn = 2055;

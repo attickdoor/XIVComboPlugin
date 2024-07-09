@@ -115,15 +115,16 @@ namespace XIVComboPlugin
 
             // DRAGOON
 
+            //SE built this in, so obsolete now
             // Change Jump/High Jump into Mirage Dive when Dive Ready
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonJumpFeature))
+            /*if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonJumpFeature))
                 if (actionID == DRG.Jump || actionID == DRG.HighJump)
                 {
                     if (SearchBuffArray(1243))
                         return DRG.MirageDive;
                     return iconHook.Original(self, DRG.Jump);
                 }
-
+            */
             // Replace Coerthan Torment with Coerthan Torment combo chain
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonCoerthanTormentCombo))
                 if (actionID == DRG.CTorment)
@@ -146,22 +147,34 @@ namespace XIVComboPlugin
                     if (comboTime > 0)
                     {
                         if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 18)
-                            return DRG.Disembowel;
-                        if (lastMove == DRG.Disembowel)
+                        {
+                            if (level >= 96)
+                                return DRG.SpiralBlow;
+                            if (level >= 18)
+                                return DRG.Disembowel;
+                        }
+                        if (lastMove == DRG.Disembowel || lastMove == DRG.SpiralBlow)
                         {
                             if (level >= 86)
                                 return DRG.ChaoticSpring;
                             if (level >= 50)
                                 return DRG.ChaosThrust;
                         }
+                        if ((lastMove == DRG.ChaosThrust || lastMove == DRG.ChaoticSpring) && level >= 58)
+                            return DRG.WheelingThrust;
+                        if ((lastMove == DRG.WheelingThrust) && level >= 64)
+                            return DRG.Drakesbane;
                     }
-                    if (SearchBuffArray(DRG.BuffFangAndClawReady) && level >= 56)
+                    //These buffs no longer exist and are now incorporated into the overall combo
+                    /*if (SearchBuffArray(DRG.BuffFangAndClawReady) && level >= 56)
                         return DRG.FangAndClaw;
                     if (SearchBuffArray(DRG.BuffWheelingThrustReady) && level >= 58)
                         return DRG.WheelingThrust;
+                    */
+                    
                     if (SearchBuffArray(DRG.BuffDraconianFire) && level >= 76)
                         return DRG.RaidenThrust;
-
+                    
                     return DRG.TrueThrust;
                 }
 
@@ -171,20 +184,32 @@ namespace XIVComboPlugin
                 {
                     if (comboTime > 0)
                     {
-                        if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 4)
-                            return DRG.VorpalThrust;
-                        if (lastMove == DRG.VorpalThrust)
+                        if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 4) 
+                        {
+                            if (level >= 96)
+                                return DRG.LanceBarrage;
+                            if (level >= 4)
+                                return DRG.VorpalThrust;
+                        }
+                        if (lastMove == DRG.VorpalThrust || lastMove == DRG.LanceBarrage)
                         {
                             if (level >= 86)
                                 return DRG.HeavensThrust;
                             if (level >= 26)
                                 return DRG.FullThrust;
                         }
+                        if ((lastMove == DRG.FullThrust || lastMove == DRG.HeavensThrust) && level >= 56)
+                            return DRG.FangAndClaw;
+                        if ((lastMove == DRG.FangAndClaw) && level >= 64)
+                            return DRG.Drakesbane;
                     }
-                    if (SearchBuffArray(DRG.BuffFangAndClawReady) && level >= 56)
+                    //These buffs no longer exist and are now incorporated into the overall combo
+                    /*if (SearchBuffArray(DRG.BuffFangAndClawReady) && level >= 56)
                         return DRG.FangAndClaw;
                     if (SearchBuffArray(DRG.BuffWheelingThrustReady) && level >= 58)
                         return DRG.WheelingThrust;
+                    */
+                    
                     if (SearchBuffArray(DRG.BuffDraconianFire) && level >= 76)
                         return DRG.RaidenThrust;
 
@@ -582,14 +607,14 @@ namespace XIVComboPlugin
             }
 
             // Ley Lines and BTL
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BlackLeyLines))
+            /*if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BlackLeyLines))
                 if (actionID == BLM.LeyLines)
                 {
                     if (SearchBuffArray(BLM.BuffLeyLines) && level >= 62)
                         return BLM.BTL;
                     return BLM.LeyLines;
                 }
-
+            */
             // ASTROLOGIAN
 
             // Make cards on the same button as play
@@ -614,6 +639,10 @@ namespace XIVComboPlugin
                         default:
                             return AST.Draw;
                     }
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.AstrologianHealLevelSyncFeature))
+                if (actionID == AST.Benefic2 && level <= 25)
+                {
+                    return AST.Benefic1;
                 }
 
             // SUMMONER
@@ -638,19 +667,25 @@ namespace XIVComboPlugin
             // SCHOLAR
 
             // Change Fey Blessing into Consolation when Seraph is out.
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarSeraphConsolationFeature))
+            /*if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarSeraphConsolationFeature))
                 if (actionID == SCH.FeyBless)
                 {
                     if (JobGauges.Get<SCHGauge>().SeraphTimer > 0) return SCH.Consolation;
                     return SCH.FeyBless;
                 }
-
+            */
             // Change Energy Drain into Aetherflow when you have no more Aetherflow stacks.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarEnergyDrainFeature))
                 if (actionID == SCH.EnergyDrain)
                 {
                     if (JobGauges.Get<SCHGauge>().Aetherflow == 0) return SCH.Aetherflow;
                     return SCH.EnergyDrain;
+                }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarHealLevelSyncFeature))
+                if (actionID == SCH.Adlo && level <= 29)
+                {
+                    return SCH.Physick;
                 }
 
             // DANCER
@@ -732,6 +767,12 @@ namespace XIVComboPlugin
                     if (JobGauges.Get<WHMGauge>().BloodLily == 3)
                         return WHM.Misery;
                     return WHM.Rapture;
+                }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.WhiteMageHealLevelSyncFeature))
+                if (actionID == WHM.Cure2 && level <= 29)
+                {
+                    return WHM.Cure1;
                 }
 
             // BARD
@@ -896,6 +937,93 @@ namespace XIVComboPlugin
                         SearchBuffArray(RPR.Buffs.ImSac2))
                         return RPR.PlentifulHarvest;
                     return actionID;
+                }
+            }
+
+            //Pictomancer
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoSubtractivePallet))
+            {
+                if (actionID == PCT.Fire1)
+                {
+                    bool isSubPallet = SearchBuffArray(PCT.SubPallet);
+
+                    if (SearchBuffArray(PCT.Aether1))
+                        return isSubPallet ? PCT.Stone1 : PCT.Aero1;
+
+                    if (SearchBuffArray(PCT.Aether2))
+                        return isSubPallet ? PCT.Thunder1 : PCT.Water1;
+
+                    return isSubPallet ? PCT.Bliz1 : PCT.Fire1;
+                }
+
+                if (actionID == PCT.Fire2)
+                {
+                    bool isSubPallet = SearchBuffArray(PCT.SubPallet);
+
+                    if (SearchBuffArray(PCT.Aether1))
+                        return isSubPallet ? PCT.Stone2 : PCT.Aero2;
+
+                    if (SearchBuffArray(PCT.Aether2))
+                        return isSubPallet ? PCT.Thunder2 : PCT.Water2;
+
+                    return isSubPallet ? PCT.Bliz2 : PCT.Fire2;
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoHolyWhiteCombo))
+            {
+                if (actionID == PCT.HolyWhite)
+                {
+                    if (SearchBuffArray(PCT.Monochrome))
+                        return PCT.CometBlack;
+                    return PCT.HolyWhite;
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoMotifMuseFeature))
+            {
+                var PCTGauge = JobGauges.Get<PCTGauge>();
+                if (actionID == PCT.CreatureMotif)
+                {
+                    if ((PCTGauge.CanvasFlags & CanvasFlags.Pom) != 0)
+                        return PCT.PomMuse;
+
+                    if ((PCTGauge.CanvasFlags & CanvasFlags.Wing) != 0)
+                        return PCT.WingMuse;
+
+                    if ((PCTGauge.CanvasFlags & CanvasFlags.Claw) != 0)
+                        return PCT.ClawMuse;
+
+                    if ((PCTGauge.CanvasFlags & CanvasFlags.Maw) != 0)
+                        return PCT.FangMuse;
+                }
+
+                if (actionID == PCT.WeaponMotif)
+                {
+                    if (PCTGauge.WeaponMotifDrawn)
+                        return PCT.StrikingMuse;
+
+                    if (lastMove == PCT.HammerStamp)
+                        return PCT.HammerBrush;
+
+                    if (lastMove == PCT.HammerBrush)
+                        return PCT.HammerPolish;
+
+                    if (SearchBuffArray(PCT.HammerReady))
+                        return PCT.HammerStamp;
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoStarrySkyCombo))
+            {
+                var PCTGauge = JobGauges.Get<PCTGauge>();
+                if (actionID == PCT.LandscapeMotif)
+                {
+                    if (PCTGauge.LandscapeMotifDrawn)
+                        return PCT.StarryMuse;
+                    if (SearchBuffArray(PCT.StarStruck))
+                        return PCT.StarPrism;
+                    return PCT.StarryMotif;
                 }
             }
 

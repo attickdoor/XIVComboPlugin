@@ -6,6 +6,9 @@
             FeyBless = 16543,
             Consolation = 16546,
             EnergyDrain = 167,
-            Aetherflow = 166;
+            Aetherflow = 166,
+
+            Physick = 190,
+            Adlo = 185;
     }
 }

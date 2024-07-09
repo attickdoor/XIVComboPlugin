@@ -11,6 +11,7 @@
             HeatedSlugshot = 7412,
             Hypercharge = 17209,
             HeatBlast = 7410,
+            BlazingShot = 36978,
             SpreadShot = 2870,
             AutoCrossbow = 16497,
             Scattergun = 25786;

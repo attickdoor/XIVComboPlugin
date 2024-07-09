@@ -9,8 +9,8 @@ namespace XIVComboPlugin
         None = 0,
 
         // DRAGOON
-        [CustomComboInfo("Jump + Mirage Dive", "Replace (High) Jump with Mirage Dive when Dive Ready", 22)]
-        DragoonJumpFeature = 1L << 44,
+        //[CustomComboInfo("Jump + Mirage Dive", "Replace (High) Jump with Mirage Dive when Dive Ready", 22)]
+        //DragoonJumpFeature = 1L << 44,
 
         [CustomComboInfo("Coerthan Torment Combo", "Replace Coerthan Torment with its combo chain", 22)]
         DragoonCoerthanTormentCombo = 1L << 0,
@@ -111,8 +111,8 @@ namespace XIVComboPlugin
         [CustomComboInfo("Enochian Stance Switcher", "Change Fire 4 and Blizzard 4 to the appropriate element depending on stance, as well as Flare and Freeze", 25)]
         BlackEnochianFeature = 1L << 25,
 
-        [CustomComboInfo("(Between the) Ley Lines", "Change Ley Lines into BTL when Ley Lines is active", 25)]
-        BlackLeyLines = 1L << 28,
+        //[CustomComboInfo("(Between the) Ley Lines", "Change Ley Lines into BTL when Ley Lines is active", 25)]
+        //BlackLeyLines = 1L << 28,
 
         // ASTROLOGIAN
         [CustomComboInfo("Draw on Play", "Play turns into Draw when no card is drawn, as well as the usual Play behavior", 33)]
@@ -127,8 +127,8 @@ namespace XIVComboPlugin
         SummonerESPainflareCombo = 1L << 40,
         
         // SCHOLAR
-        [CustomComboInfo("Seraph Fey Blessing/Consolation", "Change Fey Blessing into Consolation when Seraph is out", 28)]
-        ScholarSeraphConsolationFeature = 1L << 29,
+        //[CustomComboInfo("Seraph Fey Blessing/Consolation", "Change Fey Blessing into Consolation when Seraph is out", 28)]
+        //ScholarSeraphConsolationFeature = 1L << 29,
 
         [CustomComboInfo("ED Aetherflow", "Change Energy Drain into Aetherflow when you have no more Aetherflow stacks", 28)]
         ScholarEnergyDrainFeature = 1L << 37,
@@ -188,6 +188,19 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Arcane Circle Combo", "Replace Arcane Circle with Plentiful Harvest while you have Immortal Sacrifice.", 39)]
         ReaperArcaneFeature = 1L << 30,
+
+        //PICTOMANCER
+        [CustomComboInfo("Red to Blue combo","Replace Fire combo with Blizzard combo when Subtractive Pallet is active.",42)]
+        PictoSubtractivePallet = 1L << 31,
+
+        [CustomComboInfo("Motifs and Muses", "Replace Motifs with their relevant Muses.", 42)]
+        PictoMotifMuseFeature = 1L << 34,
+
+        [CustomComboInfo("Starry Sky to Star Prism", "Replace Starry Sky with Star Prism.", 42)]
+        PictoStarrySkyCombo = 1L << 38,
+
+        [CustomComboInfo("Holy white to Comet Black", "Replace Holy in White with Comet in black when Monochrome Tones is active.", 42)]
+        PictoHolyWhiteCombo = 1L << 43,
     }
 
     public class CustomComboInfoAttribute : Attribute

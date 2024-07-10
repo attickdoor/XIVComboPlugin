@@ -757,7 +757,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BardStraightShotUpgradeFeature))
                 if (actionID == BRD.HeavyShot || actionID == BRD.BurstShot)
                 {
-                    if (SearchBuffArray(BRD.BuffStraightShotReady))
+                    if (SearchBuffArray(BRD.BuffHawksEye) || SearchBuffArray(BRD.BuffBarrage))
                     {
                         if (level >= 70) return BRD.RefulgentArrow;
                         return BRD.StraightShot;
@@ -770,12 +770,14 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BardAoEUpgradeFeature))
                 if (actionID == BRD.QuickNock || actionID == BRD.Ladonsbite)
                 {
-                    if (SearchBuffArray(BRD.BuffShadowbiteReady))
+                    if (SearchBuffArray(BRD.BuffHawksEye) || SearchBuffArray(BRD.BuffBarrage))
                     {
-                        return BRD.Shadowbite;
+                        if (level >= 72) return BRD.Shadowbite;
+                        return BRD.WideVolley;
                     }
 
-                    return iconHook.Original(self, BRD.QuickNock);
+                    if (level >= 82) return BRD.Ladonsbite;
+                    return BRD.QuickNock;
                 }
 
             // MONK

@@ -11,10 +11,11 @@
             RefulgentArrow = 7409,
             QuickNock = 106,
             Ladonsbite = 25783,
+            WideVolley = 36974,
             Shadowbite = 16494;
 
         public const ushort
-            BuffStraightShotReady = 122,
-            BuffShadowbiteReady = 3002;
+            BuffHawksEye = 3861,
+            BuffBarrage = 128;
     }
 }

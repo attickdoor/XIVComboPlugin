@@ -420,8 +420,6 @@ namespace XIVComboPlugin
                     if (JobGauges.Get<SAMGauge>().Kaeshi == Kaeshi.NAMIKIRI)
                         return SAM.KaeshiNamikiri;
 
-                    if (SearchBuffArray(SAM.BuffZanshinReady)) return SAM.Zanshin;
-
                     return SAM.Ikishoten;
                 }
 
@@ -616,7 +614,7 @@ namespace XIVComboPlugin
                 if (actionID == AST.Play)
                 {
                     var gauge = JobGauges.Get<ASTGauge>();
-                    switch (gauge.DrawnCards[0])
+                    switch (gauge.DrawnCard)
                     {
                         case CardType.BALANCE:
                             return AST.Balance;

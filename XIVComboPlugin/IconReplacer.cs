@@ -916,6 +916,52 @@ namespace XIVComboPlugin
                 }
             }
 
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperSteelDreadSTCombine))
+            {
+                if (actionID == VPR.SteelFangs || actionID == VPR.DreadFangs)
+                {
+                    if(IsAbilityUp(VPR.DeathRattle)) return VPR.DeathRattle;
+                    return iconHook.Original(self, actionID);
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperDreadwinderCombine))
+            {
+                if (actionID == VPR.HuntersCoil)
+                {
+                    if (IsAbilityUp(VPR.TwinfangBite)) return VPR.TwinfangBite;
+                    return actionID;
+                }
+                if (actionID == VPR.SwiftskinsCoil)
+                {
+                    if (IsAbilityUp(VPR.TwinbloodBite)) return VPR.TwinbloodBite;
+                    return actionID;
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperSteelDreadAoECombine))
+            {
+                if (actionID == VPR.SteelMaw || actionID == VPR.DreadMaw)
+                {
+                    if (IsAbilityUp(VPR.LastLash)) return VPR.LastLash;
+                    return iconHook.Original(self, actionID);
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperPitOfDreadCombine))
+            {
+                if (actionID == VPR.HuntersDen)
+                {   
+                    if (IsAbilityUp(VPR.TwinfangThresh)) return VPR.TwinfangThresh;
+                    return actionID;
+                }
+                if (actionID == VPR.SwiftskinDen)
+                {
+                    if (IsAbilityUp(VPR.TwinbloodThresh)) return VPR.TwinbloodThresh;
+                    return actionID;
+                }
+            }
+
             return iconHook.Original(self, actionID);
         }
 
@@ -927,6 +973,11 @@ namespace XIVComboPlugin
                 if (buffs[i].StatusId == needle)
                     return true;
             return false;
-        }        
+        }
+        private unsafe bool IsAbilityUp(uint actionID)
+        {
+            var actionManager = *ActionManager.Instance();
+            return actionManager.IsActionHighlighted(ActionType.Action, actionID);
+        }
     }
 }

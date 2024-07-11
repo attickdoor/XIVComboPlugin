@@ -112,6 +112,8 @@ namespace XIVComboPlugin
                 case 38: return "Dancer";
                 case 39: return "Reaper";
                 case 40: return "Sage";
+                case 41: return "Viper";
+                case 42: return "Pictomancer";
             }
         }
 

@@ -188,6 +188,17 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Arcane Circle Combo", "Replace Arcane Circle with Plentiful Harvest while you have Immortal Sacrifice.", 39)]
         ReaperArcaneFeature = 1L << 30,
+
+        //Viper
+        [CustomComboInfo("Steel and Dread ST Combine", "Replaces Steel/Dread fang single target combo with Death Rattle when available.", 41)]
+        ViperSteelDreadSTCombine = 1L << 54,
+        [CustomComboInfo("Dreadwinter Combine", "Replaces Hunter's Coil and Swiftskin's Coil with respective Twinfang/Twinblood.", 41)]
+        ViperDreadwinderCombine = 1L << 51,
+        [CustomComboInfo("Steel and Dread AoE Combine", "Replaces Steel/Dread fang AoE combo with Last Lash when available.", 41)]
+        ViperSteelDreadAoECombine = 1L << 50,
+        [CustomComboInfo("Pit of Dread Combine", "Replaces Hunter's Coil and Swiftskin's Den with respective Twinfang/Twinblood.", 41)]
+        ViperPitOfDreadCombine = 1L << 46,
+
     }
 
     public class CustomComboInfoAttribute : Attribute

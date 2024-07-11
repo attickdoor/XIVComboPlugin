@@ -162,7 +162,7 @@ namespace XIVComboPlugin
         [CustomComboInfo("Heavy Shot into Straight Shot", "Replaces Heavy Shot/Burst Shot with Straight Shot/Refulgent Arrow when procced", 23)]
         BardStraightShotUpgradeFeature = 1L << 42,
 
-        [CustomComboInfo("Quick Nock into Shadowbite", "Replaces Quick Nock/Ladonsbite with Shadowbite when procced", 23)]
+        [CustomComboInfo("Quick Nock into Wide Volley", "Replaces Quick Nock/Ladonsbite with Wide Volley/Shadowbite when procced", 23)]
         BardAoEUpgradeFeature = 1L << 59,
 
         // MONK

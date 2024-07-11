@@ -6,6 +6,7 @@
             Veraero2 = 16525,
             Verthunder2 = 16524,
             Impact = 16526,
+            GrandImpact = 37006,
             Redoublement = 7516,
             ERedoublement = 7529,
             Zwerchhau = 7512,

@@ -785,11 +785,14 @@ namespace XIVComboPlugin
 
             // RED MAGE
 
-            // Replace Veraero/thunder 2 with Impact when Dualcast is active
+            // Replace Veraero/thunder 2 with Impact when Dualcast is active, or Grand Impact when Grand Impact Ready
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.RedMageAoECombo))
             {
                 if (actionID == RDM.Veraero2)
                 {
+                    // TODO: Ideally use GrandImpactReady buff ID instead of this, so we don't have to check level
+                    if (SearchBuffArray(RDM.BuffAcceleration) && level >= 96) return RDM.GrandImpact;
+
                     if (SearchBuffArray(RDM.BuffSwiftcast) || SearchBuffArray(RDM.BuffDualcast) || 
                         SearchBuffArray(RDM.BuffAcceleration) || SearchBuffArray(RDM.BuffChainspell))
                     {
@@ -801,6 +804,9 @@ namespace XIVComboPlugin
 
                 if (actionID == RDM.Verthunder2)
                 {
+                    // TODO: Ideally use GrandImpactReady buff ID instead of this, so we don't have to check level
+                    if (SearchBuffArray(RDM.BuffAcceleration) && level >= 96) return RDM.GrandImpact;
+
                     if (SearchBuffArray(RDM.BuffSwiftcast) || SearchBuffArray(RDM.BuffDualcast) ||
                         SearchBuffArray(RDM.BuffAcceleration) || SearchBuffArray(RDM.BuffChainspell))
                     {
@@ -835,12 +841,16 @@ namespace XIVComboPlugin
                     return RDM.Riposte;
                 }
 
+            // Replace Verstone or Verfire with Jolt if they're NOT ready, or Grand Impact when Grand Impact Ready
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.RedMageVerprocCombo))
             {
                 if (actionID == RDM.Verstone)
                 {
                     if (level >= 80 && (lastMove == RDM.Verflare || lastMove == RDM.Verholy)) return RDM.Scorch;
                     if (level >= 90 && lastMove == RDM.Scorch) return RDM.Resolution;
+
+                    // TODO: Ideally use GrandImpactReady buff ID instead of this, so we don't have to check level
+                    if (SearchBuffArray(RDM.BuffAcceleration) && level >= 96) return RDM.GrandImpact;
 
                     if (SearchBuffArray(RDM.BuffVerstoneReady)) return RDM.Verstone;
                     if (level < 62) return RDM.Jolt;
@@ -851,6 +861,9 @@ namespace XIVComboPlugin
                 {
                     if (level >= 80 && (lastMove == RDM.Verflare || lastMove == RDM.Verholy)) return RDM.Scorch;
                     if (level >= 90 && lastMove == RDM.Scorch) return RDM.Resolution;
+
+                    // TODO: Ideally use GrandImpactReady buff ID instead of this, so we don't have to check level
+                    if (SearchBuffArray(RDM.BuffAcceleration) && level >= 96) return RDM.GrandImpact;
 
                     if (SearchBuffArray(RDM.BuffVerfireReady)) return RDM.Verfire;
                     if (level < 62) return RDM.Jolt;

@@ -14,9 +14,7 @@
             Confiteor = 16459,
             BladeOfFaith = 25748,
             BladeOfTruth = 25749,
-            BladeOfValor = 25750,
-            Imperator = 36921,
-            BladeOfHonor = 36922;
+            BladeOfValor = 25750;
 
         public const ushort
             BuffRequiescat = 1368,

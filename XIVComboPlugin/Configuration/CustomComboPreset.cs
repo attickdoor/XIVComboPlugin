@@ -112,7 +112,8 @@ namespace XIVComboPlugin
         BlackLeyLines = 1L << 28,
 
         // ASTROLOGIAN
-        // Nothing here for now
+        [CustomComboInfo("Astral/Umbral Draw on Play 1/2/3", "The Play actions turn into Draw actions when no card is ready to be played, while keeping the the usual Play behavior", 33)]
+        AstrologianCardsOnDrawFeature = 1L << 27,
 
         // SUMMONER
 

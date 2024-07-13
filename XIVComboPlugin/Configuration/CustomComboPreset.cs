@@ -70,7 +70,7 @@ namespace XIVComboPlugin
         [CustomComboInfo("Iaijutsu into Tsubame", "Replace Iaijutsu with Tsubame after using an Iaijutsu", 34)]
         SamuraiTsubameCombo = 1L << 56,
 
-        [CustomComboInfo("Ogi Namikiri Combo", "Replace Ikishoten with Ogi Namiki and Kaeshi Namikiri when appropriate", 34)]
+        [CustomComboInfo("Ogi Namikiri Combo", "Replace Ikishoten with Ogi Namiki > Kaeshi Namikiri > Zanshin", 34)]
         SamuraiOgiCombo = 1L << 62,
 
 
@@ -188,6 +188,9 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Arcane Circle Combo", "Replace Arcane Circle with Plentiful Harvest while you have Immortal Sacrifice.", 39)]
         ReaperArcaneFeature = 1L << 30,
+
+        [CustomComboInfo("Perfectio", "Replace Enshroud with Perfectio while you have Perfectio Parata", 39)]
+        ReaperPerfectio = 1L << 31
     }
 
     public class CustomComboInfoAttribute : Attribute

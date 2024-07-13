@@ -1,0 +1,20 @@
+[
+    {
+        "Author": "Raptor",
+        "Name": "XIVCombo",
+        "Description": "XIVCombo",
+        "InternalName": "XIVCombo",
+        "AssemblyVersion": "1.0.0.0",
+        "RepoUrl": "https://github.com/erotpar/XIVComboPluginTest",
+        "ApplicableVersion": "any",
+        "DalamudApiLevel": 4,
+        "IsTestingExclusive": false,
+        "DownloadCount": 0,
+        "LastUpdated": "0"
+        "DownloadLinkInstall": "https://github.com/erotpar/XIVComboPluginTest/archive/refs/tags/release.zip",
+        "IsHide": false,
+        "IsTestingExclusive": false,
+        "DownloadLinkTesting": "https://github.com/erotpar/XIVComboPluginTest/archive/refs/tags/release.zip",
+        "DownloadLinkUpdate": "https://github.com/erotpar/XIVComboPluginTest/archive/refs/tags/release.zip",
+    }
+]

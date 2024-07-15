@@ -306,10 +306,13 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.WarriorIRCombo))
                 if (actionID == WAR.InnerRelease || actionID == WAR.Berserk)
                 {
-                    if (!SearchBuffArray(WAR.BuffWrathful) && SearchBuffArray(WAR.BuffPrimalRendReady))
-                        return WAR.PrimalRend;
-                    if (!SearchBuffArray(WAR.BuffWrathful) && SearchBuffArray(WAR.BuffPrimalRuinationReady))
-                        return WAR.PrimalRuination;
+                    if (!SearchBuffArray(WAR.BuffWrathful)
+                    {
+                        if (SearchBuffArray(WAR.BuffPrimalRendReady))
+                            return WAR.PrimalRend;
+                        if (SearchBuffArray(WAR.BuffPrimalRuinationReady))
+                            return WAR.PrimalRuination;
+                     }
                     return iconHook.Original(self, actionID);
                 }
 

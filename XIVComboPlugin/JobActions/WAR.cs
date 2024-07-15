@@ -11,9 +11,12 @@
             Overpower = 41,
             InnerRelease = 7389,
             PrimalRend = 25753,
+            PrimalRuination = 36925,
             Berserk = 38;
 
         public const ushort
-            BuffPrimalRendReady = 2624;
+            BuffPrimalRendReady = 2624,
+            BuffWrathful = 3901,
+            BuffPrimalRuinationReady = 3834;
     }
 }

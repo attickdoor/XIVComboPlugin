@@ -306,8 +306,13 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.WarriorIRCombo))
                 if (actionID == WAR.InnerRelease || actionID == WAR.Berserk)
                 {
-                    if (SearchBuffArray(WAR.BuffPrimalRendReady))
-                        return WAR.PrimalRend;
+                    if (!SearchBuffArray(WAR.BuffWrathful)
+                    {
+                        if (SearchBuffArray(WAR.BuffPrimalRendReady))
+                            return WAR.PrimalRend;
+                        if (SearchBuffArray(WAR.BuffPrimalRuinationReady))
+                            return WAR.PrimalRuination;
+                     }
                     return iconHook.Original(self, actionID);
                 }
 
@@ -591,7 +596,7 @@ namespace XIVComboPlugin
                 }
 
             // ASTROLOGIAN
-
+            /**
             // Make cards on the same button as play
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.AstrologianCardsOnDrawFeature))
                 if (actionID == AST.Play)
@@ -615,6 +620,7 @@ namespace XIVComboPlugin
                             return AST.Draw;
                     }
                 }
+            */
 
             // SUMMONER
             // Change Fester into Energy Drain

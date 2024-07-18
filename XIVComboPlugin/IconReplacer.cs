@@ -1038,16 +1038,14 @@ namespace XIVComboPlugin
                                 return iconHook.Original(self, VPR.SerpentsTail);
                         }
 
-                        var maxtribute = 4;
-                        if (level >= VPR.Levels.Ouroboros)
-                            maxtribute = 5;
-                        if (gauge.AnguineTribute == maxtribute)
+                        var maxTribute = level >= VPR.Levels.Ouroboros ? 5 : 4;
+                        if (gauge.AnguineTribute == maxTribute)
                             return VPR.FirstGeneration;
-                        if (gauge.AnguineTribute == maxtribute - 1)
+                        if (gauge.AnguineTribute == maxTribute - 1)
                             return VPR.SecondGeneration;
-                        if (gauge.AnguineTribute == maxtribute - 2)
+                        if (gauge.AnguineTribute == maxTribute - 2)
                             return VPR.ThirdGeneration;
-                        if (gauge.AnguineTribute == maxtribute - 3)
+                        if (gauge.AnguineTribute == maxTribute - 3)
                             return VPR.FourthGeneration;
                         if (gauge.AnguineTribute == 1 && level >= VPR.Levels.Ouroboros)
                             return VPR.Ouroboros;

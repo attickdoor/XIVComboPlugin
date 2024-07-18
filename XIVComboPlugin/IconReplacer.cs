@@ -512,6 +512,18 @@ namespace XIVComboPlugin
                             return GNB.DemonSlaughter;
                     return GNB.DemonSlice;
                 }
+            
+            // Replace Fated Brand with Continuation
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.GunbreakerFatedCircleCont))
+                if (actionID == GNB.FatedCircle)
+                {
+                    if (level >= GNB.LevelEnhancedContinuation2)
+                    {
+                        if (SearchBuffArray(GNB.BuffReadyToRaze))
+                            return GNB.FatedBrand;
+                    }
+                    return GNB.FatedCircle;
+                }
 
             // MACHINIST
 
@@ -903,6 +915,145 @@ namespace XIVComboPlugin
                         return RPR.PlentifulHarvest;
                     return actionID;
                 }
+            }
+            
+             //Pictomancer
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoSubtractivePallet))
+            {
+                if (actionID == PCT.Fire1)
+                {
+                    bool isSubPallet = SearchBuffArray(PCT.SubPallet);
+
+                    if (SearchBuffArray(PCT.Aether1))
+                        return isSubPallet ? PCT.Stone1 : PCT.Aero1;
+
+                    if (SearchBuffArray(PCT.Aether2))
+                        return isSubPallet ? PCT.Thunder1 : PCT.Water1;
+
+                    return isSubPallet ? PCT.Bliz1 : PCT.Fire1;
+                }
+
+                if (actionID == PCT.Fire2)
+                {
+                    bool isSubPallet = SearchBuffArray(PCT.SubPallet);
+
+                    if (SearchBuffArray(PCT.Aether1))
+                        return isSubPallet ? PCT.Stone2 : PCT.Aero2;
+
+                    if (SearchBuffArray(PCT.Aether2))
+                        return isSubPallet ? PCT.Thunder2 : PCT.Water2;
+
+                    return isSubPallet ? PCT.Bliz2 : PCT.Fire2;
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoHolyWhiteCombo))
+            {
+                if (actionID == PCT.HolyWhite)
+                {
+                    if (SearchBuffArray(PCT.Monochrome))
+                        return PCT.CometBlack;
+                    return PCT.HolyWhite;
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoMotifMuseFeature))
+            {
+                var PCTGauge = JobGauges.Get<PCTGauge>();
+                if (actionID == PCT.CreatureMotif)
+                {
+                    if ((PCTGauge.CanvasFlags & CanvasFlags.Pom) != 0)
+                        return PCT.PomMuse;
+
+                    if ((PCTGauge.CanvasFlags & CanvasFlags.Wing) != 0)
+                        return PCT.WingMuse;
+
+                    if ((PCTGauge.CanvasFlags & CanvasFlags.Claw) != 0)
+                        return PCT.ClawMuse;
+
+                    if ((PCTGauge.CanvasFlags & CanvasFlags.Maw) != 0)
+                        return PCT.FangMuse;
+                }
+
+                if (actionID == PCT.WeaponMotif)
+                {
+                    if (PCTGauge.WeaponMotifDrawn)
+                        return PCT.StrikingMuse;
+
+                    if (lastMove == PCT.HammerStamp)
+                        return PCT.HammerBrush;
+
+                    if (lastMove == PCT.HammerBrush)
+                        return PCT.HammerPolish;
+
+                    if (SearchBuffArray(PCT.HammerReady))
+                        return PCT.HammerStamp;
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoStarrySkyCombo))
+            {
+                var PCTGauge = JobGauges.Get<PCTGauge>();
+                if (actionID == PCT.LandscapeMotif)
+                {
+                    if (PCTGauge.LandscapeMotifDrawn)
+                        return PCT.StarryMuse;
+                    if (SearchBuffArray(PCT.StarStruck))
+                        return PCT.StarPrism;
+                    return PCT.StarryMotif;
+                }
+            }
+            
+            //VIPER
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperDeathRattleMaximum))
+            {
+                if (actionID == VPR.SteelFangs || actionID == VPR.DreadFangs)
+                {
+                    if (iconHook.Original(self, VPR.SerpentsTail) == VPR.DeathRattle)
+                        return VPR.DeathRattle;
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperDeathRattleMaximum))
+            {
+
+                if (actionID == VPR.DreadMaw || actionID == VPR.SteelMaw)
+                {
+                    if (iconHook.Original(self, VPR.SerpentsTail) == VPR.LastLash)
+                        return VPR.LastLash;
+                }
+            }
+            
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperDeathRattleMaximum)){
+                if (actionID == VPR.Reawaken && SearchBuffArray(VPR.Buffs.Reawakened))
+                    {
+                        var gauge = JobGauges.Get<VPRGauge>();
+
+                        if (level >= VPR.Levels.Legacies)
+                        {
+                            if (iconHook.Original(self, VPR.SerpentsTail) == VPR.FirstLegacy || 
+                                iconHook.Original(self, VPR.SerpentsTail) == VPR.SecondLegacy ||
+                                iconHook.Original(self, VPR.SerpentsTail) == VPR.ThirdLegacy ||
+                                iconHook.Original(self, VPR.SerpentsTail) == VPR.FourthLegacy)
+                                return iconHook.Original(self, VPR.SerpentsTail);
+                        }
+
+                        var maxtribute = 4;
+                        if (level >= VPR.Levels.Ouroboros)
+                            maxtribute = 5;
+                        if (gauge.AnguineTribute == maxtribute)
+                            return VPR.FirstGeneration;
+                        if (gauge.AnguineTribute == maxtribute - 1)
+                            return VPR.SecondGeneration;
+                        if (gauge.AnguineTribute == maxtribute - 2)
+                            return VPR.ThirdGeneration;
+                        if (gauge.AnguineTribute == maxtribute - 3)
+                            return VPR.FourthGeneration;
+                        if (gauge.AnguineTribute == 1 && level >= VPR.Levels.Ouroboros)
+                            return VPR.Ouroboros;
+                    }
+               
+                return iconHook.Original(self, actionID);
             }
 
             return iconHook.Original(self, actionID);

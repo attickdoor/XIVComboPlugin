@@ -14,7 +14,7 @@ namespace XIVComboPlugin
 {
     class XIVComboPlugin : IDalamudPlugin
     {
-        public string Name => "XIV Combo Plugin";
+        public string Name => "XIV Combo Plugin DT";
 
         public XIVComboConfiguration Configuration;
 
@@ -112,6 +112,8 @@ namespace XIVComboPlugin
                 case 38: return "Dancer";
                 case 39: return "Reaper";
                 case 40: return "Sage";
+                case 41: return "Viper";
+                case 42: return "Pictomancer";
             }
         }
 

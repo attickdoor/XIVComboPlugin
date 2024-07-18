@@ -1014,7 +1014,7 @@ namespace XIVComboPlugin
                 }
             }
 
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperDeathRattleMaximum))
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperAoELash))
             {
 
                 if (actionID == VPR.DreadMaw || actionID == VPR.SteelMaw)
@@ -1024,7 +1024,7 @@ namespace XIVComboPlugin
                 }
             }
             
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperDeathRattleMaximum)){
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperLegacyUnleashed)){
                 if (actionID == VPR.Reawaken && SearchBuffArray(VPR.Buffs.Reawakened))
                     {
                         var gauge = JobGauges.Get<VPRGauge>();
@@ -1050,8 +1050,6 @@ namespace XIVComboPlugin
                         if (gauge.AnguineTribute == 1 && level >= VPR.Levels.Ouroboros)
                             return VPR.Ouroboros;
                     }
-               
-                return iconHook.Original(self, actionID);
             }
 
             return iconHook.Original(self, actionID);

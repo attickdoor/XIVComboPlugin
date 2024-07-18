@@ -813,19 +813,19 @@ namespace XIVComboPlugin
                     var gauge = JobGauges.Get<RDMGauge>();
                     if ((lastMove == RDM.Riposte || lastMove == RDM.ERiposte) && level >= 35)
                     {
-                        if (gauge.BlackMana >= 15 && gauge.WhiteMana >= 15)
+                        if ((gauge.BlackMana >= 15 && gauge.WhiteMana >= 15) || SearchBuffArray(RDM.BuffMagickedSwordplay))
                             return RDM.EZwerchhau;
                         return RDM.Zwerchhau;
                     }
 
                     if (lastMove == RDM.Zwerchhau && level >= 50)
                     {
-                        if (gauge.BlackMana >= 15 && gauge.WhiteMana >= 15)
+                        if ((gauge.BlackMana >= 15 && gauge.WhiteMana >= 15) || SearchBuffArray(RDM.BuffMagickedSwordplay))
                             return RDM.ERedoublement;
                         return RDM.Redoublement;
                     }
 
-                    if (gauge.BlackMana >= 20 && gauge.WhiteMana >= 20)
+                    if ((gauge.BlackMana >= 15 && gauge.WhiteMana >= 15) || SearchBuffArray(RDM.BuffMagickedSwordplay))
                         return RDM.ERiposte;
                     return RDM.Riposte;
                 }

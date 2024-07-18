@@ -29,6 +29,8 @@
             BuffAcceleration = 1238,
             BuffChainspell = 2560,
             BuffVerstoneReady = 1235,
-            BuffVerfireReady = 1234;
+            BuffVerfireReady = 1234,
+            BuffGrandImpactReady = 3877,
+            BuffMagickedSwordplay = 3875;
     }
 }

@@ -762,7 +762,40 @@ namespace XIVComboPlugin
                 }
 
             // MONK
-            // haha you get nothing now
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MonkFuryCombo))
+            {
+                var gauge = JobGauges.Get<MNKGauge>();
+
+                if (actionID == MNK.DragonKick)
+                {
+                    if (gauge.OpoOpoFury >= 1)
+                    {
+                        if (level >= 92) return MNK.LeapingOpo;
+                        return MNK.Bootshine;
+                    }
+                    return MNK.DragonKick;
+                }
+
+                if (actionID == MNK.TwinSnakes)
+                {
+                    if (gauge.RaptorFury >= 1)
+                    {
+                        if (level >= 92) return MNK.RisingRaptor;
+                        return MNK.TrueStrike;
+                    }
+                    return MNK.TwinSnakes;
+                }
+
+                if (actionID == MNK.Demolish)
+                {
+                    if (gauge.CoeurlFury >= 1)
+                    {
+                        if (level >= 92) return MNK.PouncingCoeurl;
+                        return MNK.SnapPunch;
+                    }
+                    return MNK.Demolish;
+                }
+            }
 
             // RED MAGE
 

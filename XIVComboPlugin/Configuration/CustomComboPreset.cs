@@ -161,7 +161,8 @@ namespace XIVComboPlugin
         BardAoEUpgradeFeature = 1L << 59,
 
         // MONK
-        // you get nothing, you lose, have a nice day etc
+        [CustomComboInfo("Monk Fury Combo", "Replaces Dragon Kick, Twin Snakes, and Demolish when Fury charges are available", 20)]
+        MonkFuryCombo = 1L << 43,
 
         // RED MAGE
         [CustomComboInfo("Red Mage AoE Combo", "Replaces Veraero/thunder 2 with Impact when Dualcast or Swiftcast are active", 35)]

@@ -161,7 +161,7 @@ namespace XIVComboPlugin
         BardAoEUpgradeFeature = 1L << 59,
 
         // MONK
-        [CustomComboInfo("Monk Fury Combo", "Replaces Dragon Kick, Twin Snakes, and Demolish when Fury charges are available", 20)]
+        [CustomComboInfo("Monk Fury Combo", "Replaces Bootshine, True Strike, and Snap Punch when no Fury charges are available", 20)]
         MonkFuryCombo = 1L << 43,
 
         // RED MAGE

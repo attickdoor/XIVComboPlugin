@@ -922,28 +922,16 @@ namespace XIVComboPlugin
             {
                 if (actionID == PCT.Fire1)
                 {
-                    bool isSubPallet = SearchBuffArray(PCT.SubPallet);
-
-                    if (SearchBuffArray(PCT.Aether1))
-                        return isSubPallet ? PCT.Stone1 : PCT.Aero1;
-
-                    if (SearchBuffArray(PCT.Aether2))
-                        return isSubPallet ? PCT.Thunder1 : PCT.Water1;
-
-                    return isSubPallet ? PCT.Bliz1 : PCT.Fire1;
+                    if (SearchBuffArray(PCT.SubPallet))
+                        return iconHook.Original(self, PCT.Bliz1);
+                    return iconHook.Original(self, PCT.Fire1);
                 }
 
                 if (actionID == PCT.Fire2)
                 {
-                    bool isSubPallet = SearchBuffArray(PCT.SubPallet);
-
-                    if (SearchBuffArray(PCT.Aether1))
-                        return isSubPallet ? PCT.Stone2 : PCT.Aero2;
-
-                    if (SearchBuffArray(PCT.Aether2))
-                        return isSubPallet ? PCT.Thunder2 : PCT.Water2;
-
-                    return isSubPallet ? PCT.Bliz2 : PCT.Fire2;
+                    if (SearchBuffArray(PCT.SubPallet))
+                        return iconHook.Original(self, PCT.Bliz2);
+                    return iconHook.Original(self, PCT.Fire2);
                 }
             }
 

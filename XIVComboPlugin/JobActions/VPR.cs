@@ -95,7 +95,7 @@ namespace XIVComboPlugin.JobActions
                 DreadMaw = 35,
                 Slither = 40,
                 HuntersBite = 40,
-                SwiftskinsBike = 45,
+                SwiftskinsBite = 45,
                 AoE3rdCombo = 50,    // Jagged Maw and Bloodied Maw
                 DeathRattle = 55,
                 LastLash = 60,

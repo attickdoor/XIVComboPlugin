@@ -1026,30 +1026,30 @@ namespace XIVComboPlugin
             
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperLegacyUnleashed)){
                 if (actionID == VPR.Reawaken && SearchBuffArray(VPR.Buffs.Reawakened))
+                {
+                    var gauge = JobGauges.Get<VPRGauge>();
+
+                    if (level >= VPR.Levels.Legacies)
                     {
-                        var gauge = JobGauges.Get<VPRGauge>();
-
-                        if (level >= VPR.Levels.Legacies)
-                        {
-                            if (iconHook.Original(self, VPR.SerpentsTail) == VPR.FirstLegacy || 
-                                iconHook.Original(self, VPR.SerpentsTail) == VPR.SecondLegacy ||
-                                iconHook.Original(self, VPR.SerpentsTail) == VPR.ThirdLegacy ||
-                                iconHook.Original(self, VPR.SerpentsTail) == VPR.FourthLegacy)
-                                return iconHook.Original(self, VPR.SerpentsTail);
-                        }
-
-                        var maxTribute = level >= VPR.Levels.Ouroboros ? 5 : 4;
-                        if (gauge.AnguineTribute == maxTribute)
-                            return VPR.FirstGeneration;
-                        if (gauge.AnguineTribute == maxTribute - 1)
-                            return VPR.SecondGeneration;
-                        if (gauge.AnguineTribute == maxTribute - 2)
-                            return VPR.ThirdGeneration;
-                        if (gauge.AnguineTribute == maxTribute - 3)
-                            return VPR.FourthGeneration;
-                        if (gauge.AnguineTribute == 1 && level >= VPR.Levels.Ouroboros)
-                            return VPR.Ouroboros;
+                        if (iconHook.Original(self, VPR.SerpentsTail) == VPR.FirstLegacy || 
+                            iconHook.Original(self, VPR.SerpentsTail) == VPR.SecondLegacy ||
+                            iconHook.Original(self, VPR.SerpentsTail) == VPR.ThirdLegacy ||
+                            iconHook.Original(self, VPR.SerpentsTail) == VPR.FourthLegacy)
+                            return iconHook.Original(self, VPR.SerpentsTail);
                     }
+
+                    var maxTribute = level >= VPR.Levels.Ouroboros ? 5 : 4;
+                    if (gauge.AnguineTribute == maxTribute)
+                        return VPR.FirstGeneration;
+                    if (gauge.AnguineTribute == maxTribute - 1)
+                        return VPR.SecondGeneration;
+                    if (gauge.AnguineTribute == maxTribute - 2)
+                        return VPR.ThirdGeneration;
+                    if (gauge.AnguineTribute == maxTribute - 3)
+                        return VPR.FourthGeneration;
+                    if (gauge.AnguineTribute == 1 && level >= VPR.Levels.Ouroboros)
+                        return VPR.Ouroboros;
+                }
             }
 
             return iconHook.Original(self, actionID);

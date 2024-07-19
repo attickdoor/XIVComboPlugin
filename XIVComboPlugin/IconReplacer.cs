@@ -790,6 +790,7 @@ namespace XIVComboPlugin
                 if (actionID == MNK.MasterfulBlitz)
                 {
                     if (JobGauges.Get<MNKGauge>().BlitzTimeRemaining <= 0 || level < 60) return MNK.PerfectBalance;
+                    return iconHook.Original(self, actionID);
                 }
             }
 

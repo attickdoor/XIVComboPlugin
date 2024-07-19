@@ -825,7 +825,7 @@ namespace XIVComboPlugin
                         return RDM.Redoublement;
                     }
 
-                    if ((gauge.BlackMana >= 15 && gauge.WhiteMana >= 15) || SearchBuffArray(RDM.BuffMagickedSwordplay))
+                    if ((gauge.BlackMana >= 20 && gauge.WhiteMana >= 20) || SearchBuffArray(RDM.BuffMagickedSwordplay))
                         return RDM.ERiposte;
                     return RDM.Riposte;
                 }

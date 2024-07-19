@@ -785,6 +785,14 @@ namespace XIVComboPlugin
                 }
             }
 
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MonkPerfectBlitz))
+            {
+                if (actionID == MNK.MasterfulBlitz)
+                {
+                    if (JobGauges.Get<MNKGauge>().BlitzTimeRemaining <= 0 || level < 60) return MNK.PerfectBalance;
+                }
+            }
+
             // RED MAGE
 
             // Replace Veraero/thunder 2 with Impact when Dualcast is active

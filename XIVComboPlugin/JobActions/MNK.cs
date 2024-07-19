@@ -17,6 +17,8 @@ namespace XIVComboPlugin.JobActions
             Demolish = 66,
             LeapingOpo = 36945,
             RisingRaptor = 36946,
-            PouncingCoeurl = 36947;
+            PouncingCoeurl = 36947,
+            PerfectBalance = 69,
+            MasterfulBlitz = 25764;
     }
 }

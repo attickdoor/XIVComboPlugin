@@ -161,6 +161,9 @@ namespace XIVComboPlugin
         [CustomComboInfo("Monk Fury Combo", "Replaces Bootshine, True Strike, and Snap Punch when no Fury charges are available", 20)]
         MonkFuryCombo = 1L << 43,
 
+        [CustomComboInfo("Perfect Balance on Masterful Blitz", "Changes Masterful Blitz to Perfect Balance when no Blitz moves are available", 20)]
+        MonkPerfectBlitz = 1L << 44,
+
         // RED MAGE
         [CustomComboInfo("Red Mage AoE Combo", "Replaces Veraero/thunder 2 with Impact when Dualcast or Swiftcast are active", 35)]
         RedMageAoECombo = 1L << 48,

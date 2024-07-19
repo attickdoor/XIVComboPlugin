@@ -950,17 +950,10 @@ namespace XIVComboPlugin
                 var PCTGauge = JobGauges.Get<PCTGauge>();
                 if (actionID == PCT.CreatureMotif)
                 {
-                    if ((PCTGauge.CanvasFlags & CanvasFlags.Pom) != 0)
-                        return PCT.PomMuse;
-
-                    if ((PCTGauge.CanvasFlags & CanvasFlags.Wing) != 0)
-                        return PCT.WingMuse;
-
-                    if ((PCTGauge.CanvasFlags & CanvasFlags.Claw) != 0)
-                        return PCT.ClawMuse;
-
-                    if ((PCTGauge.CanvasFlags & CanvasFlags.Maw) != 0)
-                        return PCT.FangMuse;
+                    var PCTGauge = JobGauges.Get<PCTGauge>();
+                    if (PCTGauge.CreatureMotifDrawn)
+                        return iconHook.Original(self, PCT.LivingMuse);
+                    return iconHook.Original(self, actionID);
                 }
 
                 if (actionID == PCT.WeaponMotif)

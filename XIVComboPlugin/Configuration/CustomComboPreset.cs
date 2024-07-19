@@ -161,7 +161,7 @@ namespace XIVComboPlugin
         [CustomComboInfo("Monk Fury Combo", "Replaces Bootshine, True Strike, and Snap Punch when no Fury charges are available", 20)]
         MonkFuryCombo = 1L << 43,
 
-        [CustomComboInfo("Perfect Balance on Masterful Blitz", "Changes Masterful Blitz to Perfect Balance when no Blitz moves are available", 20)]
+        [CustomComboInfo("Perfect Balance on Masterful Blitz", "Replaces Masterful Blitz with Perfect Balance when no Blitz moves are available", 20)]
         MonkPerfectBlitz = 1L << 44,
 
         // RED MAGE

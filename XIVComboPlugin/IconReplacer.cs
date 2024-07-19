@@ -922,28 +922,16 @@ namespace XIVComboPlugin
             {
                 if (actionID == PCT.Fire1)
                 {
-                    bool isSubPallet = SearchBuffArray(PCT.SubPallet);
-
-                    if (SearchBuffArray(PCT.Aether1))
-                        return isSubPallet ? PCT.Stone1 : PCT.Aero1;
-
-                    if (SearchBuffArray(PCT.Aether2))
-                        return isSubPallet ? PCT.Thunder1 : PCT.Water1;
-
-                    return isSubPallet ? PCT.Bliz1 : PCT.Fire1;
+                    if (SearchBuffArray(PCT.SubPallet))
+                        return iconHook.Original(self, PCT.Bliz1);
+                    return iconHook.Original(self, PCT.Fire1);
                 }
 
                 if (actionID == PCT.Fire2)
                 {
-                    bool isSubPallet = SearchBuffArray(PCT.SubPallet);
-
-                    if (SearchBuffArray(PCT.Aether1))
-                        return isSubPallet ? PCT.Stone2 : PCT.Aero2;
-
-                    if (SearchBuffArray(PCT.Aether2))
-                        return isSubPallet ? PCT.Thunder2 : PCT.Water2;
-
-                    return isSubPallet ? PCT.Bliz2 : PCT.Fire2;
+                    if (SearchBuffArray(PCT.SubPallet))
+                        return iconHook.Original(self, PCT.Bliz2);
+                    return iconHook.Original(self, PCT.Fire2);
                 }
             }
 
@@ -962,40 +950,26 @@ namespace XIVComboPlugin
                 var PCTGauge = JobGauges.Get<PCTGauge>();
                 if (actionID == PCT.CreatureMotif)
                 {
-                    if ((PCTGauge.CanvasFlags & CanvasFlags.Pom) != 0)
-                        return PCT.PomMuse;
-
-                    if ((PCTGauge.CanvasFlags & CanvasFlags.Wing) != 0)
-                        return PCT.WingMuse;
-
-                    if ((PCTGauge.CanvasFlags & CanvasFlags.Claw) != 0)
-                        return PCT.ClawMuse;
-
-                    if ((PCTGauge.CanvasFlags & CanvasFlags.Maw) != 0)
-                        return PCT.FangMuse;
+                    var PCTGauge = JobGauges.Get<PCTGauge>();
+                    if (PCTGauge.CreatureMotifDrawn)
+                        return iconHook.Original(self, PCT.LivingMuse);
+                    return iconHook.Original(self, actionID);
                 }
 
                 if (actionID == PCT.WeaponMotif)
                 {
-                    if (PCTGauge.WeaponMotifDrawn)
-                        return PCT.StrikingMuse;
-
-                    if (lastMove == PCT.HammerStamp)
-                        return PCT.HammerBrush;
-
-                    if (lastMove == PCT.HammerBrush)
-                        return PCT.HammerPolish;
-
-                    if (SearchBuffArray(PCT.HammerReady))
-                        return PCT.HammerStamp;
+                    var PCTGauge = JobGauges.Get<PCTGauge>();
+                    if (SearchBuffArray(PCT.HammerReady) || PCTGauge.WeaponMotifDrawn)
+                        return iconHook.Original(self, PCT.SteelMuse);
+                    return iconHook.Original(self, actionID);
                 }
             }
 
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoStarrySkyCombo))
             {
-                var PCTGauge = JobGauges.Get<PCTGauge>();
                 if (actionID == PCT.LandscapeMotif)
                 {
+                    var PCTGauge = JobGauges.Get<PCTGauge>();
                     if (PCTGauge.LandscapeMotifDrawn)
                         return PCT.StarryMuse;
                     if (SearchBuffArray(PCT.StarStruck))

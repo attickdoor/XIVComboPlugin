@@ -9,9 +9,6 @@ namespace XIVComboPlugin
         None = 0,
 
         // DRAGOON
-        [CustomComboInfo("Jump + Mirage Dive", "Replace (High) Jump with Mirage Dive when Dive Ready", 22)]
-        DragoonJumpFeature = 1L << 44,
-
         [CustomComboInfo("Coerthan Torment Combo", "Replace Coerthan Torment with its combo chain", 22)]
         DragoonCoerthanTormentCombo = 1L << 0,
 
@@ -35,7 +32,7 @@ namespace XIVComboPlugin
         [CustomComboInfo("Prominence Combo", "Replace Prominence with its combo chain", 19)]
         PaladinProminenceCombo = 1L << 7,
 
-        [CustomComboInfo("Requiescat Confiteor", "Replace Requiescat with Confiteor while under the effect of Requiescat", 19)]
+        [CustomComboInfo("Requiescat/Imperator Confiteor", "Replace Requiescat/Imperator with Confiteor while under the effect of Requiescat", 19)]
         PaladinRequiescatCombo = 1L << 55,
 
         // WARRIOR
@@ -115,12 +112,12 @@ namespace XIVComboPlugin
         BlackLeyLines = 1L << 28,
 
         // ASTROLOGIAN
-        [CustomComboInfo("Draw on Play", "Play turns into Draw when no card is drawn, as well as the usual Play behavior", 33)]
+        [CustomComboInfo("Astral/Umbral Draw on Play 1/2/3", "The Play actions turn into Draw actions when no card is ready to be played, while keeping the the usual Play behavior", 33)]
         AstrologianCardsOnDrawFeature = 1L << 27,
 
         // SUMMONER
 
-        [CustomComboInfo("ED Fester", "Change Fester into Energy Drain when out of Aetherflow stacks", 27)]
+        [CustomComboInfo("ED Fester/Necrotize", "Change Fester/Necrotize into Energy Drain when out of Aetherflow stacks", 27)]
         SummonerEDFesterCombo = 1L << 39,
 
         [CustomComboInfo("ES Painflare", "Change Painflare into Energy Syphon when out of Aetherflow stacks", 27)]
@@ -157,7 +154,7 @@ namespace XIVComboPlugin
         [CustomComboInfo("Heavy Shot into Straight Shot", "Replaces Heavy Shot/Burst Shot with Straight Shot/Refulgent Arrow when procced", 23)]
         BardStraightShotUpgradeFeature = 1L << 42,
 
-        [CustomComboInfo("Quick Nock into Shadowbite", "Replaces Quick Nock/Ladonsbite with Shadowbite when procced", 23)]
+        [CustomComboInfo("Quick Nock into Shadowbite", "Replaces Quick Nock/Ladonsbite with Wide Volley/Shadowbite when procced", 23)]
         BardAoEUpgradeFeature = 1L << 59,
 
         // MONK

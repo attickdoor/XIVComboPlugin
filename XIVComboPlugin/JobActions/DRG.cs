@@ -20,8 +20,11 @@
             Disembowel = 87,
             FangAndClaw = 3554,
             WheelingThrust = 3556,
+            Drakesbane = 36952,
             FullThrust = 84,
-            VorpalThrust = 78;
+            VorpalThrust = 78,
+            LanceBarrage = 36954,
+            SpiralBlow = 36955;
 
         public const ushort
             BuffFangAndClawReady = 802,

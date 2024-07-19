@@ -967,9 +967,9 @@ namespace XIVComboPlugin
 
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoStarrySkyCombo))
             {
-                var PCTGauge = JobGauges.Get<PCTGauge>();
                 if (actionID == PCT.LandscapeMotif)
                 {
+                    var PCTGauge = JobGauges.Get<PCTGauge>();
                     if (PCTGauge.LandscapeMotifDrawn)
                         return PCT.StarryMuse;
                     if (SearchBuffArray(PCT.StarStruck))

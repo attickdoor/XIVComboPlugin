@@ -33,6 +33,10 @@
             HammerStamp = 34678,
             HammerBrush = 34679,
             HammerPolish = 34680,
+            
+            LivingMuse = 35347,
+            SteelMuse = 35348,
+            ScenicMuse = 35349,
 
             LandscapeMotif = 34691,
             StarryMuse = 34675,

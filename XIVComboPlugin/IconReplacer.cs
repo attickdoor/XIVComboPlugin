@@ -766,23 +766,21 @@ namespace XIVComboPlugin
             // MONK
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MonkFuryCombo))
             {
-                var gauge = JobGauges.Get<MNKGauge>();
-
                 if (actionID == MNK.Bootshine || actionID == MNK.LeapingOpo)
                 {
-                    if (gauge.OpoOpoFury < 1 && level >= 50) return MNK.DragonKick;
+                    if (JobGauges.Get<MNKGauge>().OpoOpoFury < 1 && level >= 50) return MNK.DragonKick;
                     return actionID;
                 }
 
                 if (actionID == MNK.TrueStrike || actionID == MNK.RisingRaptor)
                 {
-                    if (gauge.RaptorFury < 1 && level >= 18) return MNK.TwinSnakes;
+                    if (JobGauges.Get<MNKGauge>().RaptorFury < 1 && level >= 18) return MNK.TwinSnakes;
                     return actionID;
                 }
 
                 if (actionID == MNK.SnapPunch || actionID == MNK.PouncingCoeurl)
                 {
-                    if (gauge.CoeurlFury < 1 && level >= 30) return MNK.Demolish;
+                    if (JobGauges.Get<MNKGauge>().CoeurlFury < 1 && level >= 30) return MNK.Demolish;
                     return actionID;
                 }
             }

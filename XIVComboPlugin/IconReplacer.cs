@@ -947,7 +947,6 @@ namespace XIVComboPlugin
 
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoMotifMuseFeature))
             {
-                var PCTGauge = JobGauges.Get<PCTGauge>();
                 if (actionID == PCT.CreatureMotif)
                 {
                     var PCTGauge = JobGauges.Get<PCTGauge>();

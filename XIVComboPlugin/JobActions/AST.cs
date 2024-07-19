@@ -3,8 +3,11 @@
     public static class AST
     {
         public const uint
-            Play = 17055,
-            Draw = 3590,
+            Play1 = 37019,
+            Play2 = 37020,
+            Play3 = 37021,
+            AstralDraw = 37017,
+            UmbralDraw = 37018,
             Balance = 4401,
             Bole = 4404,
             Arrow = 4402,

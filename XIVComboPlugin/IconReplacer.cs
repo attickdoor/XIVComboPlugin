@@ -635,6 +635,14 @@ namespace XIVComboPlugin
                         return SMN.EnergySyphon;
                     return SMN.Painflare;
                 }
+            
+            //Change Summon Solar Bahamut into Lux Solaris
+            if(Configuration.ComboPresets.HasFlag(CustomComboPreset.SummonerSolarBahamutLuxSolaris))
+                if (actionID == SMN.SummonSolarBahamut)
+                    if(SearchBuffArray(SMN.Buffs.RefulgentLux))
+                    {
+                        return SMN.LuxSolaris;
+                    }
 
             // SCHOLAR
 

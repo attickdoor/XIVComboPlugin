@@ -123,6 +123,9 @@ namespace XIVComboPlugin
         [CustomComboInfo("ES Painflare", "Change Painflare into Energy Syphon when out of Aetherflow stacks", 27)]
         SummonerESPainflareCombo = 1L << 40,
         
+        [CustomComboInfo("Solar Bahamut Lux", "Change Summon Solar Bahamut into Lux Solaris after summoning", 27)]
+        SummonerSolarBahamutLuxSolaris = 1L << 21,
+        
         // SCHOLAR
         [CustomComboInfo("Seraph Fey Blessing/Consolation", "Change Fey Blessing into Consolation when Seraph is out", 28)]
         ScholarSeraphConsolationFeature = 1L << 29,

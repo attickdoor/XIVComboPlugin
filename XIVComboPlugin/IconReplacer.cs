@@ -958,8 +958,10 @@ namespace XIVComboPlugin
                 if (actionID == PCT.WeaponMotif)
                 {
                     var PCTGauge = JobGauges.Get<PCTGauge>();
-                    if (SearchBuffArray(PCT.HammerReady) || PCTGauge.WeaponMotifDrawn)
+                    if (PCTGauge.WeaponMotifDrawn)
                         return iconHook.Original(self, PCT.SteelMuse);
+                    if(SearchBuffArray(PCT.HammerReady))
+                        return iconHook.Original(self, PCT.HammerStamp);
                     return iconHook.Original(self, actionID);
                 }
             }

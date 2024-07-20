@@ -901,6 +901,7 @@ namespace XIVComboPlugin
                 if (actionID == RPR.Enshroud)
                 {
                     if (SearchBuffArray(RPR.Buffs.Enshrouded)) return RPR.Communio;
+                    if (SearchBuffArray(RPR.Buffs.PerfectioParata)) return RPR.Perfectio;
                     return actionID;
                 }
             }

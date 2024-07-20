@@ -21,7 +21,9 @@
             Regress = 24403,
 
             ArcaneCircle = 24405,
-            PlentifulHarvest = 24385;
+            PlentifulHarvest = 24385,
+            
+            Perfectio = 36973;
 
         public static class Buffs
         {
@@ -29,7 +31,8 @@
                 Enshrouded = 2593,
                 Threshold = 2595,
                 ImSac1 = 2592,
-                ImSac2 = 3204;
+                ImSac2 = 3204,
+                PerfectioParata = 3860;
         }
 
         public static class Debuffs

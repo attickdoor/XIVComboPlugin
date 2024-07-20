@@ -999,6 +999,7 @@ namespace XIVComboPlugin
                 }
             }
             
+            /*
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperLegacyUnleashed)){
                 if (actionID == VPR.Reawaken && SearchBuffArray(VPR.Buffs.Reawakened))
                 {
@@ -1025,7 +1026,7 @@ namespace XIVComboPlugin
                     if (gauge.AnguineTribute == 1 && level >= VPR.Levels.Ouroboros)
                         return VPR.Ouroboros;
                 }
-            }
+            }*/
 
             return iconHook.Original(self, actionID);
         }

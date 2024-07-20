@@ -262,8 +262,7 @@ namespace XIVComboPlugin
                     if (SearchBuffArray(PLD.BuffRequiescat) && level >= 80)
                         return iconHook.Original(self, PLD.Confiteor);
 
-                    if (level >= 96) return PLD.Imperator;
-                    return PLD.Requiescat;
+                    return iconHook.Original(self, actionID);
                 }
 
             // WARRIOR

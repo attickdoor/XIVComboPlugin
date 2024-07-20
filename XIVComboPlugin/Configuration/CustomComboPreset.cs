@@ -199,7 +199,7 @@ namespace XIVComboPlugin
         [CustomComboInfo("Starry Sky to Star Prism", "Replace Starry Sky with Star Prism.", 42)]
         PictoStarrySkyCombo = 1L << 38,
 
-        [CustomComboInfo("Holy white to Comet Black", "Replace Holy in White with Comet in black when Monochrome Tones is active.", 42)]
+        [CustomComboInfo("Holy White to Comet Black", "Replace Holy in White with Comet in Black when Monochrome Tones is active.", 42)]
         PictoHolyWhiteCombo = 1L << 43,
         
         //Viper

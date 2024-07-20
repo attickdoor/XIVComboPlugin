@@ -6,7 +6,7 @@ using System.Numerics;
 using ImGuiNET;
 using Dalamud.Game;
 using Dalamud.Utility;
-using System.Diagnostics;
+using Dalamud.IoC;
 using Dalamud.Plugin.Services;
 using Dalamud.Interface.Utility;
 
@@ -16,31 +16,23 @@ namespace XIVComboPlugin
     {
         public string Name => "XIV Combo Plugin";
 
+        [PluginService] internal static ICommandManager CommandManager { get; private set; } = null!;
+        [PluginService] internal static IDalamudPluginInterface PluginInterface { get; private set; } = null!;
+        [PluginService] internal static ISigScanner SigScanner { get; private set; } = null!;
+        [PluginService] internal static IClientState ClientState { get; private set; } = null!;
+        [PluginService] internal static IChatGui ChatGui{ get; private set; } = null!;
+        [PluginService] internal static IJobGauges JobGauges { get; private set; } = null!;
+        [PluginService] internal static IGameInteropProvider HookProvider{ get; private set; } = null!;
+        [PluginService] internal static IPluginLog PluginLog { get; private set; } = null!;
+        [PluginService] internal static IDataManager DataManager { get; private set; } = null!;
+
         public XIVComboConfiguration Configuration;
 
         private IconReplacer iconReplacer;
         private CustomComboPreset[] orderedByClassJob;
 
-        private ICommandManager CommandManager { get; init; }
-        private IDalamudPluginInterface PluginInterface { get; init; }
-        private ISigScanner TargetModuleScanner { get; init; }
-        private IClientState ClientState { get; init; }
-        private IChatGui ChatGui { get; init; }
-        private IJobGauges JobGauges { get; init; }
-        private IGameInteropProvider HookProvider { get; init; }
-        private IPluginLog PluginLog { get; init; }
-
-        public XIVComboPlugin(IClientState clientState, ICommandManager commandManager, IDataManager manager, IDalamudPluginInterface pluginInterface, ISigScanner sigScanner, IJobGauges jobGauges, IChatGui chatGui, IGameInteropProvider gameInteropProvider, IPluginLog pluginLog)
+        public XIVComboPlugin()
         {
-            ClientState = clientState;
-            CommandManager = commandManager;
-            PluginInterface =  pluginInterface;
-            TargetModuleScanner = sigScanner;
-            JobGauges = jobGauges;
-            HookProvider = gameInteropProvider;
-            ChatGui = chatGui;
-            PluginLog = pluginLog;
-
             CommandManager.AddHandler("/pcombo", new CommandInfo(OnCommandDebugCombo)
             {
                 HelpMessage = "Open a window to edit custom combo settings.",
@@ -53,11 +45,12 @@ namespace XIVComboPlugin
                 Configuration.Version = 4;
             }
 
-            this.iconReplacer = new IconReplacer(TargetModuleScanner, ClientState, manager, this.Configuration, HookProvider, JobGauges, PluginLog);
+            this.iconReplacer = new IconReplacer(SigScanner, ClientState, DataManager, this.Configuration, HookProvider, JobGauges, PluginLog);
 
             this.iconReplacer.Enable();
 
             PluginInterface.UiBuilder.OpenConfigUi += () => isImguiComboSetupOpen = true;
+            PluginInterface.UiBuilder.OpenMainUi += () => isImguiComboSetupOpen = true;
             PluginInterface.UiBuilder.Draw += UiBuilder_OnBuildUi;
 
             var values = Enum.GetValues(typeof(CustomComboPreset)).Cast<CustomComboPreset>();

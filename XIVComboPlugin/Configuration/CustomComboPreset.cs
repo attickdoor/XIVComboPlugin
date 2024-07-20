@@ -120,7 +120,7 @@ namespace XIVComboPlugin
         SummonerESPainflareCombo = 1L << 40,
         
         [CustomComboInfo("Solar Bahamut Lux", "Change Summon Solar Bahamut into Lux Solaris after summoning", 27)]
-        SummonerSolarBahamutLuxSolaris = 1L << 21,
+        SummonerSolarBahamutLuxSolaris = 1L << 28,
         
         // SCHOLAR
         [CustomComboInfo("ED Aetherflow", "Change Energy Drain into Aetherflow when you have no more Aetherflow stacks", 28)]

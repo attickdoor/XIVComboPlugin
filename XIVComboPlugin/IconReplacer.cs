@@ -781,19 +781,19 @@ namespace XIVComboPlugin
                 if (actionID == MNK.Bootshine || actionID == MNK.LeapingOpo)
                 {
                     if (JobGauges.Get<MNKGauge>().OpoOpoFury < 1 && level >= 50) return MNK.DragonKick;
-                    return actionID;
+                    return iconHook.Original(self, actionID);
                 }
 
                 if (actionID == MNK.TrueStrike || actionID == MNK.RisingRaptor)
                 {
                     if (JobGauges.Get<MNKGauge>().RaptorFury < 1 && level >= 18) return MNK.TwinSnakes;
-                    return actionID;
+                    return iconHook.Original(self, actionID);
                 }
 
                 if (actionID == MNK.SnapPunch || actionID == MNK.PouncingCoeurl)
                 {
                     if (JobGauges.Get<MNKGauge>().CoeurlFury < 1 && level >= 30) return MNK.Demolish;
-                    return actionID;
+                    return iconHook.Original(self, actionID);
                 }
             }
 

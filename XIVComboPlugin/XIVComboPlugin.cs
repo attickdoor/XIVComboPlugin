@@ -112,6 +112,8 @@ namespace XIVComboPlugin
                 case 38: return "Dancer";
                 case 39: return "Reaper";
                 case 40: return "Sage";
+                case 41: return "Viper";
+                case 42: return "Pictomancer";
             }
         }
 
@@ -170,19 +172,6 @@ namespace XIVComboPlugin
                         
                     }
                     
-                }
-            }
-
-            if (ImGui.CollapsingHeader("Monk"))
-            {
-                ImGui.Text("Not happening.");
-                if (ImGui.Button("External link for more detailed explanation (for real this time)"))
-                {
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = "https://github.com/attickdoor/XIVComboPlugin/blob/master/why-no-monk.md",
-                        UseShellExecute = true
-                    });
                 }
             }
 

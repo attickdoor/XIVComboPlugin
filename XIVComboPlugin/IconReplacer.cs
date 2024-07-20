@@ -594,15 +594,6 @@ namespace XIVComboPlugin
                 }
             }
 
-            // Ley Lines and BTL
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BlackLeyLines))
-                if (actionID == BLM.LeyLines)
-                {
-                    if (SearchBuffArray(BLM.BuffLeyLines) && level >= 62)
-                        return BLM.BTL;
-                    return BLM.LeyLines;
-                }
-
             // ASTROLOGIAN
             // Change Play 1/2/3 to Astral/Umbral Draw if that Play action doesn't have a card ready to be played.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.AstrologianCardsOnDrawFeature))

@@ -107,9 +107,6 @@ namespace XIVComboPlugin
         [CustomComboInfo("Enochian Stance Switcher", "Change Fire 4 and Blizzard 4 to the appropriate element depending on stance, as well as Flare and Freeze", 25)]
         BlackEnochianFeature = 1L << 25,
 
-        [CustomComboInfo("(Between the) Ley Lines", "Change Ley Lines into BTL when Ley Lines is active", 25)]
-        BlackLeyLines = 1L << 28,
-
         // ASTROLOGIAN
         [CustomComboInfo("Astral/Umbral Draw on Play 1/2/3", "The Play actions turn into Draw actions when no card is ready to be played, while keeping the the usual Play behavior", 33)]
         AstrologianCardsOnDrawFeature = 1L << 27,

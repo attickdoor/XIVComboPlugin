@@ -404,17 +404,6 @@ namespace XIVComboPlugin
                     return SAM.Fuga;
                 }
 
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiOgiCombo))
-                if (actionID == SAM.Ikishoten)
-                {
-                    if (SearchBuffArray(SAM.BuffOgiNamikiriReady))
-                        return SAM.OgiNamikiri;
-                    if (JobGauges.Get<SAMGauge>().Kaeshi == Kaeshi.NAMIKIRI)
-                        return SAM.KaeshiNamikiri;
-                        
-                    return SAM.Ikishoten;
-                }
-
             // NINJA
 
             // Replace Armor Crush with Armor Crush combo

@@ -67,10 +67,6 @@ namespace XIVComboPlugin
         [CustomComboInfo("Iaijutsu into Tsubame", "Replace Iaijutsu with Tsubame after using an Iaijutsu", 34)]
         SamuraiTsubameCombo = 1L << 56,
 
-        [CustomComboInfo("Ogi Namikiri Combo", "Replace Ikishoten with Ogi Namiki and Kaeshi Namikiri when appropriate", 34)]
-        SamuraiOgiCombo = 1L << 62,
-
-
         // NINJA
         [CustomComboInfo("Armor Crush Combo", "Replace Armor Crush with its combo chain", 30)]
         NinjaArmorCrushCombo = 1L << 17,

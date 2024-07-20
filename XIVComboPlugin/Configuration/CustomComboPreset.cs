@@ -120,9 +120,6 @@ namespace XIVComboPlugin
         SummonerESPainflareCombo = 1L << 40,
         
         // SCHOLAR
-        [CustomComboInfo("Seraph Fey Blessing/Consolation", "Change Fey Blessing into Consolation when Seraph is out", 28)]
-        ScholarSeraphConsolationFeature = 1L << 29,
-
         [CustomComboInfo("ED Aetherflow", "Change Energy Drain into Aetherflow when you have no more Aetherflow stacks", 28)]
         ScholarEnergyDrainFeature = 1L << 37,
 

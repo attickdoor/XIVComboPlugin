@@ -630,15 +630,6 @@ namespace XIVComboPlugin
                 }
 
             // SCHOLAR
-
-            // Change Fey Blessing into Consolation when Seraph is out.
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarSeraphConsolationFeature))
-                if (actionID == SCH.FeyBless)
-                {
-                    if (JobGauges.Get<SCHGauge>().SeraphTimer > 0) return SCH.Consolation;
-                    return SCH.FeyBless;
-                }
-
             // Change Energy Drain into Aetherflow when you have no more Aetherflow stacks.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ScholarEnergyDrainFeature))
                 if (actionID == SCH.EnergyDrain)

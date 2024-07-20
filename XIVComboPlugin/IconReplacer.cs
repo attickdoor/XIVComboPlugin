@@ -628,6 +628,18 @@ namespace XIVComboPlugin
                         return SMN.EnergySyphon;
                     return SMN.Painflare;
                 }
+            
+            //Change Summon Solar Bahamut into Lux Solaris
+            if(Configuration.ComboPresets.HasFlag(CustomComboPreset.SummonerSolarBahamutLuxSolaris))
+                if (actionID == SMN.SummonBahamut)
+                {
+                    if(SearchBuffArray(SMN.Buffs.RefulgentLux))
+                    {
+                        return SMN.LuxSolaris;
+                    }
+                    return iconHook.Original(self, actionID);
+                }
+                    
 
             // SCHOLAR
             // Change Energy Drain into Aetherflow when you have no more Aetherflow stacks.

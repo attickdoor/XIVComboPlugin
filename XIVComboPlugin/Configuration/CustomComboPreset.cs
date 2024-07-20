@@ -119,6 +119,9 @@ namespace XIVComboPlugin
         [CustomComboInfo("ES Painflare", "Change Painflare into Energy Syphon when out of Aetherflow stacks", 27)]
         SummonerESPainflareCombo = 1L << 40,
         
+        [CustomComboInfo("Solar Bahamut Lux", "Change Summon Solar Bahamut into Lux Solaris after summoning", 27)]
+        SummonerSolarBahamutLuxSolaris = 1L << 21,
+        
         // SCHOLAR
         [CustomComboInfo("ED Aetherflow", "Change Energy Drain into Aetherflow when you have no more Aetherflow stacks", 28)]
         ScholarEnergyDrainFeature = 1L << 37,

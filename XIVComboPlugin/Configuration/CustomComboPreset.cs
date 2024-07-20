@@ -104,11 +104,11 @@ namespace XIVComboPlugin
         MachinistOverheatFeature = 1L << 47,
 
         // BLACK MAGE
-        [CustomComboInfo("Enochian Stance Switcher", "Change Fire 4 and Blizzard 4 to the appropriate element depending on stance, as well as Flare and Freeze", 25)]
+        [CustomComboInfo("Enochian Stance Switcher", "Change Fire 4, Blizzard 4, Flare, and Freeze to the appropriate element depending on stance", 25)]
         BlackEnochianFeature = 1L << 25,
 
         // ASTROLOGIAN
-        [CustomComboInfo("Astral/Umbral Draw on Play 1/2/3", "The Play actions turn into Draw actions when no card is ready to be played, while keeping the the usual Play behavior", 33)]
+        [CustomComboInfo("Astral/Umbral Draw on Play 1/2/3", "Play actions turn into Draw actions after playing a card, while keeping the the usual Play behavior", 33)]
         AstrologianCardsOnDrawFeature = 1L << 27,
 
         // SUMMONER
@@ -196,21 +196,21 @@ namespace XIVComboPlugin
         [CustomComboInfo("Motifs and Muses", "Replace Motifs with their relevant Muses", 42)]
         PictoMotifMuseFeature = 1L << 34,
 
-        [CustomComboInfo("Landscape and Steel follow-ups", "Replace Starry Muse with Star Prism and Striking Muse with Hammer Stamp when appropriate", 42)]
-        PictoStarrySkyCombo = 1L << 38,
+        [CustomComboInfo("Landscape and Steel follow-ups", "Additionally replace Landscape Motif with Star Prism and Weapon Motif with Hammer Stamp when appropriate", 42)]
+        PictoMuseCombo = 1L << 38,
 
         [CustomComboInfo("Holy White to Comet Black", "Replace Holy in White with Comet in Black when Monochrome Tones is active", 42)]
         PictoHolyWhiteCombo = 1L << 5,
         
         //Viper
-        [CustomComboInfo("Death Rattle Overdrive", "Replace Steel Fangs/Dread Fangs with Death Rattle when available", 41)]
-        ViperDeathRattleMaximum = 1L << 46,
+        [CustomComboInfo("Death Rattle Finisher", "Replace Steel Fangs/Dread Fangs with Death Rattle when available", 41)]
+        ViperDeathRattleCombo = 1L << 46,
         
-        [CustomComboInfo("Lash 'Em Up", "Replace Steel Maw/Dread Maw with Last Lash when available", 41)]
-        ViperAoELash = 1L << 50,
+        [CustomComboInfo("Last Lash Finisher", "Replace Steel Maw/Dread Maw with Last Lash when available", 41)]
+        ViperLastLashCombo = 1L << 50,
         
-        [CustomComboInfo("Legacy Unleashed", "Progress through Generations and Legacies automatically", 41)]
-        ViperLegacyUnleashed = 1L << 51,
+        [CustomComboInfo("Generational Legacy", "Legacy moves replace Generation moves when usable", 41)]
+        ViperLegacyCombo = 1L << 51,
     }
 
     public class CustomComboInfoAttribute : Attribute

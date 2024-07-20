@@ -109,7 +109,7 @@ namespace XIVComboPlugin
                 return iconHook.Original(self, actionID);
             }
 
-            var lastMove = Marshal.ReadInt32(lastComboMove);
+            uint lastMove = (uint)Marshal.ReadInt32(lastComboMove);
             var comboTime = Marshal.PtrToStructure<float>(comboTimer);
             var level = clientState.LocalPlayer.Level;
 
@@ -960,27 +960,26 @@ namespace XIVComboPlugin
                     var PCTGauge = JobGauges.Get<PCTGauge>();
                     if (PCTGauge.WeaponMotifDrawn)
                         return iconHook.Original(self, PCT.SteelMuse);
-                    if(SearchBuffArray(PCT.HammerReady))
-                        return iconHook.Original(self, PCT.HammerStamp);
+                    if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoMuseCombo))
+                        if (SearchBuffArray(PCT.HammerReady))
+                            return iconHook.Original(self, PCT.HammerStamp);
                     return iconHook.Original(self, actionID);
                 }
-            }
 
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoStarrySkyCombo))
-            {
                 if (actionID == PCT.LandscapeMotif)
                 {
                     var PCTGauge = JobGauges.Get<PCTGauge>();
                     if (PCTGauge.LandscapeMotifDrawn)
                         return PCT.StarryMuse;
-                    if (SearchBuffArray(PCT.StarStruck))
-                        return PCT.StarPrism;
+                    if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoMuseCombo))
+                        if (SearchBuffArray(PCT.StarStruck))
+                            return PCT.StarPrism;
                     return PCT.StarryMotif;
                 }
             }
             
             //VIPER
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperDeathRattleMaximum))
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperDeathRattleCombo))
             {
                 if (actionID == VPR.SteelFangs || actionID == VPR.DreadFangs)
                 {
@@ -989,7 +988,7 @@ namespace XIVComboPlugin
                 }
             }
 
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperAoELash))
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperLastLashCombo))
             {
 
                 if (actionID == VPR.DreadMaw || actionID == VPR.SteelMaw)
@@ -998,35 +997,36 @@ namespace XIVComboPlugin
                         return VPR.LastLash;
                 }
             }
-            
-            /*
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperLegacyUnleashed)){
-                if (actionID == VPR.Reawaken && SearchBuffArray(VPR.Buffs.Reawakened))
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperLegacyCombo))
+            {
+                switch (actionID)
                 {
-                    var gauge = JobGauges.Get<VPRGauge>();
+                    case VPR.SteelFangs:
+                    case VPR.SteelMaw:
+                        if (lastMove == VPR.FirstGeneration)
+                            return VPR.FirstLegacy;
+                        return iconHook.Original(self, actionID);
 
-                    if (level >= VPR.Levels.Legacies)
-                    {
-                        if (iconHook.Original(self, VPR.SerpentsTail) == VPR.FirstLegacy || 
-                            iconHook.Original(self, VPR.SerpentsTail) == VPR.SecondLegacy ||
-                            iconHook.Original(self, VPR.SerpentsTail) == VPR.ThirdLegacy ||
-                            iconHook.Original(self, VPR.SerpentsTail) == VPR.FourthLegacy)
-                            return iconHook.Original(self, VPR.SerpentsTail);
-                    }
+                    case VPR.DreadFangs:
+                    case VPR.DreadMaw:
+                        if (lastMove == VPR.SecondGeneration)
+                            return VPR.SecondLegacy;
+                        return iconHook.Original(self, actionID);
 
-                    var maxTribute = level >= VPR.Levels.Ouroboros ? 5 : 4;
-                    if (gauge.AnguineTribute == maxTribute)
-                        return VPR.FirstGeneration;
-                    if (gauge.AnguineTribute == maxTribute - 1)
-                        return VPR.SecondGeneration;
-                    if (gauge.AnguineTribute == maxTribute - 2)
-                        return VPR.ThirdGeneration;
-                    if (gauge.AnguineTribute == maxTribute - 3)
-                        return VPR.FourthGeneration;
-                    if (gauge.AnguineTribute == 1 && level >= VPR.Levels.Ouroboros)
-                        return VPR.Ouroboros;
+                    case VPR.HuntersCoil:
+                    case VPR.HuntersDen:
+                        if (lastMove == VPR.ThirdGeneration)
+                            return VPR.ThirdLegacy;
+                        return iconHook.Original(self, actionID);
+
+                    case VPR.SwiftskinsCoil:
+                    case VPR.SwiftskinsDen:
+                        if (lastMove == VPR.FourthGeneration)
+                            return VPR.FourthLegacy;
+                        return iconHook.Original(self, actionID);
                 }
-            }*/
+            }
 
             return iconHook.Original(self, actionID);
         }

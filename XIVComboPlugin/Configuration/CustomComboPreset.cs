@@ -93,6 +93,9 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Demon Slaughter Combo", "Replace Demon Slaughter with its combo chain", 37)]
         GunbreakerDemonSlaughterCombo = 1L << 22,
+        
+        [CustomComboInfo("Fated Circle Continuation", "Put Continuation moves on Fated Circle when appropriate", 37)]
+        GunbreakerFatedCircleCont = 1L << 54,
 
         // MACHINIST
         [CustomComboInfo("(Heated) Shot Combo", "Replace either form of Clean Shot with its combo chain", 31)]
@@ -189,6 +192,29 @@ namespace XIVComboPlugin
 
         [CustomComboInfo("Arcane Circle Combo", "Replace Arcane Circle with Plentiful Harvest while you have Immortal Sacrifice.", 39)]
         ReaperArcaneFeature = 1L << 30,
+
+        //PICTOMANCER
+        [CustomComboInfo("Additive to Subtractive Combo","Replace Additive combo with Subtractive combo when Subtractive Pallet is active.",42)]
+        PictoSubtractivePallet = 1L << 31,
+
+        [CustomComboInfo("Motifs and Muses", "Replace Motifs with their relevant Muses.", 42)]
+        PictoMotifMuseFeature = 1L << 34,
+
+        [CustomComboInfo("Starry Sky to Star Prism", "Replace Starry Sky with Star Prism.", 42)]
+        PictoStarrySkyCombo = 1L << 38,
+
+        [CustomComboInfo("Holy White to Comet Black", "Replace Holy in White with Comet in Black when Monochrome Tones is active.", 42)]
+        PictoHolyWhiteCombo = 1L << 43,
+        
+        //Viper
+        [CustomComboInfo("Death Rattle Overdrive", "Replace Steel Fangs/Dread Fangs with Death Rattle when available", 41)]
+        ViperDeathRattleMaximum = 1L << 46,
+        
+        [CustomComboInfo("Lash 'Em Up", "Replace Steel Maw/Dread Maw with Last Lash when available", 41)]
+        ViperAoELash = 1L << 50,
+        
+        [CustomComboInfo("Legacy Unleashed", "Progress through Generations and Legacies automatically", 41)]
+        ViperLegacyUnleashed = 1L << 51,
     }
 
     public class CustomComboInfoAttribute : Attribute

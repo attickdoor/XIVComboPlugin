@@ -170,36 +170,36 @@ namespace XIVComboPlugin
         [CustomComboInfo("Redoublement combo", "Replaces Redoublement with its combo chain, following enchantment rules", 35)]
         RedMageMeleeCombo = 1L << 49,
 
-        [CustomComboInfo("Verproc into Jolt", "Replaces Verstone/Verfire with Jolt/Scorch when no proc is available.", 35)]
+        [CustomComboInfo("Verproc into Jolt", "Replaces Verstone/Verfire with Jolt/Scorch when no proc is available", 35)]
         RedMageVerprocCombo = 1L << 53,
 
         // REAPER
-        [CustomComboInfo("Slice Combo", "Replace Slice with its combo chain.", 39)]
+        [CustomComboInfo("Slice Combo", "Replace Slice with its combo chain", 39)]
         ReaperSliceCombo = 1L << 16,
 
-        [CustomComboInfo("Scythe Combo", "Replace Spinning Scythe with its combo chain.", 39)]
+        [CustomComboInfo("Scythe Combo", "Replace Spinning Scythe with its combo chain", 39)]
         ReaperScytheCombo = 1L << 57,
 
-        [CustomComboInfo("Double Regress", "Regress always replaces both Hell's Egress and Hell's Ingress.", 39)]
+        [CustomComboInfo("Double Regress", "Regress always replaces both Hell's Egress and Hell's Ingress", 39)]
         ReaperRegressFeature = 1L << 58,
 
-        [CustomComboInfo("Enshroud Combo", "Replace Enshroud with Communio while you are Enshrouded.", 39)]
+        [CustomComboInfo("Enshroud Combo", "Replace Enshroud with Communio while you are Enshrouded", 39)]
         ReaperEnshroudCombo = 1L << 26,
 
-        [CustomComboInfo("Arcane Circle Combo", "Replace Arcane Circle with Plentiful Harvest while you have Immortal Sacrifice.", 39)]
+        [CustomComboInfo("Arcane Circle Combo", "Replace Arcane Circle with Plentiful Harvest while you have Immortal Sacrifice", 39)]
         ReaperArcaneFeature = 1L << 30,
 
         //PICTOMANCER
-        [CustomComboInfo("Additive to Subtractive Combo","Replace Additive combo with Subtractive combo when Subtractive Pallet is active.",42)]
+        [CustomComboInfo("Additive to Subtractive Combo","Replace Additive combo with Subtractive combo when Subtractive Pallet is active",42)]
         PictoSubtractivePallet = 1L << 31,
 
-        [CustomComboInfo("Motifs and Muses", "Replace Motifs with their relevant Muses.", 42)]
+        [CustomComboInfo("Motifs and Muses", "Replace Motifs with their relevant Muses", 42)]
         PictoMotifMuseFeature = 1L << 34,
 
-        [CustomComboInfo("Starry Sky to Star Prism", "Replace Starry Sky with Star Prism.", 42)]
+        [CustomComboInfo("Landscape and Steel follow-ups", "Replace Starry Muse with Star Prism and Striking Muse with Hammer Stamp when appropriate", 42)]
         PictoStarrySkyCombo = 1L << 38,
 
-        [CustomComboInfo("Holy White to Comet Black", "Replace Holy in White with Comet in Black when Monochrome Tones is active.", 42)]
+        [CustomComboInfo("Holy White to Comet Black", "Replace Holy in White with Comet in Black when Monochrome Tones is active", 42)]
         PictoHolyWhiteCombo = 1L << 5,
         
         //Viper

@@ -173,19 +173,6 @@ namespace XIVComboPlugin
                 }
             }
 
-            if (ImGui.CollapsingHeader("Monk"))
-            {
-                ImGui.Text("Not happening.");
-                if (ImGui.Button("External link for more detailed explanation (for real this time)"))
-                {
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = "https://github.com/attickdoor/XIVComboPlugin/blob/master/why-no-monk.md",
-                        UseShellExecute = true
-                    });
-                }
-            }
-
             for (var i = 0; i < orderedByClassJob.Length; i++)
             {
                 if (flagsSelected[i])

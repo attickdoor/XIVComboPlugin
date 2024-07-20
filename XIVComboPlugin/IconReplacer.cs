@@ -764,7 +764,35 @@ namespace XIVComboPlugin
                 }
 
             // MONK
-            // haha you get nothing now
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MonkFuryCombo))
+            {
+                if (actionID == MNK.Bootshine || actionID == MNK.LeapingOpo)
+                {
+                    if (JobGauges.Get<MNKGauge>().OpoOpoFury < 1 && level >= 50) return MNK.DragonKick;
+                    return actionID;
+                }
+
+                if (actionID == MNK.TrueStrike || actionID == MNK.RisingRaptor)
+                {
+                    if (JobGauges.Get<MNKGauge>().RaptorFury < 1 && level >= 18) return MNK.TwinSnakes;
+                    return actionID;
+                }
+
+                if (actionID == MNK.SnapPunch || actionID == MNK.PouncingCoeurl)
+                {
+                    if (JobGauges.Get<MNKGauge>().CoeurlFury < 1 && level >= 30) return MNK.Demolish;
+                    return actionID;
+                }
+            }
+
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MonkPerfectBlitz))
+            {
+                if (actionID == MNK.MasterfulBlitz)
+                {
+                    if (JobGauges.Get<MNKGauge>().BlitzTimeRemaining <= 0 || level < 60) return MNK.PerfectBalance;
+                    return iconHook.Original(self, actionID);
+                }
+            }
 
             // RED MAGE
 

@@ -798,10 +798,9 @@ namespace XIVComboPlugin
                     if (SearchBuffArray(RDM.BuffSwiftcast) || SearchBuffArray(RDM.BuffDualcast) || 
                         SearchBuffArray(RDM.BuffAcceleration) || SearchBuffArray(RDM.BuffChainspell))
                     {
-                        if (level >= 66) return RDM.Impact;
-                        return RDM.Scatter;
+                        return iconHook.Original(self, RDM.Scatter);
                     }
-                    return iconHook.Original(self, RDM.Veraero2);
+                    return iconHook.Original(self, actionID);
                 }
 
                 if (actionID == RDM.Verthunder2)
@@ -809,10 +808,9 @@ namespace XIVComboPlugin
                     if (SearchBuffArray(RDM.BuffSwiftcast) || SearchBuffArray(RDM.BuffDualcast) ||
                         SearchBuffArray(RDM.BuffAcceleration) || SearchBuffArray(RDM.BuffChainspell))
                     {
-                        if (level >= 66) return RDM.Impact;
-                        return RDM.Scatter;
+                        return iconHook.Original(self, RDM.Scatter);
                     }
-                    return iconHook.Original(self, RDM.Verthunder2);
+                    return iconHook.Original(self, actionID);
                 }
             }
 
@@ -820,54 +818,33 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.RedMageMeleeCombo))
                 if (actionID == RDM.Redoublement)
                 {
-                    var gauge = JobGauges.Get<RDMGauge>();
-                    if ((lastMove == RDM.Riposte || lastMove == RDM.ERiposte) && level >= 35)
+                    if ((lastMove == RDM.Riposte) && level >= 35)
                     {
-                        if ((gauge.BlackMana >= 15 && gauge.WhiteMana >= 15) || SearchBuffArray(RDM.BuffMagickedSwordplay))
-                            return RDM.EZwerchhau;
-                        return RDM.Zwerchhau;
+                        return iconHook.Original(self, RDM.Zwerchhau);
                     }
 
                     if (lastMove == RDM.Zwerchhau && level >= 50)
                     {
-                        if ((gauge.BlackMana >= 15 && gauge.WhiteMana >= 15) || SearchBuffArray(RDM.BuffMagickedSwordplay))
-                            return RDM.ERedoublement;
-                        return RDM.Redoublement;
+                        return iconHook.Original(self, RDM.Redoublement);
                     }
-
-                    if ((gauge.BlackMana >= 20 && gauge.WhiteMana >= 20) || SearchBuffArray(RDM.BuffMagickedSwordplay))
-                        return RDM.ERiposte;
-                    return RDM.Riposte;
+                    return iconHook.Original(self, RDM.Riposte);
                 }
 
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.RedMageVerprocCombo))
             {
                 if (actionID == RDM.Verstone)
                 {
-                    if (level >= 80 && (lastMove == RDM.Verflare || lastMove == RDM.Verholy)) return RDM.Scorch;
-                    if (level >= 90 && lastMove == RDM.Scorch) return RDM.Resolution;
-
                     if (SearchBuffArray(RDM.BuffVerstoneReady)) return RDM.Verstone;
-                    
-                    if (level >= 84) return RDM.Jolt3;
-                    if (level >= 62) return RDM.Jolt2;
-                    return RDM.Jolt;
+                    return iconHook.Original(self, RDM.Jolt);
                 }
                 if (actionID == RDM.Verfire)
                 {
-                    if (level >= 80 && (lastMove == RDM.Verflare || lastMove == RDM.Verholy)) return RDM.Scorch;
-                    if (level >= 90 && lastMove == RDM.Scorch) return RDM.Resolution;
-
                     if (SearchBuffArray(RDM.BuffVerfireReady)) return RDM.Verfire;
-                    
-                    if (level >= 84) return RDM.Jolt3;
-                    if (level >= 62) return RDM.Jolt2;
-                    return RDM.Jolt;
+                    return iconHook.Original(self, RDM.Jolt);
                 }
             }
 
             // REAPER 
-
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ReaperSliceCombo))
             {
                 if (actionID == RPR.Slice)

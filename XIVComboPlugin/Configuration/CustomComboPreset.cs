@@ -197,7 +197,7 @@ namespace XIVComboPlugin
         PictoStarrySkyCombo = 1L << 38,
 
         [CustomComboInfo("Holy White to Comet Black", "Replace Holy in White with Comet in Black when Monochrome Tones is active.", 42)]
-        PictoHolyWhiteCombo = 1L << 43,
+        PictoHolyWhiteCombo = 1L << 5,
         
         //Viper
         [CustomComboInfo("Death Rattle Overdrive", "Replace Steel Fangs/Dread Fangs with Death Rattle when available", 41)]

@@ -27,6 +27,7 @@
             WingMuse = 34671,
             ClawMuse = 34672,
             FangMuse = 34673,
+            MogOfTheAges = 34676,
 
             WeaponMotif = 34690,
             StrikingMuse = 34674,

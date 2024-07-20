@@ -699,6 +699,16 @@ namespace XIVComboPlugin
                 }
             }
 
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DancerLastDanceCombo))
+            {
+                if (actionID == DNC.StandardStep)
+                {
+                    if (SearchBuffArray(DNC.BuffLastDance))
+                        return DNC.LastDance;
+                    return iconHook.Original(self, actionID);
+                }
+            }
+
             // WHM
 
             // Replace Solace with Misery when full blood lily

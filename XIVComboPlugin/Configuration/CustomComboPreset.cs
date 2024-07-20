@@ -136,6 +136,9 @@ namespace XIVComboPlugin
         [CustomComboInfo("Devilment into Starfall", "Change Devilment into Starfall Dance while under the effect of Flourishing Starfall", 38)]
         DancerDevilmentCombo = 1L << 61,
 
+        [CustomComboInfo("Standard Last Dance", "Change Standard Step into Last Dance when ready", 38)]
+        DancerLastDanceCombo = 1L << 21,
+
         // WHITE MAGE
         [CustomComboInfo("Solace into Misery", "Replaces Afflatus Solace with Afflatus Misery when Misery is ready to be used", 24)]
         WhiteMageSolaceMiseryFeature = 1L << 35,

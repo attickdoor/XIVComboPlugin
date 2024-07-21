@@ -849,25 +849,25 @@ namespace XIVComboPlugin
                 {
                     case VPR.SteelFangs:
                     case VPR.SteelMaw:
-                        if (lastMove == VPR.FirstGeneration)
+                        if (iconHook.Original(self, VPR.SerpentsTail) == VPR.FirstLegacy)
                             return VPR.FirstLegacy;
                         return iconHook.Original(self, actionID);
 
                     case VPR.DreadFangs:
                     case VPR.DreadMaw:
-                        if (lastMove == VPR.SecondGeneration)
+                        if (iconHook.Original(self, VPR.SerpentsTail) == VPR.SecondLegacy)
                             return VPR.SecondLegacy;
                         return iconHook.Original(self, actionID);
 
                     case VPR.HuntersCoil:
                     case VPR.HuntersDen:
-                        if (lastMove == VPR.ThirdGeneration)
+                        if (iconHook.Original(self, VPR.SerpentsTail) == VPR.ThirdLegacy)
                             return VPR.ThirdLegacy;
                         return iconHook.Original(self, actionID);
 
                     case VPR.SwiftskinsCoil:
                     case VPR.SwiftskinsDen:
-                        if (lastMove == VPR.FourthGeneration)
+                        if (iconHook.Original(self, VPR.SerpentsTail) == VPR.FourthLegacy)
                             return VPR.FourthLegacy;
                         return iconHook.Original(self, actionID);
                 }

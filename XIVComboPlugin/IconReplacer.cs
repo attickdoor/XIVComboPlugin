@@ -120,7 +120,7 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonCoerthanTormentCombo))
                 if (actionID == DRG.CTorment)
                 {
-                    if ((lastMove == DRG.DoomSpike) && level >= 62)
+                    if ((lastMove == DRG.DoomSpike || lastMove == DRG.DraconianFury) && level >= 62)
                         return DRG.SonicThrust;
                     if (lastMove == DRG.SonicThrust && level >= 72)
                         return DRG.CTorment;
@@ -131,11 +131,11 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonChaosThrustCombo))
                 if (actionID == DRG.ChaosThrust || actionID == DRG.ChaoticSpring)
                 {
-                    if (lastMove == DRG.TrueThrust && level >= 18)
+                    if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 18)
                         return iconHook.Original(self, DRG.Disembowel);
                     if (lastMove == DRG.Disembowel && level >= 50)
                         return iconHook.Original(self, DRG.ChaosThrust);
-                    if (lastMove == DRG.ChaosThrust && level >= 58)
+                    if ((lastMove == DRG.ChaosThrust || lastMove == DRG.ChaoticSpring) && level >= 58)
                         return DRG.WheelingThrust;
                     if (lastMove == DRG.WheelingThrust && level >= 64)
                         return DRG.Drakesbane;
@@ -146,11 +146,11 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonFullThrustCombo))
                 if (actionID == DRG.FullThrust || actionID == DRG.HeavensThrust)
                 {
-                    if (lastMove == DRG.TrueThrust && level >= 4)
+                    if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 4)
                         return iconHook.Original(self, DRG.VorpalThrust);
                     if (lastMove == DRG.VorpalThrust && level >= 26)
                         return iconHook.Original(self, DRG.FullThrust);
-                    if (lastMove == DRG.FullThrust && level >= 56)
+                    if ((lastMove == DRG.FullThrust || lastMove == DRG.HeavensThrust) && level >= 56)
                         return DRG.FangAndClaw;
                     if (lastMove == DRG.FangAndClaw && level >= 64)
                         return DRG.Drakesbane;
@@ -260,7 +260,7 @@ namespace XIVComboPlugin
                 {
                     if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Yukikaze;
-                    if (lastMove == SAM.Hakaze && level >= 50)
+                    if ((lastMove == SAM.Hakaze | lastMove == SAM.Gyofu) && level >= 50)
                         return SAM.Yukikaze;
                     return iconHook.Original(self, SAM.Hakaze);
                 }
@@ -271,7 +271,7 @@ namespace XIVComboPlugin
                 {
                     if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Gekko;
-                    if (lastMove == SAM.Hakaze && level >= 4)
+                    if ((lastMove == SAM.Hakaze || lastMove == SAM.Gyofu) && level >= 4)
                         return SAM.Jinpu;
                     if (lastMove == SAM.Jinpu && level >= 30)
                         return SAM.Gekko;
@@ -284,7 +284,7 @@ namespace XIVComboPlugin
                 {
                     if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Kasha;
-                    if (lastMove == SAM.Hakaze && level >= 18)
+                    if ((lastMove == SAM.Hakaze || lastMove == SAM.Gyofu) && level >= 18)
                         return SAM.Shifu;
                     if (lastMove == SAM.Shifu && level >= 40)
                         return SAM.Kasha;
@@ -297,7 +297,7 @@ namespace XIVComboPlugin
                 {
                     if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Mangetsu;
-                    if (lastMove == SAM.Fuga && level >= 35)
+                    if ((lastMove == SAM.Fuga || lastMove == SAM.Fuko) && level >= 35)
                         return SAM.Mangetsu;
                     return iconHook.Original(self, SAM.Fuga);
                 }
@@ -308,7 +308,7 @@ namespace XIVComboPlugin
                 {
                     if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Oka;
-                    if (lastMove == SAM.Fuga && level >= 45)
+                    if ((lastMove == SAM.Fuga || lastMove == SAM.Fuko) && level >= 45)
                         return SAM.Oka;
                     return iconHook.Original(self, SAM.Fuga);
                 }
@@ -319,14 +319,10 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.NinjaArmorCrushCombo))
                 if (actionID == NIN.ArmorCrush)
                 {
-                    if (comboTime > 0)
-                    {
-                        if (lastMove == NIN.SpinningEdge && level >= 4)
-                            return NIN.GustSlash;
-                        if (lastMove == NIN.GustSlash && level >= 54)
-                            return NIN.ArmorCrush;
-                    }
-
+                    if (lastMove == NIN.SpinningEdge && level >= 4)
+                        return NIN.GustSlash;
+                    if (lastMove == NIN.GustSlash && level >= 54)
+                        return NIN.ArmorCrush;
                     return NIN.SpinningEdge;
                 }
 

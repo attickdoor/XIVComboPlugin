@@ -257,13 +257,11 @@ namespace XIVComboPlugin
 
             // Replace Requiescat/Imperator with Confiteor when under the effect of Requiescat
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PaladinRequiescatCombo))
-                if (actionID == PLD.Requiescat || actionID == PLD.Imperator)
+                if (actionID == PLD.Requiescat)
                 {
                     if (SearchBuffArray(PLD.BuffRequiescat) && level >= 80)
                         return iconHook.Original(self, PLD.Confiteor);
-
-                    if (level >= 96) return PLD.Imperator;
-                    return PLD.Requiescat;
+                    return iconHook.Original(self, actionID);
                 }
 
             // WARRIOR
@@ -306,14 +304,6 @@ namespace XIVComboPlugin
                         if (lastMove == WAR.Overpower && level >= 40)
                             return WAR.MythrilTempest;
                     return WAR.Overpower;
-                }
-
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.WarriorIRCombo))
-                if (actionID == WAR.InnerRelease || actionID == WAR.Berserk)
-                {
-                    if (SearchBuffArray(WAR.BuffPrimalRendReady))
-                        return WAR.PrimalRend;
-                    return iconHook.Original(self, actionID);
                 }
 
             // SAMURAI

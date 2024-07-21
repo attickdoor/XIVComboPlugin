@@ -45,9 +45,6 @@ namespace XIVComboPlugin
         [CustomComboInfo("Mythril Tempest Combo", "Replace Mythril Tempest with its combo chain", 21)]
         WarriorMythrilTempestCombo = 1L << 10,
 
-        [CustomComboInfo("IR to Primal Rend", "Replace Inner Release with Primal Rend when Primal Rend Ready", 21)]
-        WarriorIRCombo = 1L << 63,
-
         // SAMURAI
         [CustomComboInfo("Yukikaze Combo", "Replace Yukikaze with its combo chain", 34)]
         SamuraiYukikazeCombo = 1L << 11,

@@ -129,7 +129,7 @@ namespace XIVComboPlugin
 
             // Replace Chaos Thrust with the Chaos Thrust combo chain
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonChaosThrustCombo))
-                if (actionID == DRG.ChaosThrust)
+                if (actionID == DRG.ChaosThrust || actionID == DRG.ChaoticSpring)
                 {
                     if (lastMove == DRG.TrueThrust && level >= 18)
                         return iconHook.Original(self, DRG.Disembowel);
@@ -144,7 +144,7 @@ namespace XIVComboPlugin
 
             // Replace Full Thrust with the Full Thrust combo chain
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.DragoonFullThrustCombo))
-                if (actionID == DRG.FullThrust)
+                if (actionID == DRG.FullThrust || actionID == DRG.HeavensThrust)
                 {
                     if (lastMove == DRG.TrueThrust && level >= 4)
                         return iconHook.Original(self, DRG.VorpalThrust);
@@ -203,7 +203,7 @@ namespace XIVComboPlugin
 
             // Replace Requiescat/Imperator with Confiteor when under the effect of Requiescat
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PaladinRequiescatCombo))
-                if (actionID == PLD.Requiescat)
+                if (actionID == PLD.Requiescat || actionID == PLD.Imperator)
                 {
                     if (SearchBuffArray(PLD.BuffRequiescat) && level >= 80)
                         return iconHook.Original(self, PLD.Confiteor);
@@ -413,7 +413,7 @@ namespace XIVComboPlugin
             // Replace Clean Shot with Heated Clean Shot combo
             // Or with Heat Blast when overheated.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MachinistMainCombo))
-                if (actionID == MCH.CleanShot)
+                if (actionID == MCH.CleanShot || actionID == MCH.HeatedCleanShot)
                 {
                     if (lastMove == MCH.SplitShot && level >= 2)
                         return iconHook.Original(self, MCH.SlugShot);
@@ -611,7 +611,7 @@ namespace XIVComboPlugin
 
             // Replace HS/BS with SS/RA when procced.
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BardStraightShotUpgradeFeature))
-                if (actionID == BRD.HeavyShot)
+                if (actionID == BRD.HeavyShot || actionID == BRD.BurstShot)
                 {
                     if (SearchBuffArray(BRD.BuffHawksEye) || SearchBuffArray(BRD.BuffBarrage))
                         return iconHook.Original(self, BRD.StraightShot);
@@ -619,7 +619,7 @@ namespace XIVComboPlugin
                 }
 
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.BardAoEUpgradeFeature))
-                if (actionID == BRD.QuickNock)
+                if (actionID == BRD.QuickNock || actionID == BRD.Ladonsbite)
                 {
                     if (SearchBuffArray(BRD.BuffHawksEye) || SearchBuffArray(BRD.BuffBarrage))
                         return iconHook.Original(self, BRD.WideVolley);
@@ -629,21 +629,21 @@ namespace XIVComboPlugin
             // MONK
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.MonkFuryCombo))
             {
-                if (actionID == MNK.Bootshine)
+                if (actionID == MNK.Bootshine || actionID == MNK.LeapingOpo)
                 {
                     if (JobGauges.Get<MNKGauge>().OpoOpoFury < 1 && level >= 50)
                         return MNK.DragonKick;
                     return iconHook.Original(self, actionID);
                 }
 
-                if (actionID == MNK.TrueStrike)
+                if (actionID == MNK.TrueStrike || actionID == MNK.RisingRaptor)
                 {
                     if (JobGauges.Get<MNKGauge>().RaptorFury < 1 && level >= 18)
                         return MNK.TwinSnakes;
                     return iconHook.Original(self, actionID);
                 }
 
-                if (actionID == MNK.SnapPunch)
+                if (actionID == MNK.SnapPunch || actionID == MNK.PouncingCoeurl)
                 {
                     if (JobGauges.Get<MNKGauge>().CoeurlFury < 1 && level >= 30)
                         return MNK.Demolish;

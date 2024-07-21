@@ -190,14 +190,14 @@ namespace XIVComboPlugin
         ReaperArcaneFeature = 1L << 30,
 
         //PICTOMANCER
-        [CustomComboInfo("Additive to Subtractive Combo","Replace Additive combo with Subtractive combo when Subtractive Pallet is active",42)]
-        PictoSubtractivePallet = 1L << 31,
+        [CustomComboInfo("Additive to Subtractive Combo","Replace Additive combo with Subtractive combo when Subtractive Palette is active",42)]
+        PictoSubtractivePalette = 1L << 31,
 
         [CustomComboInfo("Motifs and Muses", "Replace Motifs with their relevant Muses", 42)]
-        PictoMotifMuseFeature = 1L << 34,
+        PictoMuseCombo = 1L << 34,
 
-        [CustomComboInfo("Landscape and Steel follow-ups", "Additionally replace Landscape Motif with Star Prism and Weapon Motif with Hammer Stamp when appropriate", 42)]
-        PictoMuseCombo = 1L << 38,
+        [CustomComboInfo("Landscape and Steel follow-ups", "Replace Landscape Motif with Star Prism and Weapon Motif with Hammer Stamp when appropriate", 42)]
+        PictoMotifCombo = 1L << 38,
 
         [CustomComboInfo("Holy White to Comet Black", "Replace Holy in White with Comet in Black when Monochrome Tones is active", 42)]
         PictoHolyWhiteCombo = 1L << 5,

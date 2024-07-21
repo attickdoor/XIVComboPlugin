@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using Dalamud.Game;
 using Dalamud.Hooking;
@@ -260,7 +260,7 @@ namespace XIVComboPlugin
                 {
                     if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Yukikaze;
-                    if (lastMove == SAM.Hakaze && level >= 50)
+                    if ((lastMove == SAM.Hakaze || lastMove == SAM.Gyofu) && level >= 50)
                         return SAM.Yukikaze;
                     return iconHook.Original(self, SAM.Hakaze);
                 }
@@ -271,7 +271,7 @@ namespace XIVComboPlugin
                 {
                     if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Gekko;
-                    if (lastMove == SAM.Hakaze && level >= 4)
+                    if ((lastMove == SAM.Hakaze || lastMove == SAM.Gyofu) && level >= 4)
                         return SAM.Jinpu;
                     if (lastMove == SAM.Jinpu && level >= 30)
                         return SAM.Gekko;
@@ -284,7 +284,7 @@ namespace XIVComboPlugin
                 {
                     if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Kasha;
-                    if (lastMove == SAM.Hakaze && level >= 18)
+                    if ((lastMove == SAM.Hakaze || lastMove == SAM.Gyofu) && level >= 18)
                         return SAM.Shifu;
                     if (lastMove == SAM.Shifu && level >= 40)
                         return SAM.Kasha;

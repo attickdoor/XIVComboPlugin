@@ -7,6 +7,7 @@ using Dalamud.Game.ClientState.JobGauge.Enums;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using Dalamud.Plugin.Services;
+using FFXIVClientStructs.FFXIV.Client.Game.Gauge;
 
 namespace XIVComboPlugin
 {
@@ -311,8 +312,9 @@ namespace XIVComboPlugin
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.SamuraiTsubameCombo))
                 if (actionID == SAM.Iaijutsu)
                 {
-                    var x = iconHook.Original(self, SAM.Tsubame);
-                    if (x != SAM.Tsubame) return x;
+                    var gauge = JobGauges.Get<SAMGauge>();
+                    if (gauge.Kaeshi != Kaeshi.NONE && gauge.Kaeshi != Kaeshi.NAMIKIRI)
+                        return iconHook.Original(self, SAM.Tsubame);
                     return iconHook.Original(self, actionID);
                 }
 

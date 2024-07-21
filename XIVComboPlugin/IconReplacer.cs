@@ -260,7 +260,7 @@ namespace XIVComboPlugin
                 {
                     if (SearchBuffArray(SAM.BuffMeikyoShisui))
                         return SAM.Yukikaze;
-                    if ((lastMove == SAM.Hakaze | lastMove == SAM.Gyofu) && level >= 50)
+                    if ((lastMove == SAM.Hakaze || lastMove == SAM.Gyofu) && level >= 50)
                         return SAM.Yukikaze;
                     return iconHook.Original(self, SAM.Hakaze);
                 }

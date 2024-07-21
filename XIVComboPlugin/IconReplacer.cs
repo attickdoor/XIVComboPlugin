@@ -696,11 +696,15 @@ namespace XIVComboPlugin
             {
                 if (actionID == RDM.Verstone)
                 {
+                    if (level >= 80 && (lastMove == RDM.Verflare || lastMove == RDM.Verholy)) return RDM.Scorch;
+                    if (level >= 90 && lastMove == RDM.Scorch) return RDM.Resolution;
                     if (SearchBuffArray(RDM.BuffVerstoneReady)) return RDM.Verstone;
                     return iconHook.Original(self, RDM.Jolt);
                 }
                 if (actionID == RDM.Verfire)
                 {
+                    if (level >= 80 && (lastMove == RDM.Verflare || lastMove == RDM.Verholy)) return RDM.Scorch;
+                    if (level >= 90 && lastMove == RDM.Scorch) return RDM.Resolution;
                     if (SearchBuffArray(RDM.BuffVerfireReady)) return RDM.Verfire;
                     return iconHook.Original(self, RDM.Jolt);
                 }

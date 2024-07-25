@@ -859,8 +859,7 @@ namespace XIVComboPlugin
                         case VPR.DreadFangs:
                         case VPR.DreadMaw:
                             if (gauge.SerpentCombo == Dalamud.Game.ClientState.JobGauge.Enums.SerpentCombo.SECONDLEGACY)
-                                if (iconHook.Original(self, VPR.SerpentsTail) == VPR.SecondLegacy)
-                                    return VPR.SecondLegacy;
+                                 return VPR.SecondLegacy;
                             return iconHook.Original(self, actionID);
 
                         case VPR.HuntersCoil:

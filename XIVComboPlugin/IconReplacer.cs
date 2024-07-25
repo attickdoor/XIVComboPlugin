@@ -845,31 +845,36 @@ namespace XIVComboPlugin
 
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperLegacyCombo))
             {
-                switch (actionID)
+                if (JobGauges.Get<VPRGauge>().AnguineTribute > 0)
                 {
-                    case VPR.SteelFangs:
-                    case VPR.SteelMaw:
-                        if (lastMove == VPR.FirstGeneration)
-                            return VPR.FirstLegacy;
-                        return iconHook.Original(self, actionID);
+                    var gauge = JobGauges.Get<VPRGauge>();
+                    switch (actionID)
+                    {
+                        case VPR.SteelFangs:
+                        case VPR.SteelMaw:
+                            if (gauge.SerpentCombo == Dalamud.Game.ClientState.JobGauge.Enums.SerpentCombo.FIRSTLEGACY)
+                                return VPR.FirstLegacy;
+                            return iconHook.Original(self, actionID);
 
-                    case VPR.DreadFangs:
-                    case VPR.DreadMaw:
-                        if (lastMove == VPR.SecondGeneration)
-                            return VPR.SecondLegacy;
-                        return iconHook.Original(self, actionID);
+                        case VPR.DreadFangs:
+                        case VPR.DreadMaw:
+                            if (gauge.SerpentCombo == Dalamud.Game.ClientState.JobGauge.Enums.SerpentCombo.SECONDLEGACY)
+                                if (iconHook.Original(self, VPR.SerpentsTail) == VPR.SecondLegacy)
+                                    return VPR.SecondLegacy;
+                            return iconHook.Original(self, actionID);
 
-                    case VPR.HuntersCoil:
-                    case VPR.HuntersDen:
-                        if (lastMove == VPR.ThirdGeneration)
-                            return VPR.ThirdLegacy;
-                        return iconHook.Original(self, actionID);
+                        case VPR.HuntersCoil:
+                        case VPR.HuntersDen:
+                            if (gauge.SerpentCombo == Dalamud.Game.ClientState.JobGauge.Enums.SerpentCombo.THIRDLEGACY)
+                                return VPR.ThirdLegacy;
+                            return iconHook.Original(self, actionID);
 
-                    case VPR.SwiftskinsCoil:
-                    case VPR.SwiftskinsDen:
-                        if (lastMove == VPR.FourthGeneration)
-                            return VPR.FourthLegacy;
-                        return iconHook.Original(self, actionID);
+                        case VPR.SwiftskinsCoil:
+                        case VPR.SwiftskinsDen:
+                            if (gauge.SerpentCombo == Dalamud.Game.ClientState.JobGauge.Enums.SerpentCombo.FOURTHLEGACY)
+                                return VPR.FourthLegacy;
+                            return iconHook.Original(self, actionID);
+                    }
                 }
             }
 

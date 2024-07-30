@@ -188,7 +188,7 @@ namespace XIVComboPlugin
                 {
                     if (lastMove == PLD.FastBlade && level >= 4)
                         return PLD.RiotBlade;
-                    if (lastMove == PLD.RiotBlade)
+                    if (lastMove == PLD.RiotBlade && level >= 26)
                         return iconHook.Original(self, PLD.RageOfHalone);
                     return PLD.FastBlade;
                 }

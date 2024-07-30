@@ -134,7 +134,7 @@ namespace XIVComboPlugin
                 {
                     if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 18)
                         return iconHook.Original(self, DRG.Disembowel);
-                    if (lastMove == DRG.Disembowel && level >= 50)
+                    if ((lastMove == DRG.Disembowel || lastMove == DRG.SpiralBlow) && level >= 50)
                         return iconHook.Original(self, DRG.ChaosThrust);
                     if ((lastMove == DRG.ChaosThrust || lastMove == DRG.ChaoticSpring) && level >= 58)
                         return DRG.WheelingThrust;
@@ -149,7 +149,7 @@ namespace XIVComboPlugin
                 {
                     if ((lastMove == DRG.TrueThrust || lastMove == DRG.RaidenThrust) && level >= 4)
                         return iconHook.Original(self, DRG.VorpalThrust);
-                    if (lastMove == DRG.VorpalThrust && level >= 26)
+                    if ((lastMove == DRG.VorpalThrust || lastMove == DRG.LanceBarrage) && level >= 26)
                         return iconHook.Original(self, DRG.FullThrust);
                     if ((lastMove == DRG.FullThrust || lastMove == DRG.HeavensThrust) && level >= 56)
                         return DRG.FangAndClaw;

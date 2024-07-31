@@ -833,7 +833,7 @@ namespace XIVComboPlugin
             {
                 if (actionID == VPR.SteelFangs || actionID == VPR.DreadFangs)
                     if (JobGauges.Get<VPRGauge>().SerpentCombo == SerpentCombo.DEATHRATTLE)
-                        return VPR.LastLash;
+                        return VPR.DeathRattle;
             }
 
             if (Configuration.ComboPresets.HasFlag(CustomComboPreset.ViperLastLashCombo))

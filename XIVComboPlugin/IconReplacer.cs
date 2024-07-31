@@ -768,7 +768,7 @@ namespace XIVComboPlugin
             }
             
              //Pictomancer
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoSubtractivePallet))
+            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoSubtractivePalette))
             {
                 if (actionID == PCT.Fire1)
                 {
@@ -795,12 +795,14 @@ namespace XIVComboPlugin
                 }
             }
 
-            if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoMotifMuseFeature))
+            bool useMuseCombo = Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoMuseCombo);
+            bool useMotifCombo = Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoMotifCombo);
+            if (useMuseCombo || useMotifCombo)
             {
                 if (actionID == PCT.CreatureMotif)
                 {
                     var PCTGauge = JobGauges.Get<PCTGauge>();
-                    if (PCTGauge.CreatureMotifDrawn)
+                    if (useMuseCombo && PCTGauge.CreatureMotifDrawn)
                         return iconHook.Original(self, PCT.LivingMuse);
                     return iconHook.Original(self, actionID);
                 }
@@ -808,23 +810,21 @@ namespace XIVComboPlugin
                 if (actionID == PCT.WeaponMotif)
                 {
                     var PCTGauge = JobGauges.Get<PCTGauge>();
-                    if (PCTGauge.WeaponMotifDrawn)
+                    if (useMuseCombo && PCTGauge.WeaponMotifDrawn)
                         return iconHook.Original(self, PCT.SteelMuse);
-                    if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoMuseCombo))
-                        if (SearchBuffArray(PCT.HammerReady))
-                            return iconHook.Original(self, PCT.HammerStamp);
+                    else if (useMotifCombo && SearchBuffArray(PCT.HammerReady))
+                        return iconHook.Original(self, PCT.HammerStamp);
                     return iconHook.Original(self, actionID);
                 }
 
                 if (actionID == PCT.LandscapeMotif)
                 {
                     var PCTGauge = JobGauges.Get<PCTGauge>();
-                    if (PCTGauge.LandscapeMotifDrawn)
-                        return PCT.StarryMuse;
-                    if (Configuration.ComboPresets.HasFlag(CustomComboPreset.PictoMuseCombo))
-                        if (SearchBuffArray(PCT.StarStruck))
-                            return PCT.StarPrism;
-                    return PCT.StarryMotif;
+                    if (useMuseCombo && PCTGauge.LandscapeMotifDrawn)
+                        return iconHook.Original(self, PCT.StarryMuse);
+                    else if (useMotifCombo && SearchBuffArray(PCT.StarStruck))
+                        return iconHook.Original(self, PCT.StarPrism);
+                    return iconHook.Original(self, actionID);
                 }
             }
             

@@ -23,6 +23,10 @@
 
         public const ushort
             BuffOgiNamikiriReady = 2959,
-            BuffMeikyoShisui = 1233;
+            BuffMeikyoShisui = 1233,
+            BuffTsubameReady = 3852,
+            BuffTsubame1 = 4216,
+            BuffTsubame2 = 4217,
+            BuffTsubame3 = 4218;
     }
 }

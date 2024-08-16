@@ -12,9 +12,12 @@
             DWAD = 3566,
             Assassinate = 2246,
             Bunshin = 16493,
-            PhantomK = 25774;
+            PhantomK = 25774,
+            ForkedRaiju = 25777,
+            FleetingRaiju = 25778;
 
         public const ushort
-            BuffPhantomKReady = 2723;
+            BuffPhantomKReady = 2723,
+            BuffRaijuReady = 2690;
     }
 }

@@ -65,10 +65,10 @@ namespace XIVComboPlugin
         SamuraiTsubameCombo = 1L << 56,
 
         // NINJA
-        [CustomComboInfo("Armor Crush Combo", "Replace Armor Crush with its combo chain", 30)]
+        [CustomComboInfo("Armor Crush Combo", "Replace Armor Crush with its combo chain, or Forked Raiju when Raiju Ready", 30)]
         NinjaArmorCrushCombo = 1L << 17,
 
-        [CustomComboInfo("Aeolian Edge Combo", "Replace Aeolian Edge with its combo chain", 30)]
+        [CustomComboInfo("Aeolian Edge Combo", "Replace Aeolian Edge with its combo chain, or Fleeting Raiju when Raiju Ready", 30)]
         NinjaAeolianEdgeCombo = 1L << 18,
 
         [CustomComboInfo("Hakke Mujinsatsu Combo", "Replace Hakke Mujinsatsu with its combo chain", 30)]

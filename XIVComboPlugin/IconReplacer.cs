@@ -492,8 +492,14 @@ namespace XIVComboPlugin
                 if (actionID == SMN.Painflare)
                 {
                     if (!JobGauges.Get<SMNGauge>().HasAetherflowStacks)
-                        return SMN.EnergySyphon;
-                    return SMN.Painflare;
+                        if (level >= 52)
+                            return SMN.EnergySyphon;
+                        else
+                            return SMN.EnergyDrain;
+                    if (level >= 40)
+                        return SMN.Painflare;
+                    else
+                        return SMN.Fester;
                 }
             
             //Change Summon Solar Bahamut into Lux Solaris
@@ -881,9 +887,10 @@ namespace XIVComboPlugin
         {
             if (needle == 0) return false;
             var buffs = clientState.LocalPlayer.StatusList;
-            for (var i = 0; i < buffs.Length; i++)
+            for (var i = 0; i < buffs.Length; i++) {
                 if (buffs[i].StatusId == needle)
                     return true;
+            }
             return false;
         }        
     }

@@ -97,6 +97,9 @@ namespace XIVComboPlugin
         [CustomComboInfo("Spread Shot Heat", "Replace Spread Shot or Scattergun with Auto Crossbow when overheated", 31)]
         MachinistSpreadShotFeature = 1L << 24,
 
+        [CustomComboInfo("Overdrive when summoned", "Replace Rook/Queen with their respective Overdrives when summoned", 31)]
+        MachinistOverdriveFeature = 1L << 31,
+
         [CustomComboInfo("Heat Blast when overheated", "Replace Hypercharge with Heat Blast when overheated", 31)]
         MachinistOverheatFeature = 1L << 47,
 
